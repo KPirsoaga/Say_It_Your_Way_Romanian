@@ -159,6 +159,8 @@ export interface ProgressState {
   builderDone: number;
   /** Grammar topic ids the user has practised */
   completedGrammarTopics: string[];
+  /** Weekly topic progress keyed by topic id */
+  weeklyTopics: Record<string, WeeklyTopicProgress>;
 }
 
 export interface GrammarExample {
@@ -203,3 +205,107 @@ export interface GrammarVerb {
   present: VerbForm[];
   examples: GrammarExample[];
 }
+
+// ─── Weekly Topics learning engine ───────────────────────────────────────────
+
+export type WeeklyVocabCategory = 'noun' | 'verb' | 'adjective' | 'phrase';
+
+export interface WeeklyVocabItem {
+  id: string;
+  ro: string;
+  en: string;
+  category: WeeklyVocabCategory;
+  /** Category for the sorting exercise (topic-specific labels) */
+  sortCategory?: string;
+  pron?: string;
+  teacherNote?: string;
+}
+
+export interface WeeklyNewWord {
+  ro: string;
+  en: string;
+}
+
+export interface WeeklyReading {
+  id: string;
+  level: 1 | 2 | 3;
+  title: string;
+  ro: string;
+  modelEn: string;
+  vocabularyUsed: string[];
+  newWords: WeeklyNewWord[];
+  teacherNotes?: string;
+}
+
+export interface WeeklyMcQuestion {
+  id: string;
+  direction: 'ro-en' | 'en-ro';
+  prompt: string;
+  correct: string;
+  options: string[];
+  vocabId?: string;
+}
+
+export interface WeeklyMatchPair {
+  id: string;
+  ro: string;
+  en: string;
+}
+
+export interface WeeklySortCategory {
+  id: string;
+  label: string;
+}
+
+export interface WeeklySortItem {
+  id: string;
+  vocabId: string;
+  ro: string;
+  en: string;
+  sortCategory: string;
+}
+
+export interface WeeklyTopicExercises {
+  roToEn: WeeklyMcQuestion[];
+  enToRo: WeeklyMcQuestion[];
+  matching: WeeklyMatchPair[];
+  sortCategories: WeeklySortCategory[];
+  sortItems: WeeklySortItem[];
+}
+
+export interface WeeklyTopic {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: ColorKey;
+  vocabulary: WeeklyVocabItem[];
+  readings: WeeklyReading[];
+  exercises: WeeklyTopicExercises;
+}
+
+export interface WeeklyTopicProgress {
+  vocabularyViewed: boolean;
+  reading1Done: boolean;
+  reading2Done: boolean;
+  reading3Done: boolean;
+  translationAttempted: boolean;
+  roToEnDone: boolean;
+  enToRoDone: boolean;
+  matchingDone: boolean;
+  sortingDone: boolean;
+}
+
+export const EMPTY_WEEKLY_TOPIC_PROGRESS: WeeklyTopicProgress = {
+  vocabularyViewed: false,
+  reading1Done: false,
+  reading2Done: false,
+  reading3Done: false,
+  translationAttempted: false,
+  roToEnDone: false,
+  enToRoDone: false,
+  matchingDone: false,
+  sortingDone: false,
+};
+
+export type WeeklyExerciseType = 'ro-en' | 'en-ro' | 'match' | 'sort';

@@ -50,6 +50,7 @@ import {
   Calculator,
   GraduationCap,
   Building2,
+  Circle,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -105,6 +106,7 @@ const map: Record<string, LucideIcon> = {
   Calculator,
   GraduationCap,
   Building2,
+  Circle,
   Tortoise: Turtle,
 };
 

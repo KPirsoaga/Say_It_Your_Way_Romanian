@@ -1,0 +1,111 @@
+import { PageHeader } from '../components/PageHeader';
+import { NoShameBanner } from '../components/NoShameBanner';
+import { WeeklySectionCard } from '../components/WeeklySectionCard';
+import { WeeklyTopicProgressBar } from '../components/WeeklyTopicProgressBar';
+import { useProgress } from '../context/ProgressContext';
+import { colorMap } from '../content';
+import { getWeeklyTopic } from '../content/weeklyTopics';
+import { Icon } from '../components/Icon';
+import type { PageId } from '../App';
+
+interface Props {
+  topicId: string;
+  go: (page: PageId, arg?: string) => void;
+  onBack: () => void;
+}
+
+export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
+  const topic = getWeeklyTopic(topicId);
+  const { getWeeklyTopicProgress } = useProgress();
+
+  if (!topic) {
+    return null;
+  }
+
+  const p = getWeeklyTopicProgress(topicId);
+  const c = colorMap[topic.color];
+
+  return (
+    <div className="min-h-screen">
+      <PageHeader title={topic.title} subtitle={topic.description} onBack={onBack} />
+      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+        <div className={`rounded-3xl ${c.bgSoft} p-5 flex items-start gap-3`}>
+          <div className="h-12 w-12 rounded-2xl bg-white/70 dark:bg-white/10 flex items-center justify-center shrink-0">
+            <Icon name={topic.icon} className={`h-6 w-6 ${c.text}`} />
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300">This week&apos;s topic</p>
+            <p className="text-lg font-bold text-ink-900 dark:text-sand-100 leading-snug mt-1">
+              Work through each section at your own pace.
+            </p>
+          </div>
+        </div>
+
+        <WeeklyTopicProgressBar progress={p} />
+
+        <NoShameBanner compact />
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Vocabulary</h2>
+          <WeeklySectionCard
+            title="Vocabulary Bank"
+            subtitle="Nouns, verbs, adjectives and phrases — with audio"
+            icon="BookOpen"
+            done={p.vocabularyViewed}
+            onClick={() => go('weekly-vocab', topicId)}
+          />
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Reading & understanding</h2>
+          {topic.readings.map((reading) => {
+            const doneKey =
+              reading.level === 1 ? 'reading1Done' : reading.level === 2 ? 'reading2Done' : 'reading3Done';
+            return (
+              <WeeklySectionCard
+                key={reading.id}
+                title={reading.title}
+                subtitle="Read in Romanian, then try your own translation"
+                icon="Eye"
+                done={p[doneKey]}
+                onClick={() => go('weekly-reading', `${topicId}:${reading.id}`)}
+              />
+            );
+          })}
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Exercises</h2>
+          <WeeklySectionCard
+            title="Romanian → English"
+            subtitle="Multiple choice — tap the meaning"
+            icon="ArrowRight"
+            done={p.roToEnDone}
+            onClick={() => go('weekly-exercise', `${topicId}:ro-en`)}
+          />
+          <WeeklySectionCard
+            title="English → Romanian"
+            subtitle="Multiple choice — tap the Romanian"
+            icon="ArrowLeft"
+            done={p.enToRoDone}
+            onClick={() => go('weekly-exercise', `${topicId}:en-ro`)}
+          />
+          <WeeklySectionCard
+            title="Vocabulary Matching"
+            subtitle="Tap Romanian, then tap English"
+            icon="LayoutGrid"
+            done={p.matchingDone}
+            onClick={() => go('weekly-exercise', `${topicId}:match`)}
+          />
+          <WeeklySectionCard
+            title="Category Sorting"
+            subtitle="Tap a category, then tap each word"
+            icon="LayoutGrid"
+            done={p.sortingDone}
+            onClick={() => go('weekly-exercise', `${topicId}:sort`)}
+          />
+        </section>
+      </div>
+    </div>
+  );
+}

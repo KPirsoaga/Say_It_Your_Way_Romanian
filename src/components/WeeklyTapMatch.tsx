@@ -1,0 +1,138 @@
+import { useMemo, useState } from 'react';
+import { Icon } from './Icon';
+import type { WeeklyMatchPair } from '../types';
+
+interface Props {
+  pairs: WeeklyMatchPair[];
+  onComplete: () => void;
+}
+
+type Side = 'ro' | 'en';
+
+export function WeeklyTapMatch({ pairs, onComplete }: Props) {
+  const [matched, setMatched] = useState<Set<string>>(new Set());
+  const [selected, setSelected] = useState<{ side: Side; id: string } | null>(null);
+  const [wrong, setWrong] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  const roItems = useMemo(() => pairs.map((p) => ({ id: p.id, text: p.ro })), [pairs]);
+  const enItems = useMemo(
+    () => [...pairs].sort((a, b) => a.en.localeCompare(b.en)).map((p) => ({ id: p.id, text: p.en })),
+    [pairs]
+  );
+
+  const tap = (side: Side, id: string) => {
+    if (matched.has(id) || done) return;
+
+    if (!selected) {
+      setSelected({ side, id });
+      setWrong(null);
+      return;
+    }
+
+    if (selected.side === side) {
+      setSelected({ side, id });
+      setWrong(null);
+      return;
+    }
+
+    const firstId = selected.id;
+    const secondId = id;
+    if (firstId === secondId) {
+      const next = new Set(matched).add(firstId);
+      setMatched(next);
+      setSelected(null);
+      setWrong(null);
+      if (next.size === pairs.length) {
+        setDone(true);
+        onComplete();
+      }
+    } else {
+      setWrong(secondId);
+      setSelected(null);
+      setTimeout(() => setWrong(null), 600);
+    }
+  };
+
+  if (done) {
+    return (
+      <div className="card p-5 text-center animate-fade-in">
+        <Icon name="Check" className="h-12 w-12 text-sea-500 mx-auto mb-3" />
+        <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">All matched!</h2>
+        <p className="mt-2 text-ink-700 dark:text-ink-300">Nice work connecting Romanian and English.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4 animate-fade-in">
+      <p className="text-ink-500 dark:text-ink-300 text-base">
+        Tap a Romanian word, then tap its English meaning. Correct pairs stay matched.
+      </p>
+
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300 mb-2">Romanian</p>
+        <div className="flex flex-wrap gap-2">
+          {roItems.map((item) => {
+            const isMatched = matched.has(item.id);
+            const isSelected = selected?.id === item.id && selected.side === 'ro';
+            return (
+              <button
+                key={item.id}
+                type="button"
+                disabled={isMatched}
+                onClick={() => tap('ro', item.id)}
+                className={`btn-md tile-label ${
+                  isMatched
+                    ? 'bg-sea-500 text-white opacity-80'
+                    : isSelected
+                      ? 'bg-sea-100 ring-2 ring-sea-500 text-sea-700 dark:bg-sea-600/30 dark:text-sea-100'
+                      : wrong === item.id
+                        ? 'bg-coral-50 ring-2 ring-coral-400 text-coral-500'
+                        : 'bg-white ring-2 ring-sand-300 text-ink-700 dark:bg-ink-900 dark:ring-white/20'
+                }`}
+                aria-pressed={isSelected}
+              >
+                {item.text}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300 mb-2">English</p>
+        <div className="flex flex-wrap gap-2">
+          {enItems.map((item) => {
+            const isMatched = matched.has(item.id);
+            const isSelected = selected?.id === item.id && selected.side === 'en';
+            return (
+              <button
+                key={item.id}
+                type="button"
+                disabled={isMatched}
+                onClick={() => tap('en', item.id)}
+                className={`btn-md tile-label ${
+                  isMatched
+                    ? 'bg-sea-500 text-white opacity-80'
+                    : isSelected
+                      ? 'bg-sea-100 ring-2 ring-sea-500 text-sea-700 dark:bg-sea-600/30 dark:text-sea-100'
+                      : wrong === item.id
+                        ? 'bg-coral-50 ring-2 ring-coral-400 text-coral-500'
+                        : 'bg-white ring-2 ring-sand-300 text-ink-700 dark:bg-ink-900 dark:ring-white/20'
+                }`}
+                aria-pressed={isSelected}
+              >
+                {item.text}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <p className="text-sm text-ink-500 dark:text-ink-300 text-center">
+        {matched.size} of {pairs.length} matched
+      </p>
+    </div>
+  );
+}
