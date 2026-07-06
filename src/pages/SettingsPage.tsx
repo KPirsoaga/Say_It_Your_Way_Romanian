@@ -99,7 +99,7 @@ export function SettingsPage() {
         </Button>
 
         <p className="text-center text-xs text-ink-300 dark:text-ink-500 pt-4">
-          Româna cu Drag · A calm space to practise Romanian
+          Say It Your Way Romanian · A calm space to practise Romanian
         </p>
       </div>
     </div>
