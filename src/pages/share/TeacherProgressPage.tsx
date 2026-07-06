@@ -5,6 +5,7 @@ import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { QrScanner } from '../../components/qr/QrScanner';
 import { useQrCollector } from '../../hooks/useQrCollector';
+import { useScannerSafeBack } from '../../hooks/useScannerSafeBack';
 import { parseProgressExportPayload } from '../../services/qr/progressPackage';
 import type { ProgressExportPayload } from '../../services/qr/types';
 
@@ -14,14 +15,15 @@ interface Props {
 
 export function TeacherProgressPage({ onBack }: Props) {
   const [data, setData] = useState<ProgressExportPayload | null>(null);
+  const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
 
-  const { handleScan, progress, error, reset } = useQrCollector('progress-export', (items) => {
+  const { handleScan, progress, error, reset, lastRaw } = useQrCollector('progress-export', (items) => {
     setData(parseProgressExportPayload(items));
   });
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Katie's progress" subtitle="Read-only dashboard" onBack={onBack} />
+      <PageHeader title="Katie's progress" subtitle="Read-only dashboard" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!data ? (
           <>
@@ -30,16 +32,19 @@ export function TeacherProgressPage({ onBack }: Props) {
                 Scan Katie&apos;s progress QR before the lesson. You will see vocabulary, reading, exercises, and what needs review.
               </p>
             </Card>
-            <QrScanner onScan={handleScan} />
+            <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
             {progress && (
               <p className="text-sm font-bold text-sea-600 dark:text-sea-200 text-center">
                 Scanned {progress.received} of {progress.total} QR codes
               </p>
             )}
             {error && (
-              <p className="text-sm text-coral-500 text-center" role="alert">
-                {error}
-              </p>
+              <div className="rounded-2xl bg-coral-50 dark:bg-coral-400/10 p-3 space-y-1" role="alert">
+                <p className="text-sm font-bold text-coral-500">{error}</p>
+                {lastRaw && (
+                  <p className="text-xs text-ink-500 dark:text-ink-400 font-mono break-all">Received: {lastRaw}</p>
+                )}
+              </div>
             )}
           </>
         ) : (

@@ -16,16 +16,19 @@ export function useQrCollector<T>(
   const [progress, setProgress] = useState<QrScanProgress | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [lastRaw, setLastRaw] = useState<string | null>(null);
 
   const reset = useCallback(() => {
     chunksRef.current.clear();
     setProgress(null);
     setError(null);
     setSuccess(false);
+    setLastRaw(null);
   }, []);
 
   const handleScan = useCallback(
     (raw: string) => {
+      setLastRaw(raw.slice(0, 48) + (raw.length > 48 ? '…' : ''));
       try {
         const env = decodeQrString(raw);
         assertPackageType(env, expectedType);
@@ -38,13 +41,16 @@ export function useQrCollector<T>(
         }
         setProgress(null);
         setSuccess(true);
+        setError(null);
         onComplete(result.items as T[]);
       } catch (e) {
-        setError(e instanceof Error ? e.message : 'Could not read this QR code.');
+        const msg = e instanceof Error ? e.message : 'Could not read this QR code.';
+        setError(msg);
+        setSuccess(false);
       }
     },
     [expectedType, onComplete]
   );
 
-  return { handleScan, progress, error, success, reset };
+  return { handleScan, progress, error, success, reset, lastRaw };
 }

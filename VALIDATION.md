@@ -521,3 +521,47 @@ Status: Fixed
 Notes: `src/services/qr/*` package codec; `qrcode` + `html5-qrcode`; pages under `src/pages/share/`; teacher session in `rcd-teacher-review` localStorage.
 
 ---
+
+VAL-048
+Area: Share with Teacher / QR scanner
+Issue: Camera failed to open when tapping Scan QR code.
+Expected behaviour: Scanner region visible before camera starts; back-camera fallback; clear error if HTTPS or permissions block access.
+Current behaviour: `html5-qrcode` started while the preview div was `display:none`, so video never attached.
+Priority: High
+Status: Fixed
+Notes: Defer `start()` until after region is shown; enumerate cameras with facingMode fallback; `qr-scanner-region` video CSS.
+
+---
+
+VAL-049
+Area: Share with Teacher / QR scanner (desktop)
+Issue: Desktop webcam showed black screen after granting camera permission.
+Expected behaviour: Live camera preview visible; QR codes scannable on desktop.
+Current behaviour: `aspectRatio: 1` and shaded qrbox broke desktop webcams; preview looked black.
+Priority: High
+Status: Fixed
+Notes: Removed forced square aspect ratio; full-frame scan without dark overlay; 4:3 preview container; upload QR image fallback for desktop.
+
+---
+
+VAL-050
+Area: Share with Teacher / QR scanner lifecycle
+Issue: Scanner did not decode reliably; pressing back without stopping broke the app.
+Expected behaviour: Reliable scan on mobile and desktop; back navigation always stops camera first.
+Current behaviour: Custom Html5Qrcode integration had hidden preview, no file UI; unmount left camera running.
+Priority: High
+Status: Fixed
+Notes: Switched to `Html5QrcodeScanner`; `useScannerSafeBack` stops camera before navigate; smaller QR payloads; larger display codes.
+
+---
+
+VAL-051
+Area: Share with Teacher / QR scanner reliability
+Issue: Scanner still failed on mobile and desktop after e86f1de; large review payloads could exceed QR capacity; React StrictMode broke camera lifecycle.
+Expected behaviour: Camera, photo upload, or paste all work; generated QRs are scannable; back navigation safe.
+Current behaviour: Html5QrcodeScanner unreliable; verbose payloads too large; StrictMode double-mount.
+Priority: High
+Status: Fixed
+Notes: Direct `Html5Qrcode` API; removed StrictMode; compact QR codec; paste fallback; 360px QR display; clearer scan errors.
+
+---

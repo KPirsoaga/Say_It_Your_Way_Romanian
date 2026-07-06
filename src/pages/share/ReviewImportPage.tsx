@@ -5,6 +5,7 @@ import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { QrScanner } from '../../components/qr/QrScanner';
 import { useQrCollector } from '../../hooks/useQrCollector';
+import { useScannerSafeBack } from '../../hooks/useScannerSafeBack';
 import { useReview } from '../../context/ReviewContext';
 import { parseReviewResponsePayload } from '../../services/qr/reviewPackage';
 
@@ -16,8 +17,9 @@ interface Props {
 export function ReviewImportPage({ onBack, onDone }: Props) {
   const { applyReviewResponse } = useReview();
   const [applied, setApplied] = useState(0);
+  const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
 
-  const { handleScan, progress, error, success, reset } = useQrCollector('review-response', (items) => {
+  const { handleScan, progress, error, success, reset, lastRaw } = useQrCollector('review-response', (items) => {
     const parsed = parseReviewResponsePayload(items);
     const count = applyReviewResponse(parsed);
     setApplied(count);
@@ -25,7 +27,7 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Return review" subtitle="Scan Mihaela's response QR" onBack={onBack} />
+      <PageHeader title="Return review" subtitle="Scan Mihaela's response QR" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!success ? (
           <>
@@ -34,16 +36,19 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
                 After Mihaela reviews, scan her response QR here. Your review list updates automatically — no duplicates.
               </p>
             </Card>
-            <QrScanner onScan={handleScan} />
+            <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
             {progress && (
               <p className="text-sm font-bold text-sea-600 dark:text-sea-200 text-center">
                 Scanned {progress.received} of {progress.total} QR codes
               </p>
             )}
             {error && (
-              <p className="text-sm text-coral-500 text-center" role="alert">
-                {error}
-              </p>
+              <div className="rounded-2xl bg-coral-50 dark:bg-coral-400/10 p-3 space-y-1" role="alert">
+                <p className="text-sm font-bold text-coral-500">{error}</p>
+                {lastRaw && (
+                  <p className="text-xs text-ink-500 dark:text-ink-400 font-mono break-all">Received: {lastRaw}</p>
+                )}
+              </div>
             )}
           </>
         ) : (

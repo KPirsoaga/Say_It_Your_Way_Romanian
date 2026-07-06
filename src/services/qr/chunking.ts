@@ -1,7 +1,7 @@
 import { encodeEnvelope, makeBatchId } from './codec';
 import { APP_VERSION, QR_SCHEMA_VERSION, type QrChunkMeta, type QrEnvelope, type QrPackageType } from './types';
 
-const MAX_QR_CHARS = 1500;
+const MAX_QR_CHARS = 650;
 
 export interface SplittablePayload {
   items: unknown[];
