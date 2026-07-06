@@ -15,7 +15,7 @@ const needNowButtons: { label: string; icon: string; categoryId: string; color: 
   { label: 'Vet', icon: 'PawPrint', categoryId: 'rl-doctor', color: 'text-coral-400 bg-coral-50 dark:bg-coral-400/20' },
   { label: 'Shop', icon: 'ShoppingBasket', categoryId: 'rl-shop', color: 'text-sun-400 bg-sun-50 dark:bg-sun-300/20' },
   { label: 'Neighbours', icon: 'DoorOpen', categoryId: 'rl-neighbours', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
-  { label: 'Appointment', icon: 'CalendarClock', categoryId: 'rl-help', color: 'text-rose-400 bg-rose-50 dark:bg-rose-400/20' },
+  { label: 'Appointment', icon: 'CalendarClock', categoryId: 'rl-today', color: 'text-rose-400 bg-rose-50 dark:bg-rose-400/20' },
   { label: 'Help', icon: 'HandHeart', categoryId: 'rl-help', color: 'text-coral-400 bg-coral-50 dark:bg-coral-400/20' },
   { label: 'I’m tired / busy / confused', icon: 'EarOff', categoryId: 'rl-understand', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
 ];

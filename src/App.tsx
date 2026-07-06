@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SettingsProvider } from './context/SettingsContext';
 import { ProgressProvider } from './context/ProgressContext';
+import { SpeechProvider } from './context/SpeechContext';
 import { BottomNav } from './components/BottomNav';
 import { Icon } from './components/Icon';
 import { HomePage } from './pages/HomePage';
@@ -73,7 +74,7 @@ function Shell() {
         {page === 'scenario' && arg && <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />}
         {page === 'favourites' && <FavouritesPage />}
         {page === 'progress' && <ProgressPage go={go} />}
-        {page === 'settings' && <SettingsPage />}
+        {page === 'settings' && <SettingsPage onBack={() => go('home')} />}
         {page === 'builder' && <PhraseBuilderPage go={go} />}
         {page === 'reallife' && <RealLifePage onBack={() => go('home')} initialCategoryId={arg} />}
         {page === 'survival' && <SurvivalPage onBack={() => go('home')} />}
@@ -94,7 +95,9 @@ export default function App() {
   return (
     <SettingsProvider>
       <ProgressProvider>
-        <Shell />
+        <SpeechProvider>
+          <Shell />
+        </SpeechProvider>
       </ProgressProvider>
     </SettingsProvider>
   );

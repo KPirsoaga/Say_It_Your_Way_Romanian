@@ -13,9 +13,25 @@ interface Props {
 }
 
 export function ScenarioDetailPage({ scenarioId, go }: Props) {
-  const scenario = scenarios.find((s) => s.id === scenarioId)!;
-  const c = colorMap[scenario.color];
+  const scenario = scenarios.find((s) => s.id === scenarioId);
   const { markScenarioCompleted, progress } = useProgress();
+
+  if (!scenario) {
+    return (
+      <div className="min-h-screen">
+        <PageHeader title="Scenario not found" onBack={() => go('scenarios')} />
+        <div className="mx-auto max-w-md px-4 pb-32 pt-8 text-center space-y-4">
+          <p className="text-ink-700 dark:text-ink-300 text-lg">We couldn’t find that scenario. Pick one from the list.</p>
+          <Button variant="primary" size="lg" onClick={() => go('scenarios')}>
+            <Icon name="LayoutGrid" className="h-5 w-5" />
+            View scenarios
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const c = colorMap[scenario.color];
   const alreadyDone = progress.completedScenarios.includes(scenarioId);
 
   const finish = () => {

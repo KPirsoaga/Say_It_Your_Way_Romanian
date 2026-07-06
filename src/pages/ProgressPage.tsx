@@ -2,7 +2,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { Button } from '../components/Button';
-import { useProgress } from '../context/ProgressContext';
+import { useProgress, toLocalDateStr } from '../context/ProgressContext';
 import { scenarios, miniConversations } from '../content';
 import type { PageId } from '../App';
 
@@ -22,7 +22,7 @@ export function ProgressPage({ go }: Props) {
   const last28 = Array.from({ length: 28 }, (_, i) => {
     const d = new Date();
     d.setDate(d.getDate() - (27 - i));
-    return d.toISOString().slice(0, 10);
+    return toLocalDateStr(d);
   });
   const practicedSet = new Set(progress.practisedDays);
 

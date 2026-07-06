@@ -28,6 +28,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     html.setAttribute('data-reduce-motion', String(settings.reduceAnimations));
     html.classList.toggle('dark', settings.darkMode);
     html.style.setProperty('--font-scale', settings.textSize === 'xlarge' ? '1.15' : settings.textSize === 'large' ? '1.08' : '1');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', settings.darkMode ? '#20202a' : '#f7f3ea');
   }, [settings]);
 
   const update: SettingsCtx['update'] = (key, value) => setSettings((s) => ({ ...s, [key]: value }));

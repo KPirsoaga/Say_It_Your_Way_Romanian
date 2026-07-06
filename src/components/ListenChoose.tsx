@@ -13,7 +13,7 @@ interface Props {
 
 export function ListenChoose({ item, onDone }: Props) {
   const { settings } = useSettings();
-  const { supported, speak, currentId } = useSpeech();
+  const { supported, speak, stop, currentId } = useSpeech();
   const { addListenCorrect } = useProgress();
   const [picked, setPicked] = useState<number | null>(null);
   const isPlaying = currentId === item.id;
@@ -30,7 +30,7 @@ export function ListenChoose({ item, onDone }: Props) {
     <div className="card animate-fade-in">
       <div className="flex items-center gap-2 text-sea-600 dark:text-sea-200 mb-3">
         <Icon name="BookOpen" className="h-5 w-5" />
-        <span className="font-bold uppercase tracking-wide text-sm">Listen &amp; Choose</span>
+        <span className="font-bold uppercase tracking-wide text-sm">Listen & Choose</span>
       </div>
 
       <p className="text-2xl font-bold text-ink-900 dark:text-sand-100 mb-1" lang="ro">
@@ -44,8 +44,8 @@ export function ListenChoose({ item, onDone }: Props) {
         variant={isPlaying ? 'secondary' : 'primary'}
         size="lg"
         className="mb-4"
-        onClick={() => speak(item.ro, item.id)}
-        disabled={!supported || isPlaying}
+        onClick={() => (isPlaying ? stop() : speak(item.ro, item.id))}
+        disabled={!supported}
       >
         <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
         {isPlaying ? 'Playing…' : 'Play audio'}

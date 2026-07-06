@@ -17,14 +17,13 @@ interface Props {
 export function DailyPage({ go }: Props) {
   const today = todayStr();
   const daily = useMemo(() => getDailyContent(today), [today]);
-  const { markPractisedToday, markScenarioCompleted } = useProgress();
+  const { markPractisedToday } = useProgress();
   const [step, setStep] = useState<'phrase' | 'dialogue' | 'listen' | 'speak' | 'done'>('phrase');
   const [listened, setListened] = useState(false);
   const [spoken, setSpoken] = useState(false);
 
   const complete = () => {
     markPractisedToday();
-    markScenarioCompleted('smalltalk');
     setStep('done');
   };
 
@@ -89,7 +88,7 @@ export function DailyPage({ go }: Props) {
         )}
 
         {step === 'listen' && (
-          <StepShell title="3. Listen &amp; choose" onNext={() => setStep('speak')} nextLabel="Next">
+          <StepShell title="3. Listen & choose" onNext={() => setStep('speak')} nextLabel="Next">
             <ListenChoose item={daily.listen} onDone={() => setListened(true)} />
           </StepShell>
         )}

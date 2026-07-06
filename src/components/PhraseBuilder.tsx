@@ -20,7 +20,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export function PhraseBuilder({ item, onDone }: Props) {
-  const { supported, speak, currentId } = useSpeech();
+  const { supported, speak, stop, currentId } = useSpeech();
   const { addBuilderDone } = useProgress();
   const [placed, setPlaced] = useState<number[]>([]); // indexes into shuffled pool
   const [pool, setPool] = useState(() => shuffle(item.chunks.map((_, i) => i)));
@@ -131,7 +131,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
             </p>
           )}
           <div className="mt-3 flex flex-wrap gap-2">
-            <Button variant="soft" size="md" onClick={() => speak(item.fullRo, item.id)} disabled={!supported || isPlaying}>
+            <Button variant="soft" size="md" onClick={() => (isPlaying ? stop() : speak(item.fullRo, item.id))} disabled={!supported}>
               <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
               Play
             </Button>
