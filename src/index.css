@@ -93,25 +93,17 @@ html.dark body {
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* QR scanner — html5-qrcode scanner UI */
-.qr-scanner-host {
-  border-radius: 1.5rem;
-  overflow: hidden;
+/* QR scanner video region */
+.qr-video-region {
+  position: relative;
 }
-.qr-scanner-host video {
+.qr-video-region video {
   width: 100% !important;
-  border-radius: 1rem;
+  max-height: 70vh;
+  display: block !important;
   object-fit: cover;
-}
-.qr-scanner-host img {
   border-radius: 1rem;
 }
-.qr-scanner-host button {
-  font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
-  border-radius: 1rem !important;
-  font-weight: 700;
-}
-#html5-qrcode-anchor-scan-type-change {
-  font-weight: 700;
-  color: #2d8a8f;
+#qr-shaded-region {
+  pointer-events: none;
 }

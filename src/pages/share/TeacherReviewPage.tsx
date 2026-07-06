@@ -55,7 +55,7 @@ export function TeacherReviewPage({ onBack }: Props) {
     [setSession]
   );
 
-  const { handleScan, progress, error, reset: resetScan } = useQrCollector('review-export', onPackageReady);
+  const { handleScan, progress, error, reset: resetScan, lastRaw } = useQrCollector('review-export', onPackageReady);
 
   const updateResponse = (id: string, patch: Partial<TeacherResponse>) => {
     setSession((prev) => ({
@@ -110,9 +110,12 @@ export function TeacherReviewPage({ onBack }: Props) {
               </p>
             )}
             {error && (
-              <p className="text-sm text-coral-500 text-center" role="alert">
-                {error}
-              </p>
+              <div className="rounded-2xl bg-coral-50 dark:bg-coral-400/10 p-3 space-y-1" role="alert">
+                <p className="text-sm font-bold text-coral-500">{error}</p>
+                {lastRaw && (
+                  <p className="text-xs text-ink-500 dark:text-ink-400 font-mono break-all">Received: {lastRaw}</p>
+                )}
+              </div>
             )}
           </>
         )}
