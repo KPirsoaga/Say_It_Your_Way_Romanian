@@ -2,6 +2,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { GrammarExamples } from '../components/GrammarExamples';
+import { GrammarConjugationCards } from '../components/GrammarConjugationCards';
 import { useSpeech } from '../hooks/useSpeech';
 import { Icon } from '../components/Icon';
 import { colorMap, grammarVerbs } from '../content';
@@ -46,13 +47,13 @@ export function GrammarVerbPage({ verbId, onBack }: Props) {
           <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100 mb-3">Present tense</h2>
           <div className="space-y-2">
             {verb.present.map((form, i) => {
-              const playId = `${verb.id}-${i}`;
+              const playId = `${verb.id}-pres-${i}`;
               const playing = currentId === playId;
               return (
                 <Card key={form.label} className="p-4 flex items-center gap-3">
                   <span className="w-14 shrink-0 text-sm font-bold uppercase text-ink-500 dark:text-ink-300">{form.label}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
+                    <p className="tile-label text-xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
                       {form.ro}
                     </p>
                     <p className="text-sm text-ink-600 dark:text-ink-300">{form.en}</p>
@@ -71,6 +72,14 @@ export function GrammarVerbPage({ verbId, onBack }: Props) {
             })}
           </div>
         </section>
+
+        {verb.imperfect && verb.imperfect.length > 0 && (
+          <GrammarConjugationCards
+            title="Imperfect tense"
+            forms={verb.imperfect}
+            idPrefix={`${verb.id}-imp`}
+          />
+        )}
 
         <section>
           <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100 mb-3">Useful examples</h2>
