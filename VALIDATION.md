@@ -554,3 +554,14 @@ Status: Fixed
 Notes: Switched to `Html5QrcodeScanner`; `useScannerSafeBack` stops camera before navigate; smaller QR payloads; larger display codes.
 
 ---
+
+VAL-051
+Area: Share with Teacher / QR scanner reliability
+Issue: Scanner still failed on mobile and desktop after e86f1de; large review payloads could exceed QR capacity; React StrictMode broke camera lifecycle.
+Expected behaviour: Camera, photo upload, or paste all work; generated QRs are scannable; back navigation safe.
+Current behaviour: Html5QrcodeScanner unreliable; verbose payloads too large; StrictMode double-mount.
+Priority: High
+Status: Fixed
+Notes: Direct `Html5Qrcode` API; removed StrictMode; compact QR codec; paste fallback; 360px QR display; clearer scan errors.
+
+---
