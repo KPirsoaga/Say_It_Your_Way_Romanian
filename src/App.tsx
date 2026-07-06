@@ -20,9 +20,30 @@ import { MiniConversationDetailPage } from './pages/MiniConversationDetailPage';
 import { GrammarHelpPage } from './pages/GrammarHelpPage';
 import { GrammarTopicPage } from './pages/GrammarTopicPage';
 import { GrammarVerbPage } from './pages/GrammarVerbPage';
+import { WeeklyTopicsPage } from './pages/WeeklyTopicsPage';
+import { WeeklyTopicDetailPage } from './pages/WeeklyTopicDetailPage';
+import { WeeklyVocabPage } from './pages/WeeklyVocabPage';
+import { WeeklyReadingPage } from './pages/WeeklyReadingPage';
+import { WeeklyExercisePage } from './pages/WeeklyExercisePage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
-import type { ScenarioId } from './types';
+import { getWeeklyTopic } from './content/weeklyTopics';
+import type { ScenarioId, WeeklyExerciseType } from './types';
+
+function parseWeeklyReadingArg(arg: string): { topicId: string; readingId: string } | null {
+  const i = arg.indexOf(':');
+  if (i < 1) return null;
+  return { topicId: arg.slice(0, i), readingId: arg.slice(i + 1) };
+}
+
+function parseWeeklyExerciseArg(arg: string): { topicId: string; exerciseType: WeeklyExerciseType } | null {
+  const i = arg.indexOf(':');
+  if (i < 1) return null;
+  const topicId = arg.slice(0, i);
+  const exerciseType = arg.slice(i + 1) as WeeklyExerciseType;
+  if (!['ro-en', 'en-ro', 'match', 'sort'].includes(exerciseType)) return null;
+  return { topicId, exerciseType };
+}
 
 export type PageId =
   | 'home'
@@ -41,7 +62,12 @@ export type PageId =
   | 'conversation'
   | 'grammar'
   | 'grammar-topic'
-  | 'grammar-verb';
+  | 'grammar-verb'
+  | 'weekly-topics'
+  | 'weekly-topic'
+  | 'weekly-vocab'
+  | 'weekly-reading'
+  | 'weekly-exercise';
 
 function Shell() {
   const [page, setPage] = useState<PageId>('home');
@@ -130,6 +156,81 @@ function Shell() {
             message="We couldn’t open that verb."
             onBack={() => go('grammar')}
             backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'weekly-topics' && <WeeklyTopicsPage go={go} onBack={() => go('home')} />}
+        {page === 'weekly-topic' && arg && getWeeklyTopic(arg) ? (
+          <WeeklyTopicDetailPage topicId={arg} go={go} onBack={() => go('weekly-topics')} />
+        ) : page === 'weekly-topic' ? (
+          <NavigationFallback
+            title="Topic not found"
+            message="We couldn’t open that weekly topic."
+            onBack={() => go('weekly-topics')}
+            backLabel="Weekly Topics"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'weekly-vocab' && arg ? (
+          <WeeklyVocabPage topicId={arg} onBack={() => go('weekly-topic', arg)} />
+        ) : page === 'weekly-vocab' ? (
+          <NavigationFallback
+            title="Topic not found"
+            message="We couldn’t open that vocabulary bank."
+            onBack={() => go('weekly-topics')}
+            backLabel="Weekly Topics"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'weekly-reading' && arg ? (() => {
+          const parsed = parseWeeklyReadingArg(arg);
+          return parsed ? (
+            <WeeklyReadingPage
+              topicId={parsed.topicId}
+              readingId={parsed.readingId}
+              onBack={() => go('weekly-topic', parsed.topicId)}
+            />
+          ) : (
+            <NavigationFallback
+              title="Reading not found"
+              message="We couldn’t open that reading passage."
+              onBack={() => go('weekly-topics')}
+              backLabel="Weekly Topics"
+              backIcon="BookOpen"
+            />
+          );
+        })() : page === 'weekly-reading' ? (
+          <NavigationFallback
+            title="Reading not found"
+            message="We couldn’t open that reading passage."
+            onBack={() => go('weekly-topics')}
+            backLabel="Weekly Topics"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'weekly-exercise' && arg ? (() => {
+          const parsed = parseWeeklyExerciseArg(arg);
+          return parsed ? (
+            <WeeklyExercisePage
+              topicId={parsed.topicId}
+              exerciseType={parsed.exerciseType}
+              onBack={() => go('weekly-topic', parsed.topicId)}
+            />
+          ) : (
+            <NavigationFallback
+              title="Exercise not found"
+              message="We couldn’t open that exercise."
+              onBack={() => go('weekly-topics')}
+              backLabel="Weekly Topics"
+              backIcon="BookOpen"
+            />
+          );
+        })() : page === 'weekly-exercise' ? (
+          <NavigationFallback
+            title="Exercise not found"
+            message="We couldn’t open that exercise."
+            onBack={() => go('weekly-topics')}
+            backLabel="Weekly Topics"
             backIcon="BookOpen"
           />
         ) : null}

@@ -6,6 +6,7 @@ import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useSettings } from '../context/SettingsContext';
 import { scenarios, getDailyContent, survivalPhrases, realLifeCategories, grammarTopics } from '../content';
+import { getWeeklyTopic } from '../content/weeklyTopics';
 import type { PhraseLine } from '../types';
 
 interface FavResolved {
@@ -17,6 +18,19 @@ interface FavResolved {
 function resolveFavourite(id: string): FavResolved | null {
   // format: `${scenarioId}:${i}` | `daily:${date}:phrase|speak` | `survival:${i}` | `reallife:${catId}:${i}`
   // format: `${scenarioId}:${i}` | `daily:${date}:phrase|speak` | `survival:${i}` | `reallife:${catId}:${i}` | `grammar:${topicId}:${i}`
+  // format: `weekly:${topicId}:${vocabId}`
+  if (id.startsWith('weekly:')) {
+    const parts = id.split(':');
+    const topic = getWeeklyTopic(parts[1]);
+    if (!topic) return null;
+    const item = topic.vocabulary.find((v) => v.id === parts[2]);
+    if (!item) return null;
+    return {
+      id,
+      phrase: { ro: item.ro, en: item.en, pron: item.pron },
+      label: `Weekly: ${topic.title}`,
+    };
+  }
   if (id.startsWith('grammar:')) {
     const parts = id.split(':');
     const topic = grammarTopics.find((t) => t.id === parts[1]);

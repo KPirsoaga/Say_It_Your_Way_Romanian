@@ -75,6 +75,24 @@ export function HomePage({ go }: Props) {
       {/* No-shame encouragement */}
       <NoShameBanner compact />
 
+      {/* Weekly Topics — primary learning path */}
+      <section>
+        <SectionTitle title="Weekly Topics" icon="BookOpen" />
+        <p className="text-ink-500 dark:text-ink-300 text-sm mb-3">
+          Reinforce this week&apos;s lesson with Mihaela — vocabulary, reading, and practice.
+        </p>
+        <Card
+          onClick={() => go('weekly-topics')}
+          className="home-tile bg-gradient-to-br from-sun-100 to-white dark:from-ink-900 dark:to-ink-900 ring-2 ring-sun-200 dark:ring-sun-300/20"
+        >
+          <div className="h-11 w-11 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center shrink-0">
+            <Icon name="Building2" className="h-6 w-6 text-sun-400" />
+          </div>
+          <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Building a Cabin</p>
+          <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Topic 1 · tap to open all sections</p>
+        </Card>
+      </section>
+
       {/* I actually need this today */}
       <section>
         <SectionTitle title="I actually need this today" icon="LifeBuoy" />

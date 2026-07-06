@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon';
 import { Button } from '../components/Button';
 import { useProgress, toLocalDateStr } from '../context/ProgressContext';
 import { scenarios, miniConversations, grammarTopics } from '../content';
+import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
 import type { PageId } from '../App';
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 export function ProgressPage({ go }: Props) {
-  const { progress, resetProgress } = useProgress();
+  const { progress, resetProgress, getWeeklyTopicProgress } = useProgress();
 
   const daysCount = progress.practisedDays.length;
   const favCount = progress.favourites.length;
@@ -67,6 +68,40 @@ export function ProgressPage({ go }: Props) {
             <CountRow icon="Mic" label="Sentences said out loud" value={progress.speakDone} color="text-rose-400" />
             <CountRow icon="Sparkles" label="Phrases built" value={progress.builderDone} color="text-coral-400" />
             <CountRow icon="BookOpen" label="Grammar topics practised" value={grammarCount} color="text-sun-400" />
+          </div>
+        </Card>
+
+        {/* Weekly Topics */}
+        <Card>
+          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Weekly Topics</p>
+          <div className="space-y-3">
+            {weeklyTopics.map((topic) => {
+              const tp = getWeeklyTopicProgress(topic.id);
+              const pct = weeklyTopicPercent(tp);
+              return (
+                <div key={topic.id} className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 min-w-0">
+                    <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 font-bold">{topic.title}</span>
+                    <span className="text-sm text-sea-600 dark:text-sea-200 font-bold shrink-0">{pct}%</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-sm text-ink-600 dark:text-ink-300">
+                    <WeeklyProgressRow label="Vocabulary" done={tp.vocabularyViewed} />
+                    <WeeklyProgressRow label="Reading 1" done={tp.reading1Done} />
+                    <WeeklyProgressRow label="Reading 2" done={tp.reading2Done} />
+                    <WeeklyProgressRow label="Reading 3" done={tp.reading3Done} />
+                    <WeeklyProgressRow label="Translation" done={tp.translationAttempted} />
+                    <WeeklyProgressRow label="Ro → En" done={tp.roToEnDone} />
+                    <WeeklyProgressRow label="En → Ro" done={tp.enToRoDone} />
+                    <WeeklyProgressRow label="Matching" done={tp.matchingDone} />
+                    <WeeklyProgressRow label="Sorting" done={tp.sortingDone} />
+                  </div>
+                  <Button variant="ghost" size="md" onClick={() => go('weekly-topic', topic.id)} className="text-sea-600 dark:text-sea-200 w-full">
+                    Open topic
+                    <Icon name="ChevronRight" className="h-4 w-4" />
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         </Card>
 
@@ -187,5 +222,14 @@ function CountRow({ icon, label, value, color }: { icon: string; label: string; 
       <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{label}</span>
       <span className="font-bold text-ink-900 dark:text-sand-100 text-lg shrink-0">{value}</span>
     </div>
+  );
+}
+
+function WeeklyProgressRow({ label, done }: { label: string; done: boolean }) {
+  return (
+    <span className={`inline-flex items-center gap-1 ${done ? 'text-sea-600 dark:text-sea-200' : ''}`}>
+      <Icon name={done ? 'Check' : 'Circle'} className="h-3.5 w-3.5 shrink-0" />
+      {label}
+    </span>
   );
 }

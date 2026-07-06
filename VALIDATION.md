@@ -312,3 +312,25 @@ Status: Fixed
 Notes: Added `.tile-grid` / `.tile-label` utilities; home shortcuts use vertical tile layout; buttons allow wrapping; bottom nav labels scale down on narrow screens.
 
 ---
+
+VAL-029
+Area: Weekly Topics / Learning Engine
+Issue: No structured weekly topic learning path (vocabulary → reading → translation → exercises) as defined in Learning Engine PRD.
+Expected behaviour: Reusable Weekly Topics architecture; Topic 1 Building a Cabin with all PRD sections; progress in localStorage; integration with Home, Progress, and Favourites.
+Current behaviour: Weekly Topics feature did not exist.
+Priority: High
+Status: Fixed
+Notes: Added `src/content/weeklyTopics/`, reusable pages and exercise components, progress tracking, translation notes in localStorage. PRD at `docs/LearningEngine_PRD.md`.
+
+---
+
+VAL-030
+Area: Content / Romanian
+Issue: Weekly Topic reading passages and new words were authored for Building a Cabin — need Mihaela review for natural Romanian.
+Expected behaviour: Teacher-approved vocabulary; new words flagged separately; uncertain Romanian marked for review.
+Current behaviour: Passages use approved vocab plus listed new words (`cabană`, `lemn`, `grădină`, etc.).
+Priority: Medium
+Status: Open
+Notes: All teacher-approved PRD vocabulary included. Reading passages should be reviewed with Mihaela before demo.
+
+---

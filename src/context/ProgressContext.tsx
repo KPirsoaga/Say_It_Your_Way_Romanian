@@ -1,6 +1,7 @@
 import { createContext, useContext, useCallback, type ReactNode } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import type { ProgressState, ScenarioId } from '../types';
+import type { ProgressState, ScenarioId, WeeklyTopicProgress } from '../types';
+import { EMPTY_WEEKLY_TOPIC_PROGRESS } from '../types';
 
 const DEFAULT_PROGRESS: ProgressState = {
   practisedDays: [],
@@ -11,6 +12,7 @@ const DEFAULT_PROGRESS: ProgressState = {
   speakDone: 0,
   builderDone: 0,
   completedGrammarTopics: [],
+  weeklyTopics: {},
 };
 
 function todayStr(): string {
@@ -34,6 +36,8 @@ interface ProgressCtx {
   addSpeakDone: (n?: number) => void;
   addBuilderDone: (n?: number) => void;
   markGrammarTopicCompleted: (id: string) => void;
+  updateWeeklyTopicProgress: (topicId: string, patch: Partial<WeeklyTopicProgress>) => void;
+  getWeeklyTopicProgress: (topicId: string) => WeeklyTopicProgress;
   resetProgress: () => void;
 }
 
@@ -86,6 +90,27 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     [setProgress]
   );
 
+  const updateWeeklyTopicProgress = useCallback(
+    (topicId: string, patch: Partial<WeeklyTopicProgress>) => {
+      setProgress((p) => {
+        const current = p.weeklyTopics?.[topicId] ?? { ...EMPTY_WEEKLY_TOPIC_PROGRESS };
+        return {
+          ...p,
+          weeklyTopics: {
+            ...(p.weeklyTopics ?? {}),
+            [topicId]: { ...current, ...patch },
+          },
+        };
+      });
+    },
+    [setProgress]
+  );
+
+  const getWeeklyTopicProgress = useCallback(
+    (topicId: string) => progress.weeklyTopics?.[topicId] ?? { ...EMPTY_WEEKLY_TOPIC_PROGRESS },
+    [progress.weeklyTopics]
+  );
+
   const resetProgress = useCallback(() => setProgress(DEFAULT_PROGRESS), [setProgress]);
 
   return (
@@ -101,6 +126,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         addSpeakDone,
         addBuilderDone,
         markGrammarTopicCompleted,
+        updateWeeklyTopicProgress,
+        getWeeklyTopicProgress,
         resetProgress,
       }}
     >
