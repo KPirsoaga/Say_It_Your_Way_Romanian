@@ -44,7 +44,7 @@ export function GrammarHelpPage({ go, onBack }: Props) {
                     <Icon name={topic.icon} className={`h-7 w-7 ${c.text}`} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-bold text-ink-900 dark:text-sand-100 text-lg leading-tight">{topic.title}</p>
+                    <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-base leading-tight">{topic.title}</p>
                     <p className="text-sm text-ink-500 dark:text-ink-300 mt-0.5 line-clamp-2">{topic.summary}</p>
                   </div>
                   {done && (
@@ -71,7 +71,7 @@ export function GrammarHelpPage({ go, onBack }: Props) {
                     <Icon name={verb.icon} className={`h-6 w-6 ${c.text}`} />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-bold text-ink-900 dark:text-sand-100 text-lg" lang="ro">
+                    <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-base" lang="ro">
                       {verb.infinitive}
                     </p>
                     <p className="text-sm text-ink-500 dark:text-ink-300">{verb.en}</p>

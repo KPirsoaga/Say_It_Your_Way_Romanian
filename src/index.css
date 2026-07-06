@@ -50,19 +50,29 @@ html.dark body {
 
 @layer components {
   .card {
-    @apply rounded-3xl bg-white shadow-soft p-5 dark:bg-ink-900 dark:shadow-none dark:ring-1 dark:ring-white/10;
+    @apply rounded-3xl bg-white shadow-soft p-5 dark:bg-ink-900 dark:shadow-none dark:ring-1 dark:ring-white/10 min-w-0;
   }
   .btn-base {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sea-500/30 disabled:opacity-50 disabled:active:scale-100;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-[0.97] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sea-500/30 disabled:opacity-50 disabled:active:scale-100 whitespace-normal text-center;
   }
   .btn-lg {
-    @apply btn-base px-5 py-4 text-lg min-h-[56px];
+    @apply btn-base px-5 py-4 text-lg min-h-[56px] max-w-full;
   }
   .btn-md {
-    @apply btn-base px-4 py-3 text-base min-h-[48px];
+    @apply btn-base px-4 py-3 text-base min-h-[48px] max-w-full;
   }
   .tap-target {
     @apply min-h-[48px] min-w-[48px];
+  }
+  .tile-grid {
+    @apply grid;
+  }
+  .tile-grid > * {
+    min-width: 0;
+  }
+  .tile-label {
+    @apply min-w-0 break-words leading-snug;
+    overflow-wrap: anywhere;
   }
 }
 

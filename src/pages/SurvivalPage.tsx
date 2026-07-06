@@ -47,7 +47,7 @@ export function SurvivalPage({ onBack }: Props) {
 
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
-                    <p className="text-xl font-bold text-ink-900 dark:text-sand-100 leading-snug" lang="ro">
+                    <p className="tile-label text-xl font-bold text-ink-900 dark:text-sand-100 leading-snug" lang="ro">
                       {p.ro}
                     </p>
                     <p className="mt-2 text-ink-700 dark:text-ink-300 text-base">{p.en}</p>

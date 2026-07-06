@@ -89,7 +89,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
               disabled={done}
               className={chunkCls}
             >
-              {c.ro}
+              <span className="tile-label">{c.ro}</span>
             </button>
           );
         })}
@@ -110,7 +110,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
             disabled={done}
             className="btn-md bg-white ring-2 ring-sand-300 text-ink-700 hover:ring-sea-400 dark:bg-ink-900 dark:ring-white/20 dark:text-ink-300"
           >
-            {item.chunks[chunkIdx].ro}
+            <span className="tile-label">{item.chunks[chunkIdx].ro}</span>
           </button>
         ))}
         {pool.length === 0 && !done && (

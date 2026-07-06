@@ -32,7 +32,7 @@ export function ProgressPage({ go }: Props) {
       <PageHeader title="Progress" subtitle="Your calm, steady practice" />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {/* Big numbers */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 tile-grid">
           <BigStat icon="Flame" value={daysCount} label="Days practised" color="text-coral-400" bg="bg-coral-50 dark:bg-coral-400/20" />
           <BigStat icon="HeartFilled" value={favCount} label="Saved phrases" color="text-rose-400" bg="bg-rose-50 dark:bg-rose-400/20" />
           <BigStat icon="Trophy" value={completedCount} label="Scenarios done" color="text-sun-400" bg="bg-sun-50 dark:bg-sun-300/20" />
@@ -77,8 +77,8 @@ export function ProgressPage({ go }: Props) {
             {grammarTopics.map((t) => {
               const done = progress.completedGrammarTopics.includes(t.id);
               return (
-                <div key={t.id} className="flex items-center justify-between gap-2">
-                  <span className="text-ink-700 dark:text-ink-300 text-base">{t.title}</span>
+                <div key={t.id} className="flex items-center justify-between gap-2 min-w-0">
+                  <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{t.title}</span>
                   {done ? (
                     <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 font-bold text-sm">
                       <Icon name="Check" className="h-4 w-4" /> Done
@@ -102,8 +102,8 @@ export function ProgressPage({ go }: Props) {
             {scenarios.map((s) => {
               const done = progress.completedScenarios.includes(s.id);
               return (
-                <div key={s.id} className="flex items-center justify-between gap-2">
-                  <span className="text-ink-700 dark:text-ink-300 text-base">{s.title}</span>
+                <div key={s.id} className="flex items-center justify-between gap-2 min-w-0">
+                  <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{s.title}</span>
                   {done ? (
                     <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 font-bold text-sm">
                       <Icon name="Check" className="h-4 w-4" /> Done
@@ -128,8 +128,8 @@ export function ProgressPage({ go }: Props) {
             {miniConversations.map((conv) => {
               const done = progress.completedConversations.includes(conv.id);
               return (
-                <div key={conv.id} className="flex items-center justify-between gap-2">
-                  <span className="text-ink-700 dark:text-ink-300 text-base">{conv.title}</span>
+                <div key={conv.id} className="flex items-center justify-between gap-2 min-w-0">
+                  <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{conv.title}</span>
                   {done ? (
                     <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 font-bold text-sm">
                       <Icon name="Check" className="h-4 w-4" /> Done
@@ -170,22 +170,22 @@ export function ProgressPage({ go }: Props) {
 
 function BigStat({ icon, value, label, color, bg }: { icon: string; value: number; label: string; color: string; bg: string }) {
   return (
-    <div className="card p-4 flex flex-col items-center gap-2">
-      <div className={`h-10 w-10 rounded-2xl ${bg} flex items-center justify-center`}>
+    <div className="card p-4 flex flex-col items-center gap-2 min-w-0">
+      <div className={`h-10 w-10 rounded-2xl ${bg} flex items-center justify-center shrink-0`}>
         <Icon name={icon} className={`h-6 w-6 ${color}`} />
       </div>
       <span className="text-3xl font-bold text-ink-900 dark:text-sand-100">{value}</span>
-      <span className="text-xs text-ink-500 dark:text-ink-300">{label}</span>
+      <span className="tile-label text-xs text-ink-500 dark:text-ink-300 text-center">{label}</span>
     </div>
   );
 }
 
 function CountRow({ icon, label, value, color }: { icon: string; label: string; value: number; color: string }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 min-w-0">
       <Icon name={icon} className={`h-5 w-5 ${color} shrink-0`} />
-      <span className="text-ink-700 dark:text-ink-300 text-base flex-1">{label}</span>
-      <span className="font-bold text-ink-900 dark:text-sand-100 text-lg">{value}</span>
+      <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{label}</span>
+      <span className="font-bold text-ink-900 dark:text-sand-100 text-lg shrink-0">{value}</span>
     </div>
   );
 }

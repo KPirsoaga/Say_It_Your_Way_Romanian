@@ -68,10 +68,10 @@ export function ListenChoose({ item, onDone }: Props) {
               type="button"
               disabled={picked !== null}
               onClick={() => choose(i)}
-              className={`${cls} w-full justify-between`}
+              className={`${cls} w-full justify-between items-start text-left h-auto min-h-[48px]`}
               aria-pressed={isPicked}
             >
-              <span>{opt}</span>
+              <span className="tile-label flex-1 text-left pr-2">{opt}</span>
               {picked !== null && isCorrect && <Icon name="Check" className="h-5 w-5" />}
               {isPicked && !isCorrect && <Icon name="X" className="h-5 w-5" />}
             </button>

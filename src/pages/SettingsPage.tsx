@@ -30,7 +30,7 @@ export function SettingsPage({ onBack }: Props) {
         {/* Text size */}
         <Card>
           <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Text size</p>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2 tile-grid">
             {textSizeOptions.map((opt) => {
               const active = settings.textSize === opt.value;
               return (
