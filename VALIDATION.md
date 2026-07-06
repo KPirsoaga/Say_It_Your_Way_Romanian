@@ -510,3 +510,14 @@ Status: Fixed
 Notes: `FlagForMihaela` component; `ReviewContext.manualFlags`; `user-flag:*` ids in `rcd-review` localStorage.
 
 ---
+
+VAL-047
+Area: Share with Teacher / QR sync
+Issue: No offline way to share review items or progress with Mihaela using QR codes.
+Expected behaviour: Settings → Share with Teacher → Review Sync (two-way) and Progress Sync (one-way); multi-QR chunking when payloads are large; teacher review with corrections; learner imports response by id.
+Current behaviour: Review and progress stayed on one device only.
+Priority: High
+Status: Fixed
+Notes: `src/services/qr/*` package codec; `qrcode` + `html5-qrcode`; pages under `src/pages/share/`; teacher session in `rcd-teacher-review` localStorage.
+
+---
