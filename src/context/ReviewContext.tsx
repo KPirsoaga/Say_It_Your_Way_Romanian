@@ -217,16 +217,12 @@ export function ReviewProvider({ children }: { children: ReactNode }) {
         const nextDecisions = { ...base.decisions };
         items.forEach((item) => {
           const existing = nextDecisions[item.id];
-          const notes = [item.teacherNotes, item.pronunciationNotes, item.generalComments]
-            .filter(Boolean)
-            .join(' · ') || undefined;
           nextDecisions[item.id] = {
             status: item.status,
-            teacherNotes: notes ?? existing?.teacherNotes,
-            correctedRo: item.correctedRo?.trim() || existing?.correctedRo,
-            correctedEn: item.correctedEn?.trim() || existing?.correctedEn,
-            pronunciationNotes: item.pronunciationNotes?.trim() || existing?.pronunciationNotes,
-            generalComments: item.generalComments?.trim() || existing?.generalComments,
+            teacherNotes: item.note?.trim() || existing?.teacherNotes,
+            correctedRo: item.cro?.trim() || existing?.correctedRo,
+            correctedEn: item.cen?.trim() || existing?.correctedEn,
+            pronunciationNotes: item.pron?.trim() || existing?.pronunciationNotes,
             updatedAt: nowIso(),
           };
         });

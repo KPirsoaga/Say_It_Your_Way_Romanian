@@ -565,3 +565,14 @@ Status: Fixed
 Notes: Direct `Html5Qrcode` API; removed StrictMode; compact QR codec; paste fallback; 360px QR display; clearer scan errors.
 
 ---
+
+VAL-052
+Area: Share with Teacher / Review Sync payload
+Issue: Review Sync generated too many QR codes (e.g. 8 for one sync) because each item carried timestamps, context labels, and verbose array rows.
+Expected behaviour: Compact review export (`id`, `area`, `ro`, `en`, `note`, `status`); compact teacher response (`id`, `status`, `cro`, `cen`, `note`, `pron`); omit empty fields; filters before generate (default pending only); item count and soft warning above 3 QRs; progress sync stays separate.
+Current behaviour: Verbose per-item arrays and metadata inflated payloads; all active items exported with no filters.
+Priority: High
+Status: Fixed
+Notes: `reviewPackage.ts` compact wire objects; `ReviewExportPage` status/area filters; legacy array/object parsing retained for older QRs.
+
+---
