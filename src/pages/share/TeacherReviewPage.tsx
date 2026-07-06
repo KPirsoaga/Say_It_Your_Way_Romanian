@@ -17,11 +17,10 @@ import type { ReviewStatus } from '../../types';
 
 interface TeacherResponse {
   status: ReviewStatus;
-  teacherNotes?: string;
-  correctedRo?: string;
-  correctedEn?: string;
-  pronunciationNotes?: string;
-  generalComments?: string;
+  note?: string;
+  cro?: string;
+  cen?: string;
+  pron?: string;
 }
 
 interface TeacherSession {
@@ -71,15 +70,12 @@ export function TeacherReviewPage({ onBack }: Props) {
     () =>
       session.items.map((item) => {
         const r = session.responses[item.id] ?? { status: 'pending' as ReviewStatus };
-        return {
-          id: item.id,
-          status: r.status,
-          teacherNotes: r.teacherNotes,
-          correctedRo: r.correctedRo,
-          correctedEn: r.correctedEn,
-          pronunciationNotes: r.pronunciationNotes,
-          generalComments: r.generalComments,
-        };
+        const row: ReviewResponseItem = { id: item.id, status: r.status };
+        if (r.cro?.trim()) row.cro = r.cro.trim();
+        if (r.cen?.trim()) row.cen = r.cen.trim();
+        if (r.note?.trim()) row.note = r.note.trim();
+        if (r.pron?.trim()) row.pron = r.pron.trim();
+        return row;
       }),
     [session]
   );
@@ -183,9 +179,8 @@ function TeacherReviewCard({
     <Card className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300">
-          {item.contentArea}
+          {item.area}
         </span>
-        <span className="text-xs text-ink-400">{item.contextLabel}</span>
       </div>
 
       <div>
@@ -201,16 +196,15 @@ function TeacherReviewCard({
 
       <div className="rounded-2xl bg-sand-100 dark:bg-ink-900 p-3 text-sm">
         <p className="font-bold text-ink-500 text-xs uppercase mb-1">Why flagged</p>
-        <p>{item.reviewReason}</p>
-        {item.learnerNote && <p className="mt-2 text-ink-500">Learner note: {item.learnerNote}</p>}
+        <p>{item.note ?? '—'}</p>
       </div>
 
       <label className="block">
         <span className="text-sm font-bold text-ink-700 dark:text-ink-300">Correct Romanian</span>
         <input
           type="text"
-          value={response.correctedRo ?? ''}
-          onChange={(e) => onChange({ correctedRo: e.target.value })}
+          value={response.cro ?? ''}
+          onChange={(e) => onChange({ cro: e.target.value })}
           className="mt-1 w-full rounded-xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-3 py-2.5 text-base"
           placeholder="Optional correction"
         />
@@ -220,8 +214,8 @@ function TeacherReviewCard({
         <span className="text-sm font-bold text-ink-700 dark:text-ink-300">Correct English</span>
         <input
           type="text"
-          value={response.correctedEn ?? ''}
-          onChange={(e) => onChange({ correctedEn: e.target.value })}
+          value={response.cen ?? ''}
+          onChange={(e) => onChange({ cen: e.target.value })}
           className="mt-1 w-full rounded-xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-3 py-2.5 text-base"
           placeholder="Optional correction"
         />
@@ -230,8 +224,8 @@ function TeacherReviewCard({
       <label className="block">
         <span className="text-sm font-bold text-ink-700 dark:text-ink-300">Teacher notes</span>
         <textarea
-          value={response.teacherNotes ?? ''}
-          onChange={(e) => onChange({ teacherNotes: e.target.value })}
+          value={response.note ?? ''}
+          onChange={(e) => onChange({ note: e.target.value })}
           rows={2}
           className="mt-1 w-full rounded-xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-3 py-2.5 text-base resize-none"
           placeholder="Notes for Katie"
@@ -242,20 +236,10 @@ function TeacherReviewCard({
         <span className="text-sm font-bold text-ink-700 dark:text-ink-300">Pronunciation notes</span>
         <input
           type="text"
-          value={response.pronunciationNotes ?? ''}
-          onChange={(e) => onChange({ pronunciationNotes: e.target.value })}
+          value={response.pron ?? ''}
+          onChange={(e) => onChange({ pron: e.target.value })}
           className="mt-1 w-full rounded-xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-3 py-2.5 text-base"
           placeholder="How to say it"
-        />
-      </label>
-
-      <label className="block">
-        <span className="text-sm font-bold text-ink-700 dark:text-ink-300">General comments</span>
-        <input
-          type="text"
-          value={response.generalComments ?? ''}
-          onChange={(e) => onChange({ generalComments: e.target.value })}
-          className="mt-1 w-full rounded-xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-3 py-2.5 text-base"
         />
       </label>
 

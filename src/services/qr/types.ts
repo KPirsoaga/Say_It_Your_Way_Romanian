@@ -24,18 +24,15 @@ export interface QrEnvelope<T = unknown> {
   payload: T;
 }
 
-// ─── Review packages ─────────────────────────────────────────────────────────
+// ─── Review packages (compact wire format) ─────────────────────────────────
 
 export interface ReviewExportItem {
   id: string;
+  area: string;
   ro: string;
   en: string;
-  contentArea: string;
-  reviewReason: string;
-  learnerNote?: string;
+  note?: string;
   status: 'pending' | 'approved' | 'needs-changes';
-  timestamp: string;
-  contextLabel?: string;
 }
 
 export interface ReviewExportPayload {
@@ -45,11 +42,10 @@ export interface ReviewExportPayload {
 export interface ReviewResponseItem {
   id: string;
   status: 'pending' | 'approved' | 'needs-changes';
-  teacherNotes?: string;
-  correctedRo?: string;
-  correctedEn?: string;
-  pronunciationNotes?: string;
-  generalComments?: string;
+  cro?: string;
+  cen?: string;
+  note?: string;
+  pron?: string;
 }
 
 export interface ReviewResponsePayload {
