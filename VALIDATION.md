@@ -532,3 +532,14 @@ Status: Fixed
 Notes: Defer `start()` until after region is shown; enumerate cameras with facingMode fallback; `qr-scanner-region` video CSS.
 
 ---
+
+VAL-049
+Area: Share with Teacher / QR scanner (desktop)
+Issue: Desktop webcam showed black screen after granting camera permission.
+Expected behaviour: Live camera preview visible; QR codes scannable on desktop.
+Current behaviour: `aspectRatio: 1` and shaded qrbox broke desktop webcams; preview looked black.
+Priority: High
+Status: Fixed
+Notes: Removed forced square aspect ratio; full-frame scan without dark overlay; 4:3 preview container; upload QR image fallback for desktop.
+
+---

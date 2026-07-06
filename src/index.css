@@ -94,12 +94,18 @@ html.dark body {
 }
 
 /* QR scanner — html5-qrcode injects video into the region div */
+.qr-scanner-region {
+  position: relative;
+}
 .qr-scanner-region video {
   width: 100% !important;
-  height: auto !important;
-  display: block;
+  height: 100% !important;
+  max-height: 100%;
+  display: block !important;
   object-fit: cover;
+  background: #1a1a2e;
 }
-.qr-scanner-region img {
-  display: none;
+#qr-shaded-region {
+  /* When shading is used, keep the centre clear */
+  pointer-events: none;
 }
