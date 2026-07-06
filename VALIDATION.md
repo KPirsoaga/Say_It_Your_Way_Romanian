@@ -411,3 +411,69 @@ Status: Fixed
 Notes: `PhraseBuilder` compares chunk `.ro` strings. `PhraseCard` and `ListenChoose` label pron as guide only.
 
 ---
+
+VAL-038
+Area: Navigation
+Issue: Bottom nav prioritised Scenarios over the weekly lesson; weekly sub-pages hid the nav.
+Expected behaviour: Lesson tab opens Building a Cabin; bottom nav visible on lesson, vocab, reading, and exercise pages.
+Current behaviour: Scenarios in bottom nav; weekly pages full-screen without nav.
+Priority: High
+Status: Fixed
+Notes: `BottomNav` Lesson tab → `weekly-topic/building-cabin`. `App.tsx` shows nav on weekly sub-pages.
+
+---
+
+VAL-039
+Area: Exercises / Weekly Topics
+Issue: Finishing an exercise dropped users with no clear return path; MC options predictable; progress counted 9 steps including translation.
+Expected behaviour: Back to topic + Try again on completion; shuffled options; 8 tracked steps (translation optional, not in %).
+Current behaviour: Exercises ended without navigation; fixed option order; 9-step progress bar.
+Priority: High
+Status: Fixed
+Notes: `ExerciseCompletion` component; `shuffle.ts` in weekly exercises; `WEEKLY_TOPIC_STEP_COUNT = 8`.
+
+---
+
+VAL-040
+Area: Grammar Help
+Issue: No quick way to move between verb pages; duplicate auxiliary/predicative cards in overview.
+Expected behaviour: Prev/next verb navigation and chip strip; overview hides topics with dedicated verb pages.
+Current behaviour: Manual back-and-forth only; duplicate overview entries.
+Priority: Medium
+Status: Fixed
+Notes: `GrammarVerbNav` + `grammarVerbNav.ts`. `GrammarHelpPage` filters `gr-pos-auxiliary` and `gr-pos-predicative`.
+
+---
+
+VAL-041
+Area: Home / Daily / Phrase Builder
+Issue: Home buried the lesson; daily phrase unrelated to weekly content; Phrase Builder lacked cabin sentences.
+Expected behaviour: Lesson-first home; today’s phrase from Building a Cabin; cabin Phrase Builder items first.
+Current behaviour: Stats and scenarios dominated; generic daily phrase; generic builder only.
+Priority: High
+Status: Fixed
+Notes: `getWeeklyLessonPhrase`, `cabinPhraseBuilderItems`, home hero “Continue this week’s lesson”.
+
+---
+
+VAL-042
+Area: Reading / Terminology
+Issue: Readings had no speak step or next-reading flow; “Matching” and “Favourites” labels inconsistent.
+Expected behaviour: Speak-out-loud after reveal; Next reading button; “Vocabulary Review” and “Saved” labels.
+Current behaviour: Translation-only finish; inconsistent naming.
+Priority: Medium
+Status: Fixed
+Notes: `WeeklyReadingPage` speak + next reading. Progress, exercises, and Saved page relabelled.
+
+---
+
+VAL-043
+Area: Content — Building a Cabin
+Issue: MC distractor `a găti` was off-topic for cabin vocabulary exercise.
+Expected behaviour: Distractors stay on-theme for the lesson.
+Current behaviour: `a găti` appeared as wrong answer in exercise `er5`.
+Priority: Low
+Status: Fixed
+Notes: Replaced with `a săpa` in `buildingCabin.ts` exercise `er5`.
+
+---

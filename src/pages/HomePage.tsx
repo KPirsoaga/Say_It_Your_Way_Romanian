@@ -2,9 +2,10 @@ import { Icon } from '../components/Icon';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { useProgress } from '../context/ProgressContext';
-import { colorMap, getDailyContent, scenarios } from '../content';
+import { colorMap, scenarios } from '../content';
 import { todayStr } from '../context/ProgressContext';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
+import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
 import { WeeklyTopicProgressBar } from '../components/WeeklyTopicProgressBar';
 import type { PageId } from '../App';
 
@@ -41,7 +42,7 @@ const practiceTiles: { label: string; sub: string; icon: string; page: PageId; c
 export function HomePage({ go }: Props) {
   const { progress, getWeeklyTopicProgress } = useProgress();
   const today = todayStr();
-  const daily = getDailyContent(today);
+  const lessonPhrase = getWeeklyLessonPhrase(today);
   const cabinTopic = weeklyTopics.find((t) => t.id === CABIN_TOPIC_ID) ?? weeklyTopics[0];
   const cabinProgress = getWeeklyTopicProgress(cabinTopic.id);
   const cabinPct = weeklyTopicPercent(cabinProgress);
@@ -54,6 +55,17 @@ export function HomePage({ go }: Props) {
         <h1 className="text-3xl font-bold mt-1 leading-tight">Let’s practise Romanian today</h1>
         <p className="mt-2 text-sea-50/90 text-base">A few calm minutes a day. No tests, no pressure.</p>
         <div className="mt-4 flex flex-col gap-2">
+          {cabinPct < 100 ? (
+            <Button
+              variant="secondary"
+              size="lg"
+              className="w-full bg-sun-300 hover:bg-sun-400 text-ink-900"
+              onClick={() => go('weekly-topic', cabinTopic.id)}
+            >
+              <Icon name="BookOpen" className="h-5 w-5" />
+              Continue this week&apos;s lesson
+            </Button>
+          ) : null}
           <Button variant="secondary" size="lg" className="w-full bg-coral-400 hover:bg-coral-500" onClick={() => go('daily')}>
             <Icon name="Sparkles" className="h-5 w-5" />
             Start today&apos;s practice
@@ -67,13 +79,6 @@ export function HomePage({ go }: Props) {
             Tiny Practice — 3 minutes
           </Button>
         </div>
-      </section>
-
-      {/* Quick stats */}
-      <section className="grid grid-cols-3 gap-3 tile-grid">
-        <StatCard icon="Flame" value={progress.practisedDays.length} label="Days" color="text-coral-400" onClick={() => go('progress')} />
-        <StatCard icon="HeartFilled" value={progress.favourites.length} label="Favourites" color="text-rose-400" onClick={() => go('favourites')} />
-        <StatCard icon="Trophy" value={progress.completedScenarios.length} label="Done" color="text-sun-400" onClick={() => go('progress')} />
       </section>
 
       {/* This week's lesson — primary path */}
@@ -108,6 +113,13 @@ export function HomePage({ go }: Props) {
         >
           View all weekly topics
         </button>
+      </section>
+
+      {/* Quick stats — below lesson */}
+      <section className="grid grid-cols-3 gap-3 tile-grid">
+        <StatCard icon="Flame" value={progress.practisedDays.length} label="Days" color="text-coral-400" onClick={() => go('progress')} />
+        <StatCard icon="HeartFilled" value={progress.favourites.length} label="Saved" color="text-rose-400" onClick={() => go('favourites')} />
+        <StatCard icon="Trophy" value={progress.completedScenarios.length} label="Practised" color="text-sun-400" onClick={() => go('progress')} />
       </section>
 
       {/* I actually need this today */}
@@ -145,13 +157,14 @@ export function HomePage({ go }: Props) {
       {/* Today’s phrase */}
       <section>
         <SectionTitle title="Today’s phrase" icon="Star" />
+        <p className="text-sm text-ink-500 dark:text-ink-300 mb-2">From this week&apos;s lesson — Building a Cabin</p>
         <Card className="bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
           <p className="text-xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
-            {daily.phrase.ro}
+            {lessonPhrase.ro}
           </p>
-          <p className="mt-2 text-ink-700 dark:text-ink-300">{daily.phrase.en}</p>
-          <Button variant="soft" size="md" className="mt-3" onClick={() => go('daily')}>
-            Open daily practice
+          <p className="mt-2 text-ink-700 dark:text-ink-300">{lessonPhrase.en}</p>
+          <Button variant="soft" size="md" className="mt-3" onClick={() => go('weekly-topic', cabinTopic.id)}>
+            Open this week&apos;s lesson
             <Icon name="ChevronRight" className="h-5 w-5" />
           </Button>
         </Card>
@@ -161,7 +174,7 @@ export function HomePage({ go }: Props) {
       <section>
         <SectionTitle title="Scenarios" icon="LayoutGrid" />
         <div className="grid grid-cols-2 gap-3 tile-grid">
-          {scenarios.map((s) => {
+          {scenarios.slice(0, 6).map((s) => {
             const c = colorMap[s.color];
             const done = progress.completedScenarios.includes(s.id);
             return (
@@ -180,6 +193,10 @@ export function HomePage({ go }: Props) {
             );
           })}
         </div>
+        <Button variant="ghost" size="md" className="w-full mt-3" onClick={() => go('scenarios')}>
+          See all scenarios
+          <Icon name="ChevronRight" className="h-5 w-5" />
+        </Button>
       </section>
     </div>
   );

@@ -3,6 +3,7 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { GrammarExamples } from '../components/GrammarExamples';
 import { GrammarConjugationCards } from '../components/GrammarConjugationCards';
+import { GrammarVerbNav } from '../components/GrammarVerbNav';
 import { useSpeech } from '../hooks/useSpeech';
 import { Icon } from '../components/Icon';
 import { colorMap, grammarVerbs } from '../content';
@@ -10,9 +11,10 @@ import { colorMap, grammarVerbs } from '../content';
 interface Props {
   verbId: string;
   onBack: () => void;
+  onNavigate: (verbId: string) => void;
 }
 
-export function GrammarVerbPage({ verbId, onBack }: Props) {
+export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
   const verb = grammarVerbs.find((v) => v.id === verbId);
   const { supported, speak, stop, currentId } = useSpeech();
 
@@ -36,6 +38,8 @@ export function GrammarVerbPage({ verbId, onBack }: Props) {
     <div className="min-h-screen">
       <PageHeader title={verb.infinitive} subtitle={verb.en} onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+        <GrammarVerbNav verbId={verbId} onSelect={onNavigate} />
+
         <div className={`rounded-3xl ${c.bgSoft} p-5 text-center`}>
           <p className="text-3xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
             {verb.infinitive}
@@ -85,6 +89,8 @@ export function GrammarVerbPage({ verbId, onBack }: Props) {
           <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100 mb-3">Useful examples</h2>
           <GrammarExamples examples={verb.examples} idPrefix={verb.id} />
         </section>
+
+        <GrammarVerbNav verbId={verbId} onSelect={onNavigate} />
       </div>
     </div>
   );

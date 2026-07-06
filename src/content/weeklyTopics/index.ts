@@ -21,7 +21,6 @@ export function countWeeklyTopicStepsDone(p: WeeklyTopicProgress): number {
     p.reading1Done,
     p.reading2Done,
     p.reading3Done,
-    p.translationAttempted,
     p.roToEnDone,
     p.enToRoDone,
     p.matchingDone,
@@ -29,7 +28,7 @@ export function countWeeklyTopicStepsDone(p: WeeklyTopicProgress): number {
   ].filter(Boolean).length;
 }
 
-export const WEEKLY_TOPIC_STEP_COUNT = 9;
+export const WEEKLY_TOPIC_STEP_COUNT = 8;
 
 export function weeklyTopicPercent(p: WeeklyTopicProgress): number {
   return Math.round((countWeeklyTopicStepsDone(p) / WEEKLY_TOPIC_STEP_COUNT) * 100);

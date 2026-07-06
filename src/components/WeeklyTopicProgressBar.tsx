@@ -13,7 +13,6 @@ export function WeeklyTopicProgressBar({ progress, className = '' }: Props) {
     progress.reading1Done,
     progress.reading2Done,
     progress.reading3Done,
-    progress.translationAttempted,
     progress.roToEnDone,
     progress.enToRoDone,
     progress.matchingDone,

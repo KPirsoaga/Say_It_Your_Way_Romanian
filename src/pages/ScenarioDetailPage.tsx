@@ -36,7 +36,7 @@ export function ScenarioDetailPage({ scenarioId, go }: Props) {
 
   const finish = () => {
     markScenarioCompleted(scenarioId);
-    go('home');
+    go('scenarios');
   };
 
   return (

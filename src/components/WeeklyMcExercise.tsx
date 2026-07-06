@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from './Button';
 import { Icon } from './Icon';
+import { ExerciseCompletion } from './ExerciseCompletion';
 import { shuffledMcOptions } from '../utils/shuffle';
 import type { WeeklyMcQuestion } from '../types';
 
@@ -8,14 +9,16 @@ interface Props {
   questions: WeeklyMcQuestion[];
   title: string;
   onComplete: () => void;
+  onBackToTopic: () => void;
 }
 
-export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
+export function WeeklyMcExercise({ questions, title, onComplete, onBackToTopic }: Props) {
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
   const [options, setOptions] = useState<string[]>([]);
+  const [attempt, setAttempt] = useState(0);
 
   const q = questions[index];
   const isLast = index >= questions.length - 1;
@@ -23,7 +26,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
   useEffect(() => {
     setOptions(shuffledMcOptions(q.options, q.correct));
     setPicked(null);
-  }, [index, q.id, q.options, q.correct]);
+  }, [index, q.id, q.options, q.correct, attempt]);
 
   const choose = (i: number) => {
     if (picked !== null || finished) return;
@@ -41,15 +44,22 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
     }
   };
 
+  const tryAgain = () => {
+    setIndex(0);
+    setPicked(null);
+    setCorrectCount(0);
+    setFinished(false);
+    setAttempt((a) => a + 1);
+  };
+
   if (finished) {
     return (
-      <div className="card p-5 text-center animate-fade-in">
-        <Icon name="Check" className="h-12 w-12 text-sea-500 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">Well done!</h2>
-        <p className="mt-2 text-ink-700 dark:text-ink-300">
-          You got {correctCount} of {questions.length} right. No pressure — you can try again anytime.
-        </p>
-      </div>
+      <ExerciseCompletion
+        title="Well done!"
+        message={`You got ${correctCount} of ${questions.length} right. No pressure — you can try again anytime.`}
+        onBackToTopic={onBackToTopic}
+        onTryAgain={tryAgain}
+      />
     );
   }
 
@@ -79,7 +89,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
           }
           return (
             <button
-              key={`${q.id}-${opt}`}
+              key={`${q.id}-${opt}-${attempt}`}
               type="button"
               disabled={picked !== null}
               onClick={() => choose(i)}

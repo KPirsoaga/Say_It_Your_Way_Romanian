@@ -78,8 +78,11 @@ export function GrammarHelpPage({ go, onBack }: Props) {
   const doneCount = progress.completedGrammarTopics.length;
   const completed = progress.completedGrammarTopics;
 
+  const HIDDEN_OVERVIEW_IDS = new Set(['gr-pos-auxiliary', 'gr-pos-predicative']);
   const patterns = grammarTopics.filter((t) => !t.group);
-  const partsOfSpeech = grammarTopics.filter((t) => t.group === 'parts-of-speech');
+  const partsOfSpeech = grammarTopics.filter(
+    (t) => t.group === 'parts-of-speech' && !HIDDEN_OVERVIEW_IDS.has(t.id)
+  );
   const indicative = grammarTopics.filter((t) => t.group === 'indicative');
   const imperfect = grammarTopics.filter((t) => t.group === 'imperfect');
   const auxiliary = grammarTopics.filter((t) => t.group === 'auxiliary');

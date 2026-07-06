@@ -3,15 +3,18 @@ import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { Card } from '../components/Card';
+import { SpeakPractice } from '../components/SpeakPractice';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useWeeklyTranslationNotes } from '../hooks/useWeeklyTranslationNotes';
 import { getWeeklyTopic } from '../content/weeklyTopics';
+import type { PageId } from '../App';
 
 interface Props {
   topicId: string;
   readingId: string;
   onBack: () => void;
+  go: (page: PageId, arg?: string) => void;
 }
 
 function splitSentences(text: string): string[] {
@@ -21,7 +24,7 @@ function splitSentences(text: string): string[] {
     .filter(Boolean);
 }
 
-export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
+export function WeeklyReadingPage({ topicId, readingId, onBack, go }: Props) {
   const topic = getWeeklyTopic(topicId);
   const reading = topic?.readings.find((r) => r.id === readingId);
   const { updateWeeklyTopicProgress } = useProgress();
@@ -31,6 +34,15 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
   const [note, setNoteLocal] = useState(() => getNote(topicId, readingId));
 
   const sentences = useMemo(() => (reading ? splitSentences(reading.ro) : []), [reading]);
+  const readingIndex = topic?.readings.findIndex((r) => r.id === readingId) ?? -1;
+  const nextReading = readingIndex >= 0 ? topic?.readings[readingIndex + 1] : undefined;
+  const speakPhrase = useMemo(() => {
+    const firstEn = reading?.modelEn.split('.')[0]?.trim();
+    return {
+      ro: sentences[0] ?? reading?.ro ?? '',
+      en: firstEn ? `${firstEn}.` : '',
+    };
+  }, [sentences, reading]);
 
   if (!topic || !reading) return null;
 
@@ -174,6 +186,35 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
                 <p className="text-ink-700 dark:text-ink-300">{reading.teacherNotes}</p>
               </Card>
             )}
+
+            <Card>
+              <p className="font-bold text-ink-900 dark:text-sand-100 mb-2">Speak out loud</p>
+              <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
+                Try saying the first sentence aloud — no recording, just your own voice.
+              </p>
+              <SpeakPractice
+                phrase={speakPhrase}
+                speechId={`weekly-reading-speak-${topicId}-${readingId}`}
+              />
+            </Card>
+
+            <div className="flex flex-col gap-2">
+              {nextReading ? (
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="w-full"
+                  onClick={() => go('weekly-reading', `${topicId}:${nextReading.id}`)}
+                >
+                  Next reading
+                  <Icon name="ChevronRight" className="h-5 w-5" />
+                </Button>
+              ) : null}
+              <Button variant={nextReading ? 'soft' : 'primary'} size="lg" className="w-full" onClick={onBack}>
+                <Icon name="ArrowLeft" className="h-5 w-5" />
+                Back to lesson
+              </Button>
+            </div>
           </div>
         )}
       </div>

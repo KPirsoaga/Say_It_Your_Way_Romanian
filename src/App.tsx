@@ -87,8 +87,13 @@ function Shell() {
   }, [page]);
 
   // Pages that show the bottom nav (top-level destinations)
-  const navPages: PageId[] = ['home', 'daily', 'scenarios', 'favourites', 'progress'];
-  const showNav = navPages.includes(page);
+  const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
+  const showNav =
+    navPages.includes(page) ||
+    page === 'weekly-topic' ||
+    page === 'weekly-vocab' ||
+    page === 'weekly-reading' ||
+    page === 'weekly-exercise';
   const showSettingsGear = page === 'home';
 
   return (
@@ -154,7 +159,11 @@ function Shell() {
           />
         ) : null}
         {page === 'grammar-verb' && arg ? (
-          <GrammarVerbPage verbId={arg} onBack={() => go('grammar')} />
+          <GrammarVerbPage
+            verbId={arg}
+            onBack={() => go('grammar')}
+            onNavigate={(id) => go('grammar-verb', id)}
+          />
         ) : page === 'grammar-verb' ? (
           <NavigationFallback
             title="Verb not found"
@@ -194,6 +203,7 @@ function Shell() {
               topicId={parsed.topicId}
               readingId={parsed.readingId}
               onBack={() => go('weekly-topic', parsed.topicId)}
+              go={go}
             />
           ) : (
             <NavigationFallback
