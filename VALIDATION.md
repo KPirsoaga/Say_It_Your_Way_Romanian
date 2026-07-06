@@ -488,3 +488,14 @@ Status: Fixed
 Notes: `HomePage` reordered and simplified. Removed need-today grid and No Shame tile. `scenarioGroups.ts` for Home and Scenarios page. Optional `grammarFocus` on weekly topics.
 
 ---
+
+VAL-045
+Area: Grammar Help
+Issue: Grammar Help was a collection of disconnected textbook-style topic pages; verbs had only present tense on separate flows; linguistic jargon (indicative mood, predicative, auxiliary).
+Expected behaviour: Cheat sheets, verb centre with tense toggle (Present / Perfect Compus / Imperfect / Future), plain-English tense guides, sentence patterns, simplified parts of speech; find answers in one or two taps.
+Current behaviour: Old mood/group sections; single tense per verb page; long topic cards with practise tracking.
+Priority: High
+Status: Fixed
+Notes: New `grammarCheatSheets`, `grammarTenseGuides`, `grammarSentencePatterns`, `grammarPartsOfSpeech`, `grammarVerbTenses`. `GrammarTenseToggle` on verb pages. Grammar exercises placeholder. Legacy `grammarTopics` retained for review collector only.
+
+---

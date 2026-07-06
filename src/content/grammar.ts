@@ -1,5 +1,12 @@
 import type { GrammarTopic, GrammarVerb } from '../types';
 import { extendedGrammarTopics } from './grammarExtended';
+import { mergeVerbTenses } from './grammarVerbTenses';
+
+export { grammarCheatSheets, getGrammarCheatSheet } from './grammarCheatSheets';
+export { grammarTenseGuides, getGrammarTenseGuide } from './grammarTenseGuides';
+export { grammarSentencePatterns, getGrammarSentencePattern } from './grammarSentencePatterns';
+export { grammarPartsOfSpeech } from './grammarPartsOfSpeech';
+export { getVerbFormsForTense, getVerbExamplesForTense, getAvailableTenses } from './grammarVerbTenses';
 
 const patternGrammarTopics: GrammarTopic[] = [
   {
@@ -135,7 +142,7 @@ const patternGrammarTopics: GrammarTopic[] = [
 
 export const grammarTopics: GrammarTopic[] = [...patternGrammarTopics, ...extendedGrammarTopics];
 
-export const grammarVerbs: GrammarVerb[] = [
+const baseGrammarVerbs: GrammarVerb[] = [
   {
     id: 'vb-fi',
     infinitive: 'a fi',
@@ -453,3 +460,5 @@ export const grammarVerbs: GrammarVerb[] = [
     },
   },
 ];
+
+export const grammarVerbs: GrammarVerb[] = mergeVerbTenses(baseGrammarVerbs);
