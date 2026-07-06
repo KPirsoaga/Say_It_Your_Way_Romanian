@@ -17,6 +17,9 @@ import { SurvivalPage } from './pages/SurvivalPage';
 import { TinyPracticePage } from './pages/TinyPracticePage';
 import { MiniConversationsPage } from './pages/MiniConversationsPage';
 import { MiniConversationDetailPage } from './pages/MiniConversationDetailPage';
+import { GrammarHelpPage } from './pages/GrammarHelpPage';
+import { GrammarTopicPage } from './pages/GrammarTopicPage';
+import { GrammarVerbPage } from './pages/GrammarVerbPage';
 import { NoShamePage } from './components/NoShameBanner';
 import type { ScenarioId } from './types';
 
@@ -34,7 +37,10 @@ export type PageId =
   | 'tiny'
   | 'noshame'
   | 'conversations'
-  | 'conversation';
+  | 'conversation'
+  | 'grammar'
+  | 'grammar-topic'
+  | 'grammar-verb';
 
 function Shell() {
   const [page, setPage] = useState<PageId>('home');
@@ -84,6 +90,9 @@ function Shell() {
         {page === 'conversation' && arg && (
           <MiniConversationDetailPage conversationId={arg} onBack={() => go('conversations')} onHome={() => go('home')} />
         )}
+        {page === 'grammar' && <GrammarHelpPage go={go} onBack={() => go('home')} />}
+        {page === 'grammar-topic' && arg && <GrammarTopicPage topicId={arg} onBack={() => go('grammar')} />}
+        {page === 'grammar-verb' && arg && <GrammarVerbPage verbId={arg} onBack={() => go('grammar')} />}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}

@@ -1,0 +1,497 @@
+import type { Scenario, RealLifeCategory, MiniConversation, PhraseBuilderItem, ListenChooseItem, SurvivalPhrase } from '../types';
+
+export const extraScenarios: Scenario[] = [
+  {
+    id: 'lesson',
+    title: 'Romanian Lesson',
+    situation: 'You arrive at your lesson with Mihaela and talk about what you want to practise.',
+    icon: 'GraduationCap',
+    color: 'sea',
+    lines: [
+      {
+        ro: 'Bună, Mihaela! Sunt gata pentru lecție.',
+        en: 'Hello, Mihaela! I am ready for the lesson.',
+        pron: 'BOO-nuh, Mee-HAH-el-ah! SOONT GAH-tuh pen-TRUE lek-TSY-eh.',
+        slow: 'Bună, Mihaela!... Sunt gata pentru lecție.',
+      },
+      {
+        ro: 'Azi vreau să exersăm conversația.',
+        en: 'Today I want to practise conversation.',
+        pron: 'Ah-ZEE VROW suh ek-ser-SUHM kon-ver-sah-TSY-ah.',
+        slow: 'Azi vreau... să exersăm conversația.',
+      },
+      {
+        ro: 'Putem repeta fraza încet?',
+        en: 'Can we repeat the sentence slowly?',
+        pron: 'POO-tem reh-peh-TAH FRAH-zuh uhn-CHET?',
+        slow: 'Putem repeta... fraza încet?',
+      },
+      {
+        ro: 'Nu sunt sigur cum se spune asta.',
+        en: 'I am not sure how to say this.',
+        pron: 'NOO SOONT see-GOOR koom seh SPOO-neh AH-stuh.',
+        slow: 'Nu sunt sigur... cum se spune asta.',
+      },
+      {
+        ro: 'Mulțumesc pentru răbdare!',
+        en: 'Thank you for your patience!',
+        pron: 'MOOL-tsoo-mesk pen-TRUE ruhb-DAH-reh!',
+        slow: 'Mulțumesc... pentru răbdare!',
+      },
+    ],
+  },
+  {
+    id: 'doctor',
+    title: 'At the Doctor',
+    situation: 'You visit a doctor and explain how you feel.',
+    icon: 'Stethoscope',
+    color: 'rose',
+    lines: [
+      {
+        ro: 'Bună ziua. Am o programare la ora trei.',
+        en: 'Hello. I have an appointment at three o’clock.',
+        pron: 'BOO-nuh ZEE-wuh. Ahm oh proh-grah-MAH-reh lah oh-ruh TREY.',
+        slow: 'Bună ziua... Am o programare la ora trei.',
+      },
+      {
+        ro: 'Nu mă simt bine de ieri.',
+        en: 'I have not felt well since yesterday.',
+        pron: 'NOO muh SEEMT BEE-neh deh YEH-ree.',
+        slow: 'Nu mă simt bine... de ieri.',
+      },
+      {
+        ro: 'Am dureri de cap și sunt obosit.',
+        en: 'I have a headache and I am tired.',
+        pron: 'Ahm doo-RAY-ree deh KAHB shee SOONT oh-bee-SEET.',
+        slow: 'Am dureri de cap... și sunt obosit.',
+      },
+      {
+        ro: 'Trebuie să iau medicamente?',
+        en: 'Do I need to take medicine?',
+        pron: 'TRAY-BWEH suh YOW meh-dee-kah-MEN-teh?',
+        slow: 'Trebuie să iau... medicamente?',
+      },
+      {
+        ro: 'Mulțumesc, doctor. La revedere!',
+        en: 'Thank you, doctor. Goodbye!',
+        pron: 'MOOL-tsoo-mesk, DOK-tor. Lah reh-veh-DEH-reh!',
+        slow: 'Mulțumesc, doctor... La revedere!',
+      },
+    ],
+  },
+  {
+    id: 'taxi',
+    title: 'Taxi & Transport',
+    situation: 'You take a taxi to an appointment across the city.',
+    icon: 'Car',
+    color: 'sun',
+    lines: [
+      {
+        ro: 'La farmacie, vă rog.',
+        en: 'To the pharmacy, please.',
+        pron: 'Lah far-mah-TSY-eh, vuh ROHG.',
+        slow: 'La farmacie... vă rog.',
+      },
+      {
+        ro: 'Cât costă până acolo?',
+        en: 'How much does it cost to get there?',
+        pron: 'KUHT COHS-tuh puh-NUH ah-KOH-loh?',
+        slow: 'Cât costă... până acolo?',
+      },
+      {
+        ro: 'Puteți opri aici, vă rog?',
+        en: 'Can you stop here, please?',
+        pron: 'Poo-TETS oh-PREE ah-EES, vuh ROHG?',
+        slow: 'Puteți opri... aici, vă rog?',
+      },
+      {
+        ro: 'Unde este stația de metrou?',
+        en: 'Where is the metro station?',
+        pron: 'OON-deh YES-teh STAH-tsyah deh meh-TROH?',
+        slow: 'Unde este... stația de metrou?',
+      },
+      {
+        ro: 'Mulțumesc. O zi bună!',
+        en: 'Thank you. Have a good day!',
+        pron: 'MOOL-tsoo-mesk. Oh ZEE BOO-nuh!',
+        slow: 'Mulțumesc... O zi bună!',
+      },
+    ],
+  },
+  {
+    id: 'accountant',
+    title: 'Accountant & Tax',
+    situation: 'You meet your accountant about tax papers.',
+    icon: 'Calculator',
+    color: 'sand',
+    lines: [
+      {
+        ro: 'Bună ziua. Am o întrebare despre taxe.',
+        en: 'Hello. I have a question about taxes.',
+        pron: 'BOO-nuh ZEE-wuh. Ahm oh uhn-treh-BAH-reh deh-SPRE TAHK-seh.',
+        slow: 'Bună ziua... Am o întrebare despre taxe.',
+      },
+      {
+        ro: 'Ce documente am nevoie?',
+        en: 'What documents do I need?',
+        pron: 'Cheh doh-koo-MEN-teh ahm neh-YO-eh?',
+        slow: 'Ce documente... am nevoie?',
+      },
+      {
+        ro: 'Nu înțeleg formularul acesta.',
+        en: 'I don’t understand this form.',
+        pron: 'NOO uhn-tse-RLEHG for-moo-LAR-ool ah-CHES-tuh.',
+        slow: 'Nu înțeleg... formularul acesta.',
+      },
+      {
+        ro: 'Puteți explica mai simplu?',
+        en: 'Can you explain more simply?',
+        pron: 'Poo-TETS eks-plee-KAH MY SEEM-ploo?',
+        slow: 'Puteți explica... mai simplu?',
+      },
+      {
+        ro: 'Mulțumesc pentru ajutor.',
+        en: 'Thank you for the help.',
+        pron: 'MOOL-tsoo-mesk pen-TRUE ah-ZHOO-tor.',
+        slow: 'Mulțumesc... pentru ajutor.',
+      },
+    ],
+  },
+];
+
+export const extraRealLifeCategories: RealLifeCategory[] = [
+  {
+    id: 'rl-lesson',
+    title: 'Romanian lesson',
+    when: 'Before, during, or after a lesson with your teacher',
+    icon: 'GraduationCap',
+    color: 'sea',
+    phrases: [
+      { ro: 'Sunt gata pentru lecție.', en: 'I am ready for the lesson.', pron: 'SOONT GAH-tuh pen-TRUE lek-TSY-eh.', slow: 'Sunt gata... pentru lecție.' },
+      { ro: 'Putem repeta, vă rog?', en: 'Can we repeat, please?', pron: 'POO-tem reh-peh-TAH, vuh ROHG?', slow: 'Putem repeta... vă rog?' },
+      { ro: 'Nu știu cum să spun asta.', en: 'I don’t know how to say this.', pron: 'NOO SHTYOO koom suh SPOON AH-stuh.', slow: 'Nu știu... cum să spun asta.' },
+      { ro: 'Încă învăț. Mulțumesc pentru răbdare.', en: 'I am still learning. Thank you for your patience.', pron: 'UHN-kuh uhn-VATS. MOOL-tsoo-mesk pen-TRUE ruhb-DAH-reh.', slow: 'Încă învăț... Mulțumesc pentru răbdare.' },
+    ],
+  },
+  {
+    id: 'rl-pharmacy',
+    title: 'At the pharmacy',
+    when: 'When you need medicine or advice at the chemist',
+    icon: 'Pill',
+    color: 'rose',
+    phrases: [
+      { ro: 'Am nevoie de ceva pentru durere.', en: 'I need something for pain.', pron: 'Ahm neh-YO-eh deh CHEH-vuh pen-TRUE doo-RAY-reh.', slow: 'Am nevoie... de ceva pentru durere.' },
+      { ro: 'Pentru durerea de cap.', en: 'For a headache.', pron: 'pen-TRUE doo-RAY-uh deh KAHB.', slow: 'Pentru durerea de cap.' },
+      { ro: 'Câte pastile pe zi?', en: 'How many pills per day?', pron: 'KUH-teh PAHS-tee-leh peh ZEE?', slow: 'Câte pastile... pe zi?' },
+      { ro: 'Am alergie la…', en: 'I am allergic to…', pron: 'Ahm ah-LER-zhee-eh lah...', slow: 'Am alergie la...' },
+    ],
+  },
+  {
+    id: 'rl-cafe',
+    title: 'At the café',
+    when: 'Ordering drinks and paying at a café',
+    icon: 'Coffee',
+    color: 'coral',
+    phrases: [
+      { ro: 'O cafea, vă rog.', en: 'A coffee, please.', pron: 'Oh kah-FEH, vuh ROHG.', slow: 'O cafea... vă rog.' },
+      { ro: 'Cu lapte, fără zahăr.', en: 'With milk, no sugar.', pron: 'Koo LAHP-teh, FLAH-ruh zah-HAHR.', slow: 'Cu lapte... fără zahăr.' },
+      { ro: 'Cât costă?', en: 'How much is it?', pron: 'KUHT COHS-tuh?', slow: 'Cât costă?' },
+      { ro: 'Pot plăti cu cardul?', en: 'Can I pay by card?', pron: 'POHT pluh-TEE koo KARD-loo?', slow: 'Pot plăti... cu cardul?' },
+    ],
+  },
+  {
+    id: 'rl-taxi',
+    title: 'Taxi & transport',
+    when: 'Getting a ride or finding public transport',
+    icon: 'Car',
+    color: 'sun',
+    phrases: [
+      { ro: 'La această adresă, vă rog.', en: 'To this address, please.', pron: 'Lah ah-CHES-tuh ah-DREH-suh, vuh ROHG.', slow: 'La această adresă... vă rog.' },
+      { ro: 'Cât costă până acolo?', en: 'How much to get there?', pron: 'KUHT COHS-tuh puh-NUH ah-KOH-loh?', slow: 'Cât costă... până acolo?' },
+      { ro: 'Puteți opri aici?', en: 'Can you stop here?', pron: 'Poo-TETS oh-PREE ah-EES?', slow: 'Puteți opri aici?' },
+      { ro: 'Unde este stația de autobuz?', en: 'Where is the bus stop?', pron: 'OON-deh YES-teh STAH-tsyah deh ow-toh-BOOZ?', slow: 'Unde este... stația de autobuz?' },
+    ],
+  },
+  {
+    id: 'rl-accountant',
+    title: 'Accountant & tax',
+    when: 'Talking about forms, tax, or documents',
+    icon: 'Calculator',
+    color: 'sand',
+    phrases: [
+      { ro: 'Am o întrebare despre taxe.', en: 'I have a question about taxes.', pron: 'Ahm oh uhn-treh-BAH-reh deh-SPRE TAHK-seh.', slow: 'Am o întrebare... despre taxe.' },
+      { ro: 'Ce documente trebuie?', en: 'What documents are needed?', pron: 'Cheh doh-koo-MEN-teh TRAY-BWEH?', slow: 'Ce documente trebuie?' },
+      { ro: 'Nu înțeleg formularul.', en: 'I don’t understand the form.', pron: 'NOO uhn-tse-RLEHG for-moo-LAR-ool.', slow: 'Nu înțeleg... formularul.' },
+      { ro: 'Puteți explica mai simplu?', en: 'Can you explain more simply?', pron: 'Poo-TETS eks-plee-KAH MY SEEM-ploo?', slow: 'Puteți explica... mai simplu?' },
+    ],
+  },
+  {
+    id: 'rl-apartment',
+    title: 'Apartment & building',
+    when: 'Problems at home or with the building',
+    icon: 'Building2',
+    color: 'coral',
+    phrases: [
+      { ro: 'Am o problemă în apartament.', en: 'I have a problem in the apartment.', pron: 'Ahm oh proh-BLEH-muh uhn ah-par-tah-MENT.', slow: 'Am o problemă... în apartament.' },
+      { ro: 'Nu merge centrala.', en: 'The heating doesn’t work.', pron: 'NOO MER-geh chen-TRAH-lah.', slow: 'Nu merge... centrala.' },
+      { ro: 'Curge apă în baie.', en: 'Water is leaking in the bathroom.', pron: 'KOOR-zheh AH-puh uhn BAH-yeh.', slow: 'Curge apă... în baie.' },
+      { ro: 'Puteți veni să reparați?', en: 'Can you come to fix it?', pron: 'Poo-TETS veh-NEE suh reh-puh-RAHTS?', slow: 'Puteți veni... să reparați?' },
+    ],
+  },
+  {
+    id: 'rl-repeat',
+    title: 'Ask someone to repeat',
+    when: 'When you missed what someone said',
+    icon: 'Repeat',
+    color: 'sea',
+    phrases: [
+      { ro: 'Puteți repeta, vă rog?', en: 'Can you repeat, please?', pron: 'Poo-TETS reh-peh-TAH, vuh ROHG?', slow: 'Puteți repeta... vă rog?' },
+      { ro: 'Încă o dată, vă rog.', en: 'One more time, please.', pron: 'UHN-kuh oh DAH-tuh, vuh ROHG.', slow: 'Încă o dată... vă rog.' },
+      { ro: 'Mai încet, vă rog.', en: 'More slowly, please.', pron: 'MY uhn-CHET, vuh ROHG.', slow: 'Mai încet... vă rog.' },
+      { ro: 'Nu am auzit bine.', en: 'I didn’t hear well.', pron: 'NOO ahm ow-ZEET BEE-neh.', slow: 'Nu am auzit... bine.' },
+    ],
+  },
+  {
+    id: 'rl-understood',
+    title: 'I understood — but can’t answer',
+    when: 'When you understand the question but need more time or words',
+    icon: 'Ear',
+    color: 'rose',
+    phrases: [
+      { ro: 'Înțeleg întrebarea, dar nu pot răspunde acum.', en: 'I understand the question, but I can’t answer now.', pron: 'Uhn-tse-RLEHG uhn-treh-BAH-reh, DAR noo POHT ruhs-POON-deh ah-COON.', slow: 'Înțeleg întrebarea... dar nu pot răspunde acum.' },
+      { ro: 'Înțeleg, dar nu știu cum să spun.', en: 'I understand, but I don’t know how to say it.', pron: 'Uhn-tse-RLEHG, DAR noo SHTYOO koom suh SPOON.', slow: 'Înțeleg... dar nu știu cum să spun.' },
+      { ro: 'Da, am înțeles. Un moment.', en: 'Yes, I understood. One moment.', pron: 'DAH, ahm uhn-tse-LESS. OON moh-MENT.', slow: 'Da, am înțeles... Un moment.' },
+      { ro: 'Încă învăț. Vorbiți mai simplu?', en: 'I am still learning. Can you speak more simply?', pron: 'UHN-kuh uhn-VATS. VOR-beets MY SEEM-ploo?', slow: 'Încă învăț... Vorbiți mai simplu?' },
+    ],
+  },
+  {
+    id: 'rl-time',
+    title: 'I need time to think',
+    when: 'When you need a pause before answering',
+    icon: 'Brain',
+    color: 'sun',
+    phrases: [
+      { ro: 'Un moment, vă rog.', en: 'One moment, please.', pron: 'OON moh-MENT, vuh ROHG.', slow: 'Un moment... vă rog.' },
+      { ro: 'Mă gândesc…', en: 'I am thinking…', pron: 'Muh guhn-DESK...', slow: 'Mă gândesc...' },
+      { ro: 'Nu sunt sigur încă.', en: 'I am not sure yet.', pron: 'NOO SOONT see-GOOR UHN-kuh.', slow: 'Nu sunt sigur... încă.' },
+      { ro: 'Pot răspunde mai târziu?', en: 'Can I answer later?', pron: 'POHT ruhs-POON-deh MY tuhr-ZEE-oo?', slow: 'Pot răspunde... mai târziu?' },
+    ],
+  },
+];
+
+export const extraPhraseBuilderItems: PhraseBuilderItem[] = [
+  {
+    id: 'pb-lesson-2',
+    order: [0, 1, 2, 3],
+    chunks: [
+      { ro: 'Azi', en: 'Today' },
+      { ro: 'vreau să', en: 'I want to' },
+      { ro: 'exersăm', en: 'practise' },
+      { ro: 'conversația.', en: 'conversation.' },
+    ],
+    fullRo: 'Azi vreau să exersăm conversația.',
+    fullEn: 'Today I want to practise conversation.',
+  },
+  {
+    id: 'pb-taxi',
+    order: [0, 1, 2],
+    chunks: [
+      { ro: 'La farmacie', en: 'To the pharmacy' },
+      { ro: 'vă rog', en: 'please' },
+      { ro: '— cât costă?', en: '— how much is it?' },
+    ],
+    fullRo: 'La farmacie, vă rog — cât costă?',
+    fullEn: 'To the pharmacy, please — how much is it?',
+  },
+  {
+    id: 'pb-understand',
+    order: [0, 1, 2],
+    chunks: [
+      { ro: 'Înțeleg', en: 'I understand' },
+      { ro: 'dar nu pot', en: 'but I cannot' },
+      { ro: 'răspunde acum.', en: 'answer now.' },
+    ],
+    fullRo: 'Înțeleg, dar nu pot răspunde acum.',
+    fullEn: 'I understand, but I cannot answer now.',
+  },
+  {
+    id: 'pb-time',
+    order: [0, 1, 2],
+    chunks: [
+      { ro: 'Un moment', en: 'One moment' },
+      { ro: 'vă rog', en: 'please' },
+      { ro: '— mă gândesc.', en: '— I am thinking.' },
+    ],
+    fullRo: 'Un moment, vă rog — mă gândesc.',
+    fullEn: 'One moment, please — I am thinking.',
+  },
+];
+
+export const extraListenChooseItems: ListenChooseItem[] = [
+  {
+    id: 'lc-9',
+    ro: 'Puteți repeta, vă rog?',
+    correct: 'Can you repeat, please?',
+    options: ['Can you repeat, please?', 'Can you speak faster?', 'Can you write it down?'],
+    pron: 'Poo-TETS reh-peh-TAH, vuh ROHG?',
+  },
+  {
+    id: 'lc-10',
+    ro: 'Înțeleg, dar nu pot răspunde acum.',
+    correct: 'I understand, but I can’t answer now.',
+    options: ['I don’t understand at all.', 'I understand, but I can’t answer now.', 'I can answer right now.'],
+    pron: 'Uhn-tse-RLEHG, DAR noo POHT ruhs-POON-deh ah-COON.',
+  },
+  {
+    id: 'lc-11',
+    ro: 'La farmacie, vă rog.',
+    correct: 'To the pharmacy, please.',
+    options: ['To the pharmacy, please.', 'To the market, please.', 'To the doctor, please.'],
+    pron: 'Lah far-mah-TSY-eh, vuh ROHG.',
+  },
+  {
+    id: 'lc-12',
+    ro: 'Am o întrebare despre taxe.',
+    correct: 'I have a question about taxes.',
+    options: ['I paid the taxes yesterday.', 'I have a question about taxes.', 'I don’t like taxes.'],
+    pron: 'Ahm oh uhn-treh-BAH-reh deh-SPRE TAHK-seh.',
+  },
+];
+
+export const extraSurvivalPhrases: SurvivalPhrase[] = [
+  {
+    ro: 'Un moment, vă rog.',
+    en: 'One moment, please.',
+    pron: 'OON moh-MENT, vuh ROHG.',
+    slow: 'Un moment... vă rog.',
+    why: 'Buys you time to think. Polite and very common.',
+  },
+  {
+    ro: 'Înțeleg, dar nu pot răspunde acum.',
+    en: 'I understand, but I can’t answer now.',
+    pron: 'Uhn-tse-RLEHG, DAR noo POHT ruhs-POON-deh ah-COON.',
+    slow: 'Înțeleg... dar nu pot răspunde acum.',
+    why: 'Shows you are listening even when you need more time.',
+  },
+  {
+    ro: 'Încă o dată, vă rog.',
+    en: 'One more time, please.',
+    pron: 'UHN-kuh oh DAH-tuh, vuh ROHG.',
+    slow: 'Încă o dată... vă rog.',
+    why: 'Another way to ask for a repeat — short and clear.',
+  },
+];
+
+export const extraMiniConversations: MiniConversation[] = [
+  {
+    id: 'mc-lesson',
+    title: 'At the Romanian Lesson',
+    situation: 'You greet Mihaela and say what you want to work on today.',
+    icon: 'GraduationCap',
+    color: 'sea',
+    turns: [
+      {
+        who: 'them',
+        ro: 'Bună! Ce vrei să exersăm azi?',
+        en: 'Hello! What do you want to practise today?',
+        pron: 'BOO-nuh! Cheh VRY suh ek-ser-SUHM ah-ZEE?',
+        slow: 'Bună!... Ce vrei să exersăm azi?',
+      },
+      {
+        who: 'you',
+        ro: 'Vreau să exersăm conversația de zi cu zi.',
+        en: 'I want to practise everyday conversation.',
+        pron: 'VROW suh ek-ser-SUHM kon-ver-sah-TSY-ah deh ZEE koo ZEE.',
+        slow: 'Vreau să exersăm... conversația de zi cu zi.',
+      },
+      {
+        who: 'them',
+        ro: 'Perfect. Începem încet.',
+        en: 'Perfect. We’ll start slowly.',
+        pron: 'pehr-FEKT. uhn-CHEH-pem uhn-CHET.',
+        slow: 'Perfect... Începem încet.',
+      },
+      {
+        who: 'you',
+        ro: 'Mulțumesc. Putem repeta frazele?',
+        en: 'Thank you. Can we repeat the sentences?',
+        pron: 'MOOL-tsoo-mesk. POO-tem reh-peh-TAH FRAH-zeh-leh?',
+        slow: 'Mulțumesc... Putem repeta frazele?',
+      },
+    ],
+  },
+  {
+    id: 'mc-pharmacy',
+    title: 'At the Pharmacy',
+    situation: 'You ask for medicine for a headache.',
+    icon: 'Pill',
+    color: 'rose',
+    turns: [
+      {
+        who: 'you',
+        ro: 'Bună. Am nevoie de ceva pentru durerea de cap.',
+        en: 'Hello. I need something for a headache.',
+        pron: 'BOO-nuh. Ahm neh-YO-eh deh CHEH-vuh pen-TRUE doo-RAY-uh deh KAHB.',
+        slow: 'Bună... Am nevoie de ceva pentru durerea de cap.',
+      },
+      {
+        who: 'them',
+        ro: 'Vă recomand aceste pastile.',
+        en: 'I recommend these pills.',
+        pron: 'Vuh reh-coh-mahnd ah-CHES-teh PAHS-tee-leh.',
+        slow: 'Vă recomand... aceste pastile.',
+      },
+      {
+        who: 'you',
+        ro: 'Câte pe zi?',
+        en: 'How many per day?',
+        pron: 'KUH-teh peh ZEE?',
+        slow: 'Câte pe zi?',
+      },
+      {
+        who: 'them',
+        ro: 'Una dimineața și una seara. Să vă faceți bine!',
+        en: 'One in the morning and one in the evening. Get well!',
+        pron: 'OO-nuh deem-yah-NAY-tuh shee OO-nuh seh-YAH-ruh. Suh vuh fah-CHETS BEE-neh!',
+        slow: 'Una dimineața... și una seara.',
+      },
+    ],
+  },
+  {
+    id: 'mc-taxi',
+    title: 'Taking a Taxi',
+    situation: 'You tell the driver where to go and ask the price.',
+    icon: 'Car',
+    color: 'sun',
+    turns: [
+      {
+        who: 'you',
+        ro: 'La farmacie, vă rog.',
+        en: 'To the pharmacy, please.',
+        pron: 'Lah far-mah-TSY-eh, vuh ROHG.',
+        slow: 'La farmacie... vă rog.',
+      },
+      {
+        who: 'them',
+        ro: 'Sigur. E aproape.',
+        en: 'Sure. It’s nearby.',
+        pron: 'SEE-goor. Eh ah-proh-AH-peh.',
+        slow: 'Sigur... E aproape.',
+      },
+      {
+        who: 'you',
+        ro: 'Cât costă, vă rog?',
+        en: 'How much is it, please?',
+        pron: 'KUHT COHS-tuh, vuh ROHG?',
+        slow: 'Cât costă... vă rog?',
+      },
+      {
+        who: 'them',
+        ro: 'Douăzeci de lei. Am ajuns.',
+        en: 'Twenty lei. We have arrived.',
+        pron: 'DOH-uh-zetch deh LAY. Ahm ah-ZOONSH.',
+        slow: 'Douăzeci de lei... Am ajuns.',
+      },
+    ],
+  },
+];

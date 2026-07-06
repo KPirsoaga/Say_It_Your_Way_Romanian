@@ -46,6 +46,10 @@ import {
   LifeBuoy,
   BatteryLow,
   MessagesSquare,
+  Car,
+  Calculator,
+  GraduationCap,
+  Building2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -97,6 +101,10 @@ const map: Record<string, LucideIcon> = {
   LifeBuoy,
   BatteryLow,
   MessagesSquare,
+  Car,
+  Calculator,
+  GraduationCap,
+  Building2,
   Tortoise: Turtle,
 };
 

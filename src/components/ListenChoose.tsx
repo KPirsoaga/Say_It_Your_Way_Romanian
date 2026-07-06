@@ -52,7 +52,7 @@ export function ListenChoose({ item, onDone }: Props) {
       </Button>
 
       <p className="text-ink-500 dark:text-ink-300 mb-2 text-base">What does it mean?</p>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2" role="radiogroup" aria-label="Choose the meaning">
         {item.options.map((opt, i) => {
           const isCorrect = opt === item.correct;
           const isPicked = picked === i;
@@ -63,7 +63,14 @@ export function ListenChoose({ item, onDone }: Props) {
             else cls = 'btn-md bg-white ring-1 ring-sand-200 text-ink-500 opacity-70 dark:bg-ink-900 dark:ring-white/10';
           }
           return (
-            <button key={i} disabled={picked !== null} onClick={() => choose(i)} className={`${cls} w-full justify-between`}>
+            <button
+              key={i}
+              type="button"
+              disabled={picked !== null}
+              onClick={() => choose(i)}
+              className={`${cls} w-full justify-between`}
+              aria-pressed={isPicked}
+            >
               <span>{opt}</span>
               {picked !== null && isCorrect && <Icon name="Check" className="h-5 w-5" />}
               {isPicked && !isCorrect && <Icon name="X" className="h-5 w-5" />}
@@ -73,7 +80,7 @@ export function ListenChoose({ item, onDone }: Props) {
       </div>
 
       {picked !== null && (
-        <div className="mt-4 animate-pop">
+        <div className="mt-4 animate-pop" role="status" aria-live="polite">
           {item.options[picked] === item.correct ? (
             <p className="text-sea-600 dark:text-sea-200 font-bold text-lg">Yes! That’s right.</p>
           ) : (

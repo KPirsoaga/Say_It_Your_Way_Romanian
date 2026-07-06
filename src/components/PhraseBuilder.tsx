@@ -49,8 +49,10 @@ export function PhraseBuilder({ item, onDone }: Props) {
 
   const finish = () => {
     setDone(true);
-    if (isCorrect) addBuilderDone();
-    onDone?.();
+    if (isCorrect) {
+      addBuilderDone();
+      onDone?.();
+    }
   };
 
   const reset = () => {
@@ -74,16 +76,23 @@ export function PhraseBuilder({ item, onDone }: Props) {
         {placedChunks.length === 0 && (
           <span className="text-ink-300 dark:text-ink-500 self-center px-2">Tap chunks below to build the sentence…</span>
         )}
-        {placedChunks.map((c, i) => (
-          <button
-            key={i}
-            onClick={() => tapPlaced(i)}
-            disabled={done}
-            className="btn-md bg-sea-500 text-white animate-pop disabled:opacity-100"
-          >
-            {c.ro}
-          </button>
-        ))}
+        {placedChunks.map((c, i) => {
+          const chunkCorrect = done ? placed[i] === correctOrder[i] : null;
+          let chunkCls = 'btn-md bg-sea-500 text-white animate-pop disabled:opacity-100';
+          if (done && chunkCorrect === true) chunkCls = 'btn-md bg-sea-500 text-white ring-2 ring-sea-300';
+          if (done && chunkCorrect === false) chunkCls = 'btn-md bg-coral-400 text-white ring-2 ring-coral-300';
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => tapPlaced(i)}
+              disabled={done}
+              className={chunkCls}
+            >
+              {c.ro}
+            </button>
+          );
+        })}
       </div>
 
       {/* English hint */}
@@ -96,6 +105,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
         {pool.map((chunkIdx, poolIdx) => (
           <button
             key={poolIdx}
+            type="button"
             onClick={() => tapPool(poolIdx)}
             disabled={done}
             className="btn-md bg-white ring-2 ring-sand-300 text-ink-700 hover:ring-sea-400 dark:bg-ink-900 dark:ring-white/20 dark:text-ink-300"
@@ -115,8 +125,9 @@ export function PhraseBuilder({ item, onDone }: Props) {
         </Button>
       )}
 
+
       {done && (
-        <div className="mt-4 animate-fade-in">
+        <div className="mt-4 animate-fade-in" role="status" aria-live="polite">
           {isCorrect ? (
             <p className="text-sea-600 dark:text-sea-200 font-bold text-lg flex items-center gap-2">
               <Icon name="Check" className="h-6 w-6" /> Perfect! That’s the right order.

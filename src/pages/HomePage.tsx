@@ -17,7 +17,13 @@ const needNowButtons: { label: string; icon: string; categoryId: string; color: 
   { label: 'Neighbours', icon: 'DoorOpen', categoryId: 'rl-neighbours', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
   { label: 'Appointment', icon: 'CalendarClock', categoryId: 'rl-today', color: 'text-rose-400 bg-rose-50 dark:bg-rose-400/20' },
   { label: 'Help', icon: 'HandHeart', categoryId: 'rl-help', color: 'text-coral-400 bg-coral-50 dark:bg-coral-400/20' },
-  { label: 'I’m tired / busy / confused', icon: 'EarOff', categoryId: 'rl-understand', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
+  { label: 'Pharmacy', icon: 'Pill', categoryId: 'rl-pharmacy', color: 'text-rose-400 bg-rose-50 dark:bg-rose-400/20' },
+  { label: 'Café', icon: 'Coffee', categoryId: 'rl-cafe', color: 'text-coral-400 bg-coral-50 dark:bg-coral-400/20' },
+  { label: 'Taxi', icon: 'Car', categoryId: 'rl-taxi', color: 'text-sun-400 bg-sun-50 dark:bg-sun-300/20' },
+  { label: 'Lesson', icon: 'GraduationCap', categoryId: 'rl-lesson', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
+  { label: 'Repeat please', icon: 'Repeat', categoryId: 'rl-repeat', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
+  { label: 'Need time to think', icon: 'Brain', categoryId: 'rl-time', color: 'text-sun-400 bg-sun-50 dark:bg-sun-300/20' },
+  { label: 'I don’t understand', icon: 'EarOff', categoryId: 'rl-understand', color: 'text-sea-600 bg-sea-50 dark:bg-sea-600/20' },
 ];
 
 export function HomePage({ go }: Props) {
@@ -116,6 +122,13 @@ export function HomePage({ go }: Props) {
             </div>
             <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Mini Conversations</p>
             <p className="text-xs text-ink-500 dark:text-ink-300">Real-life guided exchanges</p>
+          </Card>
+          <Card onClick={() => go('grammar')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-12 w-12 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center">
+              <Icon name="BookOpen" className="h-6 w-6 text-sun-400" />
+            </div>
+            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Grammar Help</p>
+            <p className="text-xs text-ink-500 dark:text-ink-300">Simple patterns & verbs</p>
           </Card>
           <Card onClick={() => go('noshame')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
             <div className="h-12 w-12 rounded-2xl bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center">

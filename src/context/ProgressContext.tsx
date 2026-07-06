@@ -10,6 +10,7 @@ const DEFAULT_PROGRESS: ProgressState = {
   listenCorrect: 0,
   speakDone: 0,
   builderDone: 0,
+  completedGrammarTopics: [],
 };
 
 function todayStr(): string {
@@ -32,6 +33,7 @@ interface ProgressCtx {
   addListenCorrect: (n?: number) => void;
   addSpeakDone: (n?: number) => void;
   addBuilderDone: (n?: number) => void;
+  markGrammarTopicCompleted: (id: string) => void;
   resetProgress: () => void;
 }
 
@@ -75,6 +77,15 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const addSpeakDone = useCallback((n = 1) => setProgress((p) => ({ ...p, speakDone: p.speakDone + n })), [setProgress]);
   const addBuilderDone = useCallback((n = 1) => setProgress((p) => ({ ...p, builderDone: p.builderDone + n })), [setProgress]);
 
+  const markGrammarTopicCompleted = useCallback(
+    (id: string) => {
+      setProgress((p) =>
+        p.completedGrammarTopics.includes(id) ? p : { ...p, completedGrammarTopics: [...p.completedGrammarTopics, id] }
+      );
+    },
+    [setProgress]
+  );
+
   const resetProgress = useCallback(() => setProgress(DEFAULT_PROGRESS), [setProgress]);
 
   return (
@@ -89,6 +100,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         addListenCorrect,
         addSpeakDone,
         addBuilderDone,
+        markGrammarTopicCompleted,
         resetProgress,
       }}
     >

@@ -5,7 +5,7 @@ import { Icon } from '../components/Icon';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useSettings } from '../context/SettingsContext';
-import { scenarios, getDailyContent, survivalPhrases, realLifeCategories } from '../content';
+import { scenarios, getDailyContent, survivalPhrases, realLifeCategories, grammarTopics } from '../content';
 import type { PhraseLine } from '../types';
 
 interface FavResolved {
@@ -16,6 +16,15 @@ interface FavResolved {
 
 function resolveFavourite(id: string): FavResolved | null {
   // format: `${scenarioId}:${i}` | `daily:${date}:phrase|speak` | `survival:${i}` | `reallife:${catId}:${i}`
+  // format: `${scenarioId}:${i}` | `daily:${date}:phrase|speak` | `survival:${i}` | `reallife:${catId}:${i}` | `grammar:${topicId}:${i}`
+  if (id.startsWith('grammar:')) {
+    const parts = id.split(':');
+    const topic = grammarTopics.find((t) => t.id === parts[1]);
+    if (!topic) return null;
+    const phrase = topic.examples[Number(parts[2])];
+    if (!phrase) return null;
+    return { id, phrase, label: `Grammar: ${topic.title}` };
+  }
   if (id.startsWith('daily:')) {
     const parts = id.split(':');
     const date = parts[1];
