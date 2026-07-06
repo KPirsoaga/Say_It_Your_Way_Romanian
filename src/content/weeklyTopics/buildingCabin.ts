@@ -7,6 +7,11 @@ export const buildingCabinTopic: WeeklyTopic = {
   description: 'Vocabulary for building, repairing and discussing your cabin.',
   icon: 'Home',
   color: 'sun',
+  grammarFocus: {
+    label: 'Present tense verbs',
+    hint: 'a construi · a munci · a pune',
+    grammarTopicId: 'gr-present',
+  },
   vocabulary: [
     // Verbs
     { id: 'v-construi', ro: 'a construi', en: 'to build', category: 'verb', sortCategory: 'actions', pron: 'ah kohn-STROO-ee' },
