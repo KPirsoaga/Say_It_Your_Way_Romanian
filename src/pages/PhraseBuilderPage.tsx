@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { PhraseBuilder } from '../components/PhraseBuilder';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { phraseBuilderItems } from '../content';
+import { cabinPhraseBuilderItems } from '../content/weeklyTopics/cabinPhraseBuilder';
 import type { PageId } from '../App';
 
 interface Props {
@@ -11,9 +12,10 @@ interface Props {
 }
 
 export function PhraseBuilderPage({ go }: Props) {
+  const allItems = useMemo(() => [...cabinPhraseBuilderItems, ...phraseBuilderItems], []);
   const [idx, setIdx] = useState(0);
-  const item = phraseBuilderItems[idx];
-  const isLast = idx === phraseBuilderItems.length - 1;
+  const item = allItems[idx];
+  const isLast = idx === allItems.length - 1;
 
   const next = () => {
     if (!isLast) setIdx((i) => i + 1);
@@ -22,7 +24,7 @@ export function PhraseBuilderPage({ go }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Phrase Builder" subtitle={`Sentence ${idx + 1} of ${phraseBuilderItems.length}`} onBack={() => go('home')} />
+      <PageHeader title="Phrase Builder" subtitle={`Sentence ${idx + 1} of ${allItems.length}`} onBack={() => go('home')} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <PhraseBuilder key={item.id} item={item} onDone={next} />
 

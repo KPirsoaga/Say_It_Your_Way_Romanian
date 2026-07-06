@@ -150,7 +150,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       { id: 'er2', direction: 'en-ro', prompt: 'to carry', correct: 'a căra', options: ['a căra', 'a urca', 'a coborî', 'a aduna'], vocabId: 'v-cara' },
       { id: 'er3', direction: 'en-ro', prompt: 'insulation', correct: 'izolație', options: ['izolație', 'fundație', 'extensie', 'încuietoare'], vocabId: 'n-izolatie' },
       { id: 'er4', direction: 'en-ro', prompt: 'electrical wires', correct: 'fire electrice', options: ['fire electrice', 'șurub', 'perete', 'topor'], vocabId: 'n-fire' },
-      { id: 'er5', direction: 'en-ro', prompt: 'to water', correct: 'a uda', options: ['a uda', 'a hrăni', 'a tunde', 'a găti'], vocabId: 'v-uda' },
+      { id: 'er5', direction: 'en-ro', prompt: 'to water', correct: 'a uda', options: ['a uda', 'a hrăni', 'a tunde', 'a săpa'], vocabId: 'v-uda' },
       { id: 'er6', direction: 'en-ro', prompt: 'attic', correct: 'pod', options: ['pod', 'acoperiș', 'podea', 'gard'], vocabId: 'n-pod-attic' },
     ],
     matching: [

@@ -1,10 +1,12 @@
 import { PageHeader } from '../components/PageHeader';
+import { Card } from '../components/Card';
+import { Button } from '../components/Button';
 import { NoShameBanner } from '../components/NoShameBanner';
 import { WeeklySectionCard } from '../components/WeeklySectionCard';
 import { WeeklyTopicProgressBar } from '../components/WeeklyTopicProgressBar';
 import { useProgress } from '../context/ProgressContext';
 import { colorMap } from '../content';
-import { getWeeklyTopic } from '../content/weeklyTopics';
+import { getWeeklyTopic, WEEKLY_TOPIC_STEP_COUNT, countWeeklyTopicStepsDone } from '../content/weeklyTopics';
 import { Icon } from '../components/Icon';
 import type { PageId } from '../App';
 
@@ -24,6 +26,8 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
 
   const p = getWeeklyTopicProgress(topicId);
   const c = colorMap[topic.color];
+  const stepsDone = countWeeklyTopicStepsDone(p);
+  const complete = stepsDone >= WEEKLY_TOPIC_STEP_COUNT;
 
   return (
     <div className="min-h-screen">
@@ -36,14 +40,32 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
           <div>
             <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300">This week&apos;s lesson</p>
             <p className="text-lg font-bold text-ink-900 dark:text-sand-100 leading-snug mt-1">
-              Vocabulary, reading, and practice — at your own pace.
+              Vocabulary → reading → practice
             </p>
           </div>
         </div>
 
         <WeeklyTopicProgressBar progress={p} />
 
+        {complete && (
+          <Card className="bg-sea-50 dark:bg-sea-600/10 p-5 text-center">
+            <Icon name="Check" className="h-10 w-10 text-sea-600 dark:text-sea-200 mx-auto mb-2" />
+            <p className="font-bold text-ink-900 dark:text-sand-100 text-lg">You&apos;ve worked through this topic!</p>
+            <p className="text-sm text-ink-600 dark:text-ink-300 mt-1">
+              Come back anytime to practise again, or check Grammar Help for patterns.
+            </p>
+            <Button variant="soft" size="md" className="mt-3" onClick={() => go('grammar')}>
+              Open Grammar Help
+            </Button>
+          </Card>
+        )}
+
         <NoShameBanner compact />
+
+        <Button variant="ghost" size="md" className="w-full text-ink-500 dark:text-ink-400" onClick={() => go('mihaela-review')}>
+          <Icon name="Lightbulb" className="h-4 w-4" />
+          Content flagged for Mihaela Review
+        </Button>
 
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Vocabulary</h2>
@@ -75,7 +97,14 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
         </section>
 
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Exercises</h2>
+          <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">Vocabulary review & exercises</h2>
+          <WeeklySectionCard
+            title="Vocabulary Review"
+            subtitle="Tap Romanian, then tap English — match the pairs"
+            icon="LayoutGrid"
+            done={p.matchingDone}
+            onClick={() => go('weekly-exercise', `${topicId}:match`)}
+          />
           <WeeklySectionCard
             title="Romanian → English"
             subtitle="Multiple choice — tap the meaning"
@@ -89,13 +118,6 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
             icon="ArrowLeft"
             done={p.enToRoDone}
             onClick={() => go('weekly-exercise', `${topicId}:en-ro`)}
-          />
-          <WeeklySectionCard
-            title="Vocabulary Matching"
-            subtitle="Tap Romanian, then tap English"
-            icon="LayoutGrid"
-            done={p.matchingDone}
-            onClick={() => go('weekly-exercise', `${topicId}:match`)}
           />
           <WeeklySectionCard
             title="Category Sorting"

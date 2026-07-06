@@ -1,23 +1,25 @@
 import { useMemo, useState } from 'react';
-import { Icon } from './Icon';
+import { ExerciseCompletion } from './ExerciseCompletion';
 import { shuffleArray } from '../utils/shuffle';
 import type { WeeklyMatchPair } from '../types';
 
 interface Props {
   pairs: WeeklyMatchPair[];
   onComplete: () => void;
+  onBackToTopic: () => void;
 }
 
 type Side = 'ro' | 'en';
 
-export function WeeklyTapMatch({ pairs, onComplete }: Props) {
+export function WeeklyTapMatch({ pairs, onComplete, onBackToTopic }: Props) {
   const [matched, setMatched] = useState<Set<string>>(new Set());
   const [selected, setSelected] = useState<{ side: Side; id: string } | null>(null);
   const [wrong, setWrong] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [attempt, setAttempt] = useState(0);
 
-  const roItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.ro }))), [pairs]);
-  const enItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.en }))), [pairs]);
+  const roItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.ro }))), [pairs, attempt]);
+  const enItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.en }))), [pairs, attempt]);
 
   const tap = (side: Side, id: string) => {
     if (matched.has(id) || done) return;
@@ -52,13 +54,22 @@ export function WeeklyTapMatch({ pairs, onComplete }: Props) {
     }
   };
 
+  const tryAgain = () => {
+    setMatched(new Set());
+    setSelected(null);
+    setWrong(null);
+    setDone(false);
+    setAttempt((a) => a + 1);
+  };
+
   if (done) {
     return (
-      <div className="card p-5 text-center animate-fade-in">
-        <Icon name="Check" className="h-12 w-12 text-sea-500 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">All matched!</h2>
-        <p className="mt-2 text-ink-700 dark:text-ink-300">Nice work connecting Romanian and English.</p>
-      </div>
+      <ExerciseCompletion
+        title="All matched!"
+        message="Nice work connecting Romanian and English."
+        onBackToTopic={onBackToTopic}
+        onTryAgain={tryAgain}
+      />
     );
   }
 

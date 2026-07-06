@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Icon } from './Icon';
+import { ExerciseCompletion } from './ExerciseCompletion';
 import { shuffleArray } from '../utils/shuffle';
 import type { WeeklySortCategory, WeeklySortItem } from '../types';
 
@@ -7,13 +7,15 @@ interface Props {
   categories: WeeklySortCategory[];
   items: WeeklySortItem[];
   onComplete: () => void;
+  onBackToTopic: () => void;
 }
 
-export function WeeklyCategorySort({ categories, items, onComplete }: Props) {
+export function WeeklyCategorySort({ categories, items, onComplete, onBackToTopic }: Props) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [sorted, setSorted] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(categories.map((c) => [c.id, []]))
   );
+  const [attempt, setAttempt] = useState(0);
   const [remaining, setRemaining] = useState(() => shuffleArray(items));
   const [done, setDone] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -40,18 +42,27 @@ export function WeeklyCategorySort({ categories, items, onComplete }: Props) {
     }
   };
 
+  const tryAgain = () => {
+    setActiveCategory(null);
+    setSorted(Object.fromEntries(categories.map((c) => [c.id, []])));
+    setRemaining(shuffleArray(items));
+    setDone(false);
+    setAttempt((a) => a + 1);
+  };
+
   if (done) {
     return (
-      <div className="card p-5 text-center animate-fade-in">
-        <Icon name="Check" className="h-12 w-12 text-sea-500 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">Sorted!</h2>
-        <p className="mt-2 text-ink-700 dark:text-ink-300">You grouped all the vocabulary correctly.</p>
-      </div>
+      <ExerciseCompletion
+        title="Sorted!"
+        message="You grouped all the vocabulary correctly."
+        onBackToTopic={onBackToTopic}
+        onTryAgain={tryAgain}
+      />
     );
   }
 
   return (
-    <div className="space-y-4 animate-fade-in">
+    <div className="space-y-4 animate-fade-in" key={attempt}>
       <p className="text-ink-500 dark:text-ink-300 text-base">
         Tap a category below, then tap a word to place it. No dragging — just tap.
       </p>

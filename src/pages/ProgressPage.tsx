@@ -73,7 +73,7 @@ export function ProgressPage({ go }: Props) {
 
         {/* Weekly Topics */}
         <Card>
-          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Weekly Topics</p>
+          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Weekly lessons</p>
           <div className="space-y-3">
             {weeklyTopics.map((topic) => {
               const tp = getWeeklyTopicProgress(topic.id);
@@ -89,14 +89,13 @@ export function ProgressPage({ go }: Props) {
                     <WeeklyProgressRow label="Reading 1" done={tp.reading1Done} />
                     <WeeklyProgressRow label="Reading 2" done={tp.reading2Done} />
                     <WeeklyProgressRow label="Reading 3" done={tp.reading3Done} />
-                    <WeeklyProgressRow label="Translation" done={tp.translationAttempted} />
                     <WeeklyProgressRow label="Ro → En" done={tp.roToEnDone} />
                     <WeeklyProgressRow label="En → Ro" done={tp.enToRoDone} />
-                    <WeeklyProgressRow label="Matching" done={tp.matchingDone} />
+                    <WeeklyProgressRow label="Vocabulary Review" done={tp.matchingDone} />
                     <WeeklyProgressRow label="Sorting" done={tp.sortingDone} />
                   </div>
                   <Button variant="ghost" size="md" onClick={() => go('weekly-topic', topic.id)} className="text-sea-600 dark:text-sea-200 w-full">
-                    Open topic
+                    Open lesson
                     <Icon name="ChevronRight" className="h-4 w-4" />
                   </Button>
                 </div>
