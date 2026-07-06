@@ -5,15 +5,15 @@ export const grammarVerbOrder: string[] = [
   'vb-vrea',
   'vb-putea',
   'vb-merge',
-  'vb-vorbi',
-  'vb-intelege',
   'vb-face',
   'vb-spune',
+  'vb-vorbi',
+  'vb-intelege',
+  'vb-nevoie',
   'vb-pleca',
   'vb-intreba',
   'vb-manca',
   'vb-bea',
-  'vb-nevoie',
 ];
 
 export function getVerbNav(verbId: string): { prevId?: string; nextId?: string; index: number } {

@@ -76,9 +76,13 @@ export function HomePage({ go }: Props) {
             {cabinTopic.grammarFocus ? (
               <button
                 type="button"
-                onClick={() =>
-                  go(cabinTopic.grammarFocus?.grammarTopicId ? 'grammar-topic' : 'grammar', cabinTopic.grammarFocus?.grammarTopicId)
-                }
+                onClick={() => {
+                  const f = cabinTopic.grammarFocus;
+                  if (f?.grammarVerbId) go('grammar-verb', f.grammarVerbId);
+                  else if (f?.grammarTenseId) go('grammar-tense', f.grammarTenseId);
+                  else if (f?.grammarTopicId) go('grammar-topic', f.grammarTopicId);
+                  else go('grammar');
+                }}
                 className="w-full flex items-center justify-between gap-2 rounded-2xl p-3 ring-2 ring-sand-200 dark:ring-white/10 hover:ring-sea-400 transition text-left"
               >
                 <span className="tile-label text-sm font-bold text-ink-700 dark:text-ink-300">Grammar focus</span>

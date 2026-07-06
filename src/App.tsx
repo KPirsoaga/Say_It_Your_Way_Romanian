@@ -21,6 +21,9 @@ import { MiniConversationDetailPage } from './pages/MiniConversationDetailPage';
 import { GrammarHelpPage } from './pages/GrammarHelpPage';
 import { GrammarTopicPage } from './pages/GrammarTopicPage';
 import { GrammarVerbPage } from './pages/GrammarVerbPage';
+import { GrammarCheatSheetPage } from './pages/GrammarCheatSheetPage';
+import { GrammarTenseGuidePage } from './pages/GrammarTenseGuidePage';
+import { GrammarPatternPage } from './pages/GrammarPatternPage';
 import { WeeklyTopicsPage } from './pages/WeeklyTopicsPage';
 import { WeeklyTopicDetailPage } from './pages/WeeklyTopicDetailPage';
 import { WeeklyVocabPage } from './pages/WeeklyVocabPage';
@@ -65,6 +68,9 @@ export type PageId =
   | 'grammar'
   | 'grammar-topic'
   | 'grammar-verb'
+  | 'grammar-cheat'
+  | 'grammar-tense'
+  | 'grammar-pattern'
   | 'weekly-topics'
   | 'weekly-topic'
   | 'weekly-vocab'
@@ -168,6 +174,39 @@ function Shell() {
           <NavigationFallback
             title="Verb not found"
             message="We couldn’t open that verb."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-cheat' && arg ? (
+          <GrammarCheatSheetPage sheetId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-cheat' ? (
+          <NavigationFallback
+            title="Cheat sheet not found"
+            message="We couldn’t open that reference page."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-tense' && arg ? (
+          <GrammarTenseGuidePage guideId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-tense' ? (
+          <NavigationFallback
+            title="Tense guide not found"
+            message="We couldn’t open that tense guide."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-pattern' && arg ? (
+          <GrammarPatternPage patternId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-pattern' ? (
+          <NavigationFallback
+            title="Pattern not found"
+            message="We couldn’t open that sentence pattern."
             onBack={() => go('grammar')}
             backLabel="Back to Grammar Help"
             backIcon="BookOpen"

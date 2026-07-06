@@ -3,7 +3,7 @@ import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { Button } from '../components/Button';
 import { useProgress, toLocalDateStr } from '../context/ProgressContext';
-import { scenarios, miniConversations, grammarTopics } from '../content';
+import { scenarios, miniConversations } from '../content';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
 import type { PageId } from '../App';
 
@@ -104,29 +104,16 @@ export function ProgressPage({ go }: Props) {
           </div>
         </Card>
 
-        {/* Grammar topics */}
+        {/* Grammar Help */}
         <Card>
           <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Grammar Help</p>
-          <div className="space-y-2">
-            {grammarTopics.map((t) => {
-              const done = progress.completedGrammarTopics.includes(t.id);
-              return (
-                <div key={t.id} className="flex items-center justify-between gap-2 min-w-0">
-                  <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{t.title}</span>
-                  {done ? (
-                    <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 font-bold text-sm">
-                      <Icon name="Check" className="h-4 w-4" /> Done
-                    </span>
-                  ) : (
-                    <Button variant="ghost" size="md" onClick={() => go('grammar-topic', t.id)} className="text-sea-600 dark:text-sea-200">
-                      Practise
-                      <Icon name="ChevronRight" className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <p className="text-sm text-ink-600 dark:text-ink-300 mb-3">
+            Cheat sheets and verb reference — open Grammar Help for quick answers.
+          </p>
+          <Button variant="ghost" size="md" onClick={() => go('grammar')} className="text-sea-600 dark:text-sea-200 w-full">
+            Open Grammar Help
+            <Icon name="ChevronRight" className="h-4 w-4" />
+          </Button>
         </Card>
 
         {/* Scenarios completed */}

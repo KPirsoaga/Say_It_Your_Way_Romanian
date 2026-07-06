@@ -10,7 +10,7 @@ export const buildingCabinTopic: WeeklyTopic = {
   grammarFocus: {
     label: 'Present tense verbs',
     hint: 'a construi · a munci · a pune',
-    grammarTopicId: 'gr-present',
+    grammarVerbId: 'vb-face',
   },
   vocabulary: [
     // Verbs
