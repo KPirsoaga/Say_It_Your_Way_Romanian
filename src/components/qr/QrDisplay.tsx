@@ -8,18 +8,19 @@ interface Props {
 }
 
 /** Large, scannable QR code for offline transfer */
-export function QrDisplay({ value, size = 280, className = '' }: Props) {
+export function QrDisplay({ value, size = 320, className = '' }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !value) return;
+    const level = value.length > 800 ? 'L' : 'M';
     QRCode.toCanvas(canvas, value, {
       width: size,
-      margin: 2,
-      errorCorrectionLevel: 'M',
-      color: { dark: '#1a1a2e', light: '#ffffff' },
+      margin: 4,
+      errorCorrectionLevel: level,
+      color: { dark: '#000000', light: '#ffffff' },
     }).catch(() => setError('Could not generate QR code.'));
   }, [value, size]);
 

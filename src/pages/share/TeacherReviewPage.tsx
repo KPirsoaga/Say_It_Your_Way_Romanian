@@ -7,6 +7,7 @@ import { QrScanner } from '../../components/qr/QrScanner';
 import { MultiQrPanel } from '../../components/qr/MultiQrPanel';
 import { useQrCollector } from '../../hooks/useQrCollector';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useScannerSafeBack } from '../../hooks/useScannerSafeBack';
 import {
   encodeReviewResponse,
   parseReviewExportPayload,
@@ -39,6 +40,7 @@ interface Props {
 export function TeacherReviewPage({ onBack }: Props) {
   const [session, setSession] = useLocalStorage<TeacherSession>('rcd-teacher-review', EMPTY_SESSION);
   const [step, setStep] = useState<Step>(session.items.length > 0 ? 'review' : 'scan');
+  const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
 
   const onPackageReady = useCallback(
     (items: unknown[]) => {
@@ -92,7 +94,7 @@ export function TeacherReviewPage({ onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Teacher review" subtitle="Mihaela — scan and review" onBack={onBack} />
+      <PageHeader title="Teacher review" subtitle="Mihaela — scan and review" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {step === 'scan' && (
           <>
@@ -101,7 +103,7 @@ export function TeacherReviewPage({ onBack }: Props) {
                 Scan Katie&apos;s review QR code(s). You will see every flagged Romanian item. Your edits stay on this device until you generate a response QR.
               </p>
             </Card>
-            <QrScanner onScan={handleScan} />
+            <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
             {progress && (
               <p className="text-sm font-bold text-sea-600 dark:text-sea-200 text-center">
                 Scanned {progress.received} of {progress.total} QR codes

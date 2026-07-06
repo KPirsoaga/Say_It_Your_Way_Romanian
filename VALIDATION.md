@@ -543,3 +543,14 @@ Status: Fixed
 Notes: Removed forced square aspect ratio; full-frame scan without dark overlay; 4:3 preview container; upload QR image fallback for desktop.
 
 ---
+
+VAL-050
+Area: Share with Teacher / QR scanner lifecycle
+Issue: Scanner did not decode reliably; pressing back without stopping broke the app.
+Expected behaviour: Reliable scan on mobile and desktop; back navigation always stops camera first.
+Current behaviour: Custom Html5Qrcode integration had hidden preview, no file UI; unmount left camera running.
+Priority: High
+Status: Fixed
+Notes: Switched to `Html5QrcodeScanner`; `useScannerSafeBack` stops camera before navigate; smaller QR payloads; larger display codes.
+
+---

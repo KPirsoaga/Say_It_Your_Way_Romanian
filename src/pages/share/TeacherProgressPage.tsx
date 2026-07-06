@@ -5,6 +5,7 @@ import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { QrScanner } from '../../components/qr/QrScanner';
 import { useQrCollector } from '../../hooks/useQrCollector';
+import { useScannerSafeBack } from '../../hooks/useScannerSafeBack';
 import { parseProgressExportPayload } from '../../services/qr/progressPackage';
 import type { ProgressExportPayload } from '../../services/qr/types';
 
@@ -14,6 +15,7 @@ interface Props {
 
 export function TeacherProgressPage({ onBack }: Props) {
   const [data, setData] = useState<ProgressExportPayload | null>(null);
+  const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
 
   const { handleScan, progress, error, reset } = useQrCollector('progress-export', (items) => {
     setData(parseProgressExportPayload(items));
@@ -21,7 +23,7 @@ export function TeacherProgressPage({ onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Katie's progress" subtitle="Read-only dashboard" onBack={onBack} />
+      <PageHeader title="Katie's progress" subtitle="Read-only dashboard" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!data ? (
           <>
@@ -30,7 +32,7 @@ export function TeacherProgressPage({ onBack }: Props) {
                 Scan Katie&apos;s progress QR before the lesson. You will see vocabulary, reading, exercises, and what needs review.
               </p>
             </Card>
-            <QrScanner onScan={handleScan} />
+            <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
             {progress && (
               <p className="text-sm font-bold text-sea-600 dark:text-sea-200 text-center">
                 Scanned {progress.received} of {progress.total} QR codes

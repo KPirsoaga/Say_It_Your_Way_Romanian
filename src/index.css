@@ -93,19 +93,25 @@ html.dark body {
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* QR scanner — html5-qrcode injects video into the region div */
-.qr-scanner-region {
-  position: relative;
+/* QR scanner — html5-qrcode scanner UI */
+.qr-scanner-host {
+  border-radius: 1.5rem;
+  overflow: hidden;
 }
-.qr-scanner-region video {
+.qr-scanner-host video {
   width: 100% !important;
-  height: 100% !important;
-  max-height: 100%;
-  display: block !important;
+  border-radius: 1rem;
   object-fit: cover;
-  background: #1a1a2e;
 }
-#qr-shaded-region {
-  /* When shading is used, keep the centre clear */
-  pointer-events: none;
+.qr-scanner-host img {
+  border-radius: 1rem;
+}
+.qr-scanner-host button {
+  font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  border-radius: 1rem !important;
+  font-weight: 700;
+}
+#html5-qrcode-anchor-scan-type-change {
+  font-weight: 700;
+  color: #2d8a8f;
 }
