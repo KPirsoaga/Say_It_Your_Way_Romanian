@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './Button';
 import { Icon } from './Icon';
+import { shuffledMcOptions } from '../utils/shuffle';
 import type { WeeklyMcQuestion } from '../types';
 
 interface Props {
@@ -14,14 +15,20 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
   const [picked, setPicked] = useState<number | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [options, setOptions] = useState<string[]>([]);
 
   const q = questions[index];
   const isLast = index >= questions.length - 1;
 
+  useEffect(() => {
+    setOptions(shuffledMcOptions(q.options, q.correct));
+    setPicked(null);
+  }, [index, q.id, q.options, q.correct]);
+
   const choose = (i: number) => {
     if (picked !== null || finished) return;
     setPicked(i);
-    const correct = q.options[i] === q.correct;
+    const correct = options[i] === q.correct;
     if (correct) setCorrectCount((c) => c + 1);
   };
 
@@ -31,7 +38,6 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
       onComplete();
     } else {
       setIndex((i) => i + 1);
-      setPicked(null);
     }
   };
 
@@ -62,7 +68,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
       </p>
 
       <div className="flex flex-col gap-2" role="radiogroup" aria-label="Choose an answer">
-        {q.options.map((opt, i) => {
+        {options.map((opt, i) => {
           const isCorrect = opt === q.correct;
           const isPicked = picked === i;
           let cls = 'btn-md bg-white ring-2 ring-sand-300 text-ink-700 dark:bg-ink-900 dark:ring-white/20 dark:text-ink-300';
@@ -73,7 +79,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
           }
           return (
             <button
-              key={i}
+              key={`${q.id}-${opt}`}
               type="button"
               disabled={picked !== null}
               onClick={() => choose(i)}
@@ -92,7 +98,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
 
       {picked !== null && (
         <div className="mt-4 space-y-3" role="status" aria-live="polite">
-          {q.options[picked] === q.correct ? (
+          {options[picked] === q.correct ? (
             <p className="text-sea-600 dark:text-sea-200 font-bold text-lg">Yes! That’s right.</p>
           ) : (
             <p className="text-coral-500 font-bold text-lg">

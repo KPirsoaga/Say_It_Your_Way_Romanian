@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Icon } from './Icon';
+import { shuffleArray } from '../utils/shuffle';
 import type { WeeklyMatchPair } from '../types';
 
 interface Props {
@@ -15,11 +16,8 @@ export function WeeklyTapMatch({ pairs, onComplete }: Props) {
   const [wrong, setWrong] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
-  const roItems = useMemo(() => pairs.map((p) => ({ id: p.id, text: p.ro })), [pairs]);
-  const enItems = useMemo(
-    () => [...pairs].sort((a, b) => a.en.localeCompare(b.en)).map((p) => ({ id: p.id, text: p.en })),
-    [pairs]
-  );
+  const roItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.ro }))), [pairs]);
+  const enItems = useMemo(() => shuffleArray(pairs.map((p) => ({ id: p.id, text: p.en }))), [pairs]);
 
   const tap = (side: Side, id: string) => {
     if (matched.has(id) || done) return;

@@ -60,7 +60,7 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
           <p className={`mt-2 text-ink-700 dark:text-ink-300 ${hero ? 'text-lg' : 'text-base'}`}>{phrase.en}</p>
 
           {settings.pronunciationHelp && phrase.pron && (
-            <p className="mt-2 text-sea-600 dark:text-sea-200 italic text-base" aria-label="Pronunciation guide">
+            <p className="mt-2 text-sea-600 dark:text-sea-200 italic text-base" aria-label="Pronunciation guide (not read aloud)">
               {phrase.pron}
             </p>
           )}

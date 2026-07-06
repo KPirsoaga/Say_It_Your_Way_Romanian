@@ -10,9 +10,9 @@ export const buildingCabinTopic: WeeklyTopic = {
   vocabulary: [
     // Verbs
     { id: 'v-construi', ro: 'a construi', en: 'to build', category: 'verb', sortCategory: 'actions', pron: 'ah kohn-STROO-ee' },
-    { id: 'v-lovi', ro: 'a lovi', en: 'to hit', category: 'verb', sortCategory: 'actions', pron: 'ah loh-VEE' },
+    { id: 'v-lovi', ro: 'a lovi', en: 'to hit', category: 'verb', sortCategory: 'actions', pron: 'ah loh-VEE', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with Mihaela or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
     { id: 'v-munci', ro: 'a munci', en: 'to work', category: 'verb', sortCategory: 'actions', pron: 'ah MOON-chee' },
-    { id: 'v-gati', ro: 'a găti', en: 'to cook', category: 'verb', sortCategory: 'actions', pron: 'ah GUH-tee' },
+    { id: 'v-gati', ro: 'a găti', en: 'to cook', category: 'verb', sortCategory: 'actions', pron: 'ah GUH-tee', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with Mihaela or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
     { id: 'v-pune', ro: 'a pune', en: 'to put', category: 'verb', sortCategory: 'actions', pron: 'ah POO-neh' },
     { id: 'v-taia', ro: 'a tăia', en: 'to cut', category: 'verb', sortCategory: 'actions', pron: 'ah TUH-yah' },
     { id: 'v-sapa', ro: 'a săpa', en: 'to dig', category: 'verb', sortCategory: 'actions', pron: 'ah SUH-puh' },
@@ -56,7 +56,20 @@ export const buildingCabinTopic: WeeklyTopic = {
     { id: 'a-greu', ro: 'greu', en: 'heavy', category: 'adjective', pron: 'GREH-oo' },
     // Useful phrases
     { id: 'p-lucrez', ro: 'Lucrez la cabană.', en: 'I am working on the cabin.', category: 'phrase', pron: 'LOO-krehz lah kah-BAH-nuh' },
-    { id: 'p-ridic', ro: 'Ridic acoperișul.', en: 'I lift the roof.', category: 'phrase', pron: 'ree-DEEK ah-koh-peh-REESH-ool' },
+    {
+      id: 'p-ridic',
+      ro: 'Lucrez la acoperiș.',
+      en: 'I work on the roof.',
+      category: 'phrase',
+      pron: 'LOO-krehz lah ah-koh-peh-REESH',
+      review: {
+        needsReview: true,
+        reviewReason: 'Changed from “Ridic acoperișul” — confirm natural phrasing with Mihaela.',
+        suggestedBy: 'app author',
+        contentArea: 'Vocabulary',
+        reviewStatus: 'pending',
+      },
+    },
     { id: 'p-pun-surub', ro: 'Pun șurubul în perete.', en: 'I put the screw in the wall.', category: 'phrase', pron: 'poon SHOO-roo-bool uhn peh-REH-teh' },
     { id: 'p-ajutor', ro: 'Am nevoie de ajutor.', en: 'I need help.', category: 'phrase', pron: 'ahm neh-YOH-eh deh ah-ZHOO-tor' },
   ],
@@ -65,15 +78,15 @@ export const buildingCabinTopic: WeeklyTopic = {
       id: 'reading-1',
       level: 1,
       title: 'Reading 1 — Simple',
-      ro: 'Am o cabană mică. Cabana are acoperiș și scări. Peretele este mare. Pun șurubul în perete. Am o șurubelniță și un topor. Muncesc la cabană în fiecare zi.',
+      ro: 'Am o cabană mică. Cabana are acoperiș și scări. Lucrez la perete. Pun un șurub în perete. Am o șurubelniță și un topor. Muncesc la cabană în fiecare zi.',
       modelEn:
-        'I have a small cabin. The cabin has a roof and stairs. The wall is big. I put the screw in the wall. I have a screwdriver and an axe. I work on the cabin every day.',
+        'I have a small cabin. The cabin has a roof and stairs. I work on the wall. I put a screw in the wall. I have a screwdriver and an axe. I work on the cabin every day.',
       vocabularyUsed: ['n-acoperis', 'n-scari', 'n-perete', 'n-surub', 'n-surubelnita', 'n-topor', 'v-munci', 'v-pune', 'a-mic', 'a-mare'],
       newWords: [{ ro: 'cabană', en: 'cabin' }, { ro: 'fiecare zi', en: 'every day' }],
       teacherNotes: 'Short sentences. Heavy repetition of nouns and verbs from your vocabulary list.',
       review: {
         needsReview: true,
-        reviewReason: 'Full passage naturalness — review with Mihaela.',
+        reviewReason: 'Passage updated for naturalness — please confirm with Mihaela (especially “Lucrez la perete”).',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',
@@ -83,15 +96,15 @@ export const buildingCabinTopic: WeeklyTopic = {
       id: 'reading-2',
       level: 2,
       title: 'Reading 2 — Natural',
-      ro: 'Construiesc o extensie la cabană. Săp fundația și pun izolația pe perete. Urc pe scări și lucrez la tavan. Cobor și pun fire electrice sub podea. Este greu, dar muncesc cu atenție.',
+      ro: 'Construiesc o extensie la cabană. Săp fundația și pun izolația în perete. Urc pe scări și lucrez la tavan. Cobor și pun fire electrice sub podea. Muncesc mult, dar cu atenție.',
       modelEn:
-        'I am building an extension to the cabin. I dig the foundation and put insulation on the wall. I climb the stairs and work on the ceiling. I come down and put electrical wires under the floor. It is heavy work, but I work carefully.',
+        'I am building an extension to the cabin. I dig the foundation and put insulation in the wall. I climb the stairs and work on the ceiling. I come down and put electrical wires under the floor. I work a lot, but carefully.',
       vocabularyUsed: ['v-construi', 'n-extensie', 'n-fundatie', 'n-izolatie', 'n-perete', 'n-tavan', 'n-scari', 'n-fire', 'n-podea', 'v-sapa', 'v-pune', 'v-urca', 'v-cobori', 'v-munci', 'a-greu'],
       newWords: [{ ro: 'atenție', en: 'care / carefully' }],
       teacherNotes: 'More natural flow. Reuses vocabulary from Reading 1.',
       review: {
         needsReview: true,
-        reviewReason: 'Reading passage naturalness — confirm wording with Mihaela.',
+        reviewReason: 'Passage updated (“în perete”, “Muncesc mult”) — confirm natural Romanian with Mihaela.',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',
@@ -101,9 +114,9 @@ export const buildingCabinTopic: WeeklyTopic = {
       id: 'reading-3',
       level: 3,
       title: 'Reading 3 — Story',
-      ro: 'Astăzi am lucrat mult la cabană. Dimineața am tăiat lemnul cu toporul. Apoi am înșurubat șuruburile în perete cu șurubelnița. După-amiaza am cărat materiale în pod. Seara am udat grădina și am tuns gardul cu grebla. Sunt obosit, dar cabana arată bine.',
+      ro: 'Astăzi am lucrat mult la cabană. Dimineața am tăiat lemnul cu toporul. Apoi am înșurubat șuruburile în perete cu șurubelnița. După-amiază am cărat materiale în pod. Seara am udat grădina și am adunat frunzele cu grebla. Sunt obosit, dar cabana arată bine.',
       modelEn:
-        'Today I worked a lot on the cabin. In the morning I cut wood with the axe. Then I screwed the screws into the wall with the screwdriver. In the afternoon I carried materials into the attic. In the evening I watered the garden and trimmed the fence with the rake. I am tired, but the cabin looks good.',
+        'Today I worked a lot on the cabin. In the morning I cut the wood with the axe. Then I screwed the screws into the wall with the screwdriver. In the afternoon I carried materials into the attic. In the evening I watered the garden and gathered leaves with the rake. I am tired, but the cabin looks good.',
       vocabularyUsed: [
         'v-taia', 'n-topor', 'v-insuruba', 'n-surub', 'n-perete', 'n-surubelnita', 'v-cara', 'n-pod-attic',
         'v-uda', 'v-tunde', 'n-gard', 'n-grebla', 'v-munci',
@@ -116,7 +129,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       teacherNotes: 'Feels like a real day of cabin work. Good for speaking practice with Mihaela.',
       review: {
         needsReview: true,
-        reviewReason: 'Story passage naturalness — confirm wording with Mihaela.',
+        reviewReason: 'Story updated (greblă/gard fix, După-amiază) — confirm natural Romanian with Mihaela.',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',

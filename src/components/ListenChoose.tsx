@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from './Button';
 import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
+import { shuffledMcOptions } from '../utils/shuffle';
 import type { ListenChooseItem } from '../types';
 
 interface Props {
@@ -16,12 +17,13 @@ export function ListenChoose({ item, onDone }: Props) {
   const { supported, speak, stop, currentId } = useSpeech();
   const { addListenCorrect } = useProgress();
   const [picked, setPicked] = useState<number | null>(null);
+  const options = useMemo(() => shuffledMcOptions(item.options, item.correct), [item.id, item.options, item.correct]);
   const isPlaying = currentId === item.id;
 
   const choose = (idx: number) => {
     if (picked !== null) return;
     setPicked(idx);
-    const correct = item.options[idx] === item.correct;
+    const correct = options[idx] === item.correct;
     if (correct) addListenCorrect();
     onDone?.(correct);
   };
@@ -37,13 +39,15 @@ export function ListenChoose({ item, onDone }: Props) {
         {item.ro}
       </p>
       {settings.pronunciationHelp && item.pron && (
-        <p className="text-sea-600 dark:text-sea-200 italic mb-3">{item.pron}</p>
+        <p className="text-sea-600 dark:text-sea-200 italic mb-3" aria-label="Pronunciation guide (not read aloud)">
+          {item.pron}
+        </p>
       )}
 
       <Button
         variant={isPlaying ? 'secondary' : 'primary'}
         size="lg"
-        className="mb-4"
+        className="mb-4 w-full"
         onClick={() => (isPlaying ? stop() : speak(item.ro, item.id))}
         disabled={!supported}
       >
@@ -53,7 +57,7 @@ export function ListenChoose({ item, onDone }: Props) {
 
       <p className="text-ink-500 dark:text-ink-300 mb-2 text-base">What does it mean?</p>
       <div className="flex flex-col gap-2" role="radiogroup" aria-label="Choose the meaning">
-        {item.options.map((opt, i) => {
+        {options.map((opt, i) => {
           const isCorrect = opt === item.correct;
           const isPicked = picked === i;
           let cls = 'btn-md bg-white ring-2 ring-sand-300 text-ink-700 dark:bg-ink-900 dark:ring-white/20 dark:text-ink-300';
@@ -64,7 +68,7 @@ export function ListenChoose({ item, onDone }: Props) {
           }
           return (
             <button
-              key={i}
+              key={`${item.id}-${opt}`}
               type="button"
               disabled={picked !== null}
               onClick={() => choose(i)}
@@ -81,7 +85,7 @@ export function ListenChoose({ item, onDone }: Props) {
 
       {picked !== null && (
         <div className="mt-4 animate-pop" role="status" aria-live="polite">
-          {item.options[picked] === item.correct ? (
+          {options[picked] === item.correct ? (
             <p className="text-sea-600 dark:text-sea-200 font-bold text-lg">Yes! That’s right.</p>
           ) : (
             <p className="text-coral-500 font-bold text-lg">

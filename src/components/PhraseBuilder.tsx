@@ -3,6 +3,7 @@ import { Button } from './Button';
 import { Icon } from './Icon';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
+import { shuffleArray } from '../utils/shuffle';
 import type { PhraseBuilderItem } from '../types';
 
 interface Props {
@@ -10,20 +11,11 @@ interface Props {
   onDone?: () => void;
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
 export function PhraseBuilder({ item, onDone }: Props) {
   const { supported, speak, stop, currentId } = useSpeech();
   const { addBuilderDone } = useProgress();
   const [placed, setPlaced] = useState<number[]>([]); // indexes into shuffled pool
-  const [pool, setPool] = useState(() => shuffle(item.chunks.map((_, i) => i)));
+  const [pool, setPool] = useState(() => shuffleArray(item.chunks.map((_, i) => i)));
   const [done, setDone] = useState(false);
 
   const correctOrder = item.order;
@@ -57,7 +49,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
 
   const reset = () => {
     setPlaced([]);
-    setPool(shuffle(item.chunks.map((_, i) => i)));
+    setPool(shuffleArray(item.chunks.map((_, i) => i)));
     setDone(false);
   };
 
@@ -77,7 +69,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
           <span className="text-ink-300 dark:text-ink-500 self-center px-2">Tap chunks below to build the sentence…</span>
         )}
         {placedChunks.map((c, i) => {
-          const chunkCorrect = done ? placed[i] === correctOrder[i] : null;
+          const chunkCorrect = done ? item.chunks[placed[i]]?.ro === item.chunks[correctOrder[i]]?.ro : null;
           let chunkCls = 'btn-md bg-sea-500 text-white animate-pop disabled:opacity-100';
           if (done && chunkCorrect === true) chunkCls = 'btn-md bg-sea-500 text-white ring-2 ring-sea-300';
           if (done && chunkCorrect === false) chunkCls = 'btn-md bg-coral-400 text-white ring-2 ring-coral-300';
