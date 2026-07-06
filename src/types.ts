@@ -301,6 +301,8 @@ export interface WeeklyTopic {
   vocabulary: WeeklyVocabItem[];
   readings: WeeklyReading[];
   exercises: WeeklyTopicExercises;
+  /** Optional grammar tie-in shown on Home and topic hub */
+  grammarFocus?: { label: string; hint: string; grammarTopicId?: string };
 }
 
 export interface WeeklyTopicProgress {

@@ -477,3 +477,14 @@ Status: Fixed
 Notes: Replaced with `a săpa` in `buildingCabin.ts` exercise `er5`.
 
 ---
+
+VAL-044
+Area: Home / UX
+Issue: Home page presented unrelated features side by side; duplicate shortcuts to Real Life Mode and the weekly lesson; No Shame Mode as a separate tile.
+Expected behaviour: Single guided path — Continue lesson → Today’s phrase → Ways to practise → Scenarios → Progress; lesson progress shows vocabulary, reading, exercises, grammar focus; scenarios grouped.
+Current behaviour: Hero competed with lesson card; “I actually need this today” duplicated Real Life Mode; flat scenario list; stats mid-page.
+Priority: High
+Status: Fixed
+Notes: `HomePage` reordered and simplified. Removed need-today grid and No Shame tile. `scenarioGroups.ts` for Home and Scenarios page. Optional `grammarFocus` on weekly topics.
+
+---
