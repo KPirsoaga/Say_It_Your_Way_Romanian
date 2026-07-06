@@ -8,7 +8,6 @@ import type { ReviewCatalogItem, ReviewStatus } from '../types';
 
 interface Props {
   onBack: () => void;
-  onShareReview: () => void;
 }
 
 type FilterKey = 'active' | ReviewStatus | 'all';
@@ -33,7 +32,7 @@ const statusLabels: Record<ReviewStatus, string> = {
   'needs-changes': 'Needs changes',
 };
 
-export function MihaelaReviewPage({ onBack, onShareReview }: Props) {
+export function MihaelaReviewPage({ onBack }: Props) {
   const { counts, itemsByStatus, getEffectiveStatus, getDecisionNotes, markApproved, markNeedsChanges, resetItem } =
     useReview();
   const [filter, setFilter] = useState<FilterKey>('active');
@@ -59,11 +58,6 @@ export function MihaelaReviewPage({ onBack, onShareReview }: Props) {
           <CountCard label="Approved" value={counts.approved} color="text-sea-600 dark:text-sea-200" />
           <CountCard label="Needs changes" value={counts.needsChanges} color="text-coral-400" />
         </section>
-
-        <Button variant="soft" size="lg" className="w-full" onClick={onShareReview}>
-          <Icon name="QrCode" className="h-5 w-5" />
-          Share review items
-        </Button>
 
         <div className="flex flex-wrap gap-2">
           {filterOptions.map((opt) => {

@@ -30,14 +30,6 @@ import { WeeklyVocabPage } from './pages/WeeklyVocabPage';
 import { WeeklyReadingPage } from './pages/WeeklyReadingPage';
 import { WeeklyExercisePage } from './pages/WeeklyExercisePage';
 import { MihaelaReviewPage } from './pages/MihaelaReviewPage';
-import { ShareWithTeacherPage } from './pages/share/ShareWithTeacherPage';
-import { ReviewSyncHubPage } from './pages/share/ReviewSyncHubPage';
-import { ReviewExportPage } from './pages/share/ReviewExportPage';
-import { ReviewImportPage } from './pages/share/ReviewImportPage';
-import { TeacherReviewPage } from './pages/share/TeacherReviewPage';
-import { ProgressSyncHubPage } from './pages/share/ProgressSyncHubPage';
-import { ProgressExportPage } from './pages/share/ProgressExportPage';
-import { TeacherProgressPage } from './pages/share/TeacherProgressPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
 import { getWeeklyTopic } from './content/weeklyTopics';
@@ -84,15 +76,7 @@ export type PageId =
   | 'weekly-vocab'
   | 'weekly-reading'
   | 'weekly-exercise'
-  | 'mihaela-review'
-  | 'share-with-teacher'
-  | 'share-review'
-  | 'share-review-export'
-  | 'share-review-import'
-  | 'teacher-review'
-  | 'share-progress'
-  | 'share-progress-export'
-  | 'teacher-progress';
+  | 'mihaela-review';
 
 function Shell() {
   const [page, setPage] = useState<PageId>('home');
@@ -150,11 +134,7 @@ function Shell() {
         {page === 'favourites' && <FavouritesPage />}
         {page === 'progress' && <ProgressPage go={go} />}
         {page === 'settings' && (
-          <SettingsPage
-            onBack={() => go('home')}
-            onOpenReview={() => go('mihaela-review')}
-            onOpenShare={() => go('share-with-teacher')}
-          />
+          <SettingsPage onBack={() => go('home')} onOpenReview={() => go('mihaela-review')} />
         )}
         {page === 'builder' && <PhraseBuilderPage go={go} />}
         {page === 'reallife' && <RealLifePage onBack={() => go('home')} initialCategoryId={arg} />}
@@ -309,41 +289,7 @@ function Shell() {
             backIcon="BookOpen"
           />
         ) : null}
-        {page === 'mihaela-review' && (
-          <MihaelaReviewPage
-            onBack={() => go('settings')}
-            onShareReview={() => go('share-review-export')}
-          />
-        )}
-        {page === 'share-with-teacher' && (
-          <ShareWithTeacherPage
-            onBack={() => go('settings')}
-            onReviewSync={() => go('share-review')}
-            onProgressSync={() => go('share-progress')}
-          />
-        )}
-        {page === 'share-review' && (
-          <ReviewSyncHubPage
-            onBack={() => go('share-with-teacher')}
-            onExport={() => go('share-review-export')}
-            onTeacher={() => go('teacher-review')}
-            onImport={() => go('share-review-import')}
-          />
-        )}
-        {page === 'share-review-export' && <ReviewExportPage onBack={() => go('share-review')} />}
-        {page === 'share-review-import' && (
-          <ReviewImportPage onBack={() => go('share-review')} onDone={() => go('mihaela-review')} />
-        )}
-        {page === 'teacher-review' && <TeacherReviewPage onBack={() => go('share-review')} />}
-        {page === 'share-progress' && (
-          <ProgressSyncHubPage
-            onBack={() => go('share-with-teacher')}
-            onExport={() => go('share-progress-export')}
-            onTeacher={() => go('teacher-progress')}
-          />
-        )}
-        {page === 'share-progress-export' && <ProgressExportPage onBack={() => go('share-progress')} />}
-        {page === 'teacher-progress' && <TeacherProgressPage onBack={() => go('share-progress')} />}
+        {page === 'mihaela-review' && <MihaelaReviewPage onBack={() => go('settings')} />}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}

@@ -3,7 +3,6 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { collectReviewItems } from '../content/review/collectReviewItems';
 import type { ReviewCatalogItem, ReviewDecision, ReviewState, ReviewStatus, ManualReviewFlag } from '../types';
 import type { FlagReviewTarget } from '../content/review/reviewIds';
-import type { ReviewResponseItem } from '../services/qr/types';
 
 const DEFAULT_REVIEW: ReviewState = { decisions: {}, manualFlags: {} };
 
@@ -48,8 +47,6 @@ interface ReviewCtx {
   counts: ReviewCounts;
   itemsToReview: ReviewCatalogItem[];
   itemsByStatus: (status: ReviewStatus | 'all' | 'active') => ReviewCatalogItem[];
-  applyReviewResponse: (items: ReviewResponseItem[]) => number;
-  manualFlags: Record<string, ManualReviewFlag>;
 }
 
 const Ctx = createContext<ReviewCtx | null>(null);
@@ -86,35 +83,16 @@ export function ReviewProvider({ children }: { children: ReactNode }) {
   );
 
   const saveDecision = useCallback(
-    (
-      id: string,
-      status: ReviewStatus,
-      fields?: {
-        teacherNotes?: string;
-        correctedRo?: string;
-        correctedEn?: string;
-        pronunciationNotes?: string;
-        generalComments?: string;
-      }
-    ) => {
+    (id: string, status: ReviewStatus, teacherNotes?: string) => {
       setState((prev) => {
         const base = normalizeReviewState(prev);
-        const prevDecision = base.decisions[id];
-        const notes = fields?.teacherNotes?.trim();
-        const combinedNotes = [notes, fields?.pronunciationNotes?.trim(), fields?.generalComments?.trim()]
-          .filter(Boolean)
-          .join(' · ') || undefined;
         return {
           ...base,
           decisions: {
             ...base.decisions,
             [id]: {
               status,
-              teacherNotes: combinedNotes ?? prevDecision?.teacherNotes,
-              correctedRo: fields?.correctedRo?.trim() || prevDecision?.correctedRo,
-              correctedEn: fields?.correctedEn?.trim() || prevDecision?.correctedEn,
-              pronunciationNotes: fields?.pronunciationNotes?.trim() || prevDecision?.pronunciationNotes,
-              generalComments: fields?.generalComments?.trim() || prevDecision?.generalComments,
+              teacherNotes: teacherNotes?.trim() || undefined,
               updatedAt: nowIso(),
             },
           },
@@ -125,12 +103,12 @@ export function ReviewProvider({ children }: { children: ReactNode }) {
   );
 
   const markApproved = useCallback(
-    (id: string, teacherNotes?: string) => saveDecision(id, 'approved', { teacherNotes }),
+    (id: string, teacherNotes?: string) => saveDecision(id, 'approved', teacherNotes),
     [saveDecision]
   );
 
   const markNeedsChanges = useCallback(
-    (id: string, teacherNotes: string) => saveDecision(id, 'needs-changes', { teacherNotes }),
+    (id: string, teacherNotes: string) => saveDecision(id, 'needs-changes', teacherNotes),
     [saveDecision]
   );
 
@@ -210,33 +188,6 @@ export function ReviewProvider({ children }: { children: ReactNode }) {
     [catalog, itemsToReview, normalized.decisions]
   );
 
-  const applyReviewResponse = useCallback(
-    (items: ReviewResponseItem[]) => {
-      setState((prev) => {
-        const base = normalizeReviewState(prev);
-        const nextDecisions = { ...base.decisions };
-        items.forEach((item) => {
-          const existing = nextDecisions[item.id];
-          const notes = [item.teacherNotes, item.pronunciationNotes, item.generalComments]
-            .filter(Boolean)
-            .join(' · ') || undefined;
-          nextDecisions[item.id] = {
-            status: item.status,
-            teacherNotes: notes ?? existing?.teacherNotes,
-            correctedRo: item.correctedRo?.trim() || existing?.correctedRo,
-            correctedEn: item.correctedEn?.trim() || existing?.correctedEn,
-            pronunciationNotes: item.pronunciationNotes?.trim() || existing?.pronunciationNotes,
-            generalComments: item.generalComments?.trim() || existing?.generalComments,
-            updatedAt: nowIso(),
-          };
-        });
-        return { ...base, decisions: nextDecisions };
-      });
-      return items.length;
-    },
-    [setState]
-  );
-
   return (
     <Ctx.Provider
       value={{
@@ -252,8 +203,6 @@ export function ReviewProvider({ children }: { children: ReactNode }) {
         counts,
         itemsToReview,
         itemsByStatus,
-        applyReviewResponse,
-        manualFlags: normalized.manualFlags,
       }}
     >
       {children}

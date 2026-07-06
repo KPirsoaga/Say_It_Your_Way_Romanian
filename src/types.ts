@@ -441,10 +441,6 @@ export interface ManualReviewFlag {
 export interface ReviewDecision {
   status: ReviewStatus;
   teacherNotes?: string;
-  correctedRo?: string;
-  correctedEn?: string;
-  pronunciationNotes?: string;
-  generalComments?: string;
   updatedAt: string;
 }
 
