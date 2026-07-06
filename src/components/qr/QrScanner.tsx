@@ -11,12 +11,20 @@ interface Props {
 
 function pickCameraId(cameras: { id: string; label: string }[]): string {
   const back = cameras.find((c) => /back|rear|environment/i.test(c.label));
-  return (back ?? cameras[0])!.id;
+  const front = cameras.find((c) => /front|user|facetime|integrated|built-in/i.test(c.label));
+  return (back ?? front ?? cameras[0])!.id;
 }
+
+const SCAN_CONFIG = {
+  fps: 10,
+  // Full-frame scan — no dark shaded overlay (cleaner on desktop webcams)
+  disableFlip: false,
+};
 
 /** Camera-based QR scanner — works fully offline after page load */
 export function QrScanner({ onScan, onError, className = '' }: Props) {
   const regionId = `qr-${useId().replace(/:/g, '')}`;
+  const fileInputId = `${regionId}-file`;
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const startingRef = useRef(false);
   const onScanRef = useRef(onScan);
@@ -66,15 +74,6 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
       const scanner = new Html5Qrcode(regionId, false);
       scannerRef.current = scanner;
 
-      const scanConfig = {
-        fps: 10,
-        qrbox: (viewfinderWidth: number, viewfinderHeight: number) => {
-          const size = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.75);
-          return { width: size, height: size };
-        },
-        aspectRatio: 1,
-      };
-
       const onDecoded = (decoded: string) => {
         if (decoded === lastScanRef.current) return;
         lastScanRef.current = decoded;
@@ -87,7 +86,7 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
       try {
         const cameras = await Html5Qrcode.getCameras();
         if (cameras.length > 0) {
-          await scanner.start(pickCameraId(cameras), scanConfig, onDecoded, () => undefined);
+          await scanner.start(pickCameraId(cameras), SCAN_CONFIG, onDecoded, () => undefined);
           started = true;
         }
       } catch {
@@ -96,12 +95,12 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
 
       if (!started) {
         const constraints: MediaTrackConstraints[] = [
+          { facingMode: { ideal: 'user' } },
           { facingMode: { ideal: 'environment' } },
-          { facingMode: 'user' },
         ];
         for (const constraint of constraints) {
           try {
-            await scanner.start(constraint, scanConfig, onDecoded, () => undefined);
+            await scanner.start(constraint, SCAN_CONFIG, onDecoded, () => undefined);
             started = true;
             break;
           } catch {
@@ -114,7 +113,7 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
         throw new Error('No camera found on this device.');
       }
 
-      setStatus('Point the camera at a QR code.');
+      setStatus('Point the camera at a QR code. Hold steady for a moment.');
     } catch (e) {
       const msg =
         e instanceof Error && e.message
@@ -133,12 +132,29 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
     setActive(true);
   };
 
+  const scanFile = async (file: File) => {
+    try {
+      setStatus('Reading image…');
+      const scanner = scannerRef.current ?? new Html5Qrcode(regionId, false);
+      const result = await scanner.scanFileV2(file, false);
+      const decoded = result.decodedText;
+      if (decoded === lastScanRef.current) return;
+      lastScanRef.current = decoded;
+      onScanRef.current(decoded);
+      setStatus('Code scanned successfully.');
+    } catch {
+      const msg = 'Could not find a QR code in that image. Try a clearer photo.';
+      setStatus(msg);
+      onErrorRef.current?.(msg);
+    }
+  };
+
   // Start only after the scanner region is visible in the DOM (not display:none)
   useEffect(() => {
     if (!active) return;
     const timer = window.setTimeout(() => {
       void startScanner();
-    }, 100);
+    }, 150);
     return () => window.clearTimeout(timer);
   }, [active, startScanner]);
 
@@ -146,7 +162,7 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
     <div className={`space-y-3 ${className}`}>
       <div
         id={regionId}
-        className={`qr-scanner-region overflow-hidden rounded-3xl bg-ink-900 min-h-[280px] w-full ${
+        className={`qr-scanner-region relative w-full aspect-[4/3] min-h-[280px] overflow-hidden rounded-3xl bg-ink-900 ${
           active ? 'block' : 'hidden'
         }`}
         aria-hidden={!active}
@@ -171,7 +187,27 @@ export function QrScanner({ onScan, onError, className = '' }: Props) {
             Stop scanner
           </Button>
         )}
+        <label htmlFor={fileInputId} className="w-full">
+          <input
+            id={fileInputId}
+            type="file"
+            accept="image/*"
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) void scanFile(file);
+              e.target.value = '';
+            }}
+          />
+          <span className="btn-lg w-full bg-sand-100 text-ink-700 hover:bg-sand-200 dark:bg-ink-900 dark:text-ink-300 dark:hover:bg-ink-800 rounded-2xl font-bold flex items-center justify-center gap-2 cursor-pointer transition">
+            <Icon name="Eye" className="h-5 w-5" />
+            Upload QR image
+          </span>
+        </label>
       </div>
+      <p className="text-xs text-ink-400 dark:text-ink-500 text-center leading-relaxed">
+        On desktop, you can screenshot the QR on your phone and upload it here.
+      </p>
     </div>
   );
 }
