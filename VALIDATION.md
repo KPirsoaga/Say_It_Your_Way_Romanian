@@ -158,3 +158,69 @@ Status: Fixed
 Notes: Minor PWA polish issue on installed app. Fixed: `SettingsContext` updates `theme-color` meta when dark mode toggles.
 
 ---
+
+VAL-015
+Area: Phrase Builder
+Issue: Wrong sentence order still advanced to the next item.
+Expected behaviour: User must fix or retry before moving on after an incorrect check.
+Current behaviour: `onDone()` was called regardless of correctness.
+Priority: High
+Status: Fixed
+Notes: `onDone` only fires on correct order; incorrect shows feedback + try again.
+
+---
+
+VAL-016
+Area: Phrase Builder
+Issue: No visual feedback on which chunks were wrong after checking.
+Expected behaviour: Correct chunks highlighted positively; wrong chunks clearly marked.
+Current behaviour: All placed chunks looked the same after check.
+Priority: Medium
+Status: Fixed
+Notes: Chunk buttons use green/coral styling after check.
+
+---
+
+VAL-017
+Area: Speak Practice
+Issue: "Try again" left "I said it" disabled so user could not re-confirm.
+Expected behaviour: After "Try again", user can tap "I said it" again.
+Current behaviour: `result` stayed `'said'` after try again path in some flows.
+Priority: Medium
+Status: Fixed
+Notes: `tryAgain` resets `result` to `null`.
+
+---
+
+VAL-018
+Area: Listen & Choose
+Issue: Feedback not announced to screen readers.
+Expected behaviour: Correct/incorrect result is announced accessibly.
+Current behaviour: Visual feedback only.
+Priority: Medium
+Status: Fixed
+Notes: Added `role="status"` and `aria-live="polite"` on result; `aria-pressed` on options.
+
+---
+
+VAL-019
+Area: Content
+Issue: Limited real-life situations for teacher-led practice (lesson, tax, taxi, pharmacy shortcuts, etc.).
+Expected behaviour: App covers common daily situations with natural Romanian phrases.
+Current behaviour: Some situations missing or only in scenarios, not Real Life shortcuts.
+Priority: Medium
+Status: Fixed
+Notes: Added scenarios (lesson, doctor, taxi, accountant) and 9 Real Life categories with home shortcuts.
+
+---
+
+VAL-020
+Area: Grammar Help
+Issue: No dyslexia-friendly grammar section for structured learning with Mihaela.
+Expected behaviour: Simple visual grammar patterns, verb tables, audio, practise buttons — without cluttering bottom nav.
+Current behaviour: Grammar content did not exist.
+Priority: Medium
+Status: Fixed
+Notes: New Grammar Help section on Home; 6 topics + 10 verbs; progress tracked in localStorage.
+
+---

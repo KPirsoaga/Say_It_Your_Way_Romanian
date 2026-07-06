@@ -10,7 +10,11 @@ export type ScenarioId =
   | 'appointment'
   | 'today'
   | 'problem'
-  | 'smalltalk';
+  | 'smalltalk'
+  | 'lesson'
+  | 'doctor'
+  | 'taxi'
+  | 'accountant';
 
 export interface PhraseLine {
   /** Romanian sentence */
@@ -153,4 +157,49 @@ export interface ProgressState {
   speakDone: number;
   /** Count of phrase-builder completions */
   builderDone: number;
+  /** Grammar topic ids the user has practised */
+  completedGrammarTopics: string[];
+}
+
+export interface GrammarExample {
+  ro: string;
+  en: string;
+  pron?: string;
+  slow?: string;
+}
+
+export interface GrammarTopic {
+  id: string;
+  title: string;
+  /** One-line simple explanation */
+  summary: string;
+  icon: string;
+  color: ColorKey;
+  /** The pattern in Romanian */
+  patternRo: string;
+  /** What it means in English */
+  patternEn: string;
+  /** Short dyslexia-friendly tip */
+  tip: string;
+  /** Simpler version of the pattern */
+  simplerRo: string;
+  simplerEn: string;
+  examples: GrammarExample[];
+}
+
+export interface VerbForm {
+  label: string;
+  ro: string;
+  en: string;
+  pron?: string;
+}
+
+export interface GrammarVerb {
+  id: string;
+  infinitive: string;
+  en: string;
+  icon: string;
+  color: ColorKey;
+  present: VerbForm[];
+  examples: GrammarExample[];
 }

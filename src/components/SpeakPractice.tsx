@@ -28,7 +28,7 @@ export function SpeakPractice({ phrase, speechId, onDone }: Props) {
   };
 
   const tryAgain = () => {
-    setResult('again');
+    setResult(null);
     speak(phrase.slow ?? phrase.ro, speechId);
   };
 

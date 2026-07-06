@@ -1,4 +1,14 @@
 import type { Scenario, PhraseBuilderItem, ListenChooseItem, DailyContent, ColorKey, RealLifeCategory, SurvivalPhrase, NoShameMessage, TinyPracticeContent, MiniConversation } from './types';
+import {
+  extraScenarios,
+  extraRealLifeCategories,
+  extraPhraseBuilderItems,
+  extraListenChooseItems,
+  extraSurvivalPhrases,
+  extraMiniConversations,
+} from './content/additions';
+
+export { grammarTopics, grammarVerbs } from './content/grammar';
 
 export const scenarios: Scenario[] = [
   {
@@ -424,6 +434,8 @@ export const scenarios: Scenario[] = [
   },
 ];
 
+extraScenarios.forEach((s) => scenarios.push(s));
+
 export const phraseBuilderItems: PhraseBuilderItem[] = [
   {
     id: 'pb-lesson',
@@ -493,6 +505,8 @@ export const phraseBuilderItems: PhraseBuilderItem[] = [
   },
 ];
 
+extraPhraseBuilderItems.forEach((i) => phraseBuilderItems.push(i));
+
 export const listenChooseItems: ListenChooseItem[] = [
   {
     id: 'lc-1',
@@ -551,6 +565,8 @@ export const listenChooseItems: ListenChooseItem[] = [
     pron: 'FLAH-ruh zah-HAHR, vuh ROHG.',
   },
 ];
+
+extraListenChooseItems.forEach((i) => listenChooseItems.push(i));
 
 /** Build deterministic daily content from a date so it stays stable per day. */
 export function getDailyContent(dateStr: string): DailyContent {
@@ -896,6 +912,8 @@ export const realLifeCategories: RealLifeCategory[] = [
   },
 ];
 
+extraRealLifeCategories.forEach((c) => realLifeCategories.push(c));
+
 /* ------------------------------------------------------------------ */
 /* Survival Romanian — the most useful phrases, first                  */
 /* ------------------------------------------------------------------ */
@@ -990,6 +1008,8 @@ export const survivalPhrases: SurvivalPhrase[] = [
     why: 'A warm, complete way to explain your situation. People love that you’re trying.',
   },
 ];
+
+extraSurvivalPhrases.forEach((p) => survivalPhrases.push(p));
 
 /* ------------------------------------------------------------------ */
 /* No-Shame messages — encouraging, low-pressure                       */
@@ -1428,3 +1448,5 @@ export const miniConversations: MiniConversation[] = [
     ],
   },
 ];
+
+extraMiniConversations.forEach((c) => miniConversations.push(c));
