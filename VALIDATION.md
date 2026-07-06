@@ -499,3 +499,14 @@ Status: Fixed
 Notes: New `grammarCheatSheets`, `grammarTenseGuides`, `grammarSentencePatterns`, `grammarPartsOfSpeech`, `grammarVerbTenses`. `GrammarTenseToggle` on verb pages. Grammar exercises placeholder. Legacy `grammarTopics` retained for review collector only.
 
 ---
+
+VAL-046
+Area: Navigation / Home / Mihaela Review
+Issue: Scenarios list had no back navigation and hid bottom nav; Home progress was at the bottom; learners could not manually flag content for Mihaela.
+Expected behaviour: Scenarios page has back + bottom nav; Home order is hero → progress → lesson → phrase → practise → scenarios; subtle “Flag for Mihaela” on Romanian content saved to localStorage without duplicates.
+Current behaviour: Scenarios felt like a dead end; progress at page bottom; only author-flagged content in review.
+Priority: High
+Status: Fixed
+Notes: `FlagForMihaela` component; `ReviewContext.manualFlags`; `user-flag:*` ids in `rcd-review` localStorage.
+
+---

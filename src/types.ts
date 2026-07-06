@@ -423,6 +423,19 @@ export interface ReviewCatalogItem {
   suggestedBy?: string;
   teacherNotes?: string;
   contextLabel?: string;
+  /** Set when the learner flagged this item manually */
+  flaggedByUser?: boolean;
+}
+
+export interface ManualReviewFlag {
+  id: string;
+  contentArea: ReviewContentArea;
+  ro: string;
+  en: string;
+  reviewReason: string;
+  contextLabel?: string;
+  flaggedAt: string;
+  userNote?: string;
 }
 
 export interface ReviewDecision {
@@ -433,4 +446,5 @@ export interface ReviewDecision {
 
 export interface ReviewState {
   decisions: Record<string, ReviewDecision>;
+  manualFlags: Record<string, ManualReviewFlag>;
 }

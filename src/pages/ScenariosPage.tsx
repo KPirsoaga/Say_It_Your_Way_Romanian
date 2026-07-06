@@ -8,17 +8,18 @@ import type { PageId } from '../App';
 
 interface Props {
   go: (page: PageId, arg?: string) => void;
+  onBack: () => void;
 }
 
 const scenarioMap = new Map(scenarios.map((s) => [s.id, s]));
 
-export function ScenariosPage({ go }: Props) {
+export function ScenariosPage({ go, onBack }: Props) {
   const { progress } = useProgress();
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Scenarios" subtitle="Real-life conversations" />
-      <div className="mx-auto max-w-md px-4 pb-6 pt-4 space-y-6">
+      <PageHeader title="Scenarios" subtitle="Real-life conversations" onBack={onBack} />
+      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-6">
         {scenarioGroups.map((group) => (
           <section key={group.title}>
             <h2 className="text-base font-bold text-ink-900 dark:text-sand-100">{group.title}</h2>

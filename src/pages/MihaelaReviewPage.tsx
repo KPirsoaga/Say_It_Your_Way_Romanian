@@ -143,7 +143,14 @@ function ReviewCard({
         <span className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300">
           {item.contentArea}
         </span>
-        <span className={`text-xs font-bold rounded-full px-3 py-1 ${statusStyles[status]}`}>{statusLabels[status]}</span>
+        <div className="flex flex-wrap items-center gap-2">
+          {item.flaggedByUser && (
+            <span className="text-xs font-bold rounded-full px-3 py-1 bg-rose-50 text-rose-400 dark:bg-rose-400/20 dark:text-rose-200">
+              Flagged by me
+            </span>
+          )}
+          <span className={`text-xs font-bold rounded-full px-3 py-1 ${statusStyles[status]}`}>{statusLabels[status]}</span>
+        </div>
       </div>
 
       {item.contextLabel && (

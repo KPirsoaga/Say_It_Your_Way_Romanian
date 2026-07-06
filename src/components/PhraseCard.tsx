@@ -4,7 +4,9 @@ import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
+import { FlagForMihaela } from './FlagForMihaela';
 import type { PhraseLine } from '../types';
+import type { FlagReviewTarget } from '../content/review/reviewIds';
 
 interface Props {
   phrase: PhraseLine;
@@ -12,6 +14,8 @@ interface Props {
   favId: string;
   /** larger display for "hero" phrases */
   hero?: boolean;
+  /** When set, shows “Flag for Mihaela” */
+  flag?: Omit<FlagReviewTarget, 'ro' | 'en'>;
 }
 
 /**
@@ -34,7 +38,7 @@ function breakDown(phrase: PhraseLine): string[] {
   return parts.length > 1 ? parts : [base];
 }
 
-export function PhraseCard({ phrase, favId, hero = false }: Props) {
+export function PhraseCard({ phrase, favId, hero = false, flag }: Props) {
   const { settings } = useSettings();
   const { toggleFavourite, isFavourite } = useProgress();
   const { supported, speak, speakSlow, stop, currentId } = useSpeech();
@@ -153,6 +157,17 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
         <p className="mt-3 text-sm text-coral-500">
           Audio isn’t available on this browser, but you can still read each sentence out loud.
         </p>
+      )}
+
+      {flag && (
+        <FlagForMihaela
+          className="mt-3"
+          id={flag.id}
+          ro={phrase.ro}
+          en={phrase.en}
+          contentArea={flag.contentArea}
+          contextLabel={flag.contextLabel}
+        />
       )}
     </div>
   );

@@ -96,6 +96,7 @@ function Shell() {
   const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
   const showNav =
     navPages.includes(page) ||
+    page === 'scenarios' ||
     page === 'weekly-topic' ||
     page === 'weekly-vocab' ||
     page === 'weekly-reading' ||
@@ -118,7 +119,7 @@ function Shell() {
       <main className={showNav ? 'pb-24' : ''}>
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
-        {page === 'scenarios' && <ScenariosPage go={go} />}
+        {page === 'scenarios' && <ScenariosPage go={go} onBack={() => go('home')} />}
         {page === 'scenario' && arg ? (
           <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />
         ) : page === 'scenario' ? (
