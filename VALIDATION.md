@@ -334,3 +334,25 @@ Status: Open
 Notes: All teacher-approved PRD vocabulary included. Reading passages should be reviewed with Mihaela before demo.
 
 ---
+
+VAL-031
+Area: Grammar Help
+Issue: Grammar Help lacked structured reference sections for parts of speech, indicative mood tenses, imperfect, auxiliary verbs, predicative verbs, and common verbs from Mihaela’s notes.
+Expected behaviour: Mobile-first stacked cards; dyslexia/ADHD-friendly copy; audio on examples; “Make it simpler” on tenses; progress tracked in `completedGrammarTopics` (localStorage only); no spelling or typing tests.
+Current behaviour: Grammar Help had only basic patterns and a short verb list.
+Priority: High
+Status: Fixed
+Notes: Added `grammarExtended.ts`, sectioned `GrammarHelpPage`, conjugation cards for imperfect `a avea`, four new verbs (`a pleca`, `a întreba`, `a mânca`, `a bea`). Weekly Topics unchanged.
+
+---
+
+VAL-032
+Area: Content / Romanian
+Issue: New Grammar Help reading passages and examples were authored for clarity — need Mihaela review for natural Romanian.
+Expected behaviour: Natural Romanian with diacritics; uncertain strings marked for teacher review.
+Current behaviour: Parts-of-speech examples, predicative verb sentences, and imperfect examples use teacher-inspired patterns but were not verified in class.
+Priority: Medium
+Status: Open
+Notes: Predicative section has 6 examples (2 per verb for `a fi` and `a deveni`). Existing VAL-027 items (`Pot repeta, vă rog?`) remain open. Review `src/content/grammarExtended.ts` and new verb examples in `grammar.ts`.
+
+---

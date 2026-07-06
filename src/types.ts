@@ -177,6 +177,12 @@ export interface GrammarTopic {
   summary: string;
   icon: string;
   color: ColorKey;
+  /** Optional section for Grammar Help grouping */
+  group?: 'patterns' | 'parts-of-speech' | 'indicative' | 'imperfect' | 'auxiliary' | 'predicative';
+  /** Romanian grammar label, e.g. "verbă" */
+  roLabel?: string;
+  /** When to use this tense or pattern */
+  whenToUse?: string;
   /** The pattern in Romanian */
   patternRo: string;
   /** What it means in English */
@@ -187,6 +193,8 @@ export interface GrammarTopic {
   simplerRo: string;
   simplerEn: string;
   examples: GrammarExample[];
+  /** Optional conjugation table as stacked mobile cards */
+  conjugation?: VerbForm[];
 }
 
 export interface VerbForm {
@@ -203,6 +211,8 @@ export interface GrammarVerb {
   icon: string;
   color: ColorKey;
   present: VerbForm[];
+  /** Optional imperfect tense forms */
+  imperfect?: VerbForm[];
   examples: GrammarExample[];
 }
 

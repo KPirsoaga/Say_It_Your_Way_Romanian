@@ -1,14 +1,17 @@
 import type { GrammarTopic, GrammarVerb } from '../types';
+import { extendedGrammarTopics } from './grammarExtended';
 
-export const grammarTopics: GrammarTopic[] = [
+const patternGrammarTopics: GrammarTopic[] = [
   {
     id: 'gr-present',
     title: 'Present tense — now',
     summary: 'Talk about what happens now, every day, or usually.',
+    group: 'indicative',
     icon: 'Sun',
     color: 'sun',
     patternRo: 'Eu + verb (acum / în fiecare zi)',
     patternEn: 'I + verb (now / every day)',
+    whenToUse: 'Use the present for what happens now, regularly, or as a general truth.',
     tip: 'Romanian often drops “I” — the verb ending shows who is speaking.',
     simplerRo: 'Eu vorbesc. / Vorbesc.',
     simplerEn: 'I speak. / (I) speak.',
@@ -21,12 +24,14 @@ export const grammarTopics: GrammarTopic[] = [
   },
   {
     id: 'gr-past',
-    title: 'Past tense — already happened',
+    title: 'Perfect compus — past tense',
     summary: 'Say what you did earlier today or yesterday.',
+    group: 'indicative',
     icon: 'CalendarDays',
     color: 'sea',
-    patternRo: 'Am / Am fost + ...',
-    patternEn: 'I have / I was + ...',
+    patternRo: 'Am + past participle',
+    patternEn: 'I have + past participle',
+    whenToUse: 'Use perfect compus for completed actions in the past — often with “am” + verb form.',
     tip: 'Start with “Am fost…” (I was) or “Am…” + past participle. Keep it short.',
     simplerRo: 'Am fost acasă. / Am mâncat.',
     simplerEn: 'I was at home. / I ate.',
@@ -41,10 +46,12 @@ export const grammarTopics: GrammarTopic[] = [
     id: 'gr-future',
     title: 'Future tense — later',
     summary: 'Talk about tomorrow or later today.',
+    group: 'indicative',
     icon: 'ArrowRight',
     color: 'coral',
     patternRo: 'O să + verb / Mâine + verb',
     patternEn: 'I will + verb / Tomorrow + verb',
+    whenToUse: 'Use the future for what will happen later — tomorrow, next week, or soon.',
     tip: '“O să…” is the easiest way to say “I will…”. Add “mâine” for tomorrow.',
     simplerRo: 'O să merg. / Mâine merg.',
     simplerEn: 'I will go. / Tomorrow I go.',
@@ -114,6 +121,8 @@ export const grammarTopics: GrammarTopic[] = [
   },
 ];
 
+export const grammarTopics: GrammarTopic[] = [...patternGrammarTopics, ...extendedGrammarTopics];
+
 export const grammarVerbs: GrammarVerb[] = [
   {
     id: 'vb-fi',
@@ -153,6 +162,14 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Am o programare.', en: 'I have an appointment.', pron: 'Ahm oh proh-grah-MAH-reh.', slow: 'Am o programare.' },
       { ro: 'Ai timp acum?', en: 'Do you have time now?', pron: 'AY TEEHM ah-COON?', slow: 'Ai timp... acum?' },
       { ro: 'Avem lecție mâine.', en: 'We have a lesson tomorrow.', pron: 'AH-vem lek-TSY-eh MUH-ee-neh.', slow: 'Avem lecție... mâine.' },
+    ],
+    imperfect: [
+      { label: 'eu', ro: 'aveam', en: 'I had / I used to have', pron: 'ah-VAY-ahm' },
+      { label: 'tu', ro: 'aveai', en: 'you had / you used to have', pron: 'ah-VAY-ay' },
+      { label: 'el/ea', ro: 'avea', en: 'he/she had / used to have', pron: 'ah-VAY-ah' },
+      { label: 'noi', ro: 'aveam', en: 'we had / we used to have', pron: 'ah-VAY-ahm' },
+      { label: 'voi', ro: 'aveați', en: 'you (pl.) had / used to have', pron: 'ah-vuh-YAHTS' },
+      { label: 'ei/ele', ro: 'aveau', en: 'they had / used to have', pron: 'ah-VOW' },
     ],
   },
   {
@@ -313,6 +330,86 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Am nevoie de ajutor.', en: 'I need help.', pron: 'Ahm neh-YO-eh deh ah-ZHOO-tor.', slow: 'Am nevoie... de ajutor.' },
       { ro: 'Am nevoie de timp.', en: 'I need time.', pron: 'Ahm neh-YO-eh deh TEEHM.', slow: 'Am nevoie... de timp.' },
       { ro: 'Avem nevoie de o programare.', en: 'We need an appointment.', pron: 'AH-vem neh-YO-eh deh oh proh-grah-MAH-reh.', slow: 'Avem nevoie... de o programare.' },
+    ],
+  },
+  {
+    id: 'vb-pleca',
+    infinitive: 'a pleca',
+    en: 'to leave',
+    icon: 'ArrowRight',
+    color: 'sea',
+    present: [
+      { label: 'eu', ro: 'plec', en: 'I leave', pron: 'PLEHK' },
+      { label: 'tu', ro: 'pleci', en: 'you leave', pron: 'PLEHTS' },
+      { label: 'el/ea', ro: 'pleacă', en: 'he/she leaves', pron: 'PLYAH-kuh' },
+      { label: 'noi', ro: 'plecăm', en: 'we leave', pron: 'pleh-KUHM' },
+      { label: 'voi', ro: 'plecați', en: 'you leave (pl.)', pron: 'pleh-KAHTS' },
+      { label: 'ei/ele', ro: 'pleacă', en: 'they leave', pron: 'PLYAH-kuh' },
+    ],
+    examples: [
+      { ro: 'Plec acum.', en: 'I am leaving now.', pron: 'PLEHK ah-COON.', slow: 'Plec... acum.' },
+      { ro: 'Plecăm după lecție.', en: 'We leave after the lesson.', pron: 'pleh-KUHM DOO-puh lek-TSY-eh.', slow: 'Plecăm... după lecție.' },
+      { ro: 'La ce oră pleci?', en: 'What time do you leave?', pron: 'Lah cheh OH-ruh PLEHTS?', slow: 'La ce oră... pleci?' },
+    ],
+  },
+  {
+    id: 'vb-intreba',
+    infinitive: 'a întreba',
+    en: 'to ask',
+    icon: 'MessageCircle',
+    color: 'rose',
+    present: [
+      { label: 'eu', ro: 'întreb', en: 'I ask', pron: 'uhn-TREHB' },
+      { label: 'tu', ro: 'întrebi', en: 'you ask', pron: 'uhn-TREH-bee' },
+      { label: 'el/ea', ro: 'întreabă', en: 'he/she asks', pron: 'uhn-TREH-buh' },
+      { label: 'noi', ro: 'întrebăm', en: 'we ask', pron: 'uhn-treh-BUHM' },
+      { label: 'voi', ro: 'întrebați', en: 'you ask (pl.)', pron: 'uhn-treh-BAHTS' },
+      { label: 'ei/ele', ro: 'întreabă', en: 'they ask', pron: 'uhn-TREH-buh' },
+    ],
+    examples: [
+      { ro: 'Întreb pe Mihaela.', en: 'I ask Mihaela.', pron: 'Uhn-TREHB peh Mee-HAH-el-ah.', slow: 'Întreb... pe Mihaela.' },
+      { ro: 'Pot să te întreb ceva?', en: 'Can I ask you something?', pron: 'POHT suh teh uhn-TREHB CHEH-vah?', slow: 'Pot să te întreb... ceva?' },
+      { ro: 'Întrebăm despre lecție.', en: 'We ask about the lesson.', pron: 'Uhn-treh-BUHM DEHS-preh lek-TSY-eh.', slow: 'Întrebăm... despre lecție.' },
+    ],
+  },
+  {
+    id: 'vb-manca',
+    infinitive: 'a mânca',
+    en: 'to eat',
+    icon: 'Coffee',
+    color: 'coral',
+    present: [
+      { label: 'eu', ro: 'mănânc', en: 'I eat', pron: 'muhn-UHNK' },
+      { label: 'tu', ro: 'mănânci', en: 'you eat', pron: 'muhn-UHN-chee' },
+      { label: 'el/ea', ro: 'mănâncă', en: 'he/she eats', pron: 'muhn-UHN-kuh' },
+      { label: 'noi', ro: 'mâncăm', en: 'we eat', pron: 'muhn-KUHM' },
+      { label: 'voi', ro: 'mâncați', en: 'you eat (pl.)', pron: 'muhn-KAHTS' },
+      { label: 'ei/ele', ro: 'mâncă', en: 'they eat', pron: 'muhn-KUH' },
+    ],
+    examples: [
+      { ro: 'Mănânc la ora șapte.', en: 'I eat at seven o’clock.', pron: 'Muhn-UHNK lah oh-ruh SHAP-teh.', slow: 'Mănânc... la ora șapte.' },
+      { ro: 'Mănânci acum?', en: 'Are you eating now?', pron: 'Muhn-UHN-chee ah-COON?', slow: 'Mănânci... acum?' },
+      { ro: 'Mâncăm împreună.', en: 'We eat together.', pron: 'Muhn-KUHM uhm-preh-OO-nuh.', slow: 'Mâncăm... împreună.' },
+    ],
+  },
+  {
+    id: 'vb-bea',
+    infinitive: 'a bea',
+    en: 'to drink',
+    icon: 'Coffee',
+    color: 'sun',
+    present: [
+      { label: 'eu', ro: 'beau', en: 'I drink', pron: 'BEH-ow' },
+      { label: 'tu', ro: 'bei', en: 'you drink', pron: 'BAY' },
+      { label: 'el/ea', ro: 'bea', en: 'he/she drinks', pron: 'BEH-ah' },
+      { label: 'noi', ro: 'bem', en: 'we drink', pron: 'BEHM' },
+      { label: 'voi', ro: 'beți', en: 'you drink (pl.)', pron: 'BETS' },
+      { label: 'ei/ele', ro: 'beau', en: 'they drink', pron: 'BEH-ow' },
+    ],
+    examples: [
+      { ro: 'Beau apă, mulțumesc.', en: 'I drink water, thank you.', pron: 'BEH-ow AH-puh, mool-tsoo-MESK.', slow: 'Beau apă... mulțumesc.' },
+      { ro: 'Vrei să bei o cafea?', en: 'Do you want to drink a coffee?', pron: 'VRY suh BAY oh kah-FEH?', slow: 'Vrei să bei... o cafea?' },
+      { ro: 'Beau ceai seara.', en: 'I drink tea in the evening.', pron: 'BEH-ow CHAY seh-AH-ruh.', slow: 'Beau ceai... seara.' },
     ],
   },
 ];
