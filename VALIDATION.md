@@ -353,6 +353,17 @@ Expected behaviour: Natural Romanian with diacritics; uncertain strings marked f
 Current behaviour: Parts-of-speech examples, predicative verb sentences, and imperfect examples use teacher-inspired patterns but were not verified in class.
 Priority: Medium
 Status: Open
-Notes: Predicative section has 6 examples (2 per verb for `a fi` and `a deveni`). Existing VAL-027 items (`Pot repeta, vă rog?`) remain open. Review `src/content/grammarExtended.ts` and new verb examples in `grammar.ts`.
+Notes: Predicative section has 6 examples (2 per verb for `a fi` and `a deveni`). Existing VAL-027 items (`Pot repeta, vă rog?`) remain open. Review `src/content/grammarExtended.ts` and new verb examples in `grammar.ts`. Items now visible in **Mihaela Review** (Settings → Maintenance / Review).
+
+---
+
+VAL-033
+Area: Mihaela Review
+Issue: Content flagged for teacher review was only in code comments (`TODO: Review with Mihaela`) — not visible in the app during lessons.
+Expected behaviour: Reusable `review` metadata on content items; **Mihaela Review** page lists flagged items with Romanian/English, reason, status, teacher notes; Mark approved / Needs changes saved in localStorage (`rcd-review`); mobile-friendly cards; counts for pending, approved, needs changes.
+Current behaviour: No in-app review workflow.
+Priority: High
+Status: Fixed
+Notes: Access via **Settings → Maintenance / Review → Mihaela Review**. Collector at `src/content/review/collectReviewItems.ts`. Converted TODO items in `grammar.ts`, `content.ts`, `buildingCabin.ts`. Grammar Help new verbs and predicative topic flagged. Supplemental registry entries for parts-of-speech and imperfect overview bundles.
 
 ---

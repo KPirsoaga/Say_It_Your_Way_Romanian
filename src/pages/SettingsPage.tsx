@@ -4,10 +4,12 @@ import { Toggle } from '../components/Toggle';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { useSettings } from '../context/SettingsContext';
+import { useReview } from '../context/ReviewContext';
 import type { TextSize } from '../types';
 
 interface Props {
   onBack: () => void;
+  onOpenReview: () => void;
 }
 
 const textSizeOptions: { value: TextSize; label: string; sample: string }[] = [
@@ -16,8 +18,10 @@ const textSizeOptions: { value: TextSize; label: string; sample: string }[] = [
   { value: 'xlarge', label: 'Extra large', sample: 'Aa' },
 ];
 
-export function SettingsPage({ onBack }: Props) {
+export function SettingsPage({ onBack, onOpenReview }: Props) {
   const { settings, update, reset } = useSettings();
+  const { counts } = useReview();
+  const toReview = counts.pending + counts.needsChanges;
 
   return (
     <div className="min-h-screen">
@@ -97,6 +101,27 @@ export function SettingsPage({ onBack }: Props) {
               <span className="font-bold">Literal:</span> Good morning!
             </p>
           )}
+        </Card>
+
+        <Card>
+          <p className="font-bold text-ink-900 dark:text-sand-100 mb-1">Maintenance / Review</p>
+          <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
+            Check Romanian content with Mihaela during lessons. Decisions save on this device.
+          </p>
+          <Button variant="soft" size="lg" className="w-full" onClick={onOpenReview}>
+            <Icon name="BookOpen" className="h-5 w-5" />
+            Mihaela Review
+            {toReview > 0 && (
+              <span className="ml-auto rounded-full bg-coral-400 text-white text-xs font-bold px-2.5 py-0.5">
+                {toReview}
+              </span>
+            )}
+          </Button>
+          <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+            <span className="text-sun-400 font-bold">{counts.pending} pending</span>
+            <span className="text-sea-600 dark:text-sea-200 font-bold">{counts.approved} approved</span>
+            <span className="text-coral-400 font-bold">{counts.needsChanges} changes</span>
+          </div>
         </Card>
 
         <Button variant="ghost" size="md" className="w-full" onClick={onBack}>

@@ -71,7 +71,13 @@ export const buildingCabinTopic: WeeklyTopic = {
       vocabularyUsed: ['n-acoperis', 'n-scari', 'n-perete', 'n-surub', 'n-surubelnita', 'n-topor', 'v-munci', 'v-pune', 'a-mic', 'a-mare'],
       newWords: [{ ro: 'cabană', en: 'cabin' }, { ro: 'fiecare zi', en: 'every day' }],
       teacherNotes: 'Short sentences. Heavy repetition of nouns and verbs from your vocabulary list.',
-      // TODO: Review with Mihaela — full passage naturalness
+      review: {
+        needsReview: true,
+        reviewReason: 'Full passage naturalness — review with Mihaela.',
+        suggestedBy: 'app author',
+        contentArea: 'Reading passages',
+        reviewStatus: 'pending',
+      },
     },
     {
       id: 'reading-2',
@@ -83,6 +89,13 @@ export const buildingCabinTopic: WeeklyTopic = {
       vocabularyUsed: ['v-construi', 'n-extensie', 'n-fundatie', 'n-izolatie', 'n-perete', 'n-tavan', 'n-scari', 'n-fire', 'n-podea', 'v-sapa', 'v-pune', 'v-urca', 'v-cobori', 'v-munci', 'a-greu'],
       newWords: [{ ro: 'atenție', en: 'care / carefully' }],
       teacherNotes: 'More natural flow. Reuses vocabulary from Reading 1.',
+      review: {
+        needsReview: true,
+        reviewReason: 'Reading passage naturalness — confirm wording with Mihaela.',
+        suggestedBy: 'app author',
+        contentArea: 'Reading passages',
+        reviewStatus: 'pending',
+      },
     },
     {
       id: 'reading-3',
@@ -101,6 +114,13 @@ export const buildingCabinTopic: WeeklyTopic = {
         { ro: 'obosit', en: 'tired' },
       ],
       teacherNotes: 'Feels like a real day of cabin work. Good for speaking practice with Mihaela.',
+      review: {
+        needsReview: true,
+        reviewReason: 'Story passage naturalness — confirm wording with Mihaela.',
+        suggestedBy: 'app author',
+        contentArea: 'Reading passages',
+        reviewStatus: 'pending',
+      },
     },
   ],
   exercises: {

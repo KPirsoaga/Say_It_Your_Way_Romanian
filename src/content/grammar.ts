@@ -96,8 +96,20 @@ const patternGrammarTopics: GrammarTopic[] = [
       { ro: 'Sunt obosit astăzi.', en: 'I am tired today.', pron: 'SOONT oh-bee-SEET ah-STUHZ.', slow: 'Sunt obosit... astăzi.' },
       { ro: 'Vreau o cafea, vă rog.', en: 'I want a coffee, please.', pron: 'VROW oh kah-FEH, vuh ROHG.', slow: 'Vreau o cafea... vă rog.' },
       { ro: 'Am nevoie de ajutor.', en: 'I need help.', pron: 'Ahm neh-YO-eh deh ah-ZHOO-tor.', slow: 'Am nevoie... de ajutor.' },
-      // TODO: Review with native Romanian teacher — English says "Can I repeat" but Romanian "Pot repeta" means "I can repeat"; likely should be "Puteți repeta, vă rog?" (Can you repeat?)
-      { ro: 'Pot repeta, vă rog?', en: 'Can you repeat, please?', pron: 'POHT reh-peh-TAH, vuh ROHG?', slow: 'Pot repeta... vă rog?' },
+      {
+        ro: 'Pot repeta, vă rog?',
+        en: 'Can you repeat, please?',
+        pron: 'POHT reh-peh-TAH, vuh ROHG?',
+        slow: 'Pot repeta... vă rog?',
+        review: {
+          needsReview: true,
+          reviewReason:
+            'Romanian "Pot repeta" means "I can repeat" — likely should be "Puteți repeta, vă rog?" for "Can you repeat?"',
+          suggestedBy: 'app author',
+          contentArea: 'Grammar Help',
+          reviewStatus: 'pending',
+        },
+      },
     ],
   },
   {
@@ -351,6 +363,13 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Plecăm după lecție.', en: 'We leave after the lesson.', pron: 'pleh-KUHM DOO-puh lek-TSY-eh.', slow: 'Plecăm... după lecție.' },
       { ro: 'La ce oră pleci?', en: 'What time do you leave?', pron: 'Lah cheh OH-ruh PLEHTS?', slow: 'La ce oră... pleci?' },
     ],
+    review: {
+      needsReview: true,
+      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      suggestedBy: 'app author',
+      contentArea: 'Grammar Help',
+      reviewStatus: 'pending',
+    },
   },
   {
     id: 'vb-intreba',
@@ -371,6 +390,13 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Pot să te întreb ceva?', en: 'Can I ask you something?', pron: 'POHT suh teh uhn-TREHB CHEH-vah?', slow: 'Pot să te întreb... ceva?' },
       { ro: 'Întrebăm despre lecție.', en: 'We ask about the lesson.', pron: 'Uhn-treh-BUHM DEHS-preh lek-TSY-eh.', slow: 'Întrebăm... despre lecție.' },
     ],
+    review: {
+      needsReview: true,
+      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      suggestedBy: 'app author',
+      contentArea: 'Grammar Help',
+      reviewStatus: 'pending',
+    },
   },
   {
     id: 'vb-manca',
@@ -391,6 +417,13 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Mănânci acum?', en: 'Are you eating now?', pron: 'Muhn-UHN-chee ah-COON?', slow: 'Mănânci... acum?' },
       { ro: 'Mâncăm împreună.', en: 'We eat together.', pron: 'Muhn-KUHM uhm-preh-OO-nuh.', slow: 'Mâncăm... împreună.' },
     ],
+    review: {
+      needsReview: true,
+      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      suggestedBy: 'app author',
+      contentArea: 'Grammar Help',
+      reviewStatus: 'pending',
+    },
   },
   {
     id: 'vb-bea',
@@ -411,5 +444,12 @@ export const grammarVerbs: GrammarVerb[] = [
       { ro: 'Vrei să bei o cafea?', en: 'Do you want to drink a coffee?', pron: 'VRY suh BAY oh kah-FEH?', slow: 'Vrei să bei... o cafea?' },
       { ro: 'Beau ceai seara.', en: 'I drink tea in the evening.', pron: 'BEH-ow CHAY seh-AH-ruh.', slow: 'Beau ceai... seara.' },
     ],
+    review: {
+      needsReview: true,
+      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      suggestedBy: 'app author',
+      contentArea: 'Grammar Help',
+      reviewStatus: 'pending',
+    },
   },
 ];

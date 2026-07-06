@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { SettingsProvider } from './context/SettingsContext';
 import { ProgressProvider } from './context/ProgressContext';
+import { ReviewProvider } from './context/ReviewContext';
 import { SpeechProvider } from './context/SpeechContext';
 import { BottomNav } from './components/BottomNav';
 import { Icon } from './components/Icon';
@@ -25,6 +26,7 @@ import { WeeklyTopicDetailPage } from './pages/WeeklyTopicDetailPage';
 import { WeeklyVocabPage } from './pages/WeeklyVocabPage';
 import { WeeklyReadingPage } from './pages/WeeklyReadingPage';
 import { WeeklyExercisePage } from './pages/WeeklyExercisePage';
+import { MihaelaReviewPage } from './pages/MihaelaReviewPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
 import { getWeeklyTopic } from './content/weeklyTopics';
@@ -67,7 +69,8 @@ export type PageId =
   | 'weekly-topic'
   | 'weekly-vocab'
   | 'weekly-reading'
-  | 'weekly-exercise';
+  | 'weekly-exercise'
+  | 'mihaela-review';
 
 function Shell() {
   const [page, setPage] = useState<PageId>('home');
@@ -118,7 +121,9 @@ function Shell() {
         ) : null}
         {page === 'favourites' && <FavouritesPage />}
         {page === 'progress' && <ProgressPage go={go} />}
-        {page === 'settings' && <SettingsPage onBack={() => go('home')} />}
+        {page === 'settings' && (
+          <SettingsPage onBack={() => go('home')} onOpenReview={() => go('mihaela-review')} />
+        )}
         {page === 'builder' && <PhraseBuilderPage go={go} />}
         {page === 'reallife' && <RealLifePage onBack={() => go('home')} initialCategoryId={arg} />}
         {page === 'survival' && <SurvivalPage onBack={() => go('home')} />}
@@ -234,6 +239,7 @@ function Shell() {
             backIcon="BookOpen"
           />
         ) : null}
+        {page === 'mihaela-review' && <MihaelaReviewPage onBack={() => go('settings')} />}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}
@@ -245,9 +251,11 @@ export default function App() {
   return (
     <SettingsProvider>
       <ProgressProvider>
-        <SpeechProvider>
-          <Shell />
-        </SpeechProvider>
+        <ReviewProvider>
+          <SpeechProvider>
+            <Shell />
+          </SpeechProvider>
+        </ReviewProvider>
       </ProgressProvider>
     </SettingsProvider>
   );
