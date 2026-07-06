@@ -71,8 +71,11 @@ html.dark body {
     min-width: 0;
   }
   .tile-label {
-    @apply min-w-0 break-words leading-snug;
+    @apply min-w-0 w-full break-words leading-snug;
     overflow-wrap: anywhere;
+  }
+  .home-tile {
+    @apply !p-3 overflow-hidden flex flex-col gap-2 min-w-0;
   }
 }
 
