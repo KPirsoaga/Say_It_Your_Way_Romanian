@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Icon } from './Icon';
+import { shuffleArray } from '../utils/shuffle';
 import type { WeeklySortCategory, WeeklySortItem } from '../types';
 
 interface Props {
@@ -13,7 +14,7 @@ export function WeeklyCategorySort({ categories, items, onComplete }: Props) {
   const [sorted, setSorted] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(categories.map((c) => [c.id, []]))
   );
-  const [remaining, setRemaining] = useState(() => [...items]);
+  const [remaining, setRemaining] = useState(() => shuffleArray(items));
   const [done, setDone] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
 

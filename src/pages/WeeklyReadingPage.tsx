@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
@@ -14,6 +14,13 @@ interface Props {
   onBack: () => void;
 }
 
+function splitSentences(text: string): string[] {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
   const topic = getWeeklyTopic(topicId);
   const reading = topic?.readings.find((r) => r.id === readingId);
@@ -22,6 +29,8 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
   const { getNote, setNote } = useWeeklyTranslationNotes();
   const [revealed, setRevealed] = useState(false);
   const [note, setNoteLocal] = useState(() => getNote(topicId, readingId));
+
+  const sentences = useMemo(() => (reading ? splitSentences(reading.ro) : []), [reading]);
 
   if (!topic || !reading) return null;
 
@@ -66,8 +75,37 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
             disabled={!supported}
           >
             <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
-            {playing ? 'Playing…' : 'Play passage'}
+            {playing ? 'Playing…' : 'Play full passage'}
           </Button>
+        </Card>
+
+        <Card>
+          <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300 mb-2">
+            Play sentence by sentence
+          </p>
+          <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
+            Shorter clips sound more natural in the browser voice.
+          </p>
+          <div className="space-y-2">
+            {sentences.map((sentence, i) => {
+              const sid = `${playId}-s${i}`;
+              const sentencePlaying = currentId === sid;
+              return (
+                <button
+                  key={sid}
+                  type="button"
+                  onClick={() => (sentencePlaying ? stop() : speak(sentence, sid))}
+                  disabled={!supported}
+                  className="w-full text-left rounded-2xl p-3 ring-2 ring-sand-200 dark:ring-white/10 hover:ring-sea-400 transition flex items-start gap-3"
+                >
+                  <Icon name={sentencePlaying ? 'Pause' : 'Volume2'} className="h-5 w-5 text-sea-600 dark:text-sea-200 shrink-0 mt-0.5" />
+                  <span className="tile-label text-base font-bold text-ink-900 dark:text-sand-100" lang="ro">
+                    {sentence}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </Card>
 
         <Card>
@@ -103,11 +141,11 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
                 <p className="font-bold text-ink-900 dark:text-sand-100 mb-2">Vocabulary used</p>
                 <ul className="space-y-2">
                   {vocabItems.map((v) => (
-                    <li key={v!.id} className="flex justify-between gap-2 text-base">
-                      <span className="font-bold text-ink-900 dark:text-sand-100" lang="ro">
+                    <li key={v!.id} className="flex justify-between gap-2 text-base min-w-0">
+                      <span className="font-bold text-ink-900 dark:text-sand-100 tile-label" lang="ro">
                         {v!.ro}
                       </span>
-                      <span className="text-ink-600 dark:text-ink-300 text-right">{v!.en}</span>
+                      <span className="text-ink-600 dark:text-ink-300 text-right tile-label">{v!.en}</span>
                     </li>
                   ))}
                 </ul>
@@ -119,11 +157,11 @@ export function WeeklyReadingPage({ topicId, readingId, onBack }: Props) {
                 <p className="font-bold text-sun-600 dark:text-sun-300 mb-2">New words</p>
                 <ul className="space-y-2">
                   {reading.newWords.map((w) => (
-                    <li key={w.ro} className="flex justify-between gap-2">
-                      <span className="font-bold" lang="ro">
+                    <li key={w.ro} className="flex justify-between gap-2 min-w-0">
+                      <span className="font-bold tile-label" lang="ro">
                         {w.ro}
                       </span>
-                      <span className="text-ink-600 dark:text-ink-300">{w.en}</span>
+                      <span className="text-ink-600 dark:text-ink-300 tile-label text-right">{w.en}</span>
                     </li>
                   ))}
                 </ul>

@@ -34,9 +34,9 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
             <Icon name={topic.icon} className={`h-6 w-6 ${c.text}`} />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300">This week&apos;s topic</p>
+            <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300">This week&apos;s lesson</p>
             <p className="text-lg font-bold text-ink-900 dark:text-sand-100 leading-snug mt-1">
-              Work through each section at your own pace.
+              Vocabulary, reading, and practice — at your own pace.
             </p>
           </div>
         </div>

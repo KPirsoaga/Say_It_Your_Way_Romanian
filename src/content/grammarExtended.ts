@@ -36,7 +36,7 @@ export const extendedGrammarTopics: GrammarTopic[] = [
     simplerRo: 'cabană / casă / lecție',
     simplerEn: 'cabin / house / lesson',
     examples: [
-      { ro: 'Cabană este mică.', en: 'The cabin is small.', pron: 'kah-BAH-nuh YES-teh MEE-kuh.', slow: 'Cabană... este mică.' },
+      { ro: 'Cabana este mică.', en: 'The cabin is small.', pron: 'kah-BAH-nuh YES-teh MEE-kuh.', slow: 'Cabana este... mică.' },
       { ro: 'Casa are o grădină.', en: 'The house has a garden.', pron: 'KAH-suh AH-reh oh gruh-DEE-nuh.', slow: 'Casa are... o grădină.' },
       { ro: 'Lecția este astăzi.', en: 'The lesson is today.', pron: 'Lek-TSY-ah YES-teh ah-STUHZ.', slow: 'Lecția este... astăzi.' },
     ],

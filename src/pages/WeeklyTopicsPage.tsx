@@ -18,12 +18,12 @@ export function WeeklyTopicsPage({ go, onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Weekly Topics" subtitle="Reinforce this week's lesson with Mihaela" onBack={onBack} />
+      <PageHeader title="Weekly Topics" subtitle="Lesson support with Mihaela — vocabulary, reading, practice" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <div className="rounded-3xl bg-gradient-to-br from-sun-300 to-sun-400 text-ink-900 p-5 shadow-soft">
           <div className="flex items-center gap-2 mb-1">
             <Icon name="BookOpen" className="h-5 w-5" />
-            <p className="text-sm uppercase tracking-wide font-bold">Your weekly journey</p>
+            <p className="text-sm uppercase tracking-wide font-bold">This week&apos;s topic</p>
           </div>
           <h2 className="text-xl font-bold leading-tight">
             Vocabulary → Reading → Understanding → Practice

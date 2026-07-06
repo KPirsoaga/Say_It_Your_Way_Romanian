@@ -367,3 +367,47 @@ Status: Fixed
 Notes: Access via **Settings → Maintenance / Review → Mihaela Review**. Collector at `src/content/review/collectReviewItems.ts`. Converted TODO items in `grammar.ts`, `content.ts`, `buildingCabin.ts`. Grammar Help new verbs and predicative topic flagged. Supplemental registry entries for parts-of-speech and imperfect overview bundles.
 
 ---
+
+VAL-034
+Area: Home / Navigation
+Issue: Home page had repetitive sections and Weekly Topics felt secondary; hero duplicated Mini Conversations.
+Expected behaviour: Clear order: hero → this week’s lesson (Building a Cabin with progress) → need today → ways to practise → today’s phrase → scenarios.
+Current behaviour: Weekly Topics was a small card; conversations appeared in hero and in Ways to practise; No Shame banner repeated.
+Priority: Medium
+Status: Fixed
+Notes: Home links directly to `weekly-topic/building-cabin`; “View all weekly topics” secondary link. Removed duplicate hero conversation button and mid-page No Shame banner.
+
+---
+
+VAL-035
+Area: Exercises
+Issue: Multiple-choice correct answer often appeared as the top option (content order); match/sort exercises were predictable.
+Expected behaviour: Shuffled MC options in Weekly Topics and Listen & Choose; shuffled match columns and sort word pool; correctness unchanged.
+Current behaviour: Options rendered in source array order.
+Priority: High
+Status: Fixed
+Notes: `src/utils/shuffle.ts` with `shuffledMcOptions`; applied in `WeeklyMcExercise`, `ListenChoose`, `WeeklyTapMatch`, `WeeklyCategorySort`.
+
+---
+
+VAL-036
+Area: Content / Romanian — Building a Cabin
+Issue: Reading passages and phrases sounded unnatural (e.g. greblă + gard, “Peretele este mare”, insulation “pe perete”); long TTS passages sounded strange.
+Expected behaviour: More natural Romanian where confident; uncertain strings flagged for Mihaela Review; sentence-by-sentence audio on reading pages.
+Current behaviour: Passages updated; readings and changed phrase still flagged in Mihaela Review.
+Priority: High
+Status: Fixed
+Notes: Reading 1–3 Romanian/English revised. Phrase “Lucrez la acoperiș” replaces “Ridic acoperișul”. `v-lovi` / `v-gati` flagged off-topic. Weekly reading page adds sentence-by-sentence play.
+
+---
+
+VAL-037
+Area: Phrase Builder / Audio
+Issue: Phrase Builder chunk feedback could mis-highlight; pronunciation hints could be confused with TTS source.
+Expected behaviour: Chunk feedback compares Romanian text; TTS always uses `*.ro`; pron hints labelled as not read aloud.
+Current behaviour: Visual check used index comparison only; pron labels generic.
+Priority: Low
+Status: Fixed
+Notes: `PhraseBuilder` compares chunk `.ro` strings. `PhraseCard` and `ListenChoose` label pron as guide only.
+
+---
