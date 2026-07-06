@@ -27,6 +27,8 @@ export interface PhraseLine {
   pron?: string;
   /** A slower, simplified Romanian version for the "show slower version" button */
   slow?: string;
+  /** Optional flag for Mihaela Review */
+  review?: ContentReviewMeta;
 }
 
 export interface Scenario {
@@ -81,6 +83,7 @@ export interface ListenChooseItem {
   correct: string;
   options: string[];
   pron?: string;
+  review?: ContentReviewMeta;
 }
 
 export interface PhraseChunk {
@@ -97,6 +100,7 @@ export interface PhraseBuilderItem {
   chunks: PhraseChunk[];
   fullRo: string;
   fullEn: string;
+  review?: ContentReviewMeta;
 }
 
 export interface MiniDialogue {
@@ -168,6 +172,7 @@ export interface GrammarExample {
   en: string;
   pron?: string;
   slow?: string;
+  review?: ContentReviewMeta;
 }
 
 export interface GrammarTopic {
@@ -195,6 +200,7 @@ export interface GrammarTopic {
   examples: GrammarExample[];
   /** Optional conjugation table as stacked mobile cards */
   conjugation?: VerbForm[];
+  review?: ContentReviewMeta;
 }
 
 export interface VerbForm {
@@ -214,6 +220,7 @@ export interface GrammarVerb {
   /** Optional imperfect tense forms */
   imperfect?: VerbForm[];
   examples: GrammarExample[];
+  review?: ContentReviewMeta;
 }
 
 // ─── Weekly Topics learning engine ───────────────────────────────────────────
@@ -229,6 +236,7 @@ export interface WeeklyVocabItem {
   sortCategory?: string;
   pron?: string;
   teacherNote?: string;
+  review?: ContentReviewMeta;
 }
 
 export interface WeeklyNewWord {
@@ -245,6 +253,7 @@ export interface WeeklyReading {
   vocabularyUsed: string[];
   newWords: WeeklyNewWord[];
   teacherNotes?: string;
+  review?: ContentReviewMeta;
 }
 
 export interface WeeklyMcQuestion {
@@ -319,3 +328,52 @@ export const EMPTY_WEEKLY_TOPIC_PROGRESS: WeeklyTopicProgress = {
 };
 
 export type WeeklyExerciseType = 'ro-en' | 'en-ro' | 'match' | 'sort';
+
+// ─── Mihaela Review ──────────────────────────────────────────────────────────
+
+export type ReviewContentArea =
+  | 'Grammar Help'
+  | 'Weekly Topics'
+  | 'Reading passages'
+  | 'Vocabulary'
+  | 'Mini Conversations'
+  | 'Survival Romanian'
+  | 'Real Life Mode'
+  | 'Phrase Builder'
+  | 'Listen & Choose'
+  | 'Scenarios'
+  | 'Daily Practice';
+
+export type ReviewStatus = 'pending' | 'approved' | 'needs-changes';
+
+/** Optional review metadata on any content item */
+export interface ContentReviewMeta {
+  needsReview?: true;
+  reviewReason?: string;
+  suggestedBy?: string;
+  contentArea?: ReviewContentArea;
+  reviewStatus?: ReviewStatus;
+  teacherNotes?: string;
+}
+
+/** Flattened item shown on the Mihaela Review page */
+export interface ReviewCatalogItem {
+  id: string;
+  contentArea: ReviewContentArea;
+  ro: string;
+  en: string;
+  reviewReason: string;
+  suggestedBy?: string;
+  teacherNotes?: string;
+  contextLabel?: string;
+}
+
+export interface ReviewDecision {
+  status: ReviewStatus;
+  teacherNotes?: string;
+  updatedAt: string;
+}
+
+export interface ReviewState {
+  decisions: Record<string, ReviewDecision>;
+}

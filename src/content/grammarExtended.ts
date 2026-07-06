@@ -190,5 +190,12 @@ export const extendedGrammarTopics: GrammarTopic[] = [
       { ro: 'Este frumos afară.', en: 'It is beautiful outside. (a fi)', pron: 'YES-teh froo-MOHS ah-FAH-ruh.', slow: 'Este frumos... afară.' },
       { ro: 'Devine din ce în ce mai ușor.', en: 'It is becoming easier and easier. (a deveni)', pron: 'deh-VEE-neh deen cheh uhn CHEH mai OO-shor.', slow: 'Devine... din ce în ce mai ușor.' },
     ],
+    review: {
+      needsReview: true,
+      reviewReason: 'Predicative / linking verb examples — confirm structure and natural Romanian with Mihaela.',
+      suggestedBy: 'app author',
+      contentArea: 'Grammar Help',
+      reviewStatus: 'pending',
+    },
   },
 ];
