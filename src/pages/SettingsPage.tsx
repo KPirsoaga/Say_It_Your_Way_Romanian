@@ -10,6 +10,7 @@ import type { TextSize } from '../types';
 interface Props {
   onBack: () => void;
   onOpenReview: () => void;
+  onOpenShare: () => void;
 }
 
 const textSizeOptions: { value: TextSize; label: string; sample: string }[] = [
@@ -18,7 +19,7 @@ const textSizeOptions: { value: TextSize; label: string; sample: string }[] = [
   { value: 'xlarge', label: 'Extra large', sample: 'Aa' },
 ];
 
-export function SettingsPage({ onBack, onOpenReview }: Props) {
+export function SettingsPage({ onBack, onOpenReview, onOpenShare }: Props) {
   const { settings, update, reset } = useSettings();
   const { counts } = useReview();
   const toReview = counts.pending + counts.needsChanges;
@@ -101,6 +102,17 @@ export function SettingsPage({ onBack, onOpenReview }: Props) {
               <span className="font-bold">Literal:</span> Good morning!
             </p>
           )}
+        </Card>
+
+        <Card>
+          <p className="font-bold text-ink-900 dark:text-sand-100 mb-1">Share with Teacher</p>
+          <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
+            Offline QR codes to share review items or progress with Mihaela during lessons.
+          </p>
+          <Button variant="soft" size="lg" className="w-full" onClick={onOpenShare}>
+            <Icon name="Share2" className="h-5 w-5" />
+            Share with Teacher
+          </Button>
         </Card>
 
         <Card>

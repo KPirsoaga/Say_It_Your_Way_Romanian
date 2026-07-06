@@ -51,6 +51,9 @@ import {
   GraduationCap,
   Building2,
   Circle,
+  QrCode,
+  ScanLine,
+  Share2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -107,6 +110,9 @@ const map: Record<string, LucideIcon> = {
   GraduationCap,
   Building2,
   Circle,
+  QrCode,
+  ScanLine,
+  Share2,
   Tortoise: Turtle,
 };
 
