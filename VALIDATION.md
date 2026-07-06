@@ -521,3 +521,14 @@ Status: Fixed
 Notes: `src/services/qr/*` package codec; `qrcode` + `html5-qrcode`; pages under `src/pages/share/`; teacher session in `rcd-teacher-review` localStorage.
 
 ---
+
+VAL-048
+Area: Share with Teacher / QR scanner
+Issue: Camera failed to open when tapping Scan QR code.
+Expected behaviour: Scanner region visible before camera starts; back-camera fallback; clear error if HTTPS or permissions block access.
+Current behaviour: `html5-qrcode` started while the preview div was `display:none`, so video never attached.
+Priority: High
+Status: Fixed
+Notes: Defer `start()` until after region is shown; enumerate cameras with facingMode fallback; `qr-scanner-region` video CSS.
+
+---

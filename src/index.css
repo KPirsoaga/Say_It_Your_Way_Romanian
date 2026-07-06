@@ -92,3 +92,14 @@ html.dark body {
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* QR scanner — html5-qrcode injects video into the region div */
+.qr-scanner-region video {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+}
+.qr-scanner-region img {
+  display: none;
+}
