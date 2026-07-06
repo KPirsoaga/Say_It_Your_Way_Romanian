@@ -4,6 +4,8 @@ import { Icon } from './Icon';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
 import { shuffleArray } from '../utils/shuffle';
+import { FlagForMihaela } from './FlagForMihaela';
+import { userFlagId } from '../content/review/reviewIds';
 import type { PhraseBuilderItem } from '../types';
 
 interface Props {
@@ -145,6 +147,15 @@ export function PhraseBuilder({ item, onDone }: Props) {
           </div>
         </div>
       )}
+
+      <FlagForMihaela
+        className="mt-4"
+        id={userFlagId(`builder:${item.id}`)}
+        ro={item.fullRo}
+        en={item.fullEn}
+        contentArea="Phrase Builder"
+        contextLabel="Phrase Builder sentence"
+      />
     </div>
   );
 }

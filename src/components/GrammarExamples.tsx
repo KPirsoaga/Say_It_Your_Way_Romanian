@@ -3,15 +3,19 @@ import { Button } from './Button';
 import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useSpeech } from '../hooks/useSpeech';
-import type { GrammarExample } from '../types';
+import { FlagForMihaela } from './FlagForMihaela';
+import { userFlagId } from '../content/review/reviewIds';
+import type { GrammarExample, ReviewContentArea } from '../types';
 
 interface Props {
   examples: GrammarExample[];
   idPrefix: string;
+  contentArea?: ReviewContentArea;
+  contextLabel?: string;
   onPractise?: () => void;
 }
 
-export function GrammarExamples({ examples, idPrefix, onPractise }: Props) {
+export function GrammarExamples({ examples, idPrefix, contentArea = 'Grammar Help', contextLabel, onPractise }: Props) {
   const { settings } = useSettings();
   const { supported, speak, stop, currentId } = useSpeech();
   const [simpler, setSimpler] = useState(false);
@@ -55,6 +59,14 @@ export function GrammarExamples({ examples, idPrefix, onPractise }: Props) {
                 <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                 {playing ? 'Playing…' : 'Play'}
               </Button>
+              <FlagForMihaela
+                className="mt-2"
+                id={userFlagId(`${idPrefix}-ex-${i}`)}
+                ro={ex.ro}
+                en={ex.en}
+                contentArea={contentArea}
+                contextLabel={contextLabel}
+              />
             </div>
           );
         })}

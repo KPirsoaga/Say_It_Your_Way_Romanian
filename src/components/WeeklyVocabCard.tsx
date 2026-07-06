@@ -3,6 +3,8 @@ import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
+import { FlagForMihaela } from './FlagForMihaela';
+import { userFlagId } from '../content/review/reviewIds';
 import type { WeeklyVocabItem } from '../types';
 
 const categoryLabels: Record<string, string> = {
@@ -66,6 +68,14 @@ export function WeeklyVocabCard({ item, topicId }: Props) {
         <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
         {playing ? 'Playing…' : 'Play'}
       </Button>
+      <FlagForMihaela
+        className="mt-2"
+        id={userFlagId(`weekly:${topicId}:${item.id}`)}
+        ro={item.ro}
+        en={item.en}
+        contentArea="Weekly Topics"
+        contextLabel={`${topicId} · vocabulary`}
+      />
     </div>
   );
 }

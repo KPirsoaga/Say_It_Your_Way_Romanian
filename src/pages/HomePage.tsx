@@ -7,6 +7,8 @@ import { scenarioGroups } from '../content/scenarioGroups';
 import { todayStr } from '../context/ProgressContext';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
 import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
+import { FlagForMihaela } from '../components/FlagForMihaela';
+import { userFlagId } from '../content/review/reviewIds';
 import type { PageId } from '../App';
 import type { WeeklyTopicProgress } from '../types';
 
@@ -44,6 +46,20 @@ export function HomePage({ go }: Props) {
         <p className="text-sm uppercase tracking-wide text-sea-100/90 font-bold">Bun venit!</p>
         <h1 className="text-3xl font-bold mt-1 leading-tight">What should you do next?</h1>
         <p className="mt-2 text-sea-50/90 text-base">Start with this week&apos;s lesson — a few calm minutes, no pressure.</p>
+      </section>
+
+      {/* Progress snapshot — calm, right after welcome */}
+      <section>
+        <SectionTitle title="Progress" icon="BarChart3" />
+        <div className="grid grid-cols-3 gap-3 tile-grid">
+          <StatCard icon="Flame" value={progress.practisedDays.length} label="Days" color="text-coral-400" onClick={() => go('progress')} />
+          <StatCard icon="HeartFilled" value={progress.favourites.length} label="Saved" color="text-rose-400" onClick={() => go('favourites')} />
+          <StatCard icon="Trophy" value={progress.completedScenarios.length} label="Scenarios" color="text-sun-400" onClick={() => go('progress')} />
+        </div>
+        <Button variant="soft" size="md" className="w-full mt-3" onClick={() => go('progress')}>
+          View full progress
+          <Icon name="ChevronRight" className="h-5 w-5" />
+        </Button>
       </section>
 
       {/* Primary path: this week's lesson */}
@@ -109,6 +125,14 @@ export function HomePage({ go }: Props) {
             {lessonPhrase.ro}
           </p>
           <p className="mt-2 text-ink-700 dark:text-ink-300">{lessonPhrase.en}</p>
+          <FlagForMihaela
+            className="mt-3"
+            id={userFlagId(`home-phrase:${today}`)}
+            ro={lessonPhrase.ro}
+            en={lessonPhrase.en}
+            contentArea="Weekly Topics"
+            contextLabel={cabinTopic.title}
+          />
         </Card>
       </section>
 
@@ -165,20 +189,6 @@ export function HomePage({ go }: Props) {
         </div>
         <Button variant="ghost" size="md" className="w-full mt-3" onClick={() => go('scenarios')}>
           See all scenarios
-          <Icon name="ChevronRight" className="h-5 w-5" />
-        </Button>
-      </section>
-
-      {/* Progress snapshot */}
-      <section>
-        <SectionTitle title="Progress" icon="BarChart3" />
-        <div className="grid grid-cols-3 gap-3 tile-grid">
-          <StatCard icon="Flame" value={progress.practisedDays.length} label="Days" color="text-coral-400" onClick={() => go('progress')} />
-          <StatCard icon="HeartFilled" value={progress.favourites.length} label="Saved" color="text-rose-400" onClick={() => go('favourites')} />
-          <StatCard icon="Trophy" value={progress.completedScenarios.length} label="Scenarios" color="text-sun-400" onClick={() => go('progress')} />
-        </div>
-        <Button variant="soft" size="md" className="w-full mt-3" onClick={() => go('progress')}>
-          View full progress
           <Icon name="ChevronRight" className="h-5 w-5" />
         </Button>
       </section>
