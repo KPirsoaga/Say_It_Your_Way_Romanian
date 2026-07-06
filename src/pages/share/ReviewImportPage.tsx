@@ -5,6 +5,7 @@ import { Button } from '../../components/Button';
 import { Icon } from '../../components/Icon';
 import { QrScanner } from '../../components/qr/QrScanner';
 import { useQrCollector } from '../../hooks/useQrCollector';
+import { useScannerSafeBack } from '../../hooks/useScannerSafeBack';
 import { useReview } from '../../context/ReviewContext';
 import { parseReviewResponsePayload } from '../../services/qr/reviewPackage';
 
@@ -16,6 +17,7 @@ interface Props {
 export function ReviewImportPage({ onBack, onDone }: Props) {
   const { applyReviewResponse } = useReview();
   const [applied, setApplied] = useState(0);
+  const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
 
   const { handleScan, progress, error, success, reset } = useQrCollector('review-response', (items) => {
     const parsed = parseReviewResponsePayload(items);
@@ -25,7 +27,7 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Return review" subtitle="Scan Mihaela's response QR" onBack={onBack} />
+      <PageHeader title="Return review" subtitle="Scan Mihaela's response QR" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!success ? (
           <>
@@ -34,7 +36,7 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
                 After Mihaela reviews, scan her response QR here. Your review list updates automatically — no duplicates.
               </p>
             </Card>
-            <QrScanner onScan={handleScan} />
+            <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
             {progress && (
               <p className="text-sm font-bold text-sea-600 dark:text-sea-200 text-center">
                 Scanned {progress.received} of {progress.total} QR codes
