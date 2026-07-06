@@ -52,7 +52,7 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
           <p
-            className={`font-bold text-ink-900 dark:text-sand-100 ${hero ? 'text-2xl leading-snug' : 'text-xl leading-snug'}`}
+            className={`tile-label font-bold text-ink-900 dark:text-sand-100 ${hero ? 'text-2xl leading-snug' : 'text-xl leading-snug'}`}
             lang="ro"
           >
             {phrase.ro}
@@ -97,8 +97,8 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
                   disabled={!supported}
                   className="btn-md bg-white text-ink-900 ring-2 ring-sun-200 hover:ring-sun-300 dark:bg-ink-900 dark:text-sand-100 dark:ring-sun-300/30"
                 >
-                  <Icon name={playing ? 'Pause' : 'Volume2'} className="h-4 w-4" />
-                  {chunk}
+                  <Icon name={playing ? 'Pause' : 'Volume2'} className="h-4 w-4 shrink-0" />
+                  <span className="tile-label">{chunk}</span>
                 </button>
               );
             })}

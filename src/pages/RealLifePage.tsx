@@ -35,7 +35,7 @@ export function RealLifePage({ onBack, initialCategoryId }: Props) {
                   <Icon name={cat.icon} className={`h-7 w-7 ${c.text}`} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-bold text-ink-900 dark:text-sand-100 text-lg leading-tight">{cat.title}</p>
+                  <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-lg leading-tight">{cat.title}</p>
                   <p className="text-sm text-ink-500 dark:text-ink-300 mt-0.5 line-clamp-2">{cat.when}</p>
                 </div>
                 <Icon

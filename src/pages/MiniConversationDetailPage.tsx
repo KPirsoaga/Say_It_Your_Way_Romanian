@@ -203,8 +203,8 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                                 disabled={!supported}
                                 className="btn-md bg-white text-ink-900 ring-2 ring-sun-200 hover:ring-sun-300 dark:bg-ink-900 dark:text-sand-100 dark:ring-sun-300/30"
                               >
-                                <Icon name={playing ? 'Pause' : 'Volume2'} className="h-4 w-4" />
-                                {chunk}
+                                <Icon name={playing ? 'Pause' : 'Volume2'} className="h-4 w-4 shrink-0" />
+                                <span className="tile-label">{chunk}</span>
                               </button>
                             );
                           })}

@@ -33,7 +33,7 @@ export function NoShameBanner({ compact = false }: { compact?: boolean }) {
       <div className="h-10 w-10 rounded-2xl bg-white/70 dark:bg-white/10 flex items-center justify-center shrink-0">
         <Icon name={msg.icon} className="h-5 w-5 text-rose-400" />
       </div>
-      <p className={`text-ink-700 dark:text-sand-100 font-bold leading-snug ${compact ? 'text-base' : 'text-lg'}`}>
+      <p className={`tile-label text-ink-700 dark:text-sand-100 font-bold leading-snug min-w-0 flex-1 ${compact ? 'text-base' : 'text-lg'}`}>
         {msg.text}
       </p>
     </div>

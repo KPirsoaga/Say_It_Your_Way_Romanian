@@ -66,7 +66,7 @@ export function HomePage({ go }: Props) {
       </section>
 
       {/* Quick stats */}
-      <section className="grid grid-cols-3 gap-3">
+      <section className="grid grid-cols-3 gap-3 tile-grid">
         <StatCard icon="Flame" value={daysCount} label="Days" color="text-coral-400" onClick={() => go('progress')} />
         <StatCard icon="HeartFilled" value={favCount} label="Favourites" color="text-rose-400" onClick={() => go('favourites')} />
         <StatCard icon="Trophy" value={completedCount} label="Done" color="text-sun-400" onClick={() => go('progress')} />
@@ -79,13 +79,13 @@ export function HomePage({ go }: Props) {
       <section>
         <SectionTitle title="I actually need this today" icon="LifeBuoy" />
         <p className="text-ink-500 dark:text-ink-300 text-sm mb-3">Tap what’s happening right now. Get the phrases you need, fast.</p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 tile-grid">
           {needNowButtons.map((b) => (
-            <Card key={b.label} onClick={() => go('reallife', b.categoryId)} className="flex items-center gap-3 p-4">
-              <div className={`h-11 w-11 rounded-2xl ${b.color} flex items-center justify-center shrink-0`}>
-                <Icon name={b.icon} className="h-6 w-6" />
+            <Card key={b.label} onClick={() => go('reallife', b.categoryId)} className="flex flex-col items-start gap-2 p-3 min-h-[5.5rem]">
+              <div className={`h-10 w-10 rounded-2xl ${b.color} flex items-center justify-center shrink-0`}>
+                <Icon name={b.icon} className="h-5 w-5" />
               </div>
-              <span className="font-bold text-ink-900 dark:text-sand-100 text-base leading-tight">{b.label}</span>
+              <span className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">{b.label}</span>
             </Card>
           ))}
         </div>
@@ -94,48 +94,48 @@ export function HomePage({ go }: Props) {
       {/* Quick activities */}
       <section>
         <SectionTitle title="Ways to practise" icon="LayoutGrid" />
-        <div className="grid grid-cols-2 gap-3">
-          <Card onClick={() => go('survival')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-coral-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-coral-50 dark:bg-coral-400/20 flex items-center justify-center">
+        <div className="grid grid-cols-2 gap-3 tile-grid">
+          <Card onClick={() => go('survival')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-coral-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-coral-50 dark:bg-coral-400/20 flex items-center justify-center shrink-0">
               <Icon name="LifeBuoy" className="h-6 w-6 text-coral-400" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Survival Romanian</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">The most useful phrases, first</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Survival Romanian</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">The most useful phrases, first</p>
           </Card>
-          <Card onClick={() => go('reallife')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center">
+          <Card onClick={() => go('reallife')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center shrink-0">
               <Icon name="HandHeart" className="h-6 w-6 text-rose-400" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Real Life Mode</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">Phrases for urgent situations</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Real Life Mode</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Phrases for urgent situations</p>
           </Card>
-          <Card onClick={() => go('builder')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center">
+          <Card onClick={() => go('builder')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center shrink-0">
               <Icon name="Sparkles" className="h-6 w-6 text-sun-400" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Phrase Builder</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">Build sentences by tapping</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Phrase Builder</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Build sentences by tapping</p>
           </Card>
-          <Card onClick={() => go('conversations')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-sea-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-sea-50 dark:bg-sea-600/20 flex items-center justify-center">
+          <Card onClick={() => go('conversations')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-sea-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-sea-50 dark:bg-sea-600/20 flex items-center justify-center shrink-0">
               <Icon name="MessagesSquare" className="h-6 w-6 text-sea-600" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Mini Conversations</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">Real-life guided exchanges</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Mini Conversations</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Real-life guided exchanges</p>
           </Card>
-          <Card onClick={() => go('grammar')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center">
+          <Card onClick={() => go('grammar')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center shrink-0">
               <Icon name="BookOpen" className="h-6 w-6 text-sun-400" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">Grammar Help</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">Simple patterns & verbs</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">Grammar Help</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Simple patterns & verbs</p>
           </Card>
-          <Card onClick={() => go('noshame')} className="flex flex-col gap-2 p-4 bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
-            <div className="h-12 w-12 rounded-2xl bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center">
+          <Card onClick={() => go('noshame')} className="flex flex-col gap-2 p-3 bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
+            <div className="h-11 w-11 rounded-2xl bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center shrink-0">
               <Icon name="Heart" className="h-6 w-6 text-rose-400" />
             </div>
-            <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">No Shame Mode</p>
-            <p className="text-xs text-ink-500 dark:text-ink-300">Gentle reminders when it’s hard</p>
+            <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">No Shame Mode</p>
+            <p className="tile-label text-xs text-ink-500 dark:text-ink-300">Gentle reminders when it’s hard</p>
           </Card>
         </div>
       </section>
@@ -158,22 +158,22 @@ export function HomePage({ go }: Props) {
       {/* Scenarios quick grid */}
       <section>
         <SectionTitle title="Pick a scenario" icon="LayoutGrid" />
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 tile-grid">
           {scenarios.map((s) => {
             const c = colorMap[s.color];
             const done = progress.completedScenarios.includes(s.id);
             return (
-              <Card key={s.id} onClick={() => go('scenario', s.id)} className="flex flex-col gap-3 p-4">
-                <div className={`h-12 w-12 rounded-2xl ${c.bgSoft} flex items-center justify-center`}>
+              <Card key={s.id} onClick={() => go('scenario', s.id)} className="flex flex-col gap-2 p-3">
+                <div className={`h-11 w-11 rounded-2xl ${c.bgSoft} flex items-center justify-center shrink-0`}>
                   <Icon name={s.icon} className={`h-6 w-6 ${c.text}`} />
                 </div>
-                <div>
-                  <p className="font-bold text-ink-900 dark:text-sand-100 leading-tight">{s.title}</p>
-                  <p className="text-xs text-ink-500 dark:text-ink-300 mt-0.5">{s.lines.length} phrases</p>
+                <div className="min-w-0 w-full">
+                  <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">{s.title}</p>
+                  <p className="tile-label text-xs text-ink-500 dark:text-ink-300 mt-0.5">{s.lines.length} phrases</p>
                 </div>
                 {done && (
                   <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 text-xs font-bold">
-                    <Icon name="Check" className="h-4 w-4" /> Practised
+                    <Icon name="Check" className="h-4 w-4 shrink-0" /> Practised
                   </span>
                 )}
               </Card>
@@ -191,11 +191,11 @@ function StatCard({ icon, value, label, color, onClick }: { icon: string; value:
       type="button"
       onClick={onClick}
       aria-label={`${label}: ${value}`}
-      className="card p-3 flex flex-col items-center gap-1 active:scale-[0.97] transition"
+      className="card p-3 flex flex-col items-center gap-1 active:scale-[0.97] transition min-w-0"
     >
-      <Icon name={icon} className={`h-6 w-6 ${color}`} />
+      <Icon name={icon} className={`h-6 w-6 ${color} shrink-0`} />
       <span className="text-2xl font-bold text-ink-900 dark:text-sand-100">{value}</span>
-      <span className="text-xs text-ink-500 dark:text-ink-300">{label}</span>
+      <span className="tile-label text-xs text-ink-500 dark:text-ink-300 text-center">{label}</span>
     </button>
   );
 }

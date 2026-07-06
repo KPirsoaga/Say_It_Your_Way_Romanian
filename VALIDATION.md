@@ -301,3 +301,14 @@ Status: Open
 Notes: Fixed diacritic in slow field (`De când`). Added `TODO: Review with native Romanian teacher` comments for uncertain strings. English for grammar example aligned to intended meaning pending teacher review of Romanian.
 
 ---
+
+VAL-028
+Area: Mobile layout
+Issue: Text in grid tiles overflows or spills outside card bounds on narrow mobile viewports (especially home shortcut tiles and stat labels).
+Expected behaviour: All tile labels wrap cleanly within their cards at 320px width and with large text size enabled.
+Current behaviour: Horizontal icon+label layout on home shortcuts left ~88px for long labels; grid children lacked `min-w-0`; buttons used nowrap.
+Priority: Medium
+Status: Fixed
+Notes: Added `.tile-grid` / `.tile-label` utilities; home shortcuts use vertical tile layout; buttons allow wrapping; bottom nav labels scale down on narrow screens.
+
+---

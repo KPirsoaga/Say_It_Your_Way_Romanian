@@ -20,7 +20,7 @@ export function BottomNav({ current, go }: Props) {
       aria-label="Main navigation"
       className="fixed bottom-0 inset-x-0 z-20 border-t border-sand-200/80 bg-sand-100/90 backdrop-blur-md dark:bg-ink-900/90 dark:border-white/10 pb-[env(safe-area-inset-bottom)]"
     >
-      <div className="mx-auto max-w-md px-2 py-1.5 grid grid-cols-5">
+      <div className="mx-auto max-w-md px-1 py-1.5 grid grid-cols-5 tile-grid">
         {items.map((it) => {
           const active = current === it.id || (it.id === 'scenarios' && current === 'scenario');
           return (
@@ -28,7 +28,7 @@ export function BottomNav({ current, go }: Props) {
               key={it.id}
               type="button"
               onClick={() => go(it.id)}
-              className="flex flex-col items-center gap-0.5 py-1.5 tap-target justify-center transition"
+              className="flex flex-col items-center gap-0.5 py-1.5 tap-target justify-center transition min-w-0 w-full px-0.5"
               aria-label={it.label}
               aria-current={active ? 'page' : undefined}
             >
@@ -42,7 +42,7 @@ export function BottomNav({ current, go }: Props) {
               </span>
               <span
                 aria-hidden="true"
-                className={`text-[11px] font-bold ${active ? 'text-sea-600 dark:text-sea-200' : 'text-ink-500 dark:text-ink-300'}`}
+                className={`tile-label text-[10px] sm:text-[11px] font-bold text-center w-full ${active ? 'text-sea-600 dark:text-sea-200' : 'text-ink-500 dark:text-ink-300'}`}
               >
                 {it.label}
               </span>
