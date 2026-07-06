@@ -85,7 +85,7 @@ export function HomePage({ go }: Props) {
               <div className={`h-10 w-10 rounded-2xl ${b.color} flex items-center justify-center shrink-0`}>
                 <Icon name={b.icon} className="h-5 w-5" />
               </div>
-              <span className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">{b.label}</span>
+              <span className="tile-label font-bold text-ink-900 dark:text-sand-100 text-xs">{b.label}</span>
             </Card>
           ))}
         </div>
