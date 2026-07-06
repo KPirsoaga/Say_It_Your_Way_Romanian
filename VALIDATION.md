@@ -224,3 +224,80 @@ Status: Fixed
 Notes: New Grammar Help section on Home; 6 topics + 10 verbs; progress tracked in localStorage.
 
 ---
+
+VAL-021
+Area: Navigation
+Issue: Deep-linked pages (`scenario`, `conversation`, `grammar-topic`, `grammar-verb`) render a blank screen when opened without a valid ID.
+Expected behaviour: User sees a friendly fallback with back navigation.
+Current behaviour: Conditional render requires `arg`; missing `arg` shows empty main content.
+Priority: High
+Status: Fixed
+Notes: Added `NavigationFallback` component; `App.tsx` handles all four deep-link page types.
+
+---
+
+VAL-022
+Area: Mobile layout
+Issue: Fixed bottom navigation and settings gear ignore device safe areas (notch, home indicator).
+Expected behaviour: Controls remain fully visible and tappable on modern phones.
+Current behaviour: `bottom-0` / `top-3` positioning without `env(safe-area-inset-*)` offsets.
+Priority: Medium
+Status: Fixed
+Notes: Bottom nav uses `pb-[env(safe-area-inset-bottom)]`; settings gear uses `max()` with safe-area insets.
+
+---
+
+VAL-023
+Area: Mobile layout
+Issue: Some secondary pages use `pb-10` bottom padding, risking content sitting too close to the screen edge on pages without bottom nav.
+Expected behaviour: Consistent scroll clearance on all full-screen pages.
+Current behaviour: `TinyPracticePage`, `NoShamePage`, and conversation-done state used `pb-10`.
+Priority: Low
+Status: Fixed
+Notes: Standardised to `pb-32` on affected pages; `NoShamePage` now uses `PageHeader` like other pages.
+
+---
+
+VAL-024
+Area: Accessibility
+Issue: Bottom nav buttons lack accessible names; several interactive buttons missing `type="button"`.
+Expected behaviour: Screen readers announce nav destinations; buttons do not submit forms accidentally.
+Current behaviour: Only visible text labels; `PageHeader`, `Button`, and stat cards missing explicit button types.
+Priority: Medium
+Status: Fixed
+Notes: Added `aria-label` on nav items; `type="button"` on `Button`, `PageHeader`, settings gear, stat cards; `aria-label` on stat cards.
+
+---
+
+VAL-025
+Area: Accessibility
+Issue: Rotating No-Shame messages are not announced to screen readers.
+Expected behaviour: Message changes are conveyed accessibly without being intrusive.
+Current behaviour: Visual rotation only.
+Priority: Low
+Status: Fixed
+Notes: Added `role="status"`, `aria-live="polite"`, `aria-atomic="true"` on `NoShameBanner`.
+
+---
+
+VAL-026
+Area: Settings / Navigation
+Issue: Settings relies solely on header back affordance; users may not realise they can return home.
+Expected behaviour: Clear, obvious path back to Home from Settings.
+Current behaviour: Back arrow only in header (functional but easy to miss).
+Priority: Low
+Status: Fixed
+Notes: Added explicit “Back to home” button above reset settings.
+
+---
+
+VAL-027
+Area: Content / Romanian
+Issue: Several Romanian strings need native-speaker review before demo.
+Expected behaviour: Natural, correct Romanian with proper diacritics.
+Current behaviour: `Țeva apă pe podea.` likely typo; `Pot repeta, vă rog?` mismatches English intent; slow field missing diacritic on `când`.
+Priority: Medium
+Status: Open
+Notes: Fixed diacritic in slow field (`De când`). Added `TODO: Review with native Romanian teacher` comments for uncertain strings. English for grammar example aligned to intended meaning pending teacher review of Romanian.
+
+---

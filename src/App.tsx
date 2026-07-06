@@ -21,6 +21,7 @@ import { GrammarHelpPage } from './pages/GrammarHelpPage';
 import { GrammarTopicPage } from './pages/GrammarTopicPage';
 import { GrammarVerbPage } from './pages/GrammarVerbPage';
 import { NoShamePage } from './components/NoShameBanner';
+import { NavigationFallback } from './components/NavigationFallback';
 import type { ScenarioId } from './types';
 
 export type PageId =
@@ -65,9 +66,10 @@ function Shell() {
     <div className="min-h-screen bg-sand-100 dark:bg-ink-900 text-ink-900 dark:text-sand-100">
       {showSettingsGear && (
         <button
+          type="button"
           onClick={() => go('settings')}
           aria-label="Open settings"
-          className="fixed top-3 right-3 z-20 tap-target rounded-2xl bg-white/80 dark:bg-ink-900/80 backdrop-blur p-2 text-ink-700 dark:text-ink-300 shadow-soft hover:bg-white dark:hover:bg-ink-700 transition"
+          className="fixed top-[max(0.75rem,env(safe-area-inset-top))] right-[max(0.75rem,env(safe-area-inset-right))] z-20 tap-target rounded-2xl bg-white/80 dark:bg-ink-900/80 backdrop-blur p-2 text-ink-700 dark:text-ink-300 shadow-soft hover:bg-white dark:hover:bg-ink-700 transition"
         >
           <Icon name="Settings" className="h-6 w-6" />
         </button>
@@ -77,7 +79,17 @@ function Shell() {
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
         {page === 'scenarios' && <ScenariosPage go={go} />}
-        {page === 'scenario' && arg && <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />}
+        {page === 'scenario' && arg ? (
+          <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />
+        ) : page === 'scenario' ? (
+          <NavigationFallback
+            title="Scenario not found"
+            message="We couldn’t open that scenario. Pick one from the list."
+            onBack={() => go('scenarios')}
+            backLabel="View scenarios"
+            backIcon="LayoutGrid"
+          />
+        ) : null}
         {page === 'favourites' && <FavouritesPage />}
         {page === 'progress' && <ProgressPage go={go} />}
         {page === 'settings' && <SettingsPage onBack={() => go('home')} />}
@@ -87,12 +99,40 @@ function Shell() {
         {page === 'tiny' && <TinyPracticePage onBack={() => go('home')} onHome={() => go('home')} />}
         {page === 'noshame' && <NoShamePage onBack={() => go('home')} />}
         {page === 'conversations' && <MiniConversationsPage go={go} onBack={() => go('home')} />}
-        {page === 'conversation' && arg && (
+        {page === 'conversation' && arg ? (
           <MiniConversationDetailPage conversationId={arg} onBack={() => go('conversations')} onHome={() => go('home')} />
-        )}
+        ) : page === 'conversation' ? (
+          <NavigationFallback
+            title="Conversation not found"
+            message="We couldn’t open that conversation. Pick one from the list."
+            onBack={() => go('conversations')}
+            backLabel="View conversations"
+            backIcon="MessagesSquare"
+          />
+        ) : null}
         {page === 'grammar' && <GrammarHelpPage go={go} onBack={() => go('home')} />}
-        {page === 'grammar-topic' && arg && <GrammarTopicPage topicId={arg} onBack={() => go('grammar')} />}
-        {page === 'grammar-verb' && arg && <GrammarVerbPage verbId={arg} onBack={() => go('grammar')} />}
+        {page === 'grammar-topic' && arg ? (
+          <GrammarTopicPage topicId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-topic' ? (
+          <NavigationFallback
+            title="Topic not found"
+            message="We couldn’t open that grammar topic."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-verb' && arg ? (
+          <GrammarVerbPage verbId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-verb' ? (
+          <NavigationFallback
+            title="Verb not found"
+            message="We couldn’t open that verb."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}

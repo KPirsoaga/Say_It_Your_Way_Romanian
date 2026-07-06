@@ -187,7 +187,12 @@ export function HomePage({ go }: Props) {
 
 function StatCard({ icon, value, label, color, onClick }: { icon: string; value: number; label: string; color: string; onClick: () => void }) {
   return (
-    <button onClick={onClick} className="card p-3 flex flex-col items-center gap-1 active:scale-[0.97] transition">
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`${label}: ${value}`}
+      className="card p-3 flex flex-col items-center gap-1 active:scale-[0.97] transition"
+    >
       <Icon name={icon} className={`h-6 w-6 ${color}`} />
       <span className="text-2xl font-bold text-ink-900 dark:text-sand-100">{value}</span>
       <span className="text-xs text-ink-500 dark:text-ink-300">{label}</span>

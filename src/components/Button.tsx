@@ -21,7 +21,7 @@ const variants: Record<Variant, string> = {
 export function Button({ variant = 'primary', size = 'md', className = '', children, ...rest }: Props) {
   const sizeCls = size === 'lg' ? 'btn-lg' : 'btn-md';
   return (
-    <button className={`${sizeCls} ${variants[variant]} ${className}`} {...rest}>
+    <button type="button" className={`${sizeCls} ${variants[variant]} ${className}`} {...rest}>
       {children}
     </button>
   );
