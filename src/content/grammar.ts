@@ -89,7 +89,8 @@ export const grammarTopics: GrammarTopic[] = [
       { ro: 'Sunt obosit astăzi.', en: 'I am tired today.', pron: 'SOONT oh-bee-SEET ah-STUHZ.', slow: 'Sunt obosit... astăzi.' },
       { ro: 'Vreau o cafea, vă rog.', en: 'I want a coffee, please.', pron: 'VROW oh kah-FEH, vuh ROHG.', slow: 'Vreau o cafea... vă rog.' },
       { ro: 'Am nevoie de ajutor.', en: 'I need help.', pron: 'Ahm neh-YO-eh deh ah-ZHOO-tor.', slow: 'Am nevoie... de ajutor.' },
-      { ro: 'Pot repeta, vă rog?', en: 'Can I repeat, please?', pron: 'POHT reh-peh-TAH, vuh ROHG?', slow: 'Pot repeta... vă rog?' },
+      // TODO: Review with native Romanian teacher — English says "Can I repeat" but Romanian "Pot repeta" means "I can repeat"; likely should be "Puteți repeta, vă rog?" (Can you repeat?)
+      { ro: 'Pot repeta, vă rog?', en: 'Can you repeat, please?', pron: 'POHT reh-peh-TAH, vuh ROHG?', slow: 'Pot repeta... vă rog?' },
     ],
   },
   {

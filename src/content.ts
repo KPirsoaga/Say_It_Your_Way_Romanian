@@ -361,6 +361,7 @@ export const scenarios: Scenario[] = [
         slow: 'Am o problemă... în baie.',
       },
       {
+        // TODO: Review with native Romanian teacher — likely typo; may mean "Curge apă pe podea." (water is leaking on the floor)
         ro: 'Țeva apă pe podea.',
         en: 'There\'s some water on the floor.',
         literal: 'Leaks-some water on floor.',
@@ -1181,7 +1182,7 @@ export const miniConversations: MiniConversation[] = [
         en: 'How long has she had the problem?',
         literal: 'Since when has the problem?',
         pron: 'De kahn ah-ray proh-BLEH-muh?',
-        slow: 'De cand... are problema?',
+        slow: 'De când... are problema?',
       },
       {
         who: 'you',

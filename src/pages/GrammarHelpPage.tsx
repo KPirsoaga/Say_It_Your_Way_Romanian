@@ -27,7 +27,7 @@ export function GrammarHelpPage({ go, onBack }: Props) {
           <h2 className="text-xl font-bold leading-tight">
             See the pattern. Hear it. Say it. No long grammar lectures.
           </h2>
-          <p className="mt-2 text-ink-800 text-base">{doneCount} of {grammarTopics.length} topics practised</p>
+          <p className="mt-2 text-ink-800 dark:text-ink-900 text-base">{doneCount} of {grammarTopics.length} topics practised</p>
         </div>
 
         <NoShameBanner compact />

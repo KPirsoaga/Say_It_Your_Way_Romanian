@@ -99,6 +99,11 @@ export function SettingsPage({ onBack }: Props) {
           )}
         </Card>
 
+        <Button variant="ghost" size="md" className="w-full" onClick={onBack}>
+          <Icon name="Home" className="h-5 w-5" />
+          Back to home
+        </Button>
+
         <Button variant="ghost" size="md" className="w-full" onClick={reset}>
           <Icon name="RotateCcw" className="h-5 w-5" />
           Reset settings to defaults

@@ -94,7 +94,7 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
     return (
       <div className="min-h-screen">
         <PageHeader title={conv.title} onBack={onBack} />
-        <div className="mx-auto max-w-md px-4 pb-10 pt-4">
+        <div className="mx-auto max-w-md px-4 pb-32 pt-4">
           <div className="animate-fade-in text-center py-8">
             <div className={`mx-auto h-24 w-24 rounded-full ${c.bgSoft} flex items-center justify-center mb-4 animate-pop`}>
               <Icon name="Trophy" className={`h-12 w-12 ${c.text}`} />
@@ -198,6 +198,7 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                             return (
                               <button
                                 key={ci}
+                                type="button"
                                 onClick={() => (playing ? stop() : speak(chunk, cid))}
                                 disabled={!supported}
                                 className="btn-md bg-white text-ink-900 ring-2 ring-sun-200 hover:ring-sun-300 dark:bg-ink-900 dark:text-sand-100 dark:ring-sun-300/30"

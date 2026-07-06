@@ -36,7 +36,7 @@ export function TinyPracticePage({ onBack, onHome }: Props) {
     <div className="min-h-screen">
       <PageHeader title="Tiny Practice" subtitle="Just 3 minutes" onBack={onBack} />
 
-      <div className="mx-auto max-w-md px-4 pb-10 pt-4 space-y-4">
+      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <div className="rounded-3xl bg-gradient-to-br from-sea-400 to-sea-600 text-white p-5 shadow-soft">
           <div className="flex items-center gap-2 mb-1">
             <Icon name="Zap" className="h-5 w-5" />
