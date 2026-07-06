@@ -17,7 +17,7 @@ interface Props {
 export function TinyPracticePage({ onBack, onHome }: Props) {
   const today = todayStr();
   const content = useMemo(() => getTinyPractice(today), [today]);
-  const { speak, currentId, supported } = useSpeech();
+  const { speak, stop, currentId, supported } = useSpeech();
   const { markPractisedToday } = useProgress();
   const [step, setStep] = useState<'listen' | 'repeat' | 'phrase' | 'done'>('listen');
   const [repeatDone, setRepeatDone] = useState(false);
@@ -82,8 +82,8 @@ export function TinyPracticePage({ onBack, onHome }: Props) {
                   variant={repeatPlaying ? 'secondary' : 'primary'}
                   size="lg"
                   className="w-full"
-                  onClick={() => speak(content.repeat.ro, repeatId)}
-                  disabled={!supported || repeatPlaying}
+                  onClick={() => (repeatPlaying ? stop() : speak(content.repeat.ro, repeatId))}
+                  disabled={!supported}
                 >
                   <Icon name={repeatPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                   {repeatPlaying ? 'Playing…' : 'Hear it'}
@@ -120,8 +120,8 @@ export function TinyPracticePage({ onBack, onHome }: Props) {
                 variant={phrasePlaying ? 'secondary' : 'primary'}
                 size="lg"
                 className="mt-4 w-full"
-                onClick={() => speak(content.phrase.ro, phraseId)}
-                disabled={!supported || phrasePlaying}
+                onClick={() => (phrasePlaying ? stop() : speak(content.phrase.ro, phraseId))}
+                disabled={!supported}
               >
                 <Icon name={phrasePlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                 {phrasePlaying ? 'Playing…' : 'Hear it'}

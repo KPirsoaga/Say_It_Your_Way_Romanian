@@ -4,6 +4,7 @@ export function Card({ children, className = '', onClick }: { children: ReactNod
   const Tag = onClick ? 'button' : 'div';
   return (
     <Tag
+      type={onClick ? 'button' : undefined}
       onClick={onClick}
       className={`card text-left w-full ${onClick ? 'active:scale-[0.99] transition focus-visible:ring-4 focus-visible:ring-sea-500/30' : ''} ${className}`}
     >

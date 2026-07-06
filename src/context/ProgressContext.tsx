@@ -13,7 +13,11 @@ const DEFAULT_PROGRESS: ProgressState = {
 };
 
 function todayStr(): string {
-  const d = new Date();
+  return toLocalDateStr(new Date());
+}
+
+/** Format a Date as YYYY-MM-DD in the user's local timezone. */
+function toLocalDateStr(d: Date): string {
   const tz = d.getTimezoneOffset() * 60000;
   return new Date(d.getTime() - tz).toISOString().slice(0, 10);
 }
@@ -99,4 +103,4 @@ export function useProgress() {
   return ctx;
 }
 
-export { todayStr };
+export { todayStr, toLocalDateStr };

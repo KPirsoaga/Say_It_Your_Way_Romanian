@@ -4,7 +4,6 @@ import { PhraseBuilder } from '../components/PhraseBuilder';
 import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { phraseBuilderItems } from '../content';
-import { useProgress } from '../context/ProgressContext';
 import type { PageId } from '../App';
 
 interface Props {
@@ -12,13 +11,11 @@ interface Props {
 }
 
 export function PhraseBuilderPage({ go }: Props) {
-  const { addBuilderDone } = useProgress();
   const [idx, setIdx] = useState(0);
   const item = phraseBuilderItems[idx];
   const isLast = idx === phraseBuilderItems.length - 1;
 
   const next = () => {
-    addBuilderDone();
     if (!isLast) setIdx((i) => i + 1);
     else go('home');
   };

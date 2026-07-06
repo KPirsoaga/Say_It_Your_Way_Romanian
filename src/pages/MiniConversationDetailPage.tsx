@@ -31,17 +31,31 @@ function breakDown(turn: ConversationTurn): string[] {
 }
 
 export function MiniConversationDetailPage({ conversationId, onBack, onHome }: Props) {
-  const conv = miniConversations.find((c) => c.id === conversationId)!;
-  const c = colorMap[conv.color];
+  const conv = miniConversations.find((c) => c.id === conversationId);
   const { settings } = useSettings();
-  const { supported, speak, speakSlow, currentId } = useSpeech();
+  const { supported, speak, speakSlow, stop, currentId } = useSpeech();
   const { markConversationCompleted, markPractisedToday } = useProgress();
-
-  // How many turns the learner has revealed/played through
   const [revealed, setRevealed] = useState(1);
   const [saidTurns, setSaidTurns] = useState<Set<number>>(new Set());
   const [easierFor, setEasierFor] = useState<Set<number>>(new Set());
   const [done, setDone] = useState(false);
+
+  if (!conv) {
+    return (
+      <div className="min-h-screen">
+        <PageHeader title="Conversation not found" onBack={onBack} />
+        <div className="mx-auto max-w-md px-4 pb-32 pt-8 text-center space-y-4">
+          <p className="text-ink-700 dark:text-ink-300 text-lg">We couldn’t find that conversation. Pick one from the list.</p>
+          <Button variant="primary" size="lg" onClick={onBack}>
+            <Icon name="MessagesSquare" className="h-5 w-5" />
+            View conversations
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const c = colorMap[conv.color];
 
   const visibleTurns = conv.turns.slice(0, revealed);
   const allRevealed = revealed >= conv.turns.length;
@@ -184,7 +198,7 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                             return (
                               <button
                                 key={ci}
-                                onClick={() => speak(chunk, cid)}
+                                onClick={() => (playing ? stop() : speak(chunk, cid))}
                                 disabled={!supported}
                                 className="btn-md bg-white text-ink-900 ring-2 ring-sun-200 hover:ring-sun-300 dark:bg-ink-900 dark:text-sand-100 dark:ring-sun-300/30"
                               >
@@ -202,8 +216,8 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                       <Button
                         variant={isPlaying ? 'secondary' : isYou ? 'secondary' : 'primary'}
                         size="md"
-                        onClick={() => speak(turn.ro, playId)}
-                        disabled={!supported || isPlaying}
+                        onClick={() => (isPlaying ? stop() : speak(turn.ro, playId))}
+                        disabled={!supported}
                       >
                         <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                         Play
@@ -212,8 +226,8 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                         <Button
                           variant="outline"
                           size="md"
-                          onClick={() => speakSlow(turn.slow ?? turn.ro, slowId)}
-                          disabled={!supported || isSlow}
+                          onClick={() => (isSlow ? stop() : speakSlow(turn.slow ?? turn.ro, slowId))}
+                          disabled={!supported}
                         >
                           <Icon name="Gauge" className="h-5 w-5" />
                           Slow

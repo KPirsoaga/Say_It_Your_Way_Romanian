@@ -6,18 +6,22 @@ import { Icon } from '../components/Icon';
 import { useSettings } from '../context/SettingsContext';
 import type { TextSize } from '../types';
 
+interface Props {
+  onBack: () => void;
+}
+
 const textSizeOptions: { value: TextSize; label: string; sample: string }[] = [
   { value: 'normal', label: 'Normal', sample: 'Aa' },
   { value: 'large', label: 'Large', sample: 'Aa' },
   { value: 'xlarge', label: 'Extra large', sample: 'Aa' },
 ];
 
-export function SettingsPage() {
+export function SettingsPage({ onBack }: Props) {
   const { settings, update, reset } = useSettings();
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Settings" subtitle="Make it comfortable for you" />
+      <PageHeader title="Settings" subtitle="Make it comfortable for you" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <p className="text-ink-500 dark:text-ink-300 text-base">
           Adjust anything here to make reading and practising easier. Your choices are saved on this device.
@@ -32,7 +36,9 @@ export function SettingsPage() {
               return (
                 <button
                   key={opt.value}
+                  type="button"
                   onClick={() => update('textSize', opt.value)}
+                  aria-pressed={active}
                   className={`rounded-2xl p-3 flex flex-col items-center gap-1 transition border-2 ${
                     active
                       ? 'border-sea-500 bg-sea-50 dark:bg-sea-600/20'

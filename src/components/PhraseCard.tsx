@@ -37,7 +37,7 @@ function breakDown(phrase: PhraseLine): string[] {
 export function PhraseCard({ phrase, favId, hero = false }: Props) {
   const { settings } = useSettings();
   const { toggleFavourite, isFavourite } = useProgress();
-  const { supported, speak, speakSlow, currentId } = useSpeech();
+  const { supported, speak, speakSlow, stop, currentId } = useSpeech();
   const saved = isFavourite(favId);
   const myId = favId;
   const isPlaying = currentId === myId;
@@ -93,7 +93,7 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
               return (
                 <button
                   key={i}
-                  onClick={() => speak(chunk, cid)}
+                  onClick={() => (playing ? stop() : speak(chunk, cid))}
                   disabled={!supported}
                   className="btn-md bg-white text-ink-900 ring-2 ring-sun-200 hover:ring-sun-300 dark:bg-ink-900 dark:text-sand-100 dark:ring-sun-300/30"
                 >
@@ -111,15 +111,15 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
         <Button
           variant={isPlaying ? 'secondary' : 'primary'}
           size="lg"
-          onClick={() => (isPlaying ? undefined : speak(phrase.ro, myId))}
-          disabled={!supported || isPlaying}
-          aria-label="Play audio"
+          onClick={() => (isPlaying ? stop() : speak(phrase.ro, myId))}
+          disabled={!supported}
+          aria-label={isPlaying ? 'Stop audio' : 'Play audio'}
         >
           <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
           {isPlaying ? 'Playing…' : 'Play'}
         </Button>
 
-        <Button variant="soft" size="lg" onClick={() => speak(phrase.ro, myId)} disabled={!supported || isPlaying}>
+        <Button variant="soft" size="lg" onClick={() => speak(phrase.ro, myId)} disabled={!supported}>
           <Icon name="Repeat" className="h-5 w-5" />
           Repeat after me
         </Button>
@@ -128,8 +128,8 @@ export function PhraseCard({ phrase, favId, hero = false }: Props) {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => speakSlow(phrase.slow ?? phrase.ro, `${myId}-slow`)}
-            disabled={!supported || isSlowPlaying}
+            onClick={() => (isSlowPlaying ? stop() : speakSlow(phrase.slow ?? phrase.ro, `${myId}-slow`))}
+            disabled={!supported}
           >
             <Icon name="Gauge" className="h-5 w-5" />
             Slow audio

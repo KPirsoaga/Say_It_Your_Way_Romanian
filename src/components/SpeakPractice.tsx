@@ -15,7 +15,7 @@ interface Props {
 
 export function SpeakPractice({ phrase, speechId, onDone }: Props) {
   const { settings } = useSettings();
-  const { supported, speak, currentId } = useSpeech();
+  const { supported, speak, stop, currentId } = useSpeech();
   const { addSpeakDone } = useProgress();
   const [showSimpler, setShowSimpler] = useState(false);
   const [result, setResult] = useState<null | 'said' | 'again'>(null);
@@ -54,7 +54,7 @@ export function SpeakPractice({ phrase, speechId, onDone }: Props) {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button variant="soft" size="lg" onClick={() => speak(displayRo, speechId)} disabled={!supported || isPlaying}>
+        <Button variant="soft" size="lg" onClick={() => (isPlaying ? stop() : speak(displayRo, speechId))} disabled={!supported}>
           <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
           Hear it
         </Button>

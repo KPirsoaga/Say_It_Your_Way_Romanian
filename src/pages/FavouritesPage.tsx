@@ -49,7 +49,7 @@ function resolveFavourite(id: string): FavResolved | null {
 
 export function FavouritesPage() {
   const { progress, toggleFavourite } = useProgress();
-  const { supported, speak, currentId } = useSpeech();
+  const { supported, speak, stop, currentId } = useSpeech();
   const { settings } = useSettings();
 
   const items = progress.favourites.map(resolveFavourite).filter((x): x is FavResolved => x !== null);
@@ -83,7 +83,7 @@ export function FavouritesPage() {
                 <p className="mt-1 text-sea-600 dark:text-sea-200 italic text-sm">{phrase.pron}</p>
               )}
               <div className="mt-3 flex flex-wrap gap-2">
-                <Button variant="soft" size="md" onClick={() => speak(phrase.ro, id)} disabled={!supported || playing}>
+                <Button variant="soft" size="md" onClick={() => (playing ? stop() : speak(phrase.ro, id))} disabled={!supported}>
                   <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                   Play
                 </Button>

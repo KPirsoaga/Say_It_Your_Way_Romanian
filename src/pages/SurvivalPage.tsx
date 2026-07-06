@@ -15,7 +15,7 @@ interface Props {
 export function SurvivalPage({ onBack }: Props) {
   const { settings } = useSettings();
   const { toggleFavourite, isFavourite } = useProgress();
-  const { supported, speak, speakSlow, currentId } = useSpeech();
+  const { supported, speak, speakSlow, stop, currentId } = useSpeech();
 
   return (
     <div className="min-h-screen">
@@ -81,8 +81,8 @@ export function SurvivalPage({ onBack }: Props) {
                   <Button
                     variant={isPlaying ? 'secondary' : 'primary'}
                     size="lg"
-                    onClick={() => speak(p.ro, favId)}
-                    disabled={!supported || isPlaying}
+                    onClick={() => (isPlaying ? stop() : speak(p.ro, favId))}
+                    disabled={!supported}
                   >
                     <Icon name={isPlaying ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                     Play
@@ -91,8 +91,8 @@ export function SurvivalPage({ onBack }: Props) {
                     <Button
                       variant="outline"
                       size="lg"
-                      onClick={() => speakSlow(p.slow ?? p.ro, `${favId}-slow`)}
-                      disabled={!supported || isSlow}
+                      onClick={() => (isSlow ? stop() : speakSlow(p.slow ?? p.ro, `${favId}-slow`))}
+                      disabled={!supported}
                     >
                       <Icon name="Gauge" className="h-5 w-5" />
                       Slow
