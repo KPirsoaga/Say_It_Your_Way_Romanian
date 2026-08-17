@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import type { DictionaryWordType } from '../content/dictionary/types';
 import { dictionaryLetterIndex, resolveDictionarySearch, searchDictionary } from '../content/dictionary';
+import { useNavigation } from '../context/NavigationContext';
 import type { PageId } from '../App';
 
 interface Props {
@@ -24,12 +25,29 @@ function isPhraseItem(item: { headwordRo?: string; ro?: string }): item is { id:
 }
 
 export function DictionaryPage({ go, onBack }: Props) {
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState<DictionaryWordType | 'all' | 'lexical'>('all');
+  const { dictionaryState, setDictionaryState } = useNavigation();
+  const [query, setQuery] = useState(dictionaryState.query);
+  const [filter, setFilter] = useState<DictionaryWordType | 'all' | 'lexical'>(dictionaryState.filter as DictionaryWordType | 'all' | 'lexical');
   const showPhrases = filter === 'phrase';
   const letters = useMemo(() => dictionaryLetterIndex(showPhrases), [showPhrases]);
   const results = useMemo(() => searchDictionary(query, filter), [query, filter]);
   const searchMatches = useMemo(() => (query.trim() ? resolveDictionarySearch(query) : []), [query]);
+
+  useEffect(() => {
+    setDictionaryState({ query, filter });
+  }, [query, filter, setDictionaryState]);
+
+  useEffect(() => {
+    if (dictionaryState.scrollY > 0) {
+      requestAnimationFrame(() => window.scrollTo({ top: dictionaryState.scrollY, behavior: 'auto' }));
+    }
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setDictionaryState({ scrollY: window.scrollY });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [setDictionaryState]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, typeof results>();

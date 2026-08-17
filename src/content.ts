@@ -368,18 +368,10 @@ export const scenarios: Scenario[] = [
         slow: 'Am o problemă... în baie.',
       },
       {
-        ro: 'Țeva apă pe podea.',
-        en: 'There\'s some water on the floor.',
-        literal: 'Leaks-some water on floor.',
-        pron: 'TSYEH-vuh AH-puh peh poh-DEH-uh.',
-        review: {
-          needsReview: true,
-          reviewReason:
-            'Likely typo — may mean "Curge apă pe podea." (water is leaking on the floor).',
-          suggestedBy: 'app author',
-          contentArea: 'Scenarios',
-          reviewStatus: 'pending',
-        },
+        ro: 'Curge apă pe podea.',
+        en: 'There\'s water leaking on the floor.',
+        literal: 'Water flows on the floor.',
+        pron: 'KOOR-jeh AH-puh peh poh-DEH-uh.',
       },
       {
         ro: 'Cred că e o țeavă spartă.',

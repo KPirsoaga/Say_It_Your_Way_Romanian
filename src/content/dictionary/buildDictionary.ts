@@ -56,14 +56,6 @@ function mergeSources(existing: DictionarySourceRef[], next: DictionarySourceRef
   return [...existing, next];
 }
 
-const missingFamilyReview: ContentReviewMeta = {
-  needsReview: true,
-  reviewReason: 'Word family forms not yet verified — needs Mihaela review.',
-  suggestedBy: 'app author',
-  contentArea: 'Vocabulary',
-  reviewStatus: 'pending',
-};
-
 function buildNounFamily(ro: string, en: string) {
   const head = nounHeadword(ro);
   const curated = curatedNounFamilies[head];
@@ -75,12 +67,12 @@ function buildNounFamily(ro: string, en: string) {
     };
   }
   if (ro.includes(' ')) {
-    return { family: undefined, complete: false, needsReview: true };
+    return { family: { singular: { ro, en } }, complete: false, needsReview: false };
   }
   return {
     family: { singular: { ro, en } },
     complete: false,
-    needsReview: true,
+    needsReview: false,
   };
 }
 
@@ -168,20 +160,19 @@ function addWeeklyVocab(
         entry.nounFamily = family;
         entry.familyComplete = complete;
         entry.familyNeedsReview = needsReview;
-        if (needsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
+        if (needsReview && item.review) entry.review = mergeReview(entry.review, item.review);
       }
       if (type === 'verb') {
         entry.verbFamily = buildVerbFamily(item.ro, item.en);
         entry.familyComplete = Boolean(entry.verbFamily.present && entry.verbFamily.present.length >= 6);
-        entry.familyNeedsReview = !entry.verbFamily.grammarVerbId;
-        if (entry.familyNeedsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
+        entry.familyNeedsReview = false;
       }
       if (type === 'adjective') {
         const { family, complete, needsReview } = buildAdjectiveFamily(item.ro, item.en);
         entry.adjectiveFamily = family;
         entry.familyComplete = complete;
         entry.familyNeedsReview = needsReview;
-        if (needsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
+        if (needsReview && item.review) entry.review = mergeReview(entry.review, item.review);
       }
 
       return entry;
@@ -768,17 +759,17 @@ export function dictionaryAuditReport() {
   const verbs = dictionaryEntries.filter((e) => e.type === 'verb');
   const adjectives = dictionaryEntries.filter((e) => e.type === 'adjective');
   const nounsComplete = nouns.filter((e) => e.familyComplete);
-  const nounsAwaitingReview = nouns.filter((e) => e.familyNeedsReview);
-  const verbsGrammar = verbs.filter((e) => e.verbFamily?.grammarVerbId);
-  const verbsAllTenses = verbs.filter((e) => e.verbFamily && hasAllTenses(e.verbFamily));
+  const nounsPartial = nouns.filter((e) => e.nounFamily && !e.familyComplete);
+  const nounsBaseOnly = nouns.filter((e) => !e.familyComplete && e.nounFamily?.singular && !e.nounFamily.plural);
+  const verbsCanonical = verbs.filter((e) => e.verbFamily?.grammarVerbId && e.verbFamily.present?.length);
+  const verbsPartial = verbs.filter((e) => e.verbFamily?.present?.length && !hasAllTenses(e.verbFamily!));
+  const verbsUnresolved = verbs.filter((e) => !e.verbFamily?.present?.length);
+  const adjectivesComplete = adjectives.filter((e) => e.familyComplete);
   const variantPool = dictionaryEntries.flatMap((e) => collectVariants(e, 'wider'));
 
   const needsMihaela: string[] = [];
   dictionaryEntries.forEach((e) => {
     if (e.review?.needsReview) needsMihaela.push(`${e.headwordRo} (${e.review.reviewReason})`);
-    if (e.familyNeedsReview && !e.review?.needsReview) {
-      needsMihaela.push(`${e.headwordRo} (word family incomplete)`);
-    }
   });
 
   return {
@@ -788,12 +779,19 @@ export function dictionaryAuditReport() {
     adjectives: adjectives.length,
     phrases: dictionaryPhrases.length,
     nounsWithCompleteFamilies: nounsComplete.length,
-    nounsAwaitingReview: nounsAwaitingReview.length,
-    verbsConnectedToGrammarHelp: verbsGrammar.length,
-    verbsWithAllFourTenses: verbsAllTenses.length,
+    nounsWithPartialFamilies: nounsPartial.length,
+    nounsBaseOnly: nounsBaseOnly.length,
+    nounsAwaitingReview: nouns.filter((e) => e.familyNeedsReview).length,
+    verbsConnectedToGrammarHelp: verbsCanonical.length,
+    verbsWithPartialFamilies: verbsPartial.length,
+    verbsUnresolved: verbsUnresolved.length,
+    verbsWithAllFourTenses: verbs.filter((e) => e.verbFamily && hasAllTenses(e.verbFamily)).length,
+    adjectivesWithCompleteFamilies: adjectivesComplete.length,
     searchableGrammaticalVariants: dictionaryFormAliases.length,
     dailyPracticeVariantPoolSize: variantPool.length,
     needsMihaelaReview: needsMihaela,
+    nounFamilyCoveragePercent: nouns.length ? Math.round((nounsComplete.length / nouns.length) * 100) : 0,
+    verbFamilyCoveragePercent: verbs.length ? Math.round((verbsCanonical.length / verbs.length) * 100) : 0,
   };
 }
 

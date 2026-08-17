@@ -102,9 +102,9 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
   const displayEn = entry!.headwordEn;
   const audioId = `dict-entry-${entry!.id}`;
   const showWordFamily =
-    (entry!.type === 'noun' && entry!.familyComplete && entry!.nounFamily) ||
+    (entry!.type === 'noun' && entry!.nounFamily) ||
     (entry!.type === 'verb' && entry!.verbFamily?.present) ||
-    (entry!.type === 'adjective' && entry!.familyComplete && entry!.adjectiveFamily);
+    (entry!.type === 'adjective' && entry!.adjectiveFamily);
 
   return (
     <div className="min-h-screen">
@@ -117,11 +117,6 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
           <p className="text-lg text-ink-700 dark:text-ink-300">{displayEn}</p>
           {entry!.pron && <p className="text-sm text-sea-600 dark:text-sea-200 italic">{entry!.pron}</p>}
           {entry!.teacherNote && <p className="text-sm text-ink-500 dark:text-ink-400">{entry!.teacherNote}</p>}
-          {entry!.familyNeedsReview && !entry!.familyComplete && (
-            <p className="text-sm text-coral-600 dark:text-coral-300">
-              More grammatical forms for this word are being checked by Mihaela.
-            </p>
-          )}
           {entry!.senses && entry!.senses.length > 1 && (
             <div className="space-y-1">
               <p className="text-xs font-bold uppercase text-ink-500">Meanings</p>

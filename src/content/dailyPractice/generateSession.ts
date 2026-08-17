@@ -23,11 +23,11 @@ function pickWeighted<T>(items: T[], rand: () => number): T | undefined {
   return items[Math.floor(rand() * items.length)];
 }
 
-function distractorsFor(correct: string, pool: string[], count = 3): string[] {
+function distractorsFor(correct: string, pool: string[], count: number, rand: () => number): string[] {
   const unique = [...new Set(pool.filter((p) => p !== correct))];
   const out: string[] = [];
   while (out.length < count && unique.length > 0) {
-    const i = Math.floor(Math.random() * unique.length);
+    const i = Math.floor(rand() * unique.length);
     out.push(unique.splice(i, 1)[0]!);
   }
   while (out.length < count) out.push('—');
@@ -54,7 +54,8 @@ function buildExercise(
   variant: ReturnType<typeof collectVariants>[0],
   allVariants: ReturnType<typeof collectVariants>,
   type: DailyVariantExerciseType,
-  index: number
+  index: number,
+  rand: () => number
 ): DailyVariantExercise {
   const meaningPool = allVariants.map((v) => v.en);
   const roPool = allVariants.map((v) => v.ro);
@@ -69,12 +70,12 @@ function buildExercise(
       promptEn = variant.en;
       promptRo = variant.en;
       correct = variant.ro;
-      options = shuffledMcOptions([variant.ro, ...distractorsFor(variant.ro, roPool)], variant.ro);
+      options = shuffledMcOptions([variant.ro, ...distractorsFor(variant.ro, roPool, 3, rand)], variant.ro);
       break;
     }
     case 'listen': {
       correct = variant.en;
-      options = shuffledMcOptions([variant.en, ...distractorsFor(variant.en, meaningPool)], variant.en);
+      options = shuffledMcOptions([variant.en, ...distractorsFor(variant.en, meaningPool, 3, rand)], variant.en);
       break;
     }
     case 'verb-person':
@@ -85,7 +86,7 @@ function buildExercise(
     case 'ro-en':
     default: {
       correct = variant.en;
-      options = shuffledMcOptions([variant.en, ...distractorsFor(variant.en, meaningPool)], variant.en);
+      options = shuffledMcOptions([variant.en, ...distractorsFor(variant.en, meaningPool, 3, rand)], variant.en);
       break;
     }
   }
@@ -161,7 +162,7 @@ export function generateDailyPracticeSession(dateStr: string, currentTopicId?: s
 
   const exercises = picked.map((v, i) => {
     const type = exerciseTypeForVariant(v, rand);
-    return buildExercise(v, weightedVariants, type, i);
+    return buildExercise(v, weightedVariants, type, i, rand);
   });
 
   return { date: dateStr, currentTopicId: topicId, exercises };

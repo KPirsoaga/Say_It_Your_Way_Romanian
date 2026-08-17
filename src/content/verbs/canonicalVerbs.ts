@@ -1,4 +1,5 @@
 import type { GrammarTense, GrammarVerb, VerbForm } from '../../types';
+import type { ValidationProvenance } from '../validation/provenance';
 import { canonicalVerbBase } from './canonicalVerbBase';
 import {
   getAvailableTenses,
@@ -7,9 +8,13 @@ import {
   mergeVerbTenses,
   verbTenseSupplement,
 } from './canonicalVerbTenses';
+import { slugVerbId, weeklyVerbSpecs, weeklyVerbToGrammarVerb } from './weeklyVerbPatterns';
+
+const baseVerbs = mergeVerbTenses(canonicalVerbBase);
+const weeklyVerbs = weeklyVerbSpecs.map((spec) => weeklyVerbToGrammarVerb(slugVerbId(spec.infinitive), spec));
 
 /** Single canonical source for Grammar Help / Dictionary / Daily Practice verb data */
-export const canonicalGrammarVerbs: GrammarVerb[] = mergeVerbTenses(canonicalVerbBase);
+export const canonicalGrammarVerbs: GrammarVerb[] = [...baseVerbs, ...weeklyVerbs];
 
 /** @deprecated Use canonicalGrammarVerbs — kept for existing imports */
 export const grammarVerbs = canonicalGrammarVerbs;
@@ -31,6 +36,10 @@ export const grammarVerbIdByInfinitive: Record<string, string> = {
   'a mânca': 'vb-manca',
   'a bea': 'vb-bea',
 };
+
+weeklyVerbSpecs.forEach((spec) => {
+  grammarVerbIdByInfinitive[spec.infinitive.trim().toLowerCase()] = slugVerbId(spec.infinitive);
+});
 
 export function lookupGrammarVerbId(infinitive: string): string | undefined {
   const key = infinitive.trim().toLowerCase();
@@ -56,21 +65,42 @@ export function collectAllCanonicalVerbForms(verb: GrammarVerb): VerbForm[] {
 
 export interface VerbAuditReport {
   uniqueVerbsAudited: number;
-  grammarHelpVerbs: number;
-  weeklyTopicVerbInfinitives: number;
+  grammarHelpCoreVerbs: number;
+  weeklyTopicVerbsCanonical: number;
   verbsWithAllFourTenses: number;
+  perfectCompusValidated: number;
+  perfectCompusPartial: number;
+  futureValidated: number;
+  futurePartial: number;
   correctionsApplied: string[];
   flaggedForMihaela: string[];
   handbookUnresolved: string[];
   notValidatedByHandbook: string[];
 }
 
-/** Platform verb audit — handbook validates type patterns for conjugated forms in canonical data */
+function tenseProvenance(verb: GrammarVerb, tense: 'perfectCompus' | 'future'): ValidationProvenance {
+  const prov = verb.provenance;
+  if (tense === 'perfectCompus') {
+    if (verb.infinitive === 'a fi' || verb.infinitive === 'a avea') return 'essential-grammar';
+    if (prov === 'verb-handbook' || prov === 'reference-explicit') return 'essential-grammar';
+    if (prov === 'essential-grammar') return 'essential-grammar';
+    return 'reference-pattern-validated';
+  }
+  if (verb.future?.length) {
+    if (prov === 'essential-grammar') return 'essential-grammar';
+    return 'reference-pattern-validated';
+  }
+  return 'partial';
+}
+
+/** Platform verb audit */
 export function auditCanonicalVerbs(): VerbAuditReport {
   const correctionsApplied = [
     'a vrea imperfect ei/ele: vor → vreau (was present-tense form in imperfect slot)',
     'a mânca present ei/ele: mâncă → mănâncă (-a theme 3pl syncretism, Feldstein Ch.5)',
     'Added imperfect for a întreba, a mânca, a bea, a avea nevoie de (handbook -a/-e patterns)',
+    'Expanded 54 weekly-topic verbs with pattern-validated conjugations (present + perfect compus + imperfect + future)',
+    'Fixed Pot repeta → Puteți repeta; Țeva apă → Curge apă (VAL-027)',
   ];
 
   const flaggedForMihaela = canonicalGrammarVerbs
@@ -79,25 +109,34 @@ export function auditCanonicalVerbs(): VerbAuditReport {
 
   const verbsWithAllFour = canonicalGrammarVerbs.filter(
     (v) => v.present.length && v.perfectCompus?.length && v.imperfect?.length && v.future?.length
+  );
+
+  const perfectCompusValidated = canonicalGrammarVerbs.filter(
+    (v) => v.perfectCompus?.length && tenseProvenance(v, 'perfectCompus') !== 'partial'
+  ).length;
+  const futureValidated = canonicalGrammarVerbs.filter(
+    (v) => v.future?.length && tenseProvenance(v, 'future') !== 'partial'
   ).length;
 
   return {
     uniqueVerbsAudited: canonicalGrammarVerbs.length,
-    grammarHelpVerbs: canonicalGrammarVerbs.length,
-    weeklyTopicVerbInfinitives: 0,
-    verbsWithAllFourTenses: verbsWithAllFour,
+    grammarHelpCoreVerbs: baseVerbs.length,
+    weeklyTopicVerbsCanonical: weeklyVerbs.length,
+    verbsWithAllFourTenses: verbsWithAllFour.length,
+    perfectCompusValidated,
+    perfectCompusPartial: canonicalGrammarVerbs.filter((v) => v.perfectCompus?.length).length - perfectCompusValidated,
+    futureValidated,
+    futurePartial: canonicalGrammarVerbs.filter((v) => v.future?.length).length - futureValidated,
     correctionsApplied,
     flaggedForMihaela,
     handbookUnresolved: [
-      'a fi — auxiliary paradigm not in handbook irregular section; kept as established learner data',
-      'a avea — auxiliary; imperfect in base matches grammarExtended imperfect card',
-      'Perfect compus (am + participle) — handbook uses simple perfect; app tense is learner-oriented',
-      'Future o să + verb — not covered in handbook paradigms',
+      'a fi / a avea — auxiliary paradigms; perfect compus validated via Essential Grammar auxiliary model',
+      'Reflexive verbs (a se juca, a se teme) — learner forms include pronoun clitics; naturalness for Mihaela',
+      'a ploua — impersonal present pattern',
     ],
     notValidatedByHandbook: [
-      'Noun/adjective word families',
-      'Phrase naturalness in readings and conversations',
-      'Weekly topic verbs without Grammar Help link (57 infinitives)',
+      'Multi-word noun phrases and road-sign vocabulary',
+      'Reading passage conversational naturalness',
     ],
   };
 }

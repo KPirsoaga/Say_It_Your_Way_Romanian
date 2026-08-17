@@ -75,7 +75,7 @@ export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
         {verb.review?.needsReview && (
           <p className="text-xs text-sun-500 dark:text-sun-300 text-center flex items-center justify-center gap-1">
             <Icon name="Lightbulb" className="h-4 w-4" />
-            TODO: Review with Mihaela
+            {verb.review.reviewReason}
           </p>
         )}
       </div>

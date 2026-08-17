@@ -1,5 +1,14 @@
 // Core domain types for the Romanian practice app
 
+export type ValidationProvenance =
+  | 'reference-explicit'
+  | 'reference-pattern-validated'
+  | 'verb-handbook'
+  | 'essential-grammar'
+  | 'teacher-validated'
+  | 'unverified'
+  | 'partial';
+
 export type ScenarioId =
   | 'shop'
   | 'vet'
@@ -272,6 +281,8 @@ export interface GrammarVerb {
   /** Optional examples grouped by tense */
   examplesByTense?: Partial<Record<GrammarTense, GrammarExample[]>>;
   review?: ContentReviewMeta;
+  /** Internal validation provenance — not shown to learners */
+  provenance?: ValidationProvenance;
 }
 
 // ─── Weekly Topics learning engine ───────────────────────────────────────────
