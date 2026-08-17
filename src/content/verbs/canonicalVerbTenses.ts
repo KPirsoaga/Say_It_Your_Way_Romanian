@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Verb tense merging — learner-facing forms must come from verifiedVerbForms only.
+ */
 import type { GrammarExample, GrammarTense, GrammarVerb, VerbForm } from '../../types';
 import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe } from './verifiedVerbForms';
 
@@ -441,17 +448,8 @@ export function mergeVerbTenses(verbs: GrammarVerb[]): GrammarVerb[] {
 export function getVerbFormsForTense(verb: GrammarVerb, tense: GrammarTense): VerbForm[] | undefined {
   if (!isVerbTenseLearnerSafe(verb.id, tense)) return undefined;
   const verified = getLearnerSafeVerbForms(verb.id, tense);
-  if (verified?.length) return verified;
-  switch (tense) {
-    case 'present':
-      return verb.present;
-    case 'perfect-compus':
-      return verb.perfectCompus;
-    case 'imperfect':
-      return verb.imperfect;
-    case 'future':
-      return verb.future;
-  }
+  // Governance: never fall back to pattern-inferred verb.present / supplements
+  return verified?.length ? verified : undefined;
 }
 
 export function getVerbExamplesForTense(verb: GrammarVerb, tense: GrammarTense): GrammarExample[] {

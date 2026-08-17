@@ -110,9 +110,9 @@ export const drivingCarRoadSignsTopic: WeeklyTopic = {
       id: 'reading-2',
       level: 2,
       title: 'Reading 2 — Through town',
-      ro: 'La semafor mă opresc. Văd indicatorul „Cedează trecerea” la intersecție. Fac dreapta după sensul giratoriu. Limita de viteză este cincizeci. Frânez la trecerea de pietoni.',
+      ro: 'La semafor mă opresc. Văd indicatorul „Cedează trecerea” la intersecție. La sensul giratoriu fac dreapta. Limita de viteză este cincizeci de kilometri pe oră. Frânez la trecerea de pietoni.',
       modelEn:
-        'At the traffic light I stop. I see the "Give way" sign at the junction. I turn right after the roundabout. The speed limit is fifty. I brake at the pedestrian crossing.',
+        'At the traffic light I stop. I see the "Give way" sign at the junction. At the roundabout I turn right. The speed limit is fifty kilometres per hour. I brake at the pedestrian crossing.',
       vocabularyUsed: ['n-semafor', 'v-opri', 'n-indicator', 'n-cedeaza', 'n-intersectie', 'p-dreapta', 'n-sens-giratoriu', 'n-limita-viteza', 'v-frana-verb', 'n-trecere-pietoni'],
       newWords: [{ ro: 'cincizeci', en: 'fifty' }],
       teacherNotes: 'Town driving with signs and directions.',

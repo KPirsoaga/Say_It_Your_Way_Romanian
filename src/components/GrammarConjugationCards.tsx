@@ -1,16 +1,19 @@
 import { Button } from './Button';
 import { Icon } from './Icon';
 import { useSpeech } from '../hooks/useSpeech';
+import { learnerPersonLabel } from '../content/dictionary/familyUtils';
 import type { VerbForm } from '../types';
 
 interface Props {
   title: string;
   forms: VerbForm[];
   idPrefix: string;
+  /** Optional per-form formal grammar labels (same order as forms) */
+  formalLabels?: (string | undefined)[];
 }
 
 /** Clean person/form rows for verb conjugation — brand-aligned, mobile-first */
-export function GrammarConjugationCards({ title, forms, idPrefix }: Props) {
+export function GrammarConjugationCards({ title, forms, idPrefix, formalLabels }: Props) {
   const { supported, speak, stop, currentId } = useSpeech();
 
   return (
@@ -21,16 +24,18 @@ export function GrammarConjugationCards({ title, forms, idPrefix }: Props) {
           const playId = `${idPrefix}-conj-${i}`;
           const playing = currentId === playId;
           const highlighted = form.label === 'noi' || form.label === 'eu';
+          const formal = formalLabels?.[i];
           return (
             <div
               key={`${form.label}-${i}`}
               className={`flex items-center gap-3 px-4 py-3 ${highlighted ? 'bg-olive-50 dark:bg-olive-900/20' : 'bg-white dark:bg-forest-800'}`}
             >
-              <div className="w-16 shrink-0">
+              <div className="w-20 shrink-0">
                 <p className="text-sm font-semibold text-forest dark:text-linen-100" lang="ro">
-                  {form.label}
+                  {learnerPersonLabel(form.label).split(' / ')[0]}
                 </p>
-                <p className="text-xs text-forest/50 dark:text-linen/50">{form.en.split(' ')[0]}</p>
+                <p className="text-xs text-forest/50 dark:text-linen/50">{form.en.split(' ').slice(0, 2).join(' ')}</p>
+                {formal && <p className="text-[10px] text-forest/40 dark:text-linen/40 leading-tight mt-0.5">{formal}</p>}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="tile-label text-lg font-semibold text-forest dark:text-linen-100" lang="ro">

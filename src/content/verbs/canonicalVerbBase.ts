@@ -145,8 +145,8 @@ export const canonicalVerbBase: GrammarVerb[] = [
       { label: 'ei/ele', ro: 'spun', en: 'they say', pron: 'SPOON' },
     ],
     examples: [
-      { ro: 'Spun puțin românește.', en: 'I speak a little Romanian.', pron: 'SPOON poo-TEEN roh-muh-NESHT-eh.', slow: 'Spun puțin... românește.' },
-      { ro: 'Spui foarte bine!', en: 'You speak very well!', pron: 'SPWEE fah-OR-teh BEE-neh!', slow: 'Spui foarte bine!' },
+      { ro: 'Îți spun acum.', en: "I'll tell you now.", pron: 'Uhn-tsee SPOON ah-COON.', slow: 'Îți spun... acum.' },
+      { ro: 'Spui adevărul!', en: 'You tell the truth!', pron: 'SPWEE ah-deh-VUH-rool!', slow: 'Spui adevărul!' },
       { ro: 'Spune încet, vă rog.', en: 'Say it slowly, please.', pron: 'SPOO-neh uhn-CHET, vuh ROHG.', slow: 'Spune încet... vă rog.' },
     ],
   },
@@ -185,7 +185,7 @@ export const canonicalVerbBase: GrammarVerb[] = [
       { label: 'ei/ele', ro: 'vorbesc', en: 'they speak', pron: 'VOR-besk' },
     ],
     examples: [
-      { ro: 'Vorbesc puțin româna.', en: 'I speak a little Romanian.', pron: 'VOR-besk poo-TEEN roh-MUH-nuh.', slow: 'Vorbesc puțin... româna.' },
+      { ro: 'Vorbesc puțin românește.', en: 'I speak a little Romanian.', pron: 'VOR-besk poo-TEEN roh-muh-NESHT-eh.', slow: 'Vorbesc puțin... românește.' },
       { ro: 'Vorbiți engleză?', en: 'Do you speak English?', pron: 'VOR-beets eng-LEH-zuh?', slow: 'Vorbiți engleză?' },
       { ro: 'Vorbim după lecție.', en: 'We speak after the lesson.', pron: 'VOR-beem DOO-puh lek-TSY-eh.', slow: 'Vorbim... după lecție.' },
     ],

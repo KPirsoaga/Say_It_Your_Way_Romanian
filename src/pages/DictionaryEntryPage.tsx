@@ -164,7 +164,7 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
             />
             {entry!.verbFamily?.grammarVerbId && showGrammarLink && (
               <Button variant="outline" size="lg" className="w-full" onClick={() => go('grammar-verb', entry!.verbFamily!.grammarVerbId!)}>
-                Verified conjugations →
+                Full grammar explanation →
                 <Icon name="ChevronRight" className="h-5 w-5" />
               </Button>
             )}

@@ -83,9 +83,9 @@ export const buildingCabinTopic: WeeklyTopic = {
       id: 'reading-1',
       level: 1,
       title: 'Reading 1 — Simple',
-      ro: 'Am o cabană mică. Cabana are acoperiș și scări. Lucrez la perete. Pun un șurub în perete. Am o șurubelniță și un topor. Muncesc la cabană în fiecare zi.',
+      ro: 'Am o cabană mică. Cabana are acoperiș și scări. Lucrez la peretele cabanei. Pun un șurub în perete. Am o șurubelniță și un topor. Muncesc la cabană în fiecare zi.',
       modelEn:
-        'I have a small cabin. The cabin has a roof and stairs. I work on the wall. I put a screw in the wall. I have a screwdriver and an axe. I work on the cabin every day.',
+        'I have a small cabin. The cabin has a roof and stairs. I work on the cabin wall. I put a screw in the wall. I have a screwdriver and an axe. I work on the cabin every day.',
       vocabularyUsed: ['n-acoperis', 'n-scari', 'n-perete', 'n-surub', 'n-surubelnita', 'n-topor', 'v-munci', 'v-pune', 'a-mic', 'a-mare'],
       newWords: [{ ro: 'cabană', en: 'cabin' }, { ro: 'fiecare zi', en: 'every day' }],
       teacherNotes: 'Short sentences. Heavy repetition of nouns and verbs from your vocabulary list.',
@@ -101,11 +101,11 @@ export const buildingCabinTopic: WeeklyTopic = {
       id: 'reading-2',
       level: 2,
       title: 'Reading 2 — Natural',
-      ro: 'Construiesc o extensie la cabană. Săp fundația și pun izolația în perete. Urc pe scări și lucrez la tavan. Cobor și pun fire electrice sub podea. Muncesc mult, dar cu atenție.',
+      ro: 'Construiesc o extensie la cabană. Sap fundația și pun izolația în perete. Urc pe scări și lucrez la tavan. Cobor și pun fire electrice sub podea. Muncesc mult, dar lucrez cu grijă.',
       modelEn:
-        'I am building an extension to the cabin. I dig the foundation and put insulation in the wall. I climb the stairs and work on the ceiling. I come down and put electrical wires under the floor. I work a lot, but carefully.',
+        'I am building an extension to the cabin. I dig the foundation and put insulation in the wall. I climb the stairs and work on the ceiling. I come down and put electrical wires under the floor. I work a lot, but I work carefully.',
       vocabularyUsed: ['v-construi', 'n-extensie', 'n-fundatie', 'n-izolatie', 'n-perete', 'n-tavan', 'n-scari', 'n-fire', 'n-podea', 'v-sapa', 'v-pune', 'v-urca', 'v-cobori', 'v-munci', 'a-greu'],
-      newWords: [{ ro: 'atenție', en: 'care / carefully' }],
+      newWords: [{ ro: 'atenție', en: 'attention / carefully' }],
       teacherNotes: 'More natural flow. Reuses vocabulary from Reading 1.',
       review: {
         needsReview: true,

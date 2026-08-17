@@ -13,6 +13,13 @@ import {
 } from '../../content/dictionary/familyUtils';
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily, DictionaryVerbFamily } from '../../content/dictionary/types';
 import { GRAMMAR_TENSE_LABELS } from '../../content/dictionary/types';
+import { getCanonicalVerb } from '../../content/lexical/canonical';
+import {
+  adjectiveFormTerminology,
+  formalGrammarLabel,
+  nounFormTerminology,
+} from '../../content/lexical/canonical/terminology';
+import { safetyTierLabel } from '../../content/validation/lexicalSafety';
 import type { GrammarTense } from '../../types';
 
 interface Props {
@@ -32,18 +39,23 @@ function FormRow({
   audioId,
   onPlay,
   playingId,
+  formalLabel,
 }: {
   label: string;
   form?: { ro: string; en: string; pron?: string };
   audioId: string;
   onPlay?: (ro: string, id: string) => void;
   playingId?: string | null;
+  formalLabel?: string;
 }) {
   if (!form) return null;
   const playing = playingId === audioId;
   return (
     <div className="rounded-2xl border border-forest/8 dark:border-linen/10 bg-linen-50/80 dark:bg-forest-800/50 p-3 space-y-1">
       <p className="text-xs font-semibold uppercase tracking-wide text-forest/50 dark:text-linen/50">{label}</p>
+      {formalLabel && (
+        <p className="text-xs text-forest/45 dark:text-linen/45">{formalLabel}</p>
+      )}
       <p className="text-lg font-semibold text-forest dark:text-linen-100" lang="ro">{form.ro}</p>
       <p className="text-sm text-forest/70 dark:text-linen/70">{form.en}</p>
       {onPlay && (
@@ -53,6 +65,14 @@ function FormRow({
         </Button>
       )}
     </div>
+  );
+}
+
+function ProvenanceBadge({ tier }: { tier: string }) {
+  return (
+    <span className="inline-block rounded-full bg-olive-50 dark:bg-olive-900/30 px-2.5 py-0.5 text-xs font-medium text-olive-700 dark:text-olive-300">
+      {safetyTierLabel(tier as 'lexical-attested' | 'lexical-composed' | 'teacher-validated' | 'unresolved')}
+    </span>
   );
 }
 
@@ -73,6 +93,12 @@ export function WordFamily({
         (nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural)
     );
     if (familyComplete && hasVerifiedForms) {
+      const nounSlots = [
+        { slot: 'singular' as const, label: 'Singular', form: nounFamily.singular },
+        { slot: 'plural' as const, label: 'Plural', form: nounFamily.plural },
+        { slot: 'definiteSingular' as const, label: 'The … (singular)', form: nounFamily.definiteSingular },
+        { slot: 'definitePlural' as const, label: 'The … (plural)', form: nounFamily.definitePlural },
+      ];
       return (
         <div className="space-y-3">
           {chain.length >= 2 && <BrandWordFamilyChain chain={chain} />}
@@ -84,10 +110,22 @@ export function WordFamily({
           {nounFamily.articleNote && (
             <p className="text-sm text-forest/60 dark:text-linen/60 leading-relaxed">{nounFamily.articleNote}</p>
           )}
-          <FormRow label="Singular" form={nounFamily.singular} audioId="nf-sg" onPlay={onPlay} playingId={playingId} />
-          <FormRow label="Plural" form={nounFamily.plural} audioId="nf-pl" onPlay={onPlay} playingId={playingId} />
-          <FormRow label="The … (singular)" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
-          <FormRow label="The … (plural)" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
+          <ProvenanceBadge tier="lexical-attested" />
+          {nounSlots.map(({ slot, label, form }) => {
+            const term = nounFormTerminology(slot);
+            const formal = `${term.numberPlain}, ${term.definitenessPlain} (${term.caseFormal})`;
+            return (
+              <FormRow
+                key={slot}
+                label={label}
+                formalLabel={formal}
+                form={form}
+                audioId={`nf-${slot}`}
+                onPlay={onPlay}
+                playingId={playingId}
+              />
+            );
+          })}
         </div>
       );
     }
@@ -109,6 +147,9 @@ export function WordFamily({
           : activeTense === 'imperfect'
             ? verbFamily.imperfect
             : verbFamily.future;
+
+    const canonical = getCanonicalVerb(verbFamily.grammarVerbId, verbFamily.infinitive, verbFamily.en);
+    const canonicalTense = canonical?.tenses.find((t) => t.tense === activeTense);
 
     const chain =
       activeTense === 'present'
@@ -141,18 +182,24 @@ export function WordFamily({
             {GRAMMAR_TENSE_LABELS[visibleTenses[0]!]}
           </p>
         )}
+        {canonicalTense && <ProvenanceBadge tier={canonicalTense.safetyTier} />}
         {chain.length >= 2 && <BrandWordFamilyChain chain={chain} label="Same verb, different forms" />}
         <div className="space-y-2">
-          {tenseForms?.map((form, i) => (
-            <FormRow
-              key={`${form.label}-${i}`}
-              label={learnerPersonLabel(form.label)}
-              form={form}
-              audioId={`vf-${activeTense}-${i}`}
-              onPlay={onPlay}
-              playingId={playingId}
-            />
-          ))}
+          {tenseForms?.map((form, i) => {
+            const canonForm = canonicalTense?.forms[i];
+            const formal = canonForm?.terminology ? formalGrammarLabel(canonForm.terminology) : undefined;
+            return (
+              <FormRow
+                key={`${form.label}-${i}`}
+                label={learnerPersonLabel(form.label)}
+                formalLabel={formal}
+                form={form}
+                audioId={`vf-${activeTense}-${i}`}
+                onPlay={onPlay}
+                playingId={playingId}
+              />
+            );
+          })}
         </div>
       </div>
     );
@@ -160,13 +207,31 @@ export function WordFamily({
 
   if (adjectiveFamily && familyComplete) {
     const chain = adjectiveFamilyChain(adjectiveFamily);
+    const adjSlots = [
+      { slot: 'masculineSingular' as const, label: 'Masculine singular', form: adjectiveFamily.masculineSingular },
+      { slot: 'feminineSingular' as const, label: 'Feminine singular', form: adjectiveFamily.feminineSingular },
+      { slot: 'masculinePlural' as const, label: 'Masculine plural', form: adjectiveFamily.masculinePlural },
+      { slot: 'femininePlural' as const, label: 'Feminine plural', form: adjectiveFamily.femininePlural },
+    ];
     return (
       <div className="space-y-3">
         <BrandWordFamilyChain chain={chain} label="Same adjective, different forms" />
-        <FormRow label="Masculine singular" form={adjectiveFamily.masculineSingular} audioId="af-ms" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Feminine singular" form={adjectiveFamily.feminineSingular} audioId="af-fs" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Masculine plural" form={adjectiveFamily.masculinePlural} audioId="af-mp" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Feminine plural" form={adjectiveFamily.femininePlural} audioId="af-fp" onPlay={onPlay} playingId={playingId} />
+        <ProvenanceBadge tier="lexical-attested" />
+        {adjSlots.map(({ slot, label, form }) => {
+          const term = adjectiveFormTerminology(slot);
+          const formal = `${term.genderFormal}, ${term.numberFormal}`;
+          return (
+            <FormRow
+              key={slot}
+              label={label}
+              formalLabel={formal}
+              form={form}
+              audioId={`af-${slot}`}
+              onPlay={onPlay}
+              playingId={playingId}
+            />
+          );
+        })}
       </div>
     );
   }

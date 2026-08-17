@@ -127,6 +127,9 @@ export function learnerVisibleTensesForVerb(verbId: string): GrammarTense[] {
 export function verifiedTenseCoverageLabel(verbId: string): string | undefined {
   const tenses = learnerVisibleTensesForVerb(verbId);
   if (tenses.length === 0) return undefined;
+  if (verbHasFullTenseCoverage(verbId)) {
+    return 'Present, perfect compus, imperfect and future verified individually';
+  }
   const names = tenses.map((t) => GRAMMAR_TENSE_LABELS[t].toLowerCase());
   if (names.length === 1) return `${names[0]} forms verified individually`;
   return `${names.join(', ')} verified — other tenses not yet checked`;

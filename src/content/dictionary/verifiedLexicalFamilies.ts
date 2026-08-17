@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Verified noun/adjective families — learner-safe morphology registry.
+ */
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily } from './types';
 import type { LexicalSourceRef } from '../validation/lexicalSafety';
 
@@ -48,9 +55,9 @@ export const verifiedNounFamilies: Record<string, VerifiedNounEntry> = {
     family: {
       gender: 'neuter',
       singular: { ro: 'ambreiaj', en: 'clutch' },
-      plural: { ro: 'ambreiaje', en: 'clutchs' },
+      plural: { ro: 'ambreiaje', en: 'clutches' },
       definiteSingular: { ro: 'ambreiajul', en: 'the clutch' },
-      definitePlural: { ro: 'ambreiajele', en: 'the clutchs' },
+      definitePlural: { ro: 'ambreiajele', en: 'the clutches' },
       articleNote: 'In Romanian, \'the\' is often attached to the end of the noun.',
       complete: true,
     },
@@ -1375,6 +1382,32 @@ export const verifiedAdjectiveFamilies: Record<string, VerifiedAdjectiveEntry> =
     complete: true,
     provenance: 'lexical-explicit',
     sources: [{ url: dexUrl('mare'), dictionary: DEX, checkedAt: CHECKED }],
+    verifiedForms: ['masculineSingular', 'feminineSingular', 'masculinePlural', 'femininePlural'],
+  },
+  mic: {
+    family: {
+      masculineSingular: { ro: 'mic', en: 'small' },
+      feminineSingular: { ro: 'mică', en: 'small' },
+      masculinePlural: { ro: 'mici', en: 'small' },
+      femininePlural: { ro: 'mici', en: 'small' },
+      complete: true,
+    },
+    complete: true,
+    provenance: 'lexical-explicit',
+    sources: [{ url: dexUrl('mic'), dictionary: DEX, checkedAt: CHECKED }],
+    verifiedForms: ['masculineSingular', 'feminineSingular', 'masculinePlural', 'femininePlural'],
+  },
+  greu: {
+    family: {
+      masculineSingular: { ro: 'greu', en: 'heavy / difficult' },
+      feminineSingular: { ro: 'grea', en: 'heavy / difficult' },
+      masculinePlural: { ro: 'grei', en: 'heavy / difficult' },
+      femininePlural: { ro: 'grele', en: 'heavy / difficult' },
+      complete: true,
+    },
+    complete: true,
+    provenance: 'lexical-explicit',
+    sources: [{ url: dexUrl('greu'), dictionary: DEX, checkedAt: CHECKED }],
     verifiedForms: ['masculineSingular', 'feminineSingular', 'masculinePlural', 'femininePlural'],
   },
 };

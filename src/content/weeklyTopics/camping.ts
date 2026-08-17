@@ -79,9 +79,9 @@ export const campingTopic: WeeklyTopic = {
       id: 'reading-1',
       level: 1,
       title: 'Reading 1 — Camp setup',
-      ro: 'Mergem la camping lângă râu. Montăm cortul și punem salteaua în sacul de dormit. Avem rucsac, lanternă și pătură. Este liniște în pădure.',
+      ro: 'Mergem la camping lângă râu. Montăm cortul și punem salteaua în cort. Avem rucsac, lanternă și pătură. Este liniște în pădure.',
       modelEn:
-        'We go camping by the river. We set up the tent and put the mattress in the sleeping bag. We have a backpack, a lantern and a blanket. It is quiet in the forest.',
+        'We go camping by the river. We set up the tent and put the mattress in the tent. We have a backpack, a lantern and a blanket. It is quiet in the forest.',
       vocabularyUsed: ['v-merge', 'n-camping', 'n-raiu', 'v-monta', 'n-cort', 'n-saltea', 'n-sac-dormit', 'n-rucsac', 'n-lanterna', 'n-patura', 'n-padure'],
       newWords: [{ ro: 'liniște', en: 'quiet / peace' }],
       teacherNotes: 'Very simple sentences. Heavy repetition of camping equipment nouns.',
@@ -91,9 +91,9 @@ export const campingTopic: WeeklyTopic = {
       id: 'reading-2',
       level: 2,
       title: 'Reading 2 — Fire and food',
-      ro: 'Seara aprinde focul cu chibrituri. Punem lemne și gătim în ceaun pe aragazul de camping. O să plouă? Ascultăm insectele. Strângem gunoiul după cină.',
+      ro: 'Seara aprindem focul cu chibrituri. Punem lemne și gătim în ceaun pe aragazul de camping. O să plouă? Se aud insectele în pădure. Strângem gunoiul după cină.',
       modelEn:
-        'In the evening we light the fire with matches. We put firewood and cook in the pot on the camping stove. Is it going to rain? We listen to the insects. We gather the rubbish after dinner.',
+        'In the evening we light the fire with matches. We put firewood and cook in the pot on the camping stove. Is it going to rain? Insects can be heard in the forest. We gather the rubbish after dinner.',
       vocabularyUsed: ['v-aprinde', 'n-foc', 'n-chibrituri', 'n-lemne', 'v-gati', 'n-ceaun', 'n-aragaz-camping', 'p-o-sa-ploua', 'n-insecte', 'v-strange', 'n-gunoi'],
       newWords: [{ ro: 'seară', en: 'evening' }, { ro: 'cină', en: 'dinner' }],
       teacherNotes: 'More natural flow. Reuses vocabulary from Reading 1.',
@@ -105,7 +105,7 @@ export const campingTopic: WeeklyTopic = {
       title: 'Reading 3 — Camping day',
       ro: 'Astăzi am dormit bine în cort. Dimineața am înotat în râu, apoi am împachetat totul. „Unde punem cortul?” întreabă prietenul. „Lângă munte, departe de gunoi.” Am stins focul înainte să plecăm.',
       modelEn:
-        'Today I slept well in the tent. In the morning I swam in the river, then I packed everything. "Where shall we put the tent?" my friend asks. "Near the mountain, away from the rubbish." We put out the fire before we left.',
+        'Today I slept well in the tent. In the morning I swam in the river, then I packed everything. "Where shall we put the tent?" my friend asked. "Near the mountain, away from the rubbish." We put out the fire before we left.',
       vocabularyUsed: ['v-dormi', 'n-cort', 'v-inota', 'n-raiu', 'v-impacheta', 'p-unde-cort', 'n-munte', 'n-gunoi', 'v-stinge', 'n-foc'],
       newWords: [{ ro: 'prieten', en: 'friend' }, { ro: 'înainte', en: 'before' }],
       teacherNotes: 'Short story with dialogue. Good for speaking practice with Mihaela.',

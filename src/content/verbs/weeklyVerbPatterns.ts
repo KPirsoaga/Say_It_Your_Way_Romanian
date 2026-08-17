@@ -1,6 +1,11 @@
 /**
- * INTERNAL CANDIDATE GENERATOR — pattern-built conjugations are NOT learner-facing.
+ * RESEARCH / CANDIDATE ONLY — NOT LEARNER-FACING.
+ *
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Pattern-built conjugations require external lexical verification before any learner use.
  * Verified forms live in `verifiedVerbForms.ts`.
+ *
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
  */
 import type { GrammarVerb, VerbForm, ColorKey } from '../../types';
 import type { ValidationProvenance } from '../validation/provenance';

@@ -1,8 +1,12 @@
 /**
- * INTERNAL CANDIDATE GENERATOR — NOT LEARNER-FACING.
- * Pattern-built noun families may be used for author review only.
+ * RESEARCH / CANDIDATE ONLY — NOT LEARNER-FACING.
+ *
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Pattern-built noun families require external lexical verification before any learner use.
  * Learner views, Daily Practice, search aliases, and Grammar Help must use
  * `verifiedLexicalFamilies.ts` instead.
+ *
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
  */
 import type { DictionaryNounFamily } from './types';
 import { ROMANIAN_ARTICLE_NOTE } from './familyUtils';

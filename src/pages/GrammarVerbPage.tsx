@@ -9,6 +9,9 @@ import { Icon } from '../components/Icon';
 import { colorMap, grammarVerbs } from '../content';
 import { getAvailableTenses, getVerbExamplesForTense, getVerbFormsForTense } from '../content/grammarVerbTenses';
 import { verifiedTenseCoverageLabel } from '../content/dictionary/familyUtils';
+import { getCanonicalVerb } from '../content/lexical/canonical';
+import { formalGrammarLabel } from '../content/lexical/canonical/terminology';
+import { safetyTierLabel } from '../content/validation/lexicalSafety';
 import type { GrammarTense } from '../types';
 import { GRAMMAR_TENSE_LABELS } from '../types';
 
@@ -31,6 +34,11 @@ export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
   const forms = verb && activeTense ? getVerbFormsForTense(verb, activeTense) : undefined;
   const examples = verb && activeTense ? getVerbExamplesForTense(verb, activeTense) : [];
   const coverageNote = verb ? verifiedTenseCoverageLabel(verb.id) : undefined;
+  const canonical = verb ? getCanonicalVerb(verb.id, verb.infinitive, verb.en) : undefined;
+  const canonicalTense = canonical?.tenses.find((t) => t.tense === activeTense);
+  const formalLabels = canonicalTense?.forms.map((f) =>
+    f.terminology ? formalGrammarLabel(f.terminology) : undefined
+  );
 
   if (!verb) {
     return (
@@ -64,6 +72,12 @@ export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
               </p>
             )}
 
+            {canonicalTense && (
+              <p className="text-xs text-center text-forest/50 dark:text-linen/50">
+                {safetyTierLabel(canonicalTense.safetyTier)}
+              </p>
+            )}
+
             {availableTenses.length > 1 && activeTense && (
               <GrammarTenseToggle tenses={availableTenses} active={activeTense} onChange={setTense} />
             )}
@@ -79,6 +93,7 @@ export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
                 title={GRAMMAR_TENSE_LABELS[activeTense]}
                 forms={forms}
                 idPrefix={`${verb.id}-${activeTense}`}
+                formalLabels={formalLabels}
               />
             ) : null}
 

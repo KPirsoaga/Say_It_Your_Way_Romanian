@@ -80,7 +80,7 @@ export const dogWalkersTopic: WeeklyTopic = {
       id: 'reading-2',
       level: 2,
       title: 'Reading 2 — Breed and temperament',
-      ro: '„Ce rasă este?” „Este un mascul, are doi ani.” „Este prietenos?” „Da, se înțelege cu alți câini. Îi place să alerge și să mirosă totul. Uneori lătră, dar nu mușcă.” „Pot să-l mângâi?” „Desigur.”',
+      ro: '„Ce rasă este?” „Este un mascul, are doi ani.” „Este prietenos?” „Da, se înțelege cu alți câini. Îi place să alerge și să miroasă totul. Uneori lătră, dar nu mușcă.” „Pot să-l mângâi?” „Desigur.”',
       modelEn:
         '"What breed is he?" "He is a male, he is two years old." "Is he friendly?" "Yes, he gets along with other dogs. He likes to run and sniff everything. Sometimes he barks, but he does not bite." "Can I pet him?" "Of course."',
       vocabularyUsed: ['p-ce-rasa', 'n-mascul', 'p-cati-ani', 'p-prietenos', 'v-se-intelege', 'n-caine', 'v-alerga', 'v-mirosi', 'v-latra', 'v-musca', 'p-pot-mangâia', 'v-mangâia'],
@@ -92,9 +92,9 @@ export const dogWalkersTopic: WeeklyTopic = {
       id: 'reading-3',
       level: 3,
       title: 'Reading 3 — Dog walker chat',
-      ro: 'Ne plimbăm pe aici în fiecare zi. Câinele meu iubește parcul și jucăriile. „Este fată sau băiat?” „Este femelă, blana ei este moale.” Ea ascultă bine și primește recompense de la veterinar. Îi place să poarte ham, nu lesă. Ne vedem mâine la aceeași oră.',
+      ro: 'Ne plimbăm pe aici în fiecare zi. Câinele meu iubește parcul și jucăriile. „Este fată sau băiat?” „Este femelă, blana ei este moale.” Ea ascultă bine și primește recompense când ascultă. Îi place să poarte ham, nu lesă. Ne vedem mâine la aceeași oră.',
       modelEn:
-        'We walk around here every day. My dog loves the park and toys. "Is it a boy or a girl?" "She is female, her fur is soft." She listens well and gets treats from the vet. She likes to wear a harness, not a lead. We will see each other tomorrow at the same time.',
+        'We walk around here every day. My dog loves the park and toys. "Is it a boy or a girl?" "She is female, her fur is soft." She listens well and gets treats when she obeys. She likes to wear a harness, not a lead. We will see each other tomorrow at the same time.',
       vocabularyUsed: ['p-plimbam-zilnic', 'n-caine', 'v-iubi', 'n-parc', 'n-jucarie', 'p-baiat-fata', 'n-femela', 'n-blana', 'v-asculta', 'n-recompensa', 'n-veterinar', 'n-ham', 'n-lesa'],
       newWords: [{ ro: 'moale', en: 'soft' }, { ro: 'mâine', en: 'tomorrow' }],
       teacherNotes: 'Relaxed conversation between two regular dog walkers.',

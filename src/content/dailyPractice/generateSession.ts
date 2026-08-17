@@ -1,8 +1,19 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Daily Practice session generator — Romanian forms must come from learner-safe canonical variants only.
+ */
 import { dictionaryEntries, collectAllPracticeItems, getCurrentWeeklyTopicId } from '../dictionary';
 import { weeklyTopics } from '../weeklyTopics';
 import { shuffledMcOptions } from '../../utils/shuffle';
 import { GRAMMAR_TENSE_LABELS } from '../dictionary/types';
+import { learnerPersonLabel } from '../dictionary/familyUtils';
+import { formalGrammarLabel, getCanonicalVerb, getTenseSafetyTier } from '../lexical/canonical';
+import { safetyTierLabel } from '../validation/lexicalSafety';
 import type { DailyPracticeSession, DailyVariantExercise, DailyVariantExerciseType } from '../dictionary/types';
+import type { GrammarTense } from '../../types';
 
 function seededRandom(seed: number): () => number {
   let s = seed;
@@ -37,23 +48,55 @@ function distractorsFor(correct: string, pool: string[], count: number, rand: ()
 type PracticeVariant = ReturnType<typeof collectAllPracticeItems>[0];
 
 function variantKey(v: PracticeVariant): string {
-  return `${v.entryId}:${v.formLabel}:${v.ro}`;
+  return `${v.entryId}:${v.formLabel}:${v.ro}:${v.tense ?? ''}`;
 }
+
+const PERSON_OPTIONS = ['eu / I', 'tu / you', 'el / ea / he / she', 'noi / we', 'voi / you (pl.)', 'ei / ele / they'];
+const TENSE_OPTIONS = ['Present', 'Perfect compus', 'Imperfect', 'Future'];
 
 function exerciseTypeForVariant(variant: PracticeVariant, rand: () => number): DailyVariantExerciseType {
   const suitable: DailyVariantExerciseType[] = ['ro-en', 'which-meaning', 'listen'];
   if (variant.formLabel === 'headword') {
     return suitable[Math.floor(rand() * suitable.length)] ?? 'ro-en';
   }
-  if (variant.type === 'verb') suitable.push('verb-person', 'en-ro');
-  if (variant.formLabel === 'plural') suitable.push('singular-plural');
-  if (variant.formLabel.includes('definite')) suitable.push('definite-form');
-  if (variant.type === 'adjective' && variant.formLabel !== 'masculine singular') {
-    suitable.push('adjective-form', 'en-ro');
+  if (variant.type === 'verb') {
+    suitable.push('verb-person', 'which-person', 'which-tense', 'en-ro');
   }
-  if (variant.type === 'noun') suitable.push('en-ro');
+  if (variant.formLabel === 'plural') suitable.push('singular-plural', 'which-form-class');
+  if (variant.formLabel.includes('definite')) suitable.push('definite-form', 'which-form-class');
+  if (variant.type === 'adjective' && variant.formLabel !== 'masculine singular') {
+    suitable.push('adjective-form', 'which-form-class', 'en-ro');
+  }
+  if (variant.type === 'noun') suitable.push('en-ro', 'which-form-class');
   const unique = [...new Set(suitable)];
   return unique[Math.floor(rand() * unique.length)] ?? 'ro-en';
+}
+
+function formalGrammarForVariant(variant: PracticeVariant): string | undefined {
+  if (variant.type === 'verb' && variant.grammarVerbId && variant.tense) {
+    const canonical = getCanonicalVerb(variant.grammarVerbId);
+    const tenseBlock = canonical?.tenses.find((t) => t.tense === variant.tense);
+    const form = tenseBlock?.forms.find((f) => f.label === variant.formLabel);
+    if (form?.terminology) return formalGrammarLabel(form.terminology);
+  }
+  if (variant.type === 'noun') {
+    if (variant.formLabel === 'plural') return 'plural, indefinite (nominative-accusative)';
+    if (variant.formLabel === 'singular') return 'singular, indefinite (nominative-accusative)';
+    if (variant.formLabel === 'definite singular') return 'singular, definite (nominative-accusative)';
+    if (variant.formLabel === 'definite plural') return 'plural, definite (nominative-accusative)';
+  }
+  if (variant.type === 'adjective') return variant.formLabel;
+  return undefined;
+}
+
+function safetyLabelForVariant(variant: PracticeVariant): string | undefined {
+  if (variant.type === 'verb' && variant.grammarVerbId && variant.tense) {
+    return safetyTierLabel(getTenseSafetyTier(variant.grammarVerbId, variant.tense));
+  }
+  if (variant.type === 'noun' || variant.type === 'adjective') {
+    return safetyTierLabel('lexical-attested');
+  }
+  return undefined;
 }
 
 function buildExercise(
@@ -72,6 +115,43 @@ function buildExercise(
   let promptEn: string | undefined;
 
   switch (type) {
+    case 'which-person': {
+      correct = learnerPersonLabel(variant.formLabel);
+      options = shuffledMcOptions(
+        [correct, ...distractorsFor(correct, PERSON_OPTIONS, 3, rand)],
+        correct
+      );
+      break;
+    }
+    case 'which-tense': {
+      correct = variant.tense ? GRAMMAR_TENSE_LABELS[variant.tense] : 'Present';
+      options = shuffledMcOptions(
+        [correct, ...distractorsFor(correct, TENSE_OPTIONS, 3, rand)],
+        correct
+      );
+      break;
+    }
+    case 'which-form-class': {
+      if (variant.type === 'noun') {
+        correct =
+          variant.formLabel === 'plural' || variant.formLabel === 'definite plural'
+            ? 'plural noun form'
+            : variant.formLabel.includes('definite')
+              ? 'definite noun form'
+              : 'singular noun form';
+        options = shuffledMcOptions(
+          [correct, 'singular noun form', 'plural noun form', 'definite noun form'].filter(
+            (v, i, a) => a.indexOf(v) === i
+          ),
+          correct
+        );
+      } else {
+        correct = variant.formLabel;
+        const adjPool = ['masculine singular', 'feminine singular', 'masculine plural', 'feminine plural'];
+        options = shuffledMcOptions([correct, ...distractorsFor(correct, adjPool, 3, rand)], correct);
+      }
+      break;
+    }
     case 'en-ro': {
       promptEn = variant.en;
       promptRo = variant.en;
@@ -102,10 +182,12 @@ function buildExercise(
     variant.formLabel === 'headword'
       ? `Word: ${variant.ro}`
       : variant.type === 'verb'
-        ? `${tenseLabel ?? 'Present'}: ${variant.formLabel} ${variant.ro}`
+        ? `${tenseLabel ?? 'Present'}: ${learnerPersonLabel(variant.formLabel)} — ${variant.ro}`
         : variant.type === 'adjective'
           ? `Form: ${variant.formLabel}`
-          : undefined;
+          : variant.type === 'noun'
+            ? `Form: ${variant.formLabel}`
+            : undefined;
 
   return {
     id: `daily-${index}-${variant.ro}-${type}`,
@@ -121,6 +203,8 @@ function buildExercise(
       baseEn: variant.baseEn,
       formLabel: variant.formLabel,
       tenseLabel,
+      formalGrammar: formalGrammarForVariant(variant),
+      safetyTierLabel: safetyLabelForVariant(variant),
       wordFamily: variant.wordFamilyChain,
       grammarVerbId: variant.grammarVerbId,
       plainNote,
@@ -204,4 +288,26 @@ export function generateDailyPracticeSession(dateStr: string, currentTopicId?: s
   });
 
   return { date: dateStr, currentTopicId: topicId, exercises };
+}
+
+/** Count practice pool coverage by tense for reporting */
+export function dailyPracticeTenseCoverage(): Record<GrammarTense | 'headword' | 'noun' | 'adjective', number> {
+  const counts: Record<string, number> = {
+    present: 0,
+    'perfect-compus': 0,
+    imperfect: 0,
+    future: 0,
+    headword: 0,
+    noun: 0,
+    adjective: 0,
+  };
+  dictionaryEntries.forEach((entry) => {
+    collectAllPracticeItems(entry, 'wider').forEach((v) => {
+      if (v.formLabel === 'headword') counts.headword!++;
+      else if (v.type === 'noun') counts.noun!++;
+      else if (v.type === 'adjective') counts.adjective!++;
+      else if (v.tense) counts[v.tense] = (counts[v.tense] ?? 0) + 1;
+    });
+  });
+  return counts as Record<GrammarTense | 'headword' | 'noun' | 'adjective', number>;
 }

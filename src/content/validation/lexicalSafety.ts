@@ -1,4 +1,12 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Learner-safe provenance tiers and gates.
+ */
 import type { ValidationProvenance } from '../../types';
+import type { LexicalSafetyTier } from '../lexical/canonical/types';
 
 /** Provenance tiers safe to show learners as established Romanian facts */
 export const LEARNER_SAFE_PROVENANCES: ReadonlySet<ValidationProvenance> = new Set([
@@ -6,6 +14,17 @@ export const LEARNER_SAFE_PROVENANCES: ReadonlySet<ValidationProvenance> = new S
   'lexical-cross-checked',
   'teacher-validated',
 ]);
+
+export const LEARNER_SAFE_TIERS: ReadonlySet<LexicalSafetyTier> = new Set([
+  'lexical-attested',
+  'lexical-composed',
+  'teacher-validated',
+]);
+
+export function isLearnerSafeTier(tier: LexicalSafetyTier | undefined): boolean {
+  if (!tier) return false;
+  return LEARNER_SAFE_TIERS.has(tier);
+}
 
 /**
  * Reference-explicit is learner-safe only when the individual form is listed
@@ -31,4 +50,17 @@ export interface LexicalSourceRef {
   url: string;
   dictionary: string;
   checkedAt: string;
+}
+
+export function safetyTierLabel(tier: LexicalSafetyTier): string {
+  switch (tier) {
+    case 'lexical-attested':
+      return 'Verified on dexonline';
+    case 'lexical-composed':
+      return 'Built from verified parts';
+    case 'teacher-validated':
+      return 'Teacher validated';
+    default:
+      return 'Unresolved';
+  }
 }
