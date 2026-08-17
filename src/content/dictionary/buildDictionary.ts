@@ -1,7 +1,8 @@
-import { grammarVerbs } from '../verbs';
+import { grammarVerbs, auditCanonicalVerbs } from '../verbs';
 import { scenarios, realLifeCategories, survivalPhrases } from '../../content';
 import { weeklyTopics } from '../weeklyTopics';
 import { curatedAdjectiveFamilies, curatedNounFamilies } from './curatedFamilies';
+import { auditEssentialGrammar } from './essentialGrammarValidation';
 import { lookupGrammarVerbId } from './verbLinks';
 import {
   adjectiveFamilyChain,
@@ -793,6 +794,14 @@ export function dictionaryAuditReport() {
     searchableGrammaticalVariants: dictionaryFormAliases.length,
     dailyPracticeVariantPoolSize: variantPool.length,
     needsMihaelaReview: needsMihaela,
+  };
+}
+
+export function platformGrammarAuditReport() {
+  return {
+    dictionary: dictionaryAuditReport(),
+    essentialGrammar: auditEssentialGrammar(),
+    verbs: auditCanonicalVerbs(),
   };
 }
 

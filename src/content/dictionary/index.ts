@@ -12,6 +12,9 @@ export {
   collectVariants,
   dictionaryStats,
   dictionaryAuditReport,
+  platformGrammarAuditReport,
   buildDictionary,
   getCurrentWeeklyTopicId,
 } from './buildDictionary';
+export { auditEssentialGrammar } from './essentialGrammarValidation';
+export type { EssentialGrammarAuditReport } from './essentialGrammarValidation';

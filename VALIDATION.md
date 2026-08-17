@@ -622,3 +622,14 @@ Status: Fixed
 Notes: `canonicalVerbBase.ts`, `canonicalVerbTenses.ts`, `canonicalVerbs.ts`; 14 grammar verbs, all 4 tenses; 404 searchable variants; handbook validates -a/-e/-o type patterns (putea, bea, face, pleca); a fi/a avea auxiliaries and perfect compus/future flagged as outside handbook scope; Mihaela review retained for example sentences.
 
 ---
+
+VAL-057
+Area: Platform-wide / Romanian: An Essential Grammar validation
+Issue: Noun/adjective families, article treatment, gender/agreement, and broader Romanian grammar lacked an external validation layer beyond the Verb Handbook; risk of incorrect plurals, definite forms, or gender in Dictionary V2 and cross-feature content.
+Expected behaviour: Use Gönczöl Romanian: An Essential Grammar as validation reference (not content source) for nouns, adjectives, articles, agreement, and broader grammar; curated word families validated against reference; original learner-facing explanations only; uncertain forms flagged for Mihaela Review; `auditEssentialGrammar()` reports validation coverage.
+Current behaviour: Dictionary V2 curated families existed but were not systematically audited against Essential Grammar; no platform-wide grammar audit beyond verbs.
+Priority: High
+Status: Fixed
+Notes: `essentialGrammarValidation.ts` + `platformGrammarAuditReport()`; 2 nouns explicitly validated (câine, mașină), 8 pattern-validated; 3 adjectives explicit (bun, mic, mare), 1 pattern (greu); no gender/plural/definite corrections required; article note confirmed original; 103 nouns remain incomplete pending reference; textbook content not copied.
+
+---
