@@ -1,4 +1,5 @@
 import type { ContentReviewMeta, GrammarTense, VerbForm } from '../../types';
+import type { DictionaryEntryClass } from '../lexical/canonical/types';
 
 export type DictionaryLexicalType = 'noun' | 'verb' | 'adjective';
 
@@ -78,6 +79,8 @@ export interface DictionaryEntry {
   nounFamily?: DictionaryNounFamily;
   verbFamily?: DictionaryVerbFamily;
   adjectiveFamily?: DictionaryAdjectiveFamily;
+  /** Taxonomic class for honest coverage reporting */
+  entryClass?: DictionaryEntryClass;
   /** Verified full family available for display and practice */
   familyComplete: boolean;
   /** Missing or unverified forms — needs teacher review */
@@ -135,6 +138,9 @@ export type DailyVariantExerciseType =
   | 'definite-form'
   | 'adjective-form'
   | 'verb-person'
+  | 'which-person'
+  | 'which-tense'
+  | 'which-form-class'
   | 'ro-en'
   | 'en-ro'
   | 'listen';
@@ -153,6 +159,8 @@ export interface DailyVariantExercise {
     baseEn: string;
     formLabel?: string;
     tenseLabel?: string;
+    formalGrammar?: string;
+    safetyTierLabel?: string;
     wordFamily?: string[];
     grammarVerbId?: string;
     plainNote?: string;

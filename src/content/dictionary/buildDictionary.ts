@@ -7,6 +7,7 @@ import { runLexicalRepairAudit } from './lexicalAudit';
 import { auditEssentialGrammar } from './essentialGrammarValidation';
 import { verifiedVerbTenses } from '../verbs/verifiedVerbForms';
 import { lookupGrammarVerbId } from './verbLinks';
+import { classifyNounHeadword, expectsNounFamily } from './entryTaxonomy';
 import {
   adjectiveFamilyChain,
   extractPerfectParticiples,
@@ -27,6 +28,7 @@ import type {
   DictionaryWordType,
 } from './types';
 import type { ContentReviewMeta, GrammarTense, WeeklyVocabItem } from '../../types';
+import { getVerifiedTensesForVerb } from '../verbs/verifiedVerbForms';
 
 function normalizeRo(ro: string): string {
   return ro
@@ -59,6 +61,10 @@ function mergeSources(existing: DictionarySourceRef[], next: DictionarySourceRef
 
 function buildNounFamily(ro: string, en: string) {
   const head = nounHeadword(ro);
+  const nounClass = classifyNounHeadword(head);
+  if (!expectsNounFamily(nounClass)) {
+    return { family: { singular: { ro, en } }, complete: false, needsReview: false };
+  }
   const verified = getVerifiedNounFamily(head);
   if (verified) {
     return {
@@ -204,8 +210,11 @@ function addWeeklyVocab(
       }
       if (type === 'verb') {
         entry.verbFamily = buildVerbFamily(item.ro, item.en);
-        entry.familyComplete = Boolean(entry.verbFamily.present && entry.verbFamily.present.length >= 6);
-        entry.familyNeedsReview = !entry.familyComplete;
+        const verifiedTenses = entry.verbFamily.grammarVerbId
+          ? getVerifiedTensesForVerb(entry.verbFamily.grammarVerbId)
+          : [];
+        entry.familyComplete = verifiedTenses.length > 0;
+        entry.familyNeedsReview = verifiedTenses.length === 0;
       }
       if (type === 'adjective') {
         const { family, complete, needsReview } = buildAdjectiveFamily(item.ro, item.en);
@@ -356,11 +365,38 @@ function attachUsageExamples(phrases: DictionaryPhrase[], headwordMap: Map<strin
   });
 }
 
+function seedEssentialHeadwords(map: Map<string, DictionaryEntry>): void {
+  const essentials: { ro: string; en: string; type: DictionaryLexicalType }[] = [
+    { ro: 'bun', en: 'good', type: 'adjective' },
+  ];
+  essentials.forEach((item) => {
+    const key = `${item.type}:${normalizeRo(item.ro)}`;
+    if (map.has(key)) return;
+    const { family, complete, needsReview } = buildAdjectiveFamily(item.ro, item.en);
+    const sortKey = sortKeyFor(item.ro, item.type);
+    map.set(key, {
+      id: `dict-essential-${normalizeRo(item.ro)}`,
+      type: item.type,
+      headwordRo: item.ro,
+      headwordEn: item.en,
+      sortKey,
+      letter: letterBucket(sortKey),
+      sources: [{ feature: 'grammar', featureId: `essential-${item.ro}`, label: 'Essential vocabulary' }],
+      adjectiveFamily: family,
+      familyComplete: complete,
+      familyNeedsReview: needsReview,
+    });
+  });
+}
+
 function buildFormAliases(headwords: DictionaryEntry[]): DictionaryFormAlias[] {
   const aliases: DictionaryFormAlias[] = [];
+  const headwordByRo = new Map(headwords.map((e) => [normalizeRo(e.headwordRo), e.id]));
 
   const pushAlias = (alias: DictionaryFormAlias) => {
     const key = normalizeRo(alias.ro);
+    const ownerId = headwordByRo.get(key);
+    if (ownerId && ownerId !== alias.entryId) return;
     if (key === normalizeRo(headwords.find((e) => e.id === alias.entryId)?.headwordRo ?? '')) return;
     aliases.push({ ...alias, ro: key });
   };
@@ -472,6 +508,29 @@ export interface BuiltDictionary {
   aliasByRo: Map<string, DictionaryFormAlias[]>;
 }
 
+function finalizeEntry(entry: DictionaryEntry): DictionaryEntry {
+  const entryClass =
+    entry.type === 'noun'
+      ? classifyNounHeadword(entry.headwordRo)
+      : entry.type === 'verb'
+        ? 'verb'
+        : entry.type === 'adjective'
+          ? 'adjective'
+          : 'other';
+
+  if (entry.type === 'noun' && !expectsNounFamily(entryClass)) {
+    return {
+      ...entry,
+      entryClass,
+      familyComplete: false,
+      familyNeedsReview: false,
+      nounFamily: entry.nounFamily ?? { singular: { ro: entry.headwordRo, en: entry.headwordEn } },
+    };
+  }
+
+  return { ...entry, entryClass };
+}
+
 function buildAll(): BuiltDictionary {
   const headwordMap = new Map<string, DictionaryEntry>();
   const phraseMap = new Map<string, DictionaryPhrase>();
@@ -523,6 +582,7 @@ function buildAll(): BuiltDictionary {
   });
 
   addGrammarVerbs(headwordMap);
+  seedEssentialHeadwords(headwordMap);
 
   const podKey = `noun:${normalizeRo('pod')}`;
   const podEntry = headwordMap.get(podKey);
@@ -544,7 +604,9 @@ function buildAll(): BuiltDictionary {
     });
   }
 
-  const headwords = [...headwordMap.values()].sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
+  const headwords = [...headwordMap.values()]
+    .map(finalizeEntry)
+    .sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
   const phrases = [...phraseMap.values()].sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
 
   const aliases = buildFormAliases(headwords);
@@ -736,23 +798,35 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
     push(entry.nounFamily.singular.ro, entry.nounFamily.singular.en, 'singular');
   }
 
-  if (entry.verbFamily?.present && entry.verbFamily.grammarVerbId &&
-      isVerbTenseLearnerSafe(entry.verbFamily.grammarVerbId, 'present')) {
-    const chain = verbPresentChain(entry.verbFamily);
-    entry.verbFamily.present.forEach((form) => {
-      variants.push({
-        entryId: entry.id,
-        ro: form.ro,
-        en: form.en,
-        pron: form.pron,
-        formLabel: form.label,
-        baseRo,
-        baseEn,
-        type: 'verb',
-        grammarVerbId: entry.verbFamily?.grammarVerbId,
-        tense: 'present',
-        wordFamilyChain: chain,
-        sourceWeight: weight,
+  if (entry.verbFamily?.grammarVerbId) {
+    const grammarVerbId = entry.verbFamily.grammarVerbId;
+    const tenseBlocks: { tense: GrammarTense; forms?: { label: string; ro: string; en: string; pron?: string }[] }[] = [
+      { tense: 'present', forms: entry.verbFamily.present },
+      { tense: 'perfect-compus', forms: entry.verbFamily.perfectCompus },
+      { tense: 'imperfect', forms: entry.verbFamily.imperfect },
+      { tense: 'future', forms: entry.verbFamily.future },
+    ];
+    tenseBlocks.forEach(({ tense, forms }) => {
+      if (!isVerbTenseLearnerSafe(grammarVerbId, tense) || !forms?.length) return;
+      const chain =
+        tense === 'present'
+          ? verbPresentChain(entry.verbFamily!)
+          : [entry.verbFamily!.infinitive, ...forms.map((f) => f.ro)];
+      forms.forEach((form) => {
+        variants.push({
+          entryId: entry.id,
+          ro: form.ro,
+          en: form.en,
+          pron: form.pron,
+          formLabel: form.label,
+          baseRo,
+          baseEn,
+          type: 'verb',
+          grammarVerbId,
+          tense,
+          wordFamilyChain: chain,
+          sourceWeight: weight,
+        });
       });
     });
   }

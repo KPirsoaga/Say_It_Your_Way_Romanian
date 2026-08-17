@@ -22,6 +22,12 @@ function promptText(exercise: DailyVariantExercise): { title: string; showRo: bo
       return { title: 'Listen and choose the meaning', showRo: false };
     case 'verb-person':
       return { title: 'Who is speaking? What does this form mean?', showRo: true };
+    case 'which-person':
+      return { title: 'Which person is this verb form?', showRo: true };
+    case 'which-tense':
+      return { title: 'Which tense is this verb form?', showRo: true };
+    case 'which-form-class':
+      return { title: 'What kind of grammatical form is this?', showRo: true };
     case 'singular-plural':
       return { title: 'Singular or plural — what does this mean?', showRo: true };
     case 'definite-form':
@@ -113,6 +119,14 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
             <p className="text-sm text-ink-500 dark:text-ink-400">
               {exercise.feedback.tenseLabel}: {exercise.feedback.formLabel}
             </p>
+          )}
+          {exercise.feedback.formalGrammar && (
+            <p className="text-sm text-ink-500 dark:text-ink-400">
+              Grammar: {exercise.feedback.formalGrammar}
+            </p>
+          )}
+          {exercise.feedback.safetyTierLabel && (
+            <p className="text-xs text-ink-400 dark:text-ink-500">{exercise.feedback.safetyTierLabel}</p>
           )}
           {exercise.feedback.plainNote && (
             <p className="text-sm text-ink-500 dark:text-ink-400">{exercise.feedback.plainNote}</p>
