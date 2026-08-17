@@ -111,9 +111,9 @@ export const bbqSocialisingTopic: WeeklyTopic = {
       id: 'reading-3',
       level: 3,
       title: 'Reading 3 — BBQ conversation',
-      ro: '„Ce mai faci?” întreabă o prietenă. „Bine, mulțumesc. De unde vă cunoașteți?” „Ne-am invitat vecinii.” Cât timp stai? „Până seara.” Gust carne și porc, beau din pahar. „Pot să ajut cu ceva?” La final spun: „M-am simțit foarte bine. Mulțumesc pentru invitație.”',
+      ro: '„Ce mai faci?” întreabă o prietenă. „Bine, mulțumesc. De unde vă cunoașteți?” „Am invitat vecinii.” „Cât timp stai?” „Până seara.” Gust cârnați și mici, beau din pahar. „Pot să ajut cu ceva?” La final spun: „M-am simțit foarte bine. Mulțumesc pentru invitație.”',
       modelEn:
-        '"How are things?" a friend asks. "Fine, thanks. How do you know each other?" "We invited the neighbours." How long are you staying? "Until evening." I taste meat and pork, I drink from a glass. "Can I help with anything?" At the end I say: "I had a really nice time. Thanks for the invitation."',
+        '"How are things?" a friend asks. "Fine, thanks. How do you know each other?" "We invited the neighbours." "How long are you staying?" "Until evening." I taste sausages and mici, I drink from a glass. "Can I help with anything?" At the end I say: "I had a really nice time. Thanks for the invitation."',
       vocabularyUsed: ['p-ce-mai-faci', 'p-de-unde', 'v-invita', 'n-vecini', 'p-cat-timp', 'v-gusta', 'n-carne', 'n-porc', 'v-bea', 'n-pahar', 'p-pot-ajuta', 'p-simtit-bine', 'p-multumesc'],
       newWords: [{ ro: 'până seara', en: 'until evening' }, { ro: 'la final', en: 'at the end' }],
       teacherNotes: 'Relaxed BBQ conversation between friends and neighbours.',

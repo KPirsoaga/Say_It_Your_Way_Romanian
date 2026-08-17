@@ -53,7 +53,7 @@ export const scenarios: Scenario[] = [
         slow: 'Cât... costă?',
       },
       {
-        ro: 'Faceți cu plăcere. O zi bună!',
+        ro: 'Cu plăcere. O zi bună!',
         en: 'You\'re welcome. Have a good day!',
         literal: 'You-do with pleasure. A day good!',
         pron: 'Fah-CHETS koo pluh-CHER-ay. Oh ZEE BOO-nuh!',
@@ -115,7 +115,7 @@ export const scenarios: Scenario[] = [
         slow: 'Am nevoie... de ceva... pentru durerea de cap.',
       },
       {
-        ro: 'Vă recomand pastile acestea.',
+        ro: 'Vă recomand aceste pastile.',
         en: 'I recommend these pills.',
         literal: 'You recommend pills these.',
         pron: 'Vuh reh-coh-mahn-nd PAHS-tee-leh a-CHES-tyah.',
@@ -204,7 +204,7 @@ export const scenarios: Scenario[] = [
       },
       {
         ro: 'Da, o apă plată, mulțumesc.',
-        en: 'Yes, a still water, thank you.',
+        en: 'Yes, still water, thank you.',
         literal: 'Yes, a water flat, thanks.',
         pron: 'Dah, oh AH-puh PLAH-tuh, mool-tsoo-MESK.',
         slow: 'Da... o apă plată... mulțumesc.',
@@ -872,11 +872,11 @@ export const realLifeCategories: RealLifeCategory[] = [
         slow: 'E urgent.',
       },
       {
-        ro: 'Apoița curge.',
+        ro: 'Robinetul curge.',
         en: 'The tap is leaking.',
         literal: 'Tap-the leaks.',
-        pron: 'ah-PEE-tzuh KOOR-zheh.',
-        slow: 'Apoița curge.',
+        pron: 'roh-bee-NET-ool KOOR-zheh.',
+        slow: 'Robinetul curge.',
       },
     ],
   },
@@ -944,7 +944,7 @@ export const survivalPhrases: SurvivalPhrase[] = [
   },
   {
     ro: 'Vorbiți mai încet, vă rog.',
-    en: 'Can you say it more slowly?',
+    en: 'Please speak more slowly.',
     literal: 'You-speak more slowly, you please.',
     pron: 'VOR-beets MY uhn-CHET, vuh ROHG.',
     slow: 'Vorbiți mai încet... vă rog.',
@@ -1090,11 +1090,11 @@ const tinyPhrasePool: import('./types').PhraseLine[] = [
     slow: 'Vorbiți mai încet... vă rog.',
   },
   {
-    ro: 'Reușesc puțin câte puțin.',
-    en: 'I’m managing, little by little.',
-    literal: 'I-succeed little by little.',
-    pron: 'Reh-oo-SHESS poo-TEEN kuh-teh poo-TEEN.',
-    slow: 'Reușesc puțin... câte puțin.',
+    ro: 'Progresez puțin câte puțin.',
+    en: 'I\'m making progress, little by little.',
+    literal: 'I-progress little by little.',
+    pron: 'proh-greh-SEHZ poo-TEEN kuh-teh poo-TEEN.',
+    slow: 'Progresez puțin... câte puțin.',
   },
 ];
 
@@ -1144,7 +1144,7 @@ export const miniConversations: MiniConversation[] = [
       {
         who: 'you',
         ro: 'Vreau două pâini și o apă, vă rog.',
-        en: "I'd like two loaves and a water, please.",
+        en: "I'd like two loaves and some water, please.",
         literal: 'I-want two breads and a water, you please.',
         pron: 'VROW DOO-uh puh-NEE shee oh AH-puh, vuh ROHG.',
         slow: 'Vreau două pâini... și o apă, vă rog.',
