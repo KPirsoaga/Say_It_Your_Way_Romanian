@@ -10,7 +10,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "suntîs"
+            "ro": "sunt"
           },
           {
             "label": "tu",
@@ -18,7 +18,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "esteeîi"
+            "ro": "este"
           },
           {
             "label": "noi",
@@ -30,7 +30,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "suntîs"
+            "ro": "sunt"
           }
         ],
         "subjunctive": [
@@ -131,7 +131,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "aibăaibeaivă"
+            "ro": "aibă"
           },
           {
             "label": "noi",
@@ -143,7 +143,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "aibăaibeaivă"
+            "ro": "aibă"
           }
         ],
         "imperfect": [
@@ -184,11 +184,11 @@
         "present": [
           {
             "label": "eu",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           },
           {
             "label": "tu",
-            "ro": "vreivrai"
+            "ro": "vrei"
           },
           {
             "label": "el/ea",
@@ -210,15 +210,15 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           },
           {
             "label": "tu",
-            "ro": "vreivrai"
+            "ro": "vrei"
           },
           {
             "label": "el/ea",
-            "ro": "vreavreie"
+            "ro": "vrea"
           },
           {
             "label": "noi",
@@ -230,17 +230,17 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vreavreie"
+            "ro": "vrea"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "vreamvram"
+            "ro": "vream"
           },
           {
             "label": "tu",
-            "ro": "vreaivrai"
+            "ro": "vreai"
           },
           {
             "label": "el/ea",
@@ -248,7 +248,7 @@
           },
           {
             "label": "noi",
-            "ro": "vreamvram"
+            "ro": "vream"
           },
           {
             "label": "voi",
@@ -256,7 +256,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           }
         ],
         "source": "dexonline.ro"
@@ -532,7 +532,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "spunspui"
+            "ro": "spun"
           },
           {
             "label": "tu",
@@ -558,7 +558,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "spunspui"
+            "ro": "spun"
           },
           {
             "label": "tu",
@@ -566,7 +566,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "spunăspuie"
+            "ro": "spună"
           },
           {
             "label": "noi",
@@ -578,7 +578,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "spunăspuie"
+            "ro": "spună"
           }
         ],
         "imperfect": [
@@ -1402,7 +1402,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "punpui"
+            "ro": "pun"
           },
           {
             "label": "tu",
@@ -1428,7 +1428,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "punpui"
+            "ro": "pun"
           },
           {
             "label": "tu",
@@ -1436,7 +1436,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "punăpuie"
+            "ro": "pună"
           },
           {
             "label": "noi",
@@ -1448,7 +1448,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "punăpuie"
+            "ro": "pună"
           }
         ],
         "imperfect": [
@@ -2359,7 +2359,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "tundtunz"
+            "ro": "tund"
           },
           {
             "label": "tu",
@@ -2385,7 +2385,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "tundtunz"
+            "ro": "tund"
           },
           {
             "label": "tu",
@@ -2393,7 +2393,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "tundătunză"
+            "ro": "tundă"
           },
           {
             "label": "noi",
@@ -2405,7 +2405,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "tundătunză"
+            "ro": "tundă"
           }
         ],
         "imperfect": [
@@ -3089,7 +3089,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "plouăploaie"
+            "ro": "plouă"
           },
           {
             "label": "noi",
@@ -5438,7 +5438,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "iaieie"
+            "ro": "ia"
           },
           {
             "label": "noi",
@@ -5450,7 +5450,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "iaieie"
+            "ro": "ia"
           }
         ],
         "imperfect": [
@@ -5665,7 +5665,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "vinviu"
+            "ro": "vin"
           },
           {
             "label": "tu",
@@ -5691,7 +5691,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "vinviu"
+            "ro": "vin"
           },
           {
             "label": "tu",
@@ -5699,7 +5699,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "vinăvie"
+            "ro": "vină"
           },
           {
             "label": "noi",
@@ -5711,7 +5711,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vinăvie"
+            "ro": "vină"
           }
         ],
         "imperfect": [
@@ -5748,7 +5748,7 @@
       "lemma": "sta",
       "paradigm": {
         "infinitive": "sta",
-        "participiu": "statstătut",
+        "participiu": "stat",
         "present": [
           {
             "label": "eu",
@@ -5786,7 +5786,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "steasteie"
+            "ro": "stea"
           },
           {
             "label": "noi",
@@ -5798,33 +5798,33 @@
           },
           {
             "label": "ei/ele",
-            "ro": "steasteie"
+            "ro": "stea"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "stăteamstamsteteam"
+            "ro": "stăteam"
           },
           {
             "label": "tu",
-            "ro": "stăteaistaisteteai"
+            "ro": "stăteai"
           },
           {
             "label": "el/ea",
-            "ro": "stăteastastetea"
+            "ro": "stătea"
           },
           {
             "label": "noi",
-            "ro": "stăteamstamsteteam"
+            "ro": "stăteam"
           },
           {
             "label": "voi",
-            "ro": "stăteațistațisteteați"
+            "ro": "stăteați"
           },
           {
             "label": "ei/ele",
-            "ro": "stăteaustausteteau"
+            "ro": "stăteau"
           }
         ],
         "source": "dexonline.ro"
@@ -6270,7 +6270,7 @@
         "singular": "podea",
         "plural": "podele",
         "definiteSingular": "podeaua",
-        "definitePlural": "podelele",
+        "definitePlural": "pode",
         "source": "dexonline.ro"
       }
     },
@@ -6325,7 +6325,7 @@
         "singular": "greblă",
         "plural": "greble",
         "definiteSingular": "grebla",
-        "definitePlural": "greblele",
+        "definitePlural": "greb",
         "source": "dexonline.ro"
       }
     },
@@ -6336,7 +6336,7 @@
         "singular": "saltea",
         "plural": "saltele",
         "definiteSingular": "salteaua",
-        "definitePlural": "saltelele",
+        "definitePlural": "salte",
         "source": "dexonline.ro"
       }
     },
@@ -6577,7 +6577,7 @@
         "gender": "masculine",
         "singular": "mascul",
         "plural": "masculi",
-        "definiteSingular": "masculul",
+        "definiteSingular": "masc",
         "definitePlural": "masculii",
         "source": "dexonline.ro"
       }
@@ -6589,7 +6589,7 @@
         "singular": "femelă",
         "plural": "femele",
         "definiteSingular": "femela",
-        "definitePlural": "femelele",
+        "definitePlural": "feme",
         "source": "dexonline.ro"
       }
     },
@@ -7040,7 +7040,7 @@
         "singular": "șervețel",
         "plural": "șervețele",
         "definiteSingular": "șervețelul",
-        "definitePlural": "șervețelele",
+        "definitePlural": "șervețe",
         "source": "dexonline.ro"
       }
     },

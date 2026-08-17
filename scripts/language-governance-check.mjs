@@ -14,6 +14,7 @@ import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe, verifiedVerbTenses } f
 import { verifiedNounFamilies } from '../src/content/dictionary/verifiedLexicalFamilies.ts';
 import { generateDailyPracticeSession } from '../src/content/dailyPractice/generateSession.ts';
 import { entryHasLearnerWordFamily } from '../src/content/dictionary/familyUtils.ts';
+import { isLikelyGluedForm } from './lib/dexonline-parser.mjs';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const failures = [];
@@ -228,13 +229,10 @@ for (const [verbId, tenses] of Object.entries(verifiedVerbTenses)) {
         fail(`corrupted form ${verbId} ${t.tense} ${f.label}`, f.ro);
         corruptedForms++;
       }
-      if (f.ro.length >= 8) {
-        for (let len = Math.floor(f.ro.length / 2); len >= 4; len--) {
-          if (f.ro.slice(0, len) === f.ro.slice(len)) {
-            fail(`duplicate-stem form ${verbId} ${t.tense} ${f.label}`, f.ro);
-            corruptedForms++;
-            break;
-          }
+      for (const token of f.ro.split(/\s+/)) {
+        if (isLikelyGluedForm(token)) {
+          fail(`glued variant form ${verbId} ${t.tense} ${f.label}`, token);
+          corruptedForms++;
         }
       }
     }

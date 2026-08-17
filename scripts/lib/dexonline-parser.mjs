@@ -20,7 +20,6 @@ export function extractPrimaryVariant(raw) {
     .trim();
   if (!s) return '';
 
-  // Explicit variant separators used by dexonline
   if (s.includes('|')) {
     const parts = s.split('|').map((p) => p.trim()).filter(Boolean);
     if (parts.length) return parts[0];
@@ -30,7 +29,6 @@ export function extractPrimaryVariant(raw) {
 }
 
 function stripHtml(cell) {
-  // Dexonline often lists standard + elided variants as duplicate <li> items — keep first only
   const firstLi = cell.match(/<li[^>]*>([\s\S]*?)<\/li>/i);
   const content = firstLi ? firstLi[1] : cell;
   return extractPrimaryVariant(content);
@@ -52,13 +50,127 @@ function parseTableRows(tableHtml) {
   return rows;
 }
 
+function sharesStem(head, tail, minStem = 2) {
+  const max = Math.min(4, head.length, tail.length);
+  for (let sl = max; sl >= minStem; sl--) {
+    if (head.slice(0, sl) === tail.slice(0, sl)) return true;
+    if (head.slice(-sl) === tail.slice(0, sl)) return true;
+  }
+  return false;
+}
+
+/** Detect dexonline merge artefacts — conservative to avoid valid long forms like construiești */
+export function isLikelyGluedForm(s) {
+  if (!s || typeof s !== 'string') return false;
+  const t = s.trim();
+  if (!t || t.includes(' ')) return false;
+  if (/&#x|&#\d|&[a-z]+;/i.test(t) || /\u2011/.test(t)) return true;
+  if (t.length > 12) return true;
+
+  for (let len = Math.floor(t.length / 2); len >= 4; len--) {
+    const a = t.slice(0, len);
+    const b = t.slice(len);
+    if (a === b || b === `${a}u`) return true;
+  }
+
+  if (t.length >= 8) {
+    for (let i = 4; i <= t.length - 4; i++) {
+      const head = t.slice(0, i);
+      const tail = t.slice(i);
+      if (tail.length < 4) continue;
+      if (sharesStem(head, tail, 3) && head.length >= 4) return true;
+      if (head.length >= 2 && /^(.{1,3})\1+$/i.test(tail)) return true;
+    }
+  }
+
+  if (t.length >= 6 && t.length <= 11) {
+    for (let i = 3; i <= t.length - 3; i++) {
+      const head = t.slice(0, i);
+      const tail = t.slice(i);
+      if (head.length >= 4 && tail.length >= 4 && sharesStem(head, tail, 3)) return true;
+      if (head.length === 3 && tail.length === 3 && sharesStem(head, tail, 2)) return true;
+      if (head.length >= 4 && tail.length >= 4 && sharesStem(head, tail, 2) && t.length <= 9) return true;
+      if (head.length >= 4 && tail.length === 3 && sharesStem(head, tail, 2) && t.length <= 8 && /[ăâîșț]/i.test(head + tail)) return true;
+      if (head.length >= 3 && head.length <= 5 && tail.length >= 4 && head.slice(0, 2) === tail.slice(0, 2) && /[ăâî]/.test(tail)) return true;
+    }
+    if (/eîi$/i.test(t) && t.length >= 6) return true;
+    if (/^(?:îs|eîi)$/i.test(t.slice(-2)) && t.length >= 6) return true;
+    if (/^(.{2,3})((?:ie)+|îs)$/i.test(t)) return true;
+  }
+
+  return false;
+}
+
+/** Split glued dexonline variant chains (stăteamstamsteteam → stăteam) */
+export function splitGluedVariants(raw) {
+  let s = extractPrimaryVariant(raw);
+  if (!s) return '';
+  s = s.replace(/\s+/g, ' ').trim();
+  if (!isLikelyGluedForm(s)) return s;
+
+  if (s.includes(' ')) {
+    return s
+      .split(' ')
+      .map((w) => splitGluedVariants(w))
+      .join(' ');
+  }
+
+  for (let len = Math.floor(s.length / 2); len >= 4; len--) {
+    const a = s.slice(0, len);
+    const b = s.slice(len);
+    if (a === b || b === `${a}u`) return a;
+  }
+
+  if (s.length > 12) {
+    for (let i = 4; i <= Math.min(10, s.length - 3); i++) {
+      const head = s.slice(0, i);
+      const tail = s.slice(i);
+      if (sharesStem(head, tail, 2)) return head;
+    }
+  }
+
+  if (s.length >= 8) {
+    for (let i = 4; i <= s.length - 3; i++) {
+      const head = s.slice(0, i);
+      const tail = s.slice(i);
+      if (sharesStem(head, tail, 3) && head.length >= 4) return head;
+      if (head.length >= 2 && tail.length >= 4 && /^(.{1,3})\1+$/i.test(tail)) return head;
+    }
+  }
+
+  if (s.length >= 6 && s.length <= 11) {
+    for (let i = 3; i <= s.length - 3; i++) {
+      const head = s.slice(0, i);
+      const tail = s.slice(i);
+      if (head.length >= 4 && tail.length >= 4 && sharesStem(head, tail, 3)) return head;
+      if (head.length === 3 && tail.length === 3 && sharesStem(head, tail, 2)) return head;
+      if (head.length >= 4 && tail.length >= 4 && sharesStem(head, tail, 2) && s.length <= 9) return head;
+      if (head.length >= 4 && tail.length === 3 && sharesStem(head, tail, 2) && s.length <= 8 && /[ăâîșț]/i.test(head + tail)) return head;
+      if (head.length >= 3 && head.length <= 5 && tail.length >= 4 && head.slice(0, 2) === tail.slice(0, 2) && /[ăâî]/.test(tail)) return head;
+    }
+    for (const tailLen of [2, 3]) {
+      if (s.length <= tailLen + 3) continue;
+      const head = s.slice(0, -tailLen);
+      const tail = s.slice(-tailLen);
+      if (head.length >= 4 && (/^(?:îs|eîi)$/i.test(tail) || (tailLen === 3 && /^eîi$/i.test(tail)))) return head;
+    }
+    const m = s.match(/^(.{2,3})((?:ie)+|îs)$/i);
+    if (m) return m[1];
+  }
+
+  return s;
+}
+
 /** Split merged dexonline variants like "dormitdormitu" → "dormit" */
 export function cleanMergedForm(raw) {
   if (!raw) return '';
   let s = extractPrimaryVariant(raw);
   if (!s) return '';
 
-  // Repeated-root merge: dormit + dormitu, cortul + cortu, suntem + suntem
+  if (isLikelyGluedForm(s)) {
+    s = splitGluedVariants(s);
+  }
+
   for (let len = Math.floor(s.length / 2); len >= 3; len--) {
     const a = s.slice(0, len);
     const b = s.slice(len);
@@ -80,7 +192,6 @@ export function cleanArticulat(base, raw) {
   const s = cleanMergedForm(raw);
   if (!s || s === '—' || s.includes('&mdash')) return '';
 
-  // Already an articulated form: corturile, mașina, peretele
   if (base && s.startsWith(base) && s.length > base.length) return s;
 
   if (base.endsWith('ă')) {
@@ -131,7 +242,6 @@ export function parseVerbParadigm(html) {
   const tables = [...block.matchAll(/<table[^>]*>([\s\S]*?)<\/table>/gi)].map((m) => m[1]);
   if (!tables.length) return null;
 
-  // First verb paradigm table (has "prezent" header row)
   let verbTable = null;
   for (const t of tables) {
     if (/prezent/i.test(t) && /participiu/i.test(t)) {
@@ -165,7 +275,6 @@ export function parseVerbParadigm(html) {
     const pi = personIndex(cells);
     if (pi < 0) continue;
 
-    // Layout: [number?, person, prezent, conjunctiv, imperfect, ...]
     const offset = cells.findIndex((c) => /\(eu\)|\(tu\)|\(el|\(noi\)|\(voi\)|\(ei/.test(c));
     const base = offset >= 0 ? offset + 1 : 2;
     if (cells[base]) present[pi] = cleanMergedForm(cells[base]);
@@ -212,7 +321,6 @@ export function parseNounDeclension(html) {
   for (const t of tables) {
     const rows = parseTableRows(t);
     if (!isNounDeclensionTable(rows)) continue;
-    // Skip compound entries
     if (/-/.test(rows[1]?.[2] ?? '')) continue;
 
     const gender = genderFromHeader(rows);
@@ -256,7 +364,6 @@ export function parseNounDeclension(html) {
 export function lemmaFromInfinitive(infinitive) {
   let s = infinitive.trim().replace(/^a\s+/, '');
   if (s.startsWith('se ')) s = s.slice(3);
-  // Multi-word phrases — no single dexonline lemma
   if (s.includes(' ')) return null;
   return s;
 }

@@ -11,7 +11,7 @@ import { canonicalGrammarVerbs } from '../src/content/verbs/canonicalVerbs.ts';
 import { canonicalVerbBase } from '../src/content/verbs/canonicalVerbBase.ts';
 import { verbTenseSupplement } from '../src/content/verbs/canonicalVerbTenses.ts';
 import { buildVerbEnGloss, pronStatusForForm } from '../src/content/lexical/canonical/enGloss.ts';
-import { cleanMergedForm } from './lib/dexonline-parser.mjs';
+import { cleanMergedForm, isLikelyGluedForm } from './lib/dexonline-parser.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -89,7 +89,11 @@ function tenseMeta(tense: GrammarTense, reflexive: boolean) {
 }
 
 function isCorruptedRo(ro: string): boolean {
-  return /&#x|&#\d|&[a-z]+;/i.test(ro) || /\u2011/.test(ro);
+  if (/&#x|&#\d|&[a-z]+;/i.test(ro) || /\u2011/.test(ro)) return true;
+  if (ro.includes(' ')) {
+    return ro.split(/\s+/).some((part) => isLikelyGluedForm(part));
+  }
+  return isLikelyGluedForm(ro);
 }
 
 /** Prefer curated canonical forms when cache has merged dexonline variants */
