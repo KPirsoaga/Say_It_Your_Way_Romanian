@@ -368,6 +368,8 @@ Notes: Access via **Settings → Maintenance / Review → Mihaela Review**. Coll
 
 ---
 
+---
+
 VAL-034
 Area: Home / Navigation
 Issue: Home page had repetitive sections and Weekly Topics felt secondary; hero duplicated Mini Conversations.
@@ -574,5 +576,16 @@ Current behaviour: Verbose per-item arrays and metadata inflated payloads; all a
 Priority: High
 Status: Fixed
 Notes: `reviewPackage.ts` compact wire objects; `ReviewExportPage` status/area filters; legacy array/object parsing retained for older QRs.
+
+---
+
+VAL-053
+Area: Weekly Topics / Content
+Issue: Only one weekly topic (Building a Cabin) existed — learners needed more real-life topic packs.
+Expected behaviour: Four new `WeeklyTopic` modules (Camping, Meeting Other Dog Walkers, Driving/Car/Road Signs, Socialising at a BBQ) with vocabulary, 3 readings each, all exercise types, and registration in `weeklyTopics` index.
+Current behaviour: Single topic available in Weekly Topics list.
+Priority: High
+Status: Fixed
+Notes: `camping.ts`, `dogWalkers.ts`, `drivingCarRoadSigns.ts`, `bbqSocialising.ts`; icons `TentTree`, `Dog`, `Car`, `CookingPot`; uncertain Romanian marked with `review` metadata for Mihaela.
 
 ---

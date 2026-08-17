@@ -1,8 +1,18 @@
 import type { WeeklyTopic, WeeklyTopicProgress } from '../../types';
 import { EMPTY_WEEKLY_TOPIC_PROGRESS } from '../../types';
 import { buildingCabinTopic } from './buildingCabin';
+import { campingTopic } from './camping';
+import { dogWalkersTopic } from './dogWalkers';
+import { drivingCarRoadSignsTopic } from './drivingCarRoadSigns';
+import { bbqSocialisingTopic } from './bbqSocialising';
 
-export const weeklyTopics: WeeklyTopic[] = [buildingCabinTopic];
+export const weeklyTopics: WeeklyTopic[] = [
+  buildingCabinTopic,
+  campingTopic,
+  dogWalkersTopic,
+  drivingCarRoadSignsTopic,
+  bbqSocialisingTopic,
+];
 
 export function getWeeklyTopic(id: string): WeeklyTopic | undefined {
   return weeklyTopics.find((t) => t.id === id);
