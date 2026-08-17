@@ -1,0 +1,16 @@
+export {
+  canonicalGrammarVerbs,
+  grammarVerbs,
+  grammarVerbIdByInfinitive,
+  lookupGrammarVerbId,
+  getCanonicalVerb,
+  getCanonicalVerbByInfinitive,
+  collectAllCanonicalVerbForms,
+  auditCanonicalVerbs,
+  canonicalVerbBase,
+  verbTenseSupplement,
+  mergeVerbTenses,
+  getVerbFormsForTense,
+  getVerbExamplesForTense,
+  getAvailableTenses,
+} from './canonicalVerbs';

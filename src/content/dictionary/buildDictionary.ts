@@ -1,4 +1,4 @@
-import { grammarVerbs } from '../grammar';
+import { grammarVerbs } from '../verbs';
 import { scenarios, realLifeCategories, survivalPhrases } from '../../content';
 import { weeklyTopics } from '../weeklyTopics';
 import { curatedAdjectiveFamilies, curatedNounFamilies } from './curatedFamilies';

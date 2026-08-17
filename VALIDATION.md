@@ -600,3 +600,25 @@ Status: Fixed
 Notes: `src/content/dictionary/*`, `DictionaryPage`, `DictionaryEntryPage`, `WordFamily`, `generateDailyPracticeSession`; scenario content retained in `content.ts` for Dictionary build and saved favourites.
 
 ---
+
+VAL-055
+Area: Dictionary V2 / Word families / Daily Practice
+Issue: Dictionary over-prioritised phrases; word families were fake (singular repeated); grammatical variants were not searchable; Daily Practice lacked EN→RO, Listen & Choose, and teaching feedback chains.
+Expected behaviour: Default Dictionary lists lexical headwords only (nouns, verbs, adjectives); phrases in separate filter; canonical word-family model with curated verified forms; search resolves grammatical aliases (e.g. avem → a avea, spus → a spune); WordFamily shows transformation chains; verbs reuse Grammar Help conjugations with tense toggle; Daily Practice uses same family data with 60/25/15 weighting and variant exercise types; phrases linked as usage examples under vocabulary.
+Current behaviour: Phrases mixed into default All list; incomplete nouns showed fake word family card; search did not index conjugated forms; Daily Practice limited to RO→EN meaning MCQs.
+Priority: High
+Status: Fixed
+Notes: `familyUtils.ts`, split `dictionaryPhrases`, `dictionaryFormAliases`, `dictionaryAuditReport()`; 187 headwords, 168 phrases separate; 10 complete noun families, 384 searchable variants, 136-variant daily pool.
+
+---
+
+VAL-056
+Area: Platform-wide / Romanian Verb Handbook validation
+Issue: Verb conjugation data was duplicated across Grammar Help, Dictionary, and grammarExtended; contained errors (a vrea imperfect 3pl used present `vor`; a mânca 3pl used `mâncă` instead of `mănâncă`); missing imperfect for several common verbs.
+Expected behaviour: Single canonical verb source (`src/content/verbs/`) consumed by Grammar Help, Dictionary word families, Daily Practice aliases, and imperfect grammar card; conjugations validated against Feldstein Romanian Verb Handbook type patterns where applicable; no handbook content copied.
+Current behaviour: Verb data split across `grammar.ts` and `grammarVerbTenses.ts` with cross-file duplication and conjugation errors.
+Priority: High
+Status: Fixed
+Notes: `canonicalVerbBase.ts`, `canonicalVerbTenses.ts`, `canonicalVerbs.ts`; 14 grammar verbs, all 4 tenses; 404 searchable variants; handbook validates -a/-e/-o type patterns (putea, bea, face, pleca); a fi/a avea auxiliaries and perfect compus/future flagged as outside handbook scope; Mihaela review retained for example sentences.
+
+---
