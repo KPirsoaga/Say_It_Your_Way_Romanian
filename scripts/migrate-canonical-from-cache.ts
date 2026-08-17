@@ -11,6 +11,7 @@ import { canonicalGrammarVerbs } from '../src/content/verbs/canonicalVerbs.ts';
 import { canonicalVerbBase } from '../src/content/verbs/canonicalVerbBase.ts';
 import { verbTenseSupplement } from '../src/content/verbs/canonicalVerbTenses.ts';
 import { buildVerbEnGloss, pronStatusForForm } from '../src/content/lexical/canonical/enGloss.ts';
+import { cleanMergedForm, isLikelyGluedForm } from './lib/dexonline-parser.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -28,12 +29,12 @@ function escapeStr(s: string) {
 }
 
 function buildMetadataIndex() {
-  const byId: Record<string, { infinitive: string; en: string; tenses: Record<string, Record<string, { en?: string; pron?: string }>> }> = {};
+  const byId: Record<string, { infinitive: string; en: string; tenses: Record<string, Record<string, { ro?: string; en?: string; pron?: string }>> }> = {};
   for (const verb of canonicalGrammarVerbs) {
     byId[verb.id] = { infinitive: verb.infinitive, en: verb.en, tenses: {} };
-    const add = (tense: string, forms?: { label: string; en: string; pron?: string }[]) => {
+    const add = (tense: string, forms?: { label: string; ro: string; en: string; pron?: string }[]) => {
       if (!forms?.length) return;
-      byId[verb.id]!.tenses[tense] = Object.fromEntries(forms.map((f) => [f.label, f]));
+      byId[verb.id]!.tenses[tense] = Object.fromEntries(forms.map((f) => [f.label, { ro: f.ro, en: f.en, pron: f.pron }]));
     };
     add('present', verb.present);
     add('imperfect', verb.imperfect);
@@ -48,9 +49,9 @@ function buildMetadataIndex() {
   }
   for (const verb of canonicalVerbBase) {
     if (!byId[verb.id]) byId[verb.id] = { infinitive: verb.infinitive, en: verb.en, tenses: {} };
-    const add = (tense: string, forms?: { label: string; en: string; pron?: string }[]) => {
+    const add = (tense: string, forms?: { label: string; ro: string; en: string; pron?: string }[]) => {
       if (!forms?.length) return;
-      byId[verb.id]!.tenses[tense] = { ...byId[verb.id]!.tenses[tense], ...Object.fromEntries(forms.map((f) => [f.label, f])) };
+      byId[verb.id]!.tenses[tense] = { ...byId[verb.id]!.tenses[tense], ...Object.fromEntries(forms.map((f) => [f.label, { ro: f.ro, en: f.en, pron: f.pron }])) };
     };
     add('present', verb.present);
     add('imperfect', verb.imperfect);
@@ -87,11 +88,32 @@ function tenseMeta(tense: GrammarTense, reflexive: boolean) {
   }
 }
 
-function makeForm(label: string, ro: string, tense: GrammarTense, verbEn: string, curated?: { en?: string; pron?: string }) {
-  const { en } = buildVerbEnGloss(label, ro, tense, verbEn, curated);
-  const pronStatus = pronStatusForForm(curated?.pron, ro);
-  const pron = pronStatus === 'verified' ? curated!.pron! : ro;
-  return { label, ro, en, pron: pronStatus === 'verified' ? pron : ro };
+function isCorruptedRo(ro: string): boolean {
+  if (/&#x|&#\d|&[a-z]+;/i.test(ro) || /\u2011/.test(ro)) return true;
+  if (ro.includes(' ')) {
+    return ro.split(/\s+/).some((part) => isLikelyGluedForm(part));
+  }
+  return isLikelyGluedForm(ro);
+}
+
+/** Prefer curated canonical forms when cache has merged dexonline variants */
+function resolveRo(cacheRo: string, curated?: { ro?: string }): string {
+  const curatedRo = curated?.ro?.trim();
+  let cleaned = cleanMergedForm(cacheRo);
+  if (curatedRo) {
+    if (!cleaned || isCorruptedRo(cleaned)) return curatedRo;
+    if (cleaned.startsWith(curatedRo) && cleaned.length > curatedRo.length + 1) return curatedRo;
+    if (curatedRo.startsWith(cleaned) && curatedRo.length <= cleaned.length + 2) return curatedRo;
+  }
+  return cleaned || curatedRo || '';
+}
+
+function makeForm(label: string, ro: string, tense: GrammarTense, verbEn: string, curated?: { en?: string; pron?: string; ro?: string }) {
+  const resolvedRo = resolveRo(ro, curated);
+  const { en } = buildVerbEnGloss(label, resolvedRo, tense, verbEn, curated);
+  const pronStatus = pronStatusForForm(curated?.pron, resolvedRo);
+  const pron = pronStatus === 'verified' ? curated!.pron! : resolvedRo;
+  return { label, ro: resolvedRo, en, pron: pronStatus === 'verified' ? pron : resolvedRo };
 }
 
 function applyReflexiveOverrides(verb: { infinitive: string }, paradigm: Record<string, { label: string; ro: string }[]>, meta: ReturnType<typeof buildMetadataIndex>[string]) {

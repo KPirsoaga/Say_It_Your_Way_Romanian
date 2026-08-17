@@ -4,8 +4,8 @@ import { Button } from '../components/Button';
 import { NoShameBanner } from '../components/NoShameBanner';
 import { WeeklySectionCard } from '../components/WeeklySectionCard';
 import { WeeklyTopicProgressBar } from '../components/WeeklyTopicProgressBar';
+import { TopicIllustrationPanel } from '../components/illustrations/TopicIllustrationPanel';
 import { useProgress } from '../context/ProgressContext';
-import { colorMap } from '../content';
 import { getWeeklyTopic, WEEKLY_TOPIC_STEP_COUNT, countWeeklyTopicStepsDone } from '../content/weeklyTopics';
 import { Icon } from '../components/Icon';
 import type { PageId } from '../App';
@@ -25,21 +25,18 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
   }
 
   const p = getWeeklyTopicProgress(topicId);
-  const c = colorMap[topic.color];
   const stepsDone = countWeeklyTopicStepsDone(p);
   const complete = stepsDone >= WEEKLY_TOPIC_STEP_COUNT;
 
   return (
     <div className="min-h-screen">
       <PageHeader title={topic.title} subtitle={topic.description} onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
-        <div className={`rounded-3xl ${c.bgSoft} p-5 flex items-start gap-3`}>
-          <div className="h-12 w-12 rounded-2xl bg-white/70 dark:bg-white/10 flex items-center justify-center shrink-0">
-            <Icon name={topic.icon} className={`h-6 w-6 ${c.text}`} />
-          </div>
-          <div>
-            <p className="text-xs uppercase tracking-wide font-bold text-ink-500 dark:text-ink-300">This week&apos;s lesson</p>
-            <p className="text-lg font-bold text-ink-900 dark:text-sand-100 leading-snug mt-1">
+      <div className="page-shell-body space-y-4">
+        <div className="rounded-3xl overflow-hidden border border-forest/8 dark:border-linen/10 shadow-soft">
+          <TopicIllustrationPanel topicId={topic.id} aspect="wide" className="rounded-none" />
+          <div className="p-4 bg-white/80 dark:bg-forest-700/80">
+            <p className="text-xs uppercase tracking-wide font-bold text-forest/50 dark:text-linen/50">This week&apos;s lesson</p>
+            <p className="text-lg font-display font-bold text-forest dark:text-linen-100 leading-snug mt-1">
               Vocabulary → reading → practice
             </p>
           </div>

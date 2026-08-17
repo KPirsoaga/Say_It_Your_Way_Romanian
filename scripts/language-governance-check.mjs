@@ -14,6 +14,7 @@ import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe, verifiedVerbTenses } f
 import { verifiedNounFamilies } from '../src/content/dictionary/verifiedLexicalFamilies.ts';
 import { generateDailyPracticeSession } from '../src/content/dailyPractice/generateSession.ts';
 import { entryHasLearnerWordFamily } from '../src/content/dictionary/familyUtils.ts';
+import { isLikelyGluedForm } from './lib/dexonline-parser.mjs';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const failures = [];
@@ -219,7 +220,34 @@ for (const alias of dictionaryFormAliases) {
 }
 if (badAliases === 0) ok(`all ${dictionaryFormAliases.length} search aliases trace to verified morphology`);
 
-// --- 10. Governance doc exists ---
+// --- 10. No corrupted dexonline merge artifacts in verified verb forms ---
+let corruptedForms = 0;
+for (const [verbId, tenses] of Object.entries(verifiedVerbTenses)) {
+  for (const t of tenses) {
+    for (const f of t.forms) {
+      if (/&#x|&#\d|&[a-z]+;/i.test(f.ro)) {
+        fail(`corrupted form ${verbId} ${t.tense} ${f.label}`, f.ro);
+        corruptedForms++;
+      }
+      for (const token of f.ro.split(/\s+/)) {
+        if (isLikelyGluedForm(token)) {
+          fail(`glued variant form ${verbId} ${t.tense} ${f.label}`, token);
+          corruptedForms++;
+        }
+      }
+    }
+  }
+}
+if (corruptedForms === 0) ok('no corrupted merge artifacts in verified verb forms');
+
+const fiPresent = verifiedVerbTenses['vb-fi']?.find((t) => t.tense === 'present')?.forms;
+if (!fiPresent || fiPresent[0]?.ro !== 'sunt' || fiPresent[2]?.ro !== 'este') {
+  fail('vb-fi present', `expected sunt/este, got ${fiPresent?.map((f) => f.ro).join(', ')}`);
+} else {
+  ok('vb-fi present: sunt, ești, este, suntem (no merge artifacts)');
+}
+
+// --- 11. Governance doc exists ---
 const govPath = join(ROOT, 'docs/LANGUAGE_DATA_GOVERNANCE.md');
 if (!readFileSync(govPath, 'utf8').includes('AI confidence is not verification')) {
   fail('governance doc', 'missing core principle');

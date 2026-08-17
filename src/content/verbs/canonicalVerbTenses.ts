@@ -9,6 +9,7 @@ import type { GrammarExample, GrammarTense, GrammarVerb, VerbForm } from '../../
 import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe } from './verifiedVerbForms';
 
 type TenseSupplement = {
+  present?: VerbForm[];
   perfectCompus?: VerbForm[];
   imperfect?: VerbForm[];
   future?: VerbForm[];
@@ -400,6 +401,90 @@ export const verbTenseSupplement: Record<string, TenseSupplement> = {
       ['o să bea', 'they will drink', 'oh suh BEH-ah'],
     ]),
   },
+  'vb-sta': {
+    imperfect: forms([
+      ['stăteam', 'I used to stay / sit', 'stuh-TEH-ahm'],
+      ['stăteai', 'you used to stay / sit', 'stuh-teh-AY'],
+      ['stătea', 'he/she used to stay / sit', 'stuh-TEH-ah'],
+      ['stăteam', 'we used to stay / sit', 'stuh-TEH-ahm'],
+      ['stăteați', 'you (pl.) used to stay / sit', 'stuh-teh-YAHTS'],
+      ['stăteau', 'they used to stay / sit', 'stuh-TEH-ow'],
+    ]),
+    perfectCompus: forms([
+      ['am stat', 'I have stayed / sat', 'ahm STAHT'],
+      ['ai stat', 'you have stayed / sat', 'ay STAHT'],
+      ['a stat', 'he/she has stayed / sat', 'ah STAHT'],
+      ['am stat', 'we have stayed / sat', 'ahm STAHT'],
+      ['ați stat', 'you (pl.) have stayed / sat', 'uh-ts STAHT'],
+      ['au stat', 'they have stayed / sat', 'ow STAHT'],
+    ]),
+    future: forms([
+      ['o să stau', 'I will stay / sit', 'oh suh STOW'],
+      ['o să stai', 'you will stay / sit', 'oh suh STAY'],
+      ['o să stea', 'he/she will stay / sit', 'oh suh STYAH'],
+      ['o să stăm', 'we will stay / sit', 'oh suh STUHM'],
+      ['o să stați', 'you (pl.) will stay / sit', 'oh suh STAHTS'],
+      ['o să stea', 'they will stay / sit', 'oh suh STYAH'],
+    ]),
+  },
+  'vb-lua': {
+    future: forms([
+      ['o să iau', 'I will take', 'oh suh YOW'],
+      ['o să iei', 'you will take', 'oh suh YEH'],
+      ['o să ia', 'he/she will take', 'oh suh YAH'],
+      ['o să luăm', 'we will take', 'oh suh LOO-uhm'],
+      ['o să luați', 'you (pl.) will take', 'oh suh LOO-ahts'],
+      ['o să ia', 'they will take', 'oh suh YAH'],
+    ]),
+  },
+  'vb-ploua': {
+    future: forms([
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+      ['o să plouă', 'it will rain', 'oh suh PLOH-uh'],
+    ]),
+  },
+  'vb-pune': {
+    future: forms([
+      ['o să pun', 'I will put', 'oh suh POON'],
+      ['o să pui', 'you will put', 'oh suh POO-ee'],
+      ['o să pună', 'he/she will put', 'oh suh POO-nuh'],
+      ['o să punem', 'we will put', 'oh suh poo-NEM'],
+      ['o să puneți', 'you (pl.) will put', 'oh suh poo-NETS'],
+      ['o să pună', 'they will put', 'oh suh POO-nuh'],
+    ]),
+  },
+  'vb-tunde': {
+    present: forms([
+      ['tund', 'I trim / mow', 'TOOND'],
+      ['tunzi', 'you trim / mow', 'TOON-zee'],
+      ['tunde', 'he/she trims / mows', 'TOON-deh'],
+      ['tundem', 'we trim / mow', 'TOON-dem'],
+      ['tundeți', 'you (pl.) trim / mow', 'toon-DETS'],
+      ['tund', 'they trim / mow', 'TOOND'],
+    ]),
+    future: forms([
+      ['o să tund', 'I will trim / mow', 'oh suh TOOND'],
+      ['o să tunzi', 'you will trim / mow', 'oh suh TOON-zee'],
+      ['o să tundă', 'he/she will trim / mow', 'oh suh TOON-duh'],
+      ['o să tundem', 'we will trim / mow', 'oh suh TOON-dem'],
+      ['o să tundeți', 'you (pl.) will trim / mow', 'oh suh toon-DETS'],
+      ['o să tundă', 'they will trim / mow', 'oh suh TOON-duh'],
+    ]),
+  },
+  'vb-veni': {
+    future: forms([
+      ['o să vin', 'I will come', 'oh suh VEEN'],
+      ['o să vii', 'you will come', 'oh suh VEE'],
+      ['o să vină', 'he/she will come', 'oh suh VEE-nuh'],
+      ['o să venim', 'we will come', 'oh suh veh-NEEM'],
+      ['o să veniți', 'you (pl.) will come', 'oh suh veh-NEETS'],
+      ['o să vină', 'they will come', 'oh suh VEE-nuh'],
+    ]),
+  },
   'vb-nevoie': {
     imperfect: forms([
       ['aveam nevoie de', 'I needed', 'ah-VAY-ahm neh-YO-eh deh'],
@@ -434,6 +519,7 @@ export function mergeVerbTenses(verbs: GrammarVerb[]): GrammarVerb[] {
     if (!extra) return verb;
     return {
       ...verb,
+      present: extra.present ?? verb.present,
       perfectCompus: extra.perfectCompus ?? verb.perfectCompus,
       imperfect: extra.imperfect ?? verb.imperfect,
       future: extra.future ?? verb.future,

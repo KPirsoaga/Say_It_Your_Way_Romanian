@@ -2,6 +2,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { Button } from '../components/Button';
+import { PageSceneBanner } from '../components/explore/PageSceneBanner';
 import { useProgress, toLocalDateStr } from '../context/ProgressContext';
 import { miniConversations } from '../content';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
@@ -33,8 +34,13 @@ export function ProgressPage({ go }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Progress" subtitle="Your calm, steady practice" />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
-        <div className="grid grid-cols-2 gap-3 tile-grid">
+      <div className="page-shell-body space-y-5">
+        <PageSceneBanner
+          destination="progress"
+          title="Your journey so far"
+          subtitle="Small steps along the path — no streaks, no pressure."
+        />
+        <div className="grid grid-cols-2 gap-3 tile-grid lg:grid-cols-4">
           <BigStat icon="CalendarDays" value={daysCount} label="Days practised" color="text-olive-600" bg="bg-olive-50 dark:bg-olive-900/30" />
           <BigStat icon="HeartFilled" value={favCount} label="Saved phrases" color="text-coral" bg="bg-coral-50 dark:bg-coral-900/20" />
           <BigStat icon="BookMarked" value={wordsExplored} label="Words explored" color="text-olive-600" bg="bg-olive-50 dark:bg-olive-900/30" />

@@ -2,6 +2,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { NoShameBanner } from '../components/NoShameBanner';
+import { PageSceneBanner } from '../components/explore/PageSceneBanner';
 import { colorMap, grammarVerbs } from '../content';
 import {
   grammarCheatSheets,
@@ -63,12 +64,12 @@ export function GrammarHelpPage({ go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Grammar Help" subtitle="Practical cheat sheets — find answers in one or two taps" onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-6">
-        <div className="rounded-3xl bg-gradient-to-br from-sun-300 to-sun-400 text-ink-900 p-5 shadow-soft">
-          <p className="text-sm uppercase tracking-wide font-bold">Quick reference</p>
-          <h2 className="text-xl font-bold leading-tight mt-1">Grammar supports communication — not linguistics</h2>
-          <p className="mt-2 text-ink-800 text-base">Examples first. Plain English. No textbook stress.</p>
-        </div>
+      <div className="page-shell-body space-y-6">
+        <PageSceneBanner
+          destination="grammar"
+          title="How Romanian fits together"
+          subtitle="Examples first. Plain English. No textbook stress."
+        />
 
         <NoShameBanner compact />
 

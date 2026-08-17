@@ -33,7 +33,7 @@ export function BottomNav({ current, go }: Props) {
       aria-label="Main navigation"
       className="fixed bottom-0 inset-x-0 z-20 border-t border-forest/8 bg-linen-50/95 dark:bg-forest-900/95 backdrop-blur-md dark:border-linen/10 pb-[env(safe-area-inset-bottom)]"
     >
-      <div className="mx-auto max-w-md px-1 py-1.5 grid grid-cols-5 tile-grid">
+      <div className="page-shell py-1.5 grid grid-cols-5 tile-grid lg:max-w-6xl xl:max-w-7xl">
         {items.map((it) => {
           const active = current === it.id || it.match?.includes(current);
           return (

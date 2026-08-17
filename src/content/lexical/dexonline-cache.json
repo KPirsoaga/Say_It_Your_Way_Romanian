@@ -10,7 +10,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "suntîs&#x2011s"
+            "ro": "sunt"
           },
           {
             "label": "tu",
@@ -18,19 +18,19 @@
           },
           {
             "label": "el/ea",
-            "ro": "esteeîi&#x2011i"
+            "ro": "este"
           },
           {
             "label": "noi",
-            "ro": "suntemsuntem"
+            "ro": "suntem"
           },
           {
             "label": "voi",
-            "ro": "suntețisunteți"
+            "ro": "sunteți"
           },
           {
             "label": "ei/ele",
-            "ro": "suntîs&#x2011s"
+            "ro": "sunt"
           }
         ],
         "subjunctive": [
@@ -131,7 +131,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "aibăaibeaivă"
+            "ro": "aibă"
           },
           {
             "label": "noi",
@@ -143,7 +143,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "aibăaibeaivă"
+            "ro": "aibă"
           }
         ],
         "imperfect": [
@@ -184,11 +184,11 @@
         "present": [
           {
             "label": "eu",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           },
           {
             "label": "tu",
-            "ro": "vreivrai"
+            "ro": "vrei"
           },
           {
             "label": "el/ea",
@@ -210,15 +210,15 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           },
           {
             "label": "tu",
-            "ro": "vreivrai"
+            "ro": "vrei"
           },
           {
             "label": "el/ea",
-            "ro": "vreavreie"
+            "ro": "vrea"
           },
           {
             "label": "noi",
@@ -230,17 +230,17 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vreavreie"
+            "ro": "vrea"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "vreamvram"
+            "ro": "vream"
           },
           {
             "label": "tu",
-            "ro": "vreaivrai"
+            "ro": "vreai"
           },
           {
             "label": "el/ea",
@@ -248,7 +248,7 @@
           },
           {
             "label": "noi",
-            "ro": "vreamvram"
+            "ro": "vream"
           },
           {
             "label": "voi",
@@ -256,7 +256,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vreauvrau"
+            "ro": "vreau"
           }
         ],
         "source": "dexonline.ro"
@@ -532,7 +532,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "spunspui"
+            "ro": "spun"
           },
           {
             "label": "tu",
@@ -558,7 +558,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "spunspui"
+            "ro": "spun"
           },
           {
             "label": "tu",
@@ -566,7 +566,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "spunăspuie"
+            "ro": "spună"
           },
           {
             "label": "noi",
@@ -578,7 +578,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "spunăspuie"
+            "ro": "spună"
           }
         ],
         "imperfect": [
@@ -615,83 +615,83 @@
       "lemma": "înțelege",
       "paradigm": {
         "infinitive": "înțelege&#x2011nțelege",
-        "participiu": "înțeles&#x2011nțelesînțelesu&#x2011&#x2011nțelesu&#x2011",
+        "participiu": "înțeles",
         "present": [
           {
             "label": "eu",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           },
           {
             "label": "tu",
-            "ro": "înțelegi&#x2011nțelegi"
+            "ro": "înțelegi"
           },
           {
             "label": "el/ea",
-            "ro": "înțelege&#x2011nțelege"
+            "ro": "înțelege"
           },
           {
             "label": "noi",
-            "ro": "înțelegem&#x2011nțelegem"
+            "ro": "înțelegem"
           },
           {
             "label": "voi",
-            "ro": "înțelegeți&#x2011nțelegeți"
+            "ro": "înțelegeți"
           },
           {
             "label": "ei/ele",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           },
           {
             "label": "tu",
-            "ro": "înțelegi&#x2011nțelegi"
+            "ro": "înțelegi"
           },
           {
             "label": "el/ea",
-            "ro": "înțeleagă&#x2011nțeleagă"
+            "ro": "înțeleagă"
           },
           {
             "label": "noi",
-            "ro": "înțelegem&#x2011nțelegem"
+            "ro": "înțelegem"
           },
           {
             "label": "voi",
-            "ro": "înțelegeți&#x2011nțelegeți"
+            "ro": "înțelegeți"
           },
           {
             "label": "ei/ele",
-            "ro": "înțeleagă&#x2011nțeleagă"
+            "ro": "înțeleagă"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "înțelegeam&#x2011nțelegeam"
+            "ro": "înțelegeam"
           },
           {
             "label": "tu",
-            "ro": "înțelegeai&#x2011nțelegeai"
+            "ro": "înțelegeai"
           },
           {
             "label": "el/ea",
-            "ro": "înțelegea&#x2011nțelegea"
+            "ro": "înțelegea"
           },
           {
             "label": "noi",
-            "ro": "înțelegeam&#x2011nțelegeam"
+            "ro": "înțelegeam"
           },
           {
             "label": "voi",
-            "ro": "înțelegeați&#x2011nțelegeați"
+            "ro": "înțelegeați"
           },
           {
             "label": "ei/ele",
-            "ro": "înțelegeau&#x2011nțelegeau"
+            "ro": "înțelegeau"
           }
         ],
         "source": "dexonline.ro"
@@ -876,83 +876,83 @@
       "lemma": "întreba",
       "paradigm": {
         "infinitive": "întreba&#x2011ntreba",
-        "participiu": "întrebat&#x2011ntrebatîntrebatu&#x2011&#x2011ntrebatu&#x2011",
+        "participiu": "întrebat",
         "present": [
           {
             "label": "eu",
-            "ro": "întreb&#x2011ntreb"
+            "ro": "întreb"
           },
           {
             "label": "tu",
-            "ro": "întrebi&#x2011ntrebi"
+            "ro": "întrebi"
           },
           {
             "label": "el/ea",
-            "ro": "întreabă&#x2011ntreabă"
+            "ro": "întreabă"
           },
           {
             "label": "noi",
-            "ro": "întrebăm&#x2011ntrebăm"
+            "ro": "întrebăm"
           },
           {
             "label": "voi",
-            "ro": "întrebați&#x2011ntrebați"
+            "ro": "întrebați"
           },
           {
             "label": "ei/ele",
-            "ro": "întreabă&#x2011ntreabă"
+            "ro": "întreabă"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "întreb&#x2011ntreb"
+            "ro": "întreb"
           },
           {
             "label": "tu",
-            "ro": "întrebi&#x2011ntrebi"
+            "ro": "întrebi"
           },
           {
             "label": "el/ea",
-            "ro": "întrebe&#x2011ntrebe"
+            "ro": "întrebe"
           },
           {
             "label": "noi",
-            "ro": "întrebăm&#x2011ntrebăm"
+            "ro": "întrebăm"
           },
           {
             "label": "voi",
-            "ro": "întrebați&#x2011ntrebați"
+            "ro": "întrebați"
           },
           {
             "label": "ei/ele",
-            "ro": "întrebe&#x2011ntrebe"
+            "ro": "întrebe"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "întrebam&#x2011ntrebam"
+            "ro": "întrebam"
           },
           {
             "label": "tu",
-            "ro": "întrebai&#x2011ntrebai"
+            "ro": "întrebai"
           },
           {
             "label": "el/ea",
-            "ro": "întreba&#x2011ntreba"
+            "ro": "întreba"
           },
           {
             "label": "noi",
-            "ro": "întrebam&#x2011ntrebam"
+            "ro": "întrebam"
           },
           {
             "label": "voi",
-            "ro": "întrebați&#x2011ntrebați"
+            "ro": "întrebați"
           },
           {
             "label": "ei/ele",
-            "ro": "întrebau&#x2011ntrebau"
+            "ro": "întrebau"
           }
         ],
         "source": "dexonline.ro"
@@ -1402,7 +1402,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "punpui"
+            "ro": "pun"
           },
           {
             "label": "tu",
@@ -1428,7 +1428,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "punpui"
+            "ro": "pun"
           },
           {
             "label": "tu",
@@ -1436,7 +1436,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "punăpuie"
+            "ro": "pună"
           },
           {
             "label": "noi",
@@ -1448,7 +1448,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "punăpuie"
+            "ro": "pună"
           }
         ],
         "imperfect": [
@@ -2268,83 +2268,83 @@
       "lemma": "înșuruba",
       "paradigm": {
         "infinitive": "înșuruba&#x2011nșuruba",
-        "participiu": "înșurubat&#x2011nșurubatînșurubatu&#x2011&#x2011nșurubatu&#x2011",
+        "participiu": "înșurubat",
         "present": [
           {
             "label": "eu",
-            "ro": "înșurubez&#x2011nșurubez"
+            "ro": "înșurubez"
           },
           {
             "label": "tu",
-            "ro": "înșurubezi&#x2011nșurubezi"
+            "ro": "înșurubezi"
           },
           {
             "label": "el/ea",
-            "ro": "înșurubează&#x2011nșurubează"
+            "ro": "înșurubează"
           },
           {
             "label": "noi",
-            "ro": "înșurubăm&#x2011nșurubăm"
+            "ro": "înșurubăm"
           },
           {
             "label": "voi",
-            "ro": "înșurubați&#x2011nșurubați"
+            "ro": "înșurubați"
           },
           {
             "label": "ei/ele",
-            "ro": "înșurubează&#x2011nșurubează"
+            "ro": "înșurubează"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "înșurubez&#x2011nșurubez"
+            "ro": "înșurubez"
           },
           {
             "label": "tu",
-            "ro": "înșurubezi&#x2011nșurubezi"
+            "ro": "înșurubezi"
           },
           {
             "label": "el/ea",
-            "ro": "înșurubeze&#x2011nșurubeze"
+            "ro": "înșurubeze"
           },
           {
             "label": "noi",
-            "ro": "înșurubăm&#x2011nșurubăm"
+            "ro": "înșurubăm"
           },
           {
             "label": "voi",
-            "ro": "înșurubați&#x2011nșurubați"
+            "ro": "înșurubați"
           },
           {
             "label": "ei/ele",
-            "ro": "înșurubeze&#x2011nșurubeze"
+            "ro": "înșurubeze"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "înșurubam&#x2011nșurubam"
+            "ro": "înșurubam"
           },
           {
             "label": "tu",
-            "ro": "înșurubai&#x2011nșurubai"
+            "ro": "înșurubai"
           },
           {
             "label": "el/ea",
-            "ro": "înșuruba&#x2011nșuruba"
+            "ro": "înșuruba"
           },
           {
             "label": "noi",
-            "ro": "înșurubam&#x2011nșurubam"
+            "ro": "înșurubam"
           },
           {
             "label": "voi",
-            "ro": "înșurubați&#x2011nșurubați"
+            "ro": "înșurubați"
           },
           {
             "label": "ei/ele",
-            "ro": "înșurubau&#x2011nșurubau"
+            "ro": "înșurubau"
           }
         ],
         "source": "dexonline.ro"
@@ -2359,7 +2359,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "tundtunz"
+            "ro": "tund"
           },
           {
             "label": "tu",
@@ -2385,7 +2385,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "tundtunz"
+            "ro": "tund"
           },
           {
             "label": "tu",
@@ -2393,7 +2393,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "tundătunză"
+            "ro": "tundă"
           },
           {
             "label": "noi",
@@ -2405,7 +2405,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "tundătunză"
+            "ro": "tundă"
           }
         ],
         "imperfect": [
@@ -2707,7 +2707,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "aprindaprinz"
+            "ro": "aprind"
           },
           {
             "label": "tu",
@@ -2733,7 +2733,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "aprindaprinz"
+            "ro": "aprind"
           },
           {
             "label": "tu",
@@ -2741,7 +2741,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "aprindăaprinză"
+            "ro": "aprindă"
           },
           {
             "label": "noi",
@@ -2753,7 +2753,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "aprindăaprinză"
+            "ro": "aprindă"
           }
         ],
         "imperfect": [
@@ -2964,83 +2964,83 @@
       "lemma": "împacheta",
       "paradigm": {
         "infinitive": "împacheta&#x2011mpacheta",
-        "participiu": "împachetat&#x2011mpachetatîmpachetatu&#x2011&#x2011mpachetatu&#x2011",
+        "participiu": "împachetat",
         "present": [
           {
             "label": "eu",
-            "ro": "împachetez&#x2011mpachetez"
+            "ro": "împachetez"
           },
           {
             "label": "tu",
-            "ro": "împachetezi&#x2011mpachetezi"
+            "ro": "împachetezi"
           },
           {
             "label": "el/ea",
-            "ro": "împachetează&#x2011mpachetează"
+            "ro": "împachetează"
           },
           {
             "label": "noi",
-            "ro": "împachetăm&#x2011mpachetăm"
+            "ro": "împachetăm"
           },
           {
             "label": "voi",
-            "ro": "împachetați&#x2011mpachetați"
+            "ro": "împachetați"
           },
           {
             "label": "ei/ele",
-            "ro": "împachetează&#x2011mpachetează"
+            "ro": "împachetează"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "împachetez&#x2011mpachetez"
+            "ro": "împachetez"
           },
           {
             "label": "tu",
-            "ro": "împachetezi&#x2011mpachetezi"
+            "ro": "împachetezi"
           },
           {
             "label": "el/ea",
-            "ro": "împacheteze&#x2011mpacheteze"
+            "ro": "împacheteze"
           },
           {
             "label": "noi",
-            "ro": "împachetăm&#x2011mpachetăm"
+            "ro": "împachetăm"
           },
           {
             "label": "voi",
-            "ro": "împachetați&#x2011mpachetați"
+            "ro": "împachetați"
           },
           {
             "label": "ei/ele",
-            "ro": "împacheteze&#x2011mpacheteze"
+            "ro": "împacheteze"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "împachetam&#x2011mpachetam"
+            "ro": "împachetam"
           },
           {
             "label": "tu",
-            "ro": "împachetai&#x2011mpachetai"
+            "ro": "împachetai"
           },
           {
             "label": "el/ea",
-            "ro": "împacheta&#x2011mpacheta"
+            "ro": "împacheta"
           },
           {
             "label": "noi",
-            "ro": "împachetam&#x2011mpachetam"
+            "ro": "împachetam"
           },
           {
             "label": "voi",
-            "ro": "împachetați&#x2011mpachetați"
+            "ro": "împachetați"
           },
           {
             "label": "ei/ele",
-            "ro": "împachetau&#x2011mpachetau"
+            "ro": "împachetau"
           }
         ],
         "source": "dexonline.ro"
@@ -3055,11 +3055,11 @@
         "present": [
           {
             "label": "eu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "tu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "el/ea",
@@ -3067,51 +3067,51 @@
           },
           {
             "label": "noi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "voi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "ei/ele",
-            "ro": "&mdash;"
+            "ro": "—"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "tu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "el/ea",
-            "ro": "plouăploaie"
+            "ro": "plouă"
           },
           {
             "label": "noi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "voi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "ei/ele",
-            "ro": "&mdash;"
+            "ro": "—"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "tu",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "el/ea",
@@ -3119,15 +3119,15 @@
           },
           {
             "label": "noi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "voi",
-            "ro": "&mdash;"
+            "ro": "—"
           },
           {
             "label": "ei/ele",
-            "ro": "&mdash;"
+            "ro": "—"
           }
         ],
         "source": "dexonline.ro"
@@ -3138,83 +3138,83 @@
       "lemma": "înota",
       "paradigm": {
         "infinitive": "înota&#x2011nota",
-        "participiu": "înotat&#x2011notatînotatu&#x2011&#x2011notatu&#x2011",
+        "participiu": "înotat",
         "present": [
           {
             "label": "eu",
-            "ro": "înot&#x2011not"
+            "ro": "înot"
           },
           {
             "label": "tu",
-            "ro": "înoți&#x2011noți"
+            "ro": "înoți"
           },
           {
             "label": "el/ea",
-            "ro": "înoată&#x2011noată"
+            "ro": "înoată"
           },
           {
             "label": "noi",
-            "ro": "înotăm&#x2011notăm"
+            "ro": "înotăm"
           },
           {
             "label": "voi",
-            "ro": "înotați&#x2011notați"
+            "ro": "înotați"
           },
           {
             "label": "ei/ele",
-            "ro": "înoată&#x2011noată"
+            "ro": "înoată"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "înot&#x2011not"
+            "ro": "înot"
           },
           {
             "label": "tu",
-            "ro": "înoți&#x2011noți"
+            "ro": "înoți"
           },
           {
             "label": "el/ea",
-            "ro": "înoate&#x2011noate"
+            "ro": "înoate"
           },
           {
             "label": "noi",
-            "ro": "înotăm&#x2011notăm"
+            "ro": "înotăm"
           },
           {
             "label": "voi",
-            "ro": "înotați&#x2011notați"
+            "ro": "înotați"
           },
           {
             "label": "ei/ele",
-            "ro": "înoate&#x2011noate"
+            "ro": "înoate"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "înotam&#x2011notam"
+            "ro": "înotam"
           },
           {
             "label": "tu",
-            "ro": "înotai&#x2011notai"
+            "ro": "înotai"
           },
           {
             "label": "el/ea",
-            "ro": "înota&#x2011nota"
+            "ro": "înota"
           },
           {
             "label": "noi",
-            "ro": "înotam&#x2011notam"
+            "ro": "înotam"
           },
           {
             "label": "voi",
-            "ro": "înotați&#x2011notați"
+            "ro": "înotați"
           },
           {
             "label": "ei/ele",
-            "ro": "înotau&#x2011notau"
+            "ro": "înotau"
           }
         ],
         "source": "dexonline.ro"
@@ -3684,7 +3684,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "mirosmiroase"
+            "ro": "miros"
           }
         ],
         "subjunctive": [
@@ -3698,7 +3698,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "miroasămiroase"
+            "ro": "miroasă"
           },
           {
             "label": "noi",
@@ -3710,7 +3710,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "miroasămiroase"
+            "ro": "miroasă"
           }
         ],
         "imperfect": [
@@ -4095,83 +4095,83 @@
       "lemma": "înțelege",
       "paradigm": {
         "infinitive": "înțelege&#x2011nțelege",
-        "participiu": "înțeles&#x2011nțelesînțelesu&#x2011&#x2011nțelesu&#x2011",
+        "participiu": "înțeles",
         "present": [
           {
             "label": "eu",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           },
           {
             "label": "tu",
-            "ro": "înțelegi&#x2011nțelegi"
+            "ro": "înțelegi"
           },
           {
             "label": "el/ea",
-            "ro": "înțelege&#x2011nțelege"
+            "ro": "înțelege"
           },
           {
             "label": "noi",
-            "ro": "înțelegem&#x2011nțelegem"
+            "ro": "înțelegem"
           },
           {
             "label": "voi",
-            "ro": "înțelegeți&#x2011nțelegeți"
+            "ro": "înțelegeți"
           },
           {
             "label": "ei/ele",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           }
         ],
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "înțeleg&#x2011nțeleg"
+            "ro": "înțeleg"
           },
           {
             "label": "tu",
-            "ro": "înțelegi&#x2011nțelegi"
+            "ro": "înțelegi"
           },
           {
             "label": "el/ea",
-            "ro": "înțeleagă&#x2011nțeleagă"
+            "ro": "înțeleagă"
           },
           {
             "label": "noi",
-            "ro": "înțelegem&#x2011nțelegem"
+            "ro": "înțelegem"
           },
           {
             "label": "voi",
-            "ro": "înțelegeți&#x2011nțelegeți"
+            "ro": "înțelegeți"
           },
           {
             "label": "ei/ele",
-            "ro": "înțeleagă&#x2011nțeleagă"
+            "ro": "înțeleagă"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "înțelegeam&#x2011nțelegeam"
+            "ro": "înțelegeam"
           },
           {
             "label": "tu",
-            "ro": "înțelegeai&#x2011nțelegeai"
+            "ro": "înțelegeai"
           },
           {
             "label": "el/ea",
-            "ro": "înțelegea&#x2011nțelegea"
+            "ro": "înțelegea"
           },
           {
             "label": "noi",
-            "ro": "înțelegeam&#x2011nțelegeam"
+            "ro": "înțelegeam"
           },
           {
             "label": "voi",
-            "ro": "înțelegeați&#x2011nțelegeați"
+            "ro": "înțelegeați"
           },
           {
             "label": "ei/ele",
-            "ro": "înțelegeau&#x2011nțelegeau"
+            "ro": "înțelegeau"
           }
         ],
         "source": "dexonline.ro"
@@ -5438,7 +5438,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "iaieie"
+            "ro": "ia"
           },
           {
             "label": "noi",
@@ -5450,7 +5450,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "iaieie"
+            "ro": "ia"
           }
         ],
         "imperfect": [
@@ -5665,7 +5665,7 @@
         "present": [
           {
             "label": "eu",
-            "ro": "vinviu"
+            "ro": "vin"
           },
           {
             "label": "tu",
@@ -5691,7 +5691,7 @@
         "subjunctive": [
           {
             "label": "eu",
-            "ro": "vinviu"
+            "ro": "vin"
           },
           {
             "label": "tu",
@@ -5699,7 +5699,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "vinăvie"
+            "ro": "vină"
           },
           {
             "label": "noi",
@@ -5711,7 +5711,7 @@
           },
           {
             "label": "ei/ele",
-            "ro": "vinăvie"
+            "ro": "vină"
           }
         ],
         "imperfect": [
@@ -5748,7 +5748,7 @@
       "lemma": "sta",
       "paradigm": {
         "infinitive": "sta",
-        "participiu": "statstătutstatu&#x2011stătutu&#x2011",
+        "participiu": "stat",
         "present": [
           {
             "label": "eu",
@@ -5786,7 +5786,7 @@
           },
           {
             "label": "el/ea",
-            "ro": "steasteie"
+            "ro": "stea"
           },
           {
             "label": "noi",
@@ -5798,33 +5798,33 @@
           },
           {
             "label": "ei/ele",
-            "ro": "steasteie"
+            "ro": "stea"
           }
         ],
         "imperfect": [
           {
             "label": "eu",
-            "ro": "stăteamstamsteteam"
+            "ro": "stăteam"
           },
           {
             "label": "tu",
-            "ro": "stăteaistaisteteai"
+            "ro": "stăteai"
           },
           {
             "label": "el/ea",
-            "ro": "stăteastastetea"
+            "ro": "stătea"
           },
           {
             "label": "noi",
-            "ro": "stăteamstamsteteam"
+            "ro": "stăteam"
           },
           {
             "label": "voi",
-            "ro": "stăteațistațisteteați"
+            "ro": "stăteați"
           },
           {
             "label": "ei/ele",
-            "ro": "stăteaustausteteau"
+            "ro": "stăteau"
           }
         ],
         "source": "dexonline.ro"
@@ -6270,7 +6270,7 @@
         "singular": "podea",
         "plural": "podele",
         "definiteSingular": "podeaua",
-        "definitePlural": "podelele",
+        "definitePlural": "pode",
         "source": "dexonline.ro"
       }
     },
@@ -6325,7 +6325,7 @@
         "singular": "greblă",
         "plural": "greble",
         "definiteSingular": "grebla",
-        "definitePlural": "greblele",
+        "definitePlural": "greb",
         "source": "dexonline.ro"
       }
     },
@@ -6336,7 +6336,7 @@
         "singular": "saltea",
         "plural": "saltele",
         "definiteSingular": "salteaua",
-        "definitePlural": "saltelele",
+        "definitePlural": "salte",
         "source": "dexonline.ro"
       }
     },
@@ -6577,7 +6577,7 @@
         "gender": "masculine",
         "singular": "mascul",
         "plural": "masculi",
-        "definiteSingular": "masculul",
+        "definiteSingular": "masc",
         "definitePlural": "masculii",
         "source": "dexonline.ro"
       }
@@ -6589,7 +6589,7 @@
         "singular": "femelă",
         "plural": "femele",
         "definiteSingular": "femela",
-        "definitePlural": "femelele",
+        "definitePlural": "feme",
         "source": "dexonline.ro"
       }
     },
@@ -7040,7 +7040,7 @@
         "singular": "șervețel",
         "plural": "șervețele",
         "definiteSingular": "șervețelul",
-        "definitePlural": "șervețelele",
+        "definitePlural": "șervețe",
         "source": "dexonline.ro"
       }
     },

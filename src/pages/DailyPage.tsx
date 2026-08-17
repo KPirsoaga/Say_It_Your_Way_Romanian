@@ -4,6 +4,8 @@ import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { PhraseCard } from '../components/PhraseCard';
 import { DailyVariantExerciseCard } from '../components/dailyPractice/DailyVariantExerciseCard';
+import { IllustrationPanel } from '../components/illustrations/IllustrationPanel';
+import { ExploreScene } from '../components/illustrations/ExploreScenes';
 import { useProgress, todayStr } from '../context/ProgressContext';
 import { generateDailyPracticeSession } from '../content/dailyPractice/generateSession';
 import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
@@ -45,7 +47,7 @@ export function DailyPage({ go }: Props) {
         subtitle={new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
       />
 
-      <div className="mx-auto max-w-md px-4 pt-4">
+      <div className="page-shell pt-4">
         <div className="flex items-center gap-1.5 mb-4">
           {(['phrase', 'variants'] as const).map((s) => {
             const done = step === 'done' || (step === 'variants' && s === 'phrase');
@@ -62,7 +64,7 @@ export function DailyPage({ go }: Props) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-md px-4 pb-6 pt-0 space-y-4">
+      <div className="page-shell-body space-y-4">
         {step === 'phrase' && (
           <div className="animate-fade-in space-y-4">
             <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">1. Today&apos;s phrase</h2>
@@ -102,11 +104,13 @@ export function DailyPage({ go }: Props) {
         )}
 
         {step === 'done' && (
-          <div className="animate-fade-in text-center py-8">
-            <div className="mx-auto h-24 w-24 rounded-full bg-sea-50 dark:bg-sea-600/20 flex items-center justify-center mb-4 animate-pop">
-              <Icon name="Trophy" className="h-12 w-12 text-sun-400" />
+          <div className="animate-fade-in text-center py-6 space-y-4">
+            <div className="mx-auto max-w-xs overflow-hidden rounded-3xl shadow-soft animate-pop">
+              <IllustrationPanel tone="coral" aspect="wide" ruled className="!aspect-[16/10]">
+                <ExploreScene destination="daily" className="h-full w-full" />
+              </IllustrationPanel>
             </div>
-            <h2 className="text-2xl font-bold text-ink-900 dark:text-sand-100">Great job today!</h2>
+            <h2 className="font-display text-2xl font-bold text-forest dark:text-linen-100">Great job today!</h2>
             <p className="mt-2 text-ink-700 dark:text-ink-300 text-lg">
               You practised today&apos;s phrase and {session.exercises.length} word forms.
             </p>
