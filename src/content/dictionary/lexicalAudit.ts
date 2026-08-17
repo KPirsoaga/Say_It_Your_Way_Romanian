@@ -24,9 +24,12 @@ export interface LexicalRepairAudit {
   };
   verbs: {
     totalAudited: number;
-    fullyVerified: number;
-    partiallyVerified: number;
-    unresolved: number;
+    /** All four app-supported tenses individually verified */
+    withFullTenseCoverage: number;
+    /** One or more tenses verified, but not all four */
+    withPartialMorphology: number;
+    /** No verified conjugation forms — infinitive/headword only */
+    morphologyUnresolved: number;
     patternInferredWeekly: number;
   };
   adjectives: {
@@ -57,18 +60,13 @@ export function runLexicalRepairAudit(stage: 'pre-repair' | 'post-repair' = 'pos
     (f) => f.provenance === 'reference-pattern-validated' || f.provenance === 'pattern-inferred'
   ).length;
 
-  const verbsFullyVerified = Object.entries(verifiedVerbTenses).filter(([, tenses]) => {
-    const hasPresent = tenses.some((t) => t.tense === 'present');
-    const hasAllFour =
-      tenses.some((t) => t.tense === 'present') &&
-      tenses.some((t) => t.tense === 'perfect-compus') &&
-      tenses.some((t) => t.tense === 'imperfect') &&
-      tenses.some((t) => t.tense === 'future');
-    return hasAllFour || (hasPresent && tenses.length >= 1);
-  }).length;
-
-  const verbsWithPresent = Object.keys(verifiedVerbTenses).length;
-  const verbsUnresolved = canonicalGrammarVerbs.length - verbsWithPresent;
+  const APP_TENSES = ['present', 'perfect-compus', 'imperfect', 'future'] as const;
+  const verbsWithAnyMorphology = Object.keys(verifiedVerbTenses).length;
+  const verbsWithFullCoverage = Object.entries(verifiedVerbTenses).filter(([, tenses]) =>
+    APP_TENSES.every((t) => tenses.some((v) => v.tense === t))
+  ).length;
+  const verbsWithPartialMorphology = verbsWithAnyMorphology - verbsWithFullCoverage;
+  const verbsMorphologyUnresolved = canonicalGrammarVerbs.length - verbsWithAnyMorphology;
 
   const teacherReviewRemaining = dictionaryEntries
     .filter((e) => e.review?.needsReview)
@@ -92,9 +90,9 @@ export function runLexicalRepairAudit(stage: 'pre-repair' | 'post-repair' = 'pos
     },
     verbs: {
       totalAudited: canonicalGrammarVerbs.length,
-      fullyVerified: verbsFullyVerified,
-      partiallyVerified: verbsWithPresent - verbsFullyVerified,
-      unresolved: verbsUnresolved,
+      withFullTenseCoverage: verbsWithFullCoverage,
+      withPartialMorphology: verbsWithPartialMorphology,
+      morphologyUnresolved: verbsMorphologyUnresolved,
       patternInferredWeekly: canonicalGrammarVerbs.filter((v) => v.provenance === 'pattern-inferred').length,
     },
     adjectives: {
@@ -114,7 +112,7 @@ export function lexicalCoverageSummary() {
   const audit = runLexicalRepairAudit('post-repair');
   return {
     nouns: `${audit.nouns.fullyVerified} fully verified / ${audit.nouns.dictionaryHeadwords} total (${audit.nouns.baseOnly} base-only)`,
-    verbs: `${Object.keys(verifiedVerbTenses).length} with verified tenses / ${audit.verbs.totalAudited} total`,
+    verbs: `${audit.verbs.withPartialMorphology + audit.verbs.withFullTenseCoverage} with verified morphology (${audit.verbs.withFullTenseCoverage} full tense coverage) / ${audit.verbs.totalAudited} total`,
     adjectives: `${audit.adjectives.fullyVerified} fully verified / ${audit.adjectives.dictionaryHeadwords} total`,
     aliases: audit.aliases.total,
     dailyPracticePool: audit.aliases.variantPoolSize,

@@ -1,13 +1,21 @@
 import { grammarVerbs } from '../content';
+import { getAvailableTenses } from '../content/grammarVerbTenses';
 import { getVerbNav } from '../content/grammarVerbNav';
 
 interface Props {
   verbId: string;
   onSelect: (verbId: string) => void;
+  /** When true, quick-nav chips only list verbs with verified conjugation */
+  verifiedOnly?: boolean;
 }
 
-export function GrammarVerbNav({ verbId, onSelect }: Props) {
+export function GrammarVerbNav({ verbId, onSelect, verifiedOnly = false }: Props) {
   const { prevId, nextId } = getVerbNav(verbId);
+  const navVerbs = grammarVerbs.filter((v) => {
+    if (getVerbNav(v.id).index < 0) return false;
+    if (!verifiedOnly) return true;
+    return getAvailableTenses(v).length > 0;
+  });
   const prev = prevId ? grammarVerbs.find((v) => v.id === prevId) : undefined;
   const next = nextId ? grammarVerbs.find((v) => v.id === nextId) : undefined;
 
@@ -45,8 +53,7 @@ export function GrammarVerbNav({ verbId, onSelect }: Props) {
       </div>
 
       <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
-        {grammarVerbs
-          .filter((v) => getVerbNav(v.id).index >= 0)
+        {navVerbs
           .sort((a, b) => getVerbNav(a.id).index - getVerbNav(b.id).index)
           .map((v) => {
             const active = v.id === verbId;

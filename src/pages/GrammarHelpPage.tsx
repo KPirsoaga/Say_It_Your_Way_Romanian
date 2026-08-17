@@ -9,6 +9,7 @@ import {
   grammarSentencePatterns,
   grammarPartsOfSpeech,
 } from '../content/grammar';
+import { getAvailableTenses } from '../content/grammarVerbTenses';
 import { getVerbNav } from '../content/grammarVerbNav';
 import type { PageId } from '../App';
 
@@ -56,7 +57,8 @@ function NavCard({
 
 export function GrammarHelpPage({ go, onBack }: Props) {
   const sortedVerbs = [...grammarVerbs].sort((a, b) => getVerbNav(a.id).index - getVerbNav(b.id).index);
-  const firstVerb = sortedVerbs.find((v) => getVerbNav(v.id).index >= 0) ?? grammarVerbs[0];
+  const verifiedVerbs = sortedVerbs.filter((v) => getAvailableTenses(v).length > 0);
+  const firstVerified = verifiedVerbs[0];
 
   return (
     <div className="min-h-screen">
@@ -86,28 +88,36 @@ export function GrammarHelpPage({ go, onBack }: Props) {
         {/* 2. Common verbs — primary */}
         <section>
           <SectionHeader
-            title="Common verbs"
-            subtitle="One page per verb — switch tense without leaving"
+            title="Verified verb conjugations"
+            subtitle="Only forms checked individually in a Romanian dictionary — more verbs coming"
           />
-          <NavCard
-            title="Open verb reference"
-            subtitle={firstVerb ? `Start with ${firstVerb.infinitive} — ${firstVerb.en}` : 'Conjugations and examples'}
-            icon="Zap"
-            color="coral"
-            onClick={() => go('grammar-verb', firstVerb?.id ?? 'vb-fi')}
-          />
-          <div className="flex gap-2 overflow-x-auto pb-1 mt-3 -mx-1 px-1">
-            {sortedVerbs.map((v) => (
-              <button
-                key={v.id}
-                type="button"
-                onClick={() => go('grammar-verb', v.id)}
-                className="shrink-0 rounded-full px-3 py-2 text-sm font-bold bg-sand-100 text-ink-700 dark:bg-ink-900 dark:text-ink-300"
-              >
-                <span lang="ro">{v.infinitive.replace('a ', '')}</span>
-              </button>
-            ))}
-          </div>
+          {firstVerified ? (
+            <>
+              <NavCard
+                title="Open verb reference"
+                subtitle={`Start with ${firstVerified.infinitive} — ${firstVerified.en}`}
+                icon="Zap"
+                color="coral"
+                onClick={() => go('grammar-verb', firstVerified.id)}
+              />
+              <div className="flex gap-2 overflow-x-auto pb-1 mt-3 -mx-1 px-1">
+                {verifiedVerbs.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    onClick={() => go('grammar-verb', v.id)}
+                    className="shrink-0 rounded-full px-3 py-2 text-sm font-bold bg-sand-100 text-ink-700 dark:bg-ink-900 dark:text-ink-300"
+                  >
+                    <span lang="ro">{v.infinitive.replace('a ', '')}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <Card className="p-4 text-sm text-ink-600 dark:text-ink-300 text-center">
+              Verified conjugation tables will appear here as each verb is checked individually.
+            </Card>
+          )}
         </section>
 
         {/* 3. Understanding tenses — primary */}

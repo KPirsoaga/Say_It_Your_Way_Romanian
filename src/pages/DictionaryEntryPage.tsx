@@ -5,6 +5,7 @@ import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { getDictionaryEntry, getDictionaryPhrase } from '../content/dictionary';
 import { DictionaryFlag, WordFamily } from '../components/dictionary/WordFamily';
+import { entryHasLearnerWordFamily, learnerVisibleTensesForVerb } from '../content/dictionary/familyUtils';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
 import type { GrammarTense } from '../types';
@@ -101,10 +102,11 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
   const displayRo = entry!.headwordRo;
   const displayEn = entry!.headwordEn;
   const audioId = `dict-entry-${entry!.id}`;
-  const showWordFamily =
-    (entry!.type === 'noun' && entry!.nounFamily) ||
-    (entry!.type === 'verb' && entry!.verbFamily?.present) ||
-    (entry!.type === 'adjective' && entry!.adjectiveFamily);
+  const showWordFamily = entryHasLearnerWordFamily(entry!);
+  const grammarVerbId = entry!.verbFamily?.grammarVerbId;
+  const showGrammarLink = Boolean(
+    grammarVerbId && learnerVisibleTensesForVerb(grammarVerbId).length > 0
+  );
 
   return (
     <div className="min-h-screen">
@@ -160,9 +162,9 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
               onPlay={(ro, id) => (currentId === id ? stop() : speak(ro, id))}
               playingId={currentId}
             />
-            {entry!.verbFamily?.grammarVerbId && (
+            {entry!.verbFamily?.grammarVerbId && showGrammarLink && (
               <Button variant="outline" size="lg" className="w-full" onClick={() => go('grammar-verb', entry!.verbFamily!.grammarVerbId!)}>
-                Full conjugations →
+                Verified conjugations →
                 <Icon name="ChevronRight" className="h-5 w-5" />
               </Button>
             )}

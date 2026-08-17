@@ -784,6 +784,33 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
   return variants;
 }
 
+/** Headword recognition for Daily Practice — base form only, not invented morphology */
+export function collectHeadwordPracticeItem(
+  entry: DictionaryEntry,
+  weight: DictionaryVariant['sourceWeight']
+): DictionaryVariant | undefined {
+  if (!entry.sources.some((s) => s.feature === 'weekly-topic')) return undefined;
+  const baseRo = entry.type === 'verb' ? entry.headwordRo : entry.headwordRo;
+  return {
+    entryId: entry.id,
+    ro: baseRo,
+    en: entry.headwordEn,
+    pron: entry.pron,
+    formLabel: 'headword',
+    baseRo,
+    baseEn: entry.headwordEn,
+    type: entry.type,
+    wordFamilyChain: [baseRo],
+    sourceWeight: weight,
+  };
+}
+
+export function collectAllPracticeItems(entry: DictionaryEntry, weight: DictionaryVariant['sourceWeight']): DictionaryVariant[] {
+  const morph = collectVariants(entry, weight);
+  const headword = collectHeadwordPracticeItem(entry, weight);
+  return headword ? [...morph, headword] : morph;
+}
+
 export function getCurrentWeeklyTopicId(dateStr: string): string {
   let seed = 0;
   for (let i = 0; i < dateStr.length; i++) seed = (seed * 31 + dateStr.charCodeAt(i)) % 100000;
@@ -811,9 +838,11 @@ export function dictionaryAuditReport() {
     nounsBaseOnly: lexical.nouns.baseOnly,
     nounsAwaitingReview: nouns.filter((e) => e.familyNeedsReview).length,
     verbsConnectedToGrammarHelp: Object.keys(verifiedVerbTenses).length,
-    verbsWithPartialFamilies: lexical.verbs.partiallyVerified,
-    verbsUnresolved: lexical.verbs.unresolved,
-    verbsWithAllFourTenses: lexical.verbs.fullyVerified,
+    verbsWithPartialFamilies: lexical.verbs.withPartialMorphology,
+    verbsUnresolved: lexical.verbs.morphologyUnresolved,
+    verbsWithAllFourTenses: lexical.verbs.withFullTenseCoverage,
+    verbsWithVerifiedMorphology:
+      lexical.verbs.withPartialMorphology + lexical.verbs.withFullTenseCoverage,
     adjectivesWithCompleteFamilies: lexical.adjectives.fullyVerified,
     searchableGrammaticalVariants: dictionaryFormAliases.length,
     dailyPracticeVariantPoolSize: variantPool.length,

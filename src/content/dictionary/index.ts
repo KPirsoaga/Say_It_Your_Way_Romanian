@@ -10,6 +10,7 @@ export {
   searchDictionary,
   dictionaryLetterIndex,
   collectVariants,
+  collectAllPracticeItems,
   dictionaryStats,
   dictionaryAuditReport,
   platformGrammarAuditReport,

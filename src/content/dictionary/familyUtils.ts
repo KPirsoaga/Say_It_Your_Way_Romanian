@@ -1,8 +1,12 @@
 import type {
   DictionaryAdjectiveFamily,
+  DictionaryEntry,
   DictionaryNounFamily,
   DictionaryVerbFamily,
 } from './types';
+import type { GrammarTense } from '../../types';
+import { GRAMMAR_TENSE_LABELS } from './types';
+import { getVerifiedTensesForVerb } from '../verbs/verifiedVerbForms';
 
 export const ROMANIAN_ARTICLE_NOTE =
   "In Romanian, 'the' is often attached to the end of the noun.";
@@ -102,4 +106,34 @@ export function learnerPersonLabel(label: string): string {
     'ei/ele': 'ei / ele / they',
   };
   return map[label] ?? label;
+}
+
+/** True when the entry has lexically verified inflected forms to show learners */
+export function entryHasLearnerWordFamily(entry: DictionaryEntry): boolean {
+  if (entry.type === 'noun' && entry.familyComplete) return true;
+  if (entry.type === 'adjective' && entry.familyComplete) return true;
+  if (entry.type === 'verb' && entry.verbFamily?.grammarVerbId) {
+    return getVerifiedTensesForVerb(entry.verbFamily.grammarVerbId).length > 0;
+  }
+  return false;
+}
+
+/** Tenses with individually verified forms for this verb (may be a subset of app-supported tenses) */
+export function learnerVisibleTensesForVerb(verbId: string): GrammarTense[] {
+  return getVerifiedTensesForVerb(verbId).map((t) => t.tense);
+}
+
+/** Short label clarifying partial vs full tense coverage — never implies all four tenses */
+export function verifiedTenseCoverageLabel(verbId: string): string | undefined {
+  const tenses = learnerVisibleTensesForVerb(verbId);
+  if (tenses.length === 0) return undefined;
+  const names = tenses.map((t) => GRAMMAR_TENSE_LABELS[t].toLowerCase());
+  if (names.length === 1) return `${names[0]} forms verified individually`;
+  return `${names.join(', ')} verified — other tenses not yet checked`;
+}
+
+export function verbHasFullTenseCoverage(verbId: string): boolean {
+  const required: GrammarTense[] = ['present', 'perfect-compus', 'imperfect', 'future'];
+  const verified = new Set(learnerVisibleTensesForVerb(verbId));
+  return required.every((t) => verified.has(t));
 }
