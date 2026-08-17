@@ -48,16 +48,16 @@ export function TeacherReviewPage({ onBack, onShareReview }: Props) {
         onBack={onBack}
       />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
-        <Card className="bg-gradient-to-br from-rose-50 to-white dark:from-ink-900 dark:to-ink-900">
-          <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
+        <Card variant="quiet">
+          <p className="text-sm text-forest/70 dark:text-linen/70 leading-relaxed">
             Items flagged for teacher review appear here. Mark approved or note what to change — saved on this device only.
           </p>
         </Card>
 
         <section className="grid grid-cols-3 gap-3 tile-grid">
-          <CountCard label="Pending" value={counts.pending} color="text-sun-400" />
-          <CountCard label="Approved" value={counts.approved} color="text-sea-600 dark:text-sea-200" />
-          <CountCard label="Needs changes" value={counts.needsChanges} color="text-coral-400" />
+          <CountCard label="Pending" value={counts.pending} color="text-coral" />
+          <CountCard label="Approved" value={counts.approved} color="text-olive-600 dark:text-olive-300" />
+          <CountCard label="Needs changes" value={counts.needsChanges} color="text-coral-600" />
         </section>
 
         <Button variant="soft" size="lg" className="w-full" onClick={onShareReview}>
@@ -74,11 +74,7 @@ export function TeacherReviewPage({ onBack, onShareReview }: Props) {
                 type="button"
                 onClick={() => setFilter(opt.key)}
                 aria-pressed={active}
-                className={`rounded-2xl px-4 py-2 text-sm font-bold transition ${
-                  active
-                    ? 'bg-sea-500 text-white shadow-soft'
-                    : 'bg-sand-100 text-ink-700 dark:bg-ink-900 dark:text-ink-300'
-                }`}
+                className={`filter-chip ${active ? 'filter-chip-active' : 'filter-chip-inactive'}`}
               >
                 {opt.label}
               </button>

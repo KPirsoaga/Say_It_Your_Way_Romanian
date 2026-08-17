@@ -67,9 +67,9 @@ export function DictionaryPage({ go, onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Dictionary" subtitle="Words you have met in the app" onBack={onBack} />
+      <PageHeader title="Dictionary" subtitle="Your personal Romanian reference" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
-        <Card className="space-y-3">
+        <div className="space-y-3">
           <label className="block">
             <span className="sr-only">Search Romanian or English</span>
             <input
@@ -77,12 +77,12 @@ export function DictionaryPage({ go, onBack }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search Romanian or English…"
-              className="w-full rounded-2xl border border-sand-200 dark:border-white/10 bg-white dark:bg-ink-800 px-4 py-3 text-base"
+              className="input-field"
             />
           </label>
           {searchMatches.some((m) => m.alias) && (
-            <p className="text-sm text-ink-600 dark:text-ink-300">
-              Grammatical forms like <span lang="ro" className="font-bold">{query.trim()}</span> link to their base word.
+            <p className="text-sm text-forest/70 dark:text-linen/70">
+              Grammatical forms like <span lang="ro" className="font-semibold">{query.trim()}</span> link to their base word.
             </p>
           )}
           <div className="flex flex-wrap gap-2">
@@ -91,11 +91,7 @@ export function DictionaryPage({ go, onBack }: Props) {
                 key={f.id}
                 type="button"
                 onClick={() => setFilter(f.id)}
-                className={`rounded-full px-3 py-1.5 text-sm font-bold ${
-                  filter === f.id
-                    ? 'bg-sea-600 text-white dark:bg-sea-400 dark:text-ink-900'
-                    : 'bg-sand-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300'
-                }`}
+                className={`filter-chip ${filter === f.id ? 'filter-chip-active' : 'filter-chip-inactive'}`}
               >
                 {f.label}
               </button>
@@ -108,22 +104,22 @@ export function DictionaryPage({ go, onBack }: Props) {
                   key={letter}
                   type="button"
                   onClick={() => jumpTo(letter)}
-                  className="h-8 w-8 rounded-lg text-sm font-bold bg-sand-100 dark:bg-ink-800 text-ink-600 dark:text-ink-300"
+                  className="h-8 w-8 rounded-lg text-sm font-semibold bg-clay-100 dark:bg-forest-800 text-forest/70 dark:text-linen/70 hover:bg-olive-100 dark:hover:bg-olive-900/30"
                 >
                   {letter}
                 </button>
               ))}
             </div>
           )}
-        </Card>
+        </div>
 
-        <p className="text-sm text-ink-500 dark:text-ink-300">
+        <p className="text-sm text-forest/50 dark:text-linen/50">
           {results.length} {showPhrases ? 'phrases' : 'words'}
         </p>
 
         {grouped.map(([letter, entries]) => (
           <section key={letter} id={`dict-letter-${letter}`}>
-            <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100 mb-2">{letter}</h2>
+            <h2 className="font-display text-lg font-bold text-forest dark:text-linen-100 mb-2">{letter}</h2>
             <div className="space-y-2">
               {entries.map((item) => {
                 const phrase = isPhraseItem(item);
@@ -133,20 +129,20 @@ export function DictionaryPage({ go, onBack }: Props) {
                     key={item.id}
                     type="button"
                     onClick={() => go('dictionary-entry', item.id)}
-                    className="w-full text-left card p-4 hover:ring-2 hover:ring-sea-400 transition"
+                    className="w-full text-left rounded-2xl border border-forest/8 dark:border-linen/10 bg-white dark:bg-forest-800 p-4 hover:border-olive-300/50 transition"
                   >
-                    <p className="text-lg font-bold text-ink-900 dark:text-sand-100" lang="ro">
+                    <p className="text-lg font-semibold text-forest dark:text-linen-100" lang="ro">
                       {phrase ? item.ro : item.headwordRo}
                     </p>
-                    <p className="text-sm text-ink-600 dark:text-ink-300 mt-1">
+                    <p className="text-sm text-forest/70 dark:text-linen/70 mt-0.5">
                       {phrase ? item.en : item.headwordEn}
                     </p>
                     {aliasMatch && (
-                      <p className="text-xs text-sea-600 dark:text-sea-200 mt-1">
+                      <p className="text-xs text-olive-600 dark:text-olive-300 mt-1">
                         {aliasMatch.explanation}
                       </p>
                     )}
-                    <p className="text-xs font-bold uppercase tracking-wide text-ink-400 mt-2 capitalize">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-forest/40 mt-2 capitalize">
                       {phrase ? 'phrase' : item.type}
                     </p>
                   </button>
@@ -158,8 +154,8 @@ export function DictionaryPage({ go, onBack }: Props) {
 
         {results.length === 0 && (
           <Card className="text-center py-8">
-            <Icon name="BookOpen" className="h-10 w-10 text-ink-300 mx-auto mb-2" />
-            <p className="font-bold text-ink-700 dark:text-ink-300">No matches</p>
+            <Icon name="BookOpen" className="h-10 w-10 text-clay-300 mx-auto mb-2" />
+            <p className="font-semibold text-forest/70 dark:text-linen/70">No matches</p>
           </Card>
         )}
       </div>

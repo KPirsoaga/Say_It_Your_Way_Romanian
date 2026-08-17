@@ -3,7 +3,7 @@ import { Card } from '../Card';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { useSpeech } from '../../hooks/useSpeech';
-import { WordFamilyChain } from '../dictionary/WordFamily';
+import { WordFamilyChain } from '../brand/WordFamilyChain';
 import type { DailyVariantExercise } from '../../content/dictionary/types';
 
 interface Props {
@@ -83,12 +83,12 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
                 type="button"
                 disabled={answered}
                 onClick={() => setPicked(opt)}
-                className={`w-full text-left rounded-2xl px-4 py-3 font-bold transition ${
+                className={`w-full text-left rounded-2xl px-4 py-3.5 font-semibold transition border ${
                   showCorrect
-                    ? 'bg-sea-100 dark:bg-sea-600/30 ring-2 ring-sea-500'
+                    ? 'bg-olive-50 dark:bg-olive-900/30 border-olive-400 ring-2 ring-olive-400'
                     : showWrong
-                      ? 'bg-coral-50 dark:bg-coral-400/20 ring-2 ring-coral-400'
-                      : 'bg-sand-100 dark:bg-ink-900 hover:ring-2 hover:ring-sea-300'
+                      ? 'bg-coral-50 dark:bg-coral-900/20 border-coral-300 ring-2 ring-coral-400'
+                      : 'bg-white dark:bg-forest-800 border-forest/8 dark:border-linen/10 hover:border-olive-300'
                 }`}
                 lang={isEnRo ? 'ro' : undefined}
               >
@@ -100,9 +100,10 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
       </Card>
 
       {answered && (
-        <Card className="space-y-2 bg-sea-50 dark:bg-sea-600/10">
-          <p className="text-lg font-bold text-ink-900 dark:text-sand-100">
-            {correct ? '✓' : '→'} {exercise.feedback.meaning}
+        <Card variant="accent" className="space-y-2">
+          <p className="text-lg font-semibold text-forest dark:text-linen-100 flex items-center gap-2">
+            <Icon name={correct ? 'Check' : 'ArrowRight'} className={`h-5 w-5 shrink-0 ${correct ? 'text-olive-600' : 'text-coral'}`} />
+            {exercise.feedback.meaning}
           </p>
           <p className="text-sm text-ink-600 dark:text-ink-300">
             Base {exercise.feedback.grammarVerbId ? 'verb' : exercise.type === 'adjective-form' ? 'adjective' : 'noun'}:{' '}

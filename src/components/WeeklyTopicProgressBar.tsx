@@ -1,6 +1,7 @@
 import { Icon } from './Icon';
 import type { WeeklyTopicProgress } from '../types';
 import { WEEKLY_TOPIC_STEP_COUNT } from '../content/weeklyTopics';
+import { ProgressBar } from './brand/ProgressBar';
 
 interface Props {
   progress: WeeklyTopicProgress;
@@ -18,27 +19,13 @@ export function WeeklyTopicProgressBar({ progress, className = '' }: Props) {
     progress.matchingDone,
     progress.sortingDone,
   ].filter(Boolean).length;
-  const pct = Math.round((done / WEEKLY_TOPIC_STEP_COUNT) * 100);
 
   return (
     <div className={className}>
-      <div className="flex items-center justify-between text-sm mb-1.5">
-        <span className="font-bold text-ink-700 dark:text-ink-300">Progress</span>
-        <span className="text-ink-500 dark:text-ink-300">
-          {done} of {WEEKLY_TOPIC_STEP_COUNT} · {pct}%
-        </span>
-      </div>
-      <div className="h-3 rounded-full bg-sand-200 dark:bg-white/10 overflow-hidden">
-        <div
-          className="h-full bg-sea-500 rounded-full transition-all duration-500"
-          style={{ width: `${pct}%` }}
-          role="progressbar"
-          aria-valuenow={pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={`Topic progress ${pct} percent`}
-        />
-      </div>
+      <ProgressBar value={done} max={WEEKLY_TOPIC_STEP_COUNT} />
+      <p className="text-xs text-forest/50 dark:text-linen/50 mt-1">
+        {done} of {WEEKLY_TOPIC_STEP_COUNT} steps
+      </p>
     </div>
   );
 }
@@ -51,8 +38,8 @@ interface StepProps {
 export function WeeklyStepBadge({ done, label }: StepProps) {
   return (
     <span
-      className={`inline-flex items-center gap-1 text-xs font-bold shrink-0 ${
-        done ? 'text-sea-600 dark:text-sea-200' : 'text-ink-300 dark:text-ink-500'
+      className={`inline-flex items-center gap-1 text-xs font-semibold shrink-0 ${
+        done ? 'text-olive-600 dark:text-olive-300' : 'text-forest/30 dark:text-linen/30'
       }`}
     >
       <Icon name={done ? 'Check' : 'Circle'} className="h-4 w-4" />

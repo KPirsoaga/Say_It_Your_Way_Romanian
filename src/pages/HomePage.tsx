@@ -1,13 +1,13 @@
 import { Icon } from '../components/Icon';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
+import { BrandLogo } from '../components/brand/BrandLogo';
+import { SectionHeading } from '../components/brand/SectionHeading';
+import { ProgressBar } from '../components/brand/ProgressBar';
 import { useProgress } from '../context/ProgressContext';
 import { todayStr } from '../context/ProgressContext';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
-import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
 import { dictionaryStats } from '../content/dictionary';
-import { FlagForTeacher } from '../components/FlagForTeacher';
-import { userFlagId } from '../content/review/reviewIds';
 import type { PageId } from '../App';
 import type { WeeklyTopicProgress } from '../types';
 
@@ -15,131 +15,118 @@ interface Props {
   go: (page: PageId, arg?: string) => void;
 }
 
-const CABIN_TOPIC_ID = 'building-cabin';
-
-const practiceTiles: { label: string; sub: string; icon: string; page: PageId; color: string }[] = [
-  { label: 'Weekly Topics', sub: 'This week’s lesson path', icon: 'BookOpen', page: 'weekly-topics', color: 'from-sun-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Daily Practice', sub: 'Recognise word forms calmly', icon: 'CalendarDays', page: 'daily', color: 'from-coral-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Dictionary', sub: 'Words you have met', icon: 'BookOpen', page: 'dictionary', color: 'from-sea-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Grammar Help', sub: 'Simple patterns & verbs', icon: 'BookOpen', page: 'grammar', color: 'from-sun-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Phrase Builder', sub: 'Build sentences by tapping', icon: 'Sparkles', page: 'builder', color: 'from-sea-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Mini Conversations', sub: 'Real-life guided exchanges', icon: 'MessagesSquare', page: 'conversations', color: 'from-sea-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Real Life Mode', sub: 'Phrases for urgent situations', icon: 'HandHeart', page: 'reallife', color: 'from-rose-50 to-white dark:from-ink-900 dark:to-ink-900' },
-  { label: 'Survival Romanian', sub: 'The most useful phrases, first', icon: 'LifeBuoy', page: 'survival', color: 'from-coral-50 to-white dark:from-ink-900 dark:to-ink-900' },
-];
+function findActiveTopic(getWeeklyTopicProgress: (id: string) => WeeklyTopicProgress) {
+  const incomplete = weeklyTopics.find((t) => weeklyTopicPercent(getWeeklyTopicProgress(t.id)) < 100);
+  return incomplete ?? weeklyTopics[0]!;
+}
 
 export function HomePage({ go }: Props) {
   const { progress, getWeeklyTopicProgress } = useProgress();
   const today = todayStr();
-  const lessonPhrase = getWeeklyLessonPhrase(today);
-  const cabinTopic = weeklyTopics.find((t) => t.id === CABIN_TOPIC_ID) ?? weeklyTopics[0];
-  const cabinProgress = getWeeklyTopicProgress(cabinTopic.id);
-  const cabinPct = weeklyTopicPercent(cabinProgress);
-  const lessonSummary = summariseLessonProgress(cabinProgress);
+  const activeTopic = findActiveTopic(getWeeklyTopicProgress);
+  const topicProgress = getWeeklyTopicProgress(activeTopic.id);
+  const pct = weeklyTopicPercent(topicProgress);
+  const lessonSummary = summariseLessonProgress(topicProgress);
   const dictStats = dictionaryStats();
-  const wordsExplored = progress.dictionaryWordsSeen.length;
+  const practisedToday = progress.practisedDays.includes(today);
 
   return (
-    <div className="mx-auto max-w-md px-4 pb-8 pt-2 space-y-6">
-      <section className="rounded-3xl bg-gradient-to-br from-sea-400 to-sea-600 text-white p-6 shadow-soft-lg animate-fade-in">
-        <p className="text-sm uppercase tracking-wide text-sea-100/90 font-bold">Bun venit!</p>
-        <h1 className="text-3xl font-bold mt-1 leading-tight">What should you do next?</h1>
-        <p className="mt-2 text-sea-50/90 text-base">Start with this week&apos;s lesson — a few calm minutes, no pressure.</p>
-      </section>
-
-      <section>
-        <SectionTitle title="Progress" icon="BarChart3" />
-        <div className="grid grid-cols-3 gap-3 tile-grid">
-          <StatCard icon="Flame" value={progress.practisedDays.length} label="Days" color="text-coral-400" onClick={() => go('progress')} />
-          <StatCard icon="HeartFilled" value={progress.favourites.length} label="Saved" color="text-rose-400" onClick={() => go('favourites')} />
-          <StatCard icon="BookOpen" value={wordsExplored} label="Words explored" color="text-sea-600" onClick={() => go('dictionary')} />
-        </div>
-        <p className="text-xs text-ink-500 dark:text-ink-400 mt-2 text-center">
-          {dictStats.total} words in your Dictionary
+    <div className="mx-auto max-w-md px-4 pb-8 pt-[max(0.5rem,env(safe-area-inset-top))] space-y-8">
+      {/* Greeting */}
+      <header className="animate-fade-in pt-10">
+        <p className="font-script text-2xl text-coral leading-none">Bună!</p>
+        <h1 className="font-display text-2xl font-bold text-forest dark:text-linen-100 mt-1 leading-tight">
+          Your Romanian notebook
+        </h1>
+        <p className="text-sm text-forest/60 dark:text-linen/60 mt-1">
+          Real language. Real life. Your pace.
         </p>
-        <Button variant="soft" size="md" className="w-full mt-3" onClick={() => go('progress')}>
-          View full progress
-          <Icon name="ChevronRight" className="h-5 w-5" />
-        </Button>
-      </section>
+      </header>
 
-      <section>
-        <SectionTitle title="Continue this week's lesson" icon="BookOpen" />
-        <Card className="p-5 bg-gradient-to-br from-sun-100 to-white dark:from-ink-900 dark:to-ink-900 ring-2 ring-sun-300 dark:ring-sun-300/30">
+      {/* Continue learning */}
+      <section className="animate-fade-in">
+        <SectionHeading title="Continue learning" subtitle={activeTopic.title} />
+        <Card variant="accent" className="space-y-4">
           <div className="flex items-start gap-4">
-            <div className="h-14 w-14 rounded-2xl bg-sun-50 dark:bg-sun-300/20 flex items-center justify-center shrink-0">
-              <Icon name="Building2" className="h-7 w-7 text-sun-400" />
+            <div className="h-12 w-12 rounded-2xl bg-white/70 dark:bg-forest-800/50 flex items-center justify-center shrink-0">
+              <Icon name={activeTopic.icon} className="h-6 w-6 text-olive-600 dark:text-olive-300" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-xl leading-tight">{cabinTopic.title}</p>
-              <p className="tile-label text-sm text-ink-500 dark:text-ink-300 mt-1">{cabinTopic.description}</p>
-              <p className="text-xs font-bold text-sun-500 dark:text-sun-300 mt-2">{cabinPct}% complete</p>
+              <p className="font-display text-lg font-bold text-forest dark:text-linen-100 leading-tight">
+                {activeTopic.title}
+              </p>
+              <p className="text-sm text-forest/70 dark:text-linen/70 mt-0.5">{activeTopic.description}</p>
             </div>
           </div>
 
-          <div className="mt-4 space-y-2">
-            <LessonProgressRow label="Vocabulary" done={cabinProgress.vocabularyViewed} detail={cabinProgress.vocabularyViewed ? 'Viewed' : 'Not started'} />
-            <LessonProgressRow label="Reading" done={lessonSummary.readingsDone === 3} detail={`${lessonSummary.readingsDone} of 3`} />
-            <LessonProgressRow label="Exercises" done={lessonSummary.exercisesDone === 4} detail={`${lessonSummary.exercisesDone} of 4`} />
-            {cabinTopic.grammarFocus ? (
-              <button
-                type="button"
-                onClick={() => {
-                  const f = cabinTopic.grammarFocus;
-                  if (f?.grammarVerbId) go('grammar-verb', f.grammarVerbId);
-                  else if (f?.grammarTenseId) go('grammar-tense', f.grammarTenseId);
-                  else if (f?.grammarTopicId) go('grammar-topic', f.grammarTopicId);
-                  else go('grammar');
-                }}
-                className="w-full flex items-center justify-between gap-2 rounded-2xl p-3 ring-2 ring-sand-200 dark:ring-white/10 hover:ring-sea-400 transition text-left"
-              >
-                <span className="tile-label text-sm font-bold text-ink-700 dark:text-ink-300">Grammar focus</span>
-                <span className="text-sm text-ink-500 dark:text-ink-400 text-right tile-label">{cabinTopic.grammarFocus.hint}</span>
-              </button>
-            ) : null}
+          <ProgressBar value={pct} label="Lesson progress" />
+
+          <div className="grid grid-cols-3 gap-2 text-center text-xs">
+            <MiniStat label="Vocab" done={topicProgress.vocabularyViewed} detail={topicProgress.vocabularyViewed ? '✓' : '—'} />
+            <MiniStat label="Reading" done={lessonSummary.readingsDone === 3} detail={`${lessonSummary.readingsDone}/3`} />
+            <MiniStat label="Practice" done={lessonSummary.exercisesDone === 4} detail={`${lessonSummary.exercisesDone}/4`} />
           </div>
 
-          <Button variant="primary" size="lg" className="mt-4 w-full" onClick={() => go('weekly-topic', cabinTopic.id)}>
+          {activeTopic.grammarFocus && (
+            <button
+              type="button"
+              onClick={() => {
+                const f = activeTopic.grammarFocus;
+                if (f?.grammarVerbId) go('grammar-verb', f.grammarVerbId);
+                else if (f?.grammarTenseId) go('grammar-tense', f.grammarTenseId);
+                else if (f?.grammarTopicId) go('grammar-topic', f.grammarTopicId);
+                else go('grammar');
+              }}
+              className="w-full flex items-center justify-between gap-2 rounded-2xl px-3 py-2.5 bg-white/60 dark:bg-forest-800/40 text-left transition hover:ring-2 hover:ring-olive-300/50"
+            >
+              <span className="text-sm font-semibold text-forest/80 dark:text-linen/80">Grammar focus</span>
+              <span className="text-sm text-forest/60 dark:text-linen/60 text-right">{activeTopic.grammarFocus.hint}</span>
+            </button>
+          )}
+
+          <Button variant="primary" size="lg" className="w-full" onClick={() => go('weekly-topic', activeTopic.id)}>
             <Icon name="BookOpen" className="h-5 w-5" />
-            {cabinPct >= 100 ? 'Review lesson' : 'Continue'}
+            {pct >= 100 ? 'Review lesson' : 'Continue lesson'}
           </Button>
         </Card>
       </section>
 
-      <section>
-        <SectionTitle title="Today's phrase" icon="Star" />
-        <p className="text-sm text-ink-500 dark:text-ink-300 mb-2">From {cabinTopic.title}</p>
-        <Card className="bg-gradient-to-br from-sun-50 to-white dark:from-ink-900 dark:to-ink-900 p-4">
-          <p className="text-xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
-            {lessonPhrase.ro}
-          </p>
-          <p className="mt-2 text-ink-700 dark:text-ink-300">{lessonPhrase.en}</p>
-          <FlagForTeacher
-            className="mt-3"
-            id={userFlagId(`home-phrase:${today}`)}
-            ro={lessonPhrase.ro}
-            en={lessonPhrase.en}
-            contentArea="Weekly Topics"
-            contextLabel={cabinTopic.title}
-          />
+      {/* Daily practice */}
+      <section className="animate-fade-in">
+        <SectionHeading title="Daily practice" subtitle="5 calm minutes" />
+        <Card className="space-y-4">
+          <div className="flex items-center gap-4">
+            <div className="h-12 w-12 rounded-2xl bg-coral-50 dark:bg-coral-900/20 flex items-center justify-center shrink-0">
+              <Icon name="CalendarDays" className="h-6 w-6 text-coral" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold text-forest dark:text-linen-100">Recognise word forms</p>
+              <p className="text-sm text-forest/60 dark:text-linen/60">
+                {practisedToday ? 'Done for today — well done!' : 'Short session from your current topic & dictionary'}
+              </p>
+            </div>
+          </div>
+          <Button variant={practisedToday ? 'outline' : 'secondary'} size="lg" className="w-full" onClick={() => go('daily')}>
+            {practisedToday ? 'Practise again' : 'Start daily practice'}
+            <Icon name="ArrowRight" className="h-5 w-5" />
+          </Button>
         </Card>
       </section>
 
-      <section>
-        <SectionTitle title="Ways to practise" icon="LayoutGrid" />
-        <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">Reinforce your lesson — pick what fits today.</p>
-        <div className="grid grid-cols-2 gap-3 tile-grid">
-          {practiceTiles.map((t) => (
-            <Card key={t.label} onClick={() => go(t.page)} className={`home-tile bg-gradient-to-br ${t.color}`}>
-              <div className="h-11 w-11 rounded-2xl bg-white/60 dark:bg-white/10 flex items-center justify-center shrink-0">
-                <Icon name={t.icon} className="h-6 w-6 text-ink-700 dark:text-sand-100" />
-              </div>
-              <p className="tile-label font-bold text-ink-900 dark:text-sand-100 text-sm">{t.label}</p>
-              <p className="tile-label text-xs text-ink-500 dark:text-ink-300">{t.sub}</p>
-            </Card>
-          ))}
+      {/* Quiet access */}
+      <section className="animate-fade-in">
+        <SectionHeading title="Explore" />
+        <div className="grid grid-cols-2 gap-2">
+          <QuietLink icon="BookOpen" label="Topics" onClick={() => go('weekly-topics')} />
+          <QuietLink icon="BookMarked" label="Dictionary" sub={`${dictStats.total} words`} onClick={() => go('dictionary')} />
+          <QuietLink icon="BookOpen" label="Grammar" onClick={() => go('grammar')} />
+          <QuietLink icon="BarChart3" label="Progress" onClick={() => go('progress')} />
         </div>
       </section>
+
+      <footer className="pt-4 pb-2 flex justify-center opacity-60">
+        <BrandLogo variant="compact" />
+      </footer>
     </div>
   );
 }
@@ -150,38 +137,37 @@ function summariseLessonProgress(p: WeeklyTopicProgress) {
   return { readingsDone, exercisesDone };
 }
 
-function LessonProgressRow({ label, done, detail }: { label: string; done: boolean; detail: string }) {
+function MiniStat({ label, done, detail }: { label: string; done: boolean; detail: string }) {
   return (
-    <div className="flex items-center justify-between gap-2 rounded-2xl p-3 bg-white/60 dark:bg-white/5">
-      <span className="inline-flex items-center gap-2 min-w-0">
-        <Icon name={done ? 'Check' : 'Circle'} className={`h-4 w-4 shrink-0 ${done ? 'text-sea-600 dark:text-sea-200' : 'text-ink-300 dark:text-ink-500'}`} />
-        <span className="tile-label text-sm font-bold text-ink-900 dark:text-sand-100">{label}</span>
-      </span>
-      <span className="text-sm text-ink-500 dark:text-ink-400 shrink-0">{detail}</span>
+    <div className="rounded-xl bg-white/50 dark:bg-forest-800/30 px-2 py-2">
+      <p className="text-forest/50 dark:text-linen/50 font-semibold uppercase tracking-wide text-[10px]">{label}</p>
+      <p className={`text-sm font-bold mt-0.5 ${done ? 'text-olive-600 dark:text-olive-300' : 'text-forest/70 dark:text-linen/70'}`}>
+        {detail}
+      </p>
     </div>
   );
 }
 
-function StatCard({ icon, value, label, color, onClick }: { icon: string; value: number; label: string; color: string; onClick: () => void }) {
+function QuietLink({
+  icon,
+  label,
+  sub,
+  onClick,
+}: {
+  icon: string;
+  label: string;
+  sub?: string;
+  onClick: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={`${label}: ${value}`}
-      className="card !p-3 flex flex-col items-center gap-1 active:scale-[0.97] transition min-w-0 overflow-hidden"
+      className="rounded-2xl border border-forest/8 dark:border-linen/10 bg-white/60 dark:bg-forest-800/30 px-4 py-3 text-left transition hover:border-olive-300/50 active:scale-[0.98]"
     >
-      <Icon name={icon} className={`h-6 w-6 ${color} shrink-0`} />
-      <span className="text-2xl font-bold text-ink-900 dark:text-sand-100">{value}</span>
-      <span className="tile-label text-xs text-ink-500 dark:text-ink-300 text-center">{label}</span>
+      <Icon name={icon} className="h-5 w-5 text-olive-600 dark:text-olive-300 mb-2" />
+      <p className="font-semibold text-sm text-forest dark:text-linen-100">{label}</p>
+      {sub && <p className="text-xs text-forest/50 dark:text-linen/50 mt-0.5">{sub}</p>}
     </button>
-  );
-}
-
-function SectionTitle({ title, icon }: { title: string; icon: string }) {
-  return (
-    <div className="flex items-center gap-2 mb-2 mt-1">
-      <Icon name={icon} className="h-5 w-5 text-sea-600 dark:text-sea-200 shrink-0" />
-      <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">{title}</h2>
-    </div>
   );
 }
