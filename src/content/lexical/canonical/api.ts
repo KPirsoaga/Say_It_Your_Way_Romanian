@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Canonical lexical API — single source of linguistic truth for learner-facing features.
+ */
 import type { GrammarTense } from '../../../types';
 import { getVerifiedTensesForVerb, verifiedVerbTenses } from '../../verbs/verifiedVerbForms';
 import {

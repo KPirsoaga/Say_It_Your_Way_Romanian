@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Verified verb morphology — learner-safe conjugation registry.
+ */
 import type { GrammarTense, VerbForm } from '../../types';
 import type { LexicalSourceRef } from '../validation/lexicalSafety';
 import type { CompositionRule, LexicalSafetyTier } from '../lexical/canonical/types';

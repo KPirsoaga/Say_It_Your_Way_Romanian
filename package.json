@@ -9,7 +9,8 @@
     "generate-icons": "node scripts/generate-icons.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json"
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "language:qa": "npx tsx scripts/language-qa.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

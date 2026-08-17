@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Daily Practice session generator — Romanian forms must come from learner-safe canonical variants only.
+ */
 import { dictionaryEntries, collectAllPracticeItems, getCurrentWeeklyTopicId } from '../dictionary';
 import { weeklyTopics } from '../weeklyTopics';
 import { shuffledMcOptions } from '../../utils/shuffle';

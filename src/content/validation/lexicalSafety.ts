@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Learner-safe provenance tiers and gates.
+ */
 import type { ValidationProvenance } from '../../types';
 import type { LexicalSafetyTier } from '../lexical/canonical/types';
 

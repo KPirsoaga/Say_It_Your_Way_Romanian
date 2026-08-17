@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Verified noun/adjective families — learner-safe morphology registry.
+ */
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily } from './types';
 import type { LexicalSourceRef } from '../validation/lexicalSafety';
 

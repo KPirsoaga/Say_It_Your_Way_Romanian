@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
- * Pre-merge lexical UX checks — run: npx tsx scripts/pre-merge-lexical-check.mjs
+ * Pre-merge lexical safety checks.
+ * Part of npm run language:qa — see docs/LANGUAGE_DATA_GOVERNANCE.md
+ * Run: npx tsx scripts/pre-merge-lexical-check.mjs
  */
 import { dictionaryEntries, dictionaryFormAliases, resolveDictionarySearch } from '../src/content/dictionary/buildDictionary.ts';
 import { nounFamilyCandidateRegistry } from '../src/content/dictionary/nounFamilyBuilder.ts';

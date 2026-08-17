@@ -655,3 +655,14 @@ Status: Fixed
 Notes: Stage B (quarantine) + Stage C (dexonline restoration via `scripts/import-dexonline-lexical.mjs`): 71/71 verbs with full four-tense coverage (present, imperfect, perfect compus, future); 88/90 nouns fully verified; bun, mare (adjectives). Base-only until verified: extensie (dexonline lemma extensiune), mici (plural-only, no clean dexonline paradigm). Teacher Review reserved for naturalness/conflicts, not routine morphology. Pre-merge: `npx tsx scripts/pre-merge-lexical-check.mjs`.
 
 ---
+
+VAL-060
+Area: Platform-wide / Romanian Language Data Governance
+Issue: No permanent, enforceable policy preventing future introduction of unverified or pattern-generated Romanian into learner-facing surfaces.
+Expected behaviour: Authoritative governance document; automated language QA command; bypass detection; agent/developer instructions; research-only generators quarantined; PR workflow for language changes.
+Current behaviour: `docs/LANGUAGE_DATA_GOVERNANCE.md` defines permanent policy. `npm run language:qa` orchestrates pre-merge lexical check, governance enforcement, acceptance matrix, and audit scripts. `scripts/language-governance-check.mjs` detects forbidden pattern-generator imports, provenance mislabelling, and golden-path regressions. `AGENTS.md` and `docs/LANGUAGE_SENSITIVE_PATHS.md` guide future developers and AI sessions. Research generators (`nounFamilyBuilder.ts`, `weeklyVerbPatterns.ts`) labelled candidate-only.
+Priority: Critical
+Status: Fixed
+Notes: Future language-data changes must comply with `docs/LANGUAGE_DATA_GOVERNANCE.md` and pass `npm run language:qa`. New Weekly Topics use `docs/WEEKLY_TOPIC_LANGUAGE_QA.md`. Automated QA does not replace external verification for new Romanian prose.
+
+---

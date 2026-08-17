@@ -1,3 +1,10 @@
+/**
+ * ROMANIAN LANGUAGE DATA IS GOVERNED.
+ * Do not infer or generate learner-facing morphology from patterns.
+ * See: docs/LANGUAGE_DATA_GOVERNANCE.md
+ *
+ * Dictionary builder — aliases and variants must trace to verifiedLexicalFamilies / verifiedVerbForms only.
+ */
 import { grammarVerbs, auditCanonicalVerbs } from '../verbs';
 import { scenarios, realLifeCategories, survivalPhrases } from '../../content';
 import { weeklyTopics } from '../weeklyTopics';
