@@ -3,19 +3,37 @@
  * Used by import-dexonline-lexical.mjs — not learner-facing.
  */
 
+function decodeHtmlEntities(text) {
+  return text
+    .replace(/&#x([0-9a-f]+);?/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&mdash;/g, '—');
+}
+
+/** Split dexonline variant chains (sunt‑îs‑s, este‑e‑îi) — keep first standard form */
+export function extractPrimaryVariant(raw) {
+  if (!raw) return '';
+  let s = decodeHtmlEntities(String(raw))
+    .replace(/<[^>]+>/g, '')
+    .replace(/\u2011/g, '|')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!s) return '';
+
+  // Explicit variant separators used by dexonline
+  if (s.includes('|')) {
+    const parts = s.split('|').map((p) => p.trim()).filter(Boolean);
+    if (parts.length) return parts[0];
+  }
+
+  return s;
+}
+
 function stripHtml(cell) {
   // Dexonline often lists standard + elided variants as duplicate <li> items — keep first only
   const firstLi = cell.match(/<li[^>]*>([\s\S]*?)<\/li>/i);
   const content = firstLi ? firstLi[1] : cell;
-  const text = content
-    .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
-    .replace(/&mdash;/g, '—')
-    .replace(/\u2011/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  return text;
+  return extractPrimaryVariant(content);
 }
 
 function parseTableRows(tableHtml) {
@@ -37,13 +55,10 @@ function parseTableRows(tableHtml) {
 /** Split merged dexonline variants like "dormitdormitu" → "dormit" */
 export function cleanMergedForm(raw) {
   if (!raw) return '';
-  let s = String(raw)
-    .replace(/&#x2011;/gi, '')
-    .replace(/\u2011/g, '')
-    .trim();
+  let s = extractPrimaryVariant(raw);
   if (!s) return '';
 
-  // Repeated-root merge: dormit + dormitu, cortul + cortu
+  // Repeated-root merge: dormit + dormitu, cortul + cortu, suntem + suntem
   for (let len = Math.floor(s.length / 2); len >= 3; len--) {
     const a = s.slice(0, len);
     const b = s.slice(len);
@@ -153,9 +168,9 @@ export function parseVerbParadigm(html) {
     // Layout: [number?, person, prezent, conjunctiv, imperfect, ...]
     const offset = cells.findIndex((c) => /\(eu\)|\(tu\)|\(el|\(noi\)|\(voi\)|\(ei/.test(c));
     const base = offset >= 0 ? offset + 1 : 2;
-    if (cells[base]) present[pi] = cells[base].trim();
-    if (cells[base + 1]) subjunctive[pi] = cleanSubjunctive(cells[base + 1]);
-    if (cells[base + 2]) imperfect[pi] = cells[base + 2].trim();
+    if (cells[base]) present[pi] = cleanMergedForm(cells[base]);
+    if (cells[base + 1]) subjunctive[pi] = cleanSubjunctive(cleanMergedForm(cells[base + 1]));
+    if (cells[base + 2]) imperfect[pi] = cleanMergedForm(cells[base + 2]);
   }
 
   if (present.filter(Boolean).length < 6) return null;
