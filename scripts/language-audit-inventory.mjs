@@ -76,14 +76,20 @@ console.log(JSON.stringify({
   listenChoose: { items: allListen.length },
   realLife: { categories: allRealLife.length, phrases: allRealLife.reduce((n, c) => n + c.phrases.length, 0) },
   survival: { phrases: allSurvival.length },
-  miniConversations: { conversations: allMini.length, lines: allMini.reduce((n, c) => n + c.lines.length, 0) },
-  scenarios: { scenarios: allScenarios.length, lines: allScenarios.reduce((n, s) => n + s.lines.length, 0) },
+  miniConversations: {
+    conversations: allMini.length,
+    lines: allMini.reduce((n, c) => n + (c.turns?.length ?? c.lines?.length ?? 0), 0),
+  },
+  scenarios: {
+    scenarios: allScenarios.length,
+    lines: allScenarios.reduce((n, s) => n + (s.turns?.length ?? s.lines?.length ?? 0), 0),
+  },
   grammar: {
     cheatSheets: grammarCheatSheets.length,
     tenseGuides: grammarTenseGuides.length,
     partsOfSpeech: grammarPartsOfSpeech.length,
     sentencePatterns: grammarSentencePatterns.length,
-    extendedSections: grammarExtended.length,
+    extendedSections: extendedGrammarTopics.length,
     exampleSentences: grammarExamples,
   },
 }, null, 2));

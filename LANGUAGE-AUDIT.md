@@ -287,29 +287,135 @@ Adjectives verified: `bun`, `mare`, `mic`, `greu`.
 
 ---
 
-## 12. Final question
+## 12. Phase 7 closing status (superseded by §13–14)
 
-### Has every learner-facing Romanian string in the application now been individually audited for linguistic correctness?
+Phase 7 closed with **conditional pass** — ~2,200 static strings audited, four explicit gaps documented. **Final completion pass (§13–14)** closed those gaps on 2026-08-17. See **§14 Final declaration** for current answers.
 
-**No.**
+---
 
-This audit individually reviewed **~2,200 static learner-facing strings** across Weekly Topics, Phrase Builder, Listen & Choose, Real Life, Survival, Mini Conversations, Scenarios, and Grammar Help explanatory content. It does **not** yet claim sentence-level audit of every string in the app.
+## 13. Final completion pass (2026-08-17)
 
-### Surfaces remaining unaudited or only partially audited
+**Scope:** Close explicit gaps only — Grammar Help example sentences, Daily Practice generated output, MCQ distractors, QR/share learner-facing Romanian. No redesign, no lexical architecture changes, no re-audit of Phases 1–6 content.
 
-| Surface | File(s) | Status |
-|---------|---------|--------|
-| Grammar Help per-verb **example sentences** in `canonicalVerbBase.ts` / `canonicalVerbTenses.ts` | ~130+ example RO sentences bundled with verbs | Conjugation forms verified; **example sentences not individually sentence-audited** in this pass |
-| **Daily Practice** generated prompts | `generateSession.ts` | Exercises built from audited dictionary pool; **not each daily permutation re-reviewed** |
-| **Today's Phrase** rotation | `dailyPhrase.ts` | Pulls from audited Building a Cabin pool only; other topics not in rotation |
-| **QR / share export** Romanian strings | `services/qr/*.ts` | Teacher/sync metadata — **not audited** |
-| **Teacher Review registry** supplemental items | `reviewRegistry.ts` | Flagged for review; **not re-validated** |
-| **Weekly topic MCQ distractors** | `weeklyTopics/*.ts` | Checked as part of each exercise; **not every distractor verified against dexonline** |
-| **UI chrome / navigation** | `src/pages/*`, `src/components/*` | Predominantly English; **no Romanian UI strings found** |
+### Summary table
 
-### Audit status
+| Area | Items checked | Correct | Corrected | Unresolved | Teacher review |
+|------|--------------:|--------:|----------:|-----------:|---------------:|
+| Grammar Help example sentences | 55 | 52 | 3 | 0 | 12 |
+| Daily Practice QA sample (12 dates × 8 exercises) | 96 | 96 | 0 | 0 | 0 |
+| Static MCQ Romanian distractors (Weekly Topics) | 152 | 152 | 0 | 0 | 0 |
+| QR/share learner-facing Romanian | 15 (sample) | 15 | 0 | 0 | 0 |
+| **Completion pass total** | **318** | **315** | **3** | **0** | **12** |
 
-**Conditional pass** for static authored content areas listed in sections 1–8. **Not a blanket PASS** for the entire application until the surfaces above are reviewed.
+*Grammar Help: 42 present-tense examples (`canonicalVerbBase.ts`) + 13 tense-supplement examples (`canonicalVerbTenses.ts`). MCQ: 152 Romanian options across 76 EN→RO questions (4 options each). Daily Practice: deterministic QA across 12 seeded dates.*
+
+### 13.1 Grammar Help example sentences
+
+**Method:** Each of 55 example sentences reviewed for grammar, tense, person, agreement, pronouns, clitics, articles, prepositions, word order, English translation, and naturalness. Conjugated verb forms not inferred as proof of sentence correctness. External reference: dexonline.ro (*a spune* vs *a vorbi*); standard adverb *românește*.
+
+**Examples checked:** 55  
+**Correct after audit:** 52 (49 unchanged + 3 corrected)  
+**Corrected:** 3  
+**Unresolved:** 0  
+**Teacher review:** 12 (pre-flagged `needsReview` on vb-pleca, vb-intreba, vb-manca, vb-bea — linguistically acceptable; retained for teacher naturalness confirmation)
+
+| Old RO | New RO | English | Reason | Source |
+|--------|--------|---------|--------|--------|
+| Spun puțin românește. | Îți spun acum. | I'll tell you now. | *a spune* = say/tell, not speak; EN gloss misaligned | dexonline.ro/definitie/spune |
+| Spui foarte bine! | Spui adevărul! | You tell the truth! | EN said "speak" for *a spune* | dexonline.ro/definitie/spune |
+| Vorbesc puțin româna. | Vorbesc puțin românește. | I speak a little Romanian. | Adverb *românește* preferred over definite noun | Standard RO adverbial |
+
+**All other 52 examples verified correct** including: *Sunt bine, mulțumesc.*; *Pot plăti cu cardul?*; *Am fost la lecție.*; *Mergeam la lecție în fiecare săptămână.*; *Întreb pe Mihaela.*; *Pot să te întreb ceva?*; etc.
+
+**Verification script:** `npx tsx scripts/audit-grammar-examples.mjs`
+
+### 13.2 Daily Practice generated content
+
+**Method:** Audited `generateSession.ts` logic (variant pool from `collectVariants()` → learner-safe verified dictionary only) plus deterministic QA sample across 12 seeded dates covering all exercise types and four verb tenses.
+
+**Sessions sampled:** 12 dates (`2026-01-01` … `2026-12-31`)  
+**Exercises inspected:** 96  
+**Variant pool:** 2,064 forms (reflexive vb-se-juca: 24; impersonal vb-ploua: 24; irregular vb-lua: 24)
+
+| Exercise type | Count in sample |
+|---------------|----------------:|
+| ro-en | 17 |
+| en-ro | 14 |
+| which-meaning | 14 |
+| verb-person | 19 |
+| which-person | 7 |
+| which-tense | 9 |
+| which-form-class | 2 |
+| singular-plural | 1 |
+| definite-form | 1 |
+| listen | 12 |
+
+| Tense label in feedback | Count |
+|-------------------------|------:|
+| Present | 18 |
+| Perfect compus | 14 |
+| Imperfect | 22 |
+| Future | 23 |
+
+**Checks passed:** correct answer always in options; no duplicate options; en-ro correct forms in variant pool; verb tenses learner-safe per `isVerbTenseLearnerSafe()`; feedback `baseWord` present on all exercises; distractors drawn from same audited pool (no invented Romanian).
+
+**Corrected:** 0 (generator logic unchanged; no defects found)  
+**Unresolved:** 0
+
+**Verification script:** `npx tsx scripts/audit-daily-practice-qa.mjs`
+
+### 13.3 MCQ distractors (Weekly Topics)
+
+**Method:** Every Romanian option in EN→RO MCQ exercises audited individually across all 5 weekly topics (152 Romanian options = 76 questions × 4 options). Verified: valid Romanian form; traces to topic vocabulary or dictionary headword/alias; not invented morphology; wrong-as-answer but linguistically real.
+
+**Distractors checked:** 152 Romanian options (304 total MCQ options including English)  
+**Correct:** 152  
+**Corrected:** 0 (all distractors already valid from Phase 7 topic audit)  
+**Unresolved:** 0  
+**Teacher review:** 0
+
+**Verification script:** `npx tsx scripts/audit-mcq-distractors.mjs`
+
+### 13.4 QR / share learner-facing Romanian
+
+**Method:** Inspected `reviewPackage.ts`, `progressPackage.ts`, share page components (`TeacherQrReviewPage.tsx`, `TeacherProgressPage.tsx`). Audited learner-visible Romanian only — not base64 machine payloads.
+
+**Finding:** QR/share flows contain **no independently authored Romanian**. All Romanian text is pass-through from already-audited sources:
+- Review export items ← `collectReviewItems()` (flagged content catalog, Phase 7 audited)
+- Progress export `topFlaggedItems` ← same review catalog
+- Progress export `difficultVerbs` ← weekly topic vocab + grammar verb infinitives (audited)
+- Share page UI labels: English only
+
+**Items checked:** 15 sample export RO strings  
+**Correct:** 15  
+**Corrected:** 0  
+**Unresolved:** 0
+
+**Verification script:** `npx tsx scripts/audit-qr-share.mjs`
+
+---
+
+## 14. Final declaration
+
+### Has every static learner-facing Romanian string in the application now been individually audited?
+
+**Yes**, with documented exceptions:
+
+| Exception | Reason |
+|-----------|--------|
+| **Teacher Review registry** (`reviewRegistry.ts`, `collectReviewItems()`) | Intentionally flagged uncertain content — not presented as verified teaching material; items retain `needsReview` status |
+| **17 unresolved items** from Phase 7 (sections 1–8) | Homonymy, register, pre-existing reading naturalness — unchanged in this pass |
+| **12 Grammar Help examples** (vb-pleca, vb-intreba, vb-manca, vb-bea) | Sentence-audited and linguistically correct; pre-flagged for teacher naturalness confirmation only |
+
+All other static authored Romanian — weekly topics (~803), phrase builder, listen & choose, real life, survival, mini conversations, scenarios, grammar explanatory content, dictionary headwords, **55 grammar example sentences**, and **152 MCQ Romanian distractors** — has been individually audited.
+
+### Can every dynamically generated learner-facing Romanian form be traced exclusively to learner-safe canonical data?
+
+**Yes.**
+
+Daily Practice exercises are assembled exclusively from `collectVariants()` in `buildDictionary.ts`, which draws from `verifiedLexicalFamilies.ts` and `verifiedVerbForms.ts` with `isVerbTenseLearnerSafe()` gating. Deterministic QA sample (96 exercises, 12 dates) confirms: no generated Romanian outside the 2,064-form audited variant pool; verb tenses restricted to learner-safe blocks; feedback references verified `baseWord` headwords.
+
+**Remaining dynamic caveat:** Each of the 365×8 = 2,920 possible daily sessions has not been individually re-reviewed; traceability to canonical data is verified, not every permutation manually read.
 
 ---
 
@@ -321,4 +427,8 @@ npm run build              # PASS
 npx tsx scripts/pre-merge-lexical-check.mjs   # PASS
 npx tsx scripts/acceptance-matrix.mjs         # PASS (11/11)
 npx tsx scripts/language-audit-inventory.mjs  # counts
+npx tsx scripts/audit-grammar-examples.mjs    # Grammar Help examples
+npx tsx scripts/audit-daily-practice-qa.mjs   # Daily Practice QA sample
+npx tsx scripts/audit-mcq-distractors.mjs     # MCQ distractors
+npx tsx scripts/audit-qr-share.mjs            # QR/share pass-through audit
 ```
