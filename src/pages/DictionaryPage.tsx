@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
+import { PageSceneBanner } from '../components/explore/PageSceneBanner';
 import type { DictionaryWordType } from '../content/dictionary/types';
 import { dictionaryLetterIndex, resolveDictionarySearch, searchDictionary } from '../content/dictionary';
 import { useNavigation } from '../context/NavigationContext';
@@ -69,6 +70,11 @@ export function DictionaryPage({ go, onBack }: Props) {
     <div className="min-h-screen">
       <PageHeader title="Dictionary" subtitle="Your personal Romanian reference" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+        <PageSceneBanner
+          destination="dictionary"
+          title="My Romanian words"
+          subtitle="Search, explore families, and save the forms you meet in real life."
+        />
         <div className="space-y-3">
           <label className="block">
             <span className="sr-only">Search Romanian or English</span>
