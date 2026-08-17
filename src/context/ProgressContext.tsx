@@ -13,6 +13,7 @@ const DEFAULT_PROGRESS: ProgressState = {
   builderDone: 0,
   completedGrammarTopics: [],
   weeklyTopics: {},
+  dictionaryWordsSeen: [],
 };
 
 function todayStr(): string {
@@ -25,11 +26,26 @@ function toLocalDateStr(d: Date): string {
   return new Date(d.getTime() - tz).toISOString().slice(0, 10);
 }
 
+function normalizeProgress(raw: ProgressState): ProgressState {
+  return {
+    ...DEFAULT_PROGRESS,
+    ...raw,
+    practisedDays: raw.practisedDays ?? [],
+    favourites: raw.favourites ?? [],
+    completedScenarios: raw.completedScenarios ?? [],
+    completedConversations: raw.completedConversations ?? [],
+    completedGrammarTopics: raw.completedGrammarTopics ?? [],
+    weeklyTopics: raw.weeklyTopics ?? {},
+    dictionaryWordsSeen: raw.dictionaryWordsSeen ?? [],
+  };
+}
+
 interface ProgressCtx {
   progress: ProgressState;
   markPractisedToday: () => void;
   toggleFavourite: (id: string) => void;
   isFavourite: (id: string) => boolean;
+  /** @deprecated Scenarios removed — kept for localStorage compatibility */
   markScenarioCompleted: (id: ScenarioId) => void;
   markConversationCompleted: (id: string) => void;
   addListenCorrect: (n?: number) => void;
@@ -38,61 +54,79 @@ interface ProgressCtx {
   markGrammarTopicCompleted: (id: string) => void;
   updateWeeklyTopicProgress: (topicId: string, patch: Partial<WeeklyTopicProgress>) => void;
   getWeeklyTopicProgress: (topicId: string) => WeeklyTopicProgress;
+  markDictionaryWordSeen: (entryId: string) => void;
   resetProgress: () => void;
 }
 
 const Ctx = createContext<ProgressCtx | null>(null);
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
-  const [progress, setProgress] = useLocalStorage<ProgressState>('rcd-progress', DEFAULT_PROGRESS);
+  const [rawProgress, setProgress] = useLocalStorage<ProgressState>('rcd-progress', DEFAULT_PROGRESS);
+  const progress = normalizeProgress(rawProgress);
+
+  const persist = useCallback(
+    (updater: (p: ProgressState) => ProgressState) => {
+      setProgress((p) => updater(normalizeProgress(p)));
+    },
+    [setProgress]
+  );
 
   const markPractisedToday = useCallback(() => {
     const today = todayStr();
-    setProgress((p) => (p.practisedDays.includes(today) ? p : { ...p, practisedDays: [...p.practisedDays, today].sort() }));
-  }, [setProgress]);
+    persist((p) => (p.practisedDays.includes(today) ? p : { ...p, practisedDays: [...p.practisedDays, today].sort() }));
+  }, [persist]);
 
   const toggleFavourite = useCallback(
     (id: string) => {
-      setProgress((p) => ({
+      persist((p) => ({
         ...p,
         favourites: p.favourites.includes(id) ? p.favourites.filter((f) => f !== id) : [...p.favourites, id],
       }));
     },
-    [setProgress]
+    [persist]
   );
 
   const isFavourite = useCallback((id: string) => progress.favourites.includes(id), [progress.favourites]);
 
   const markScenarioCompleted = useCallback(
     (id: ScenarioId) => {
-      setProgress((p) => (p.completedScenarios.includes(id) ? p : { ...p, completedScenarios: [...p.completedScenarios, id] }));
+      persist((p) => (p.completedScenarios.includes(id) ? p : { ...p, completedScenarios: [...p.completedScenarios, id] }));
     },
-    [setProgress]
+    [persist]
   );
 
   const markConversationCompleted = useCallback(
     (id: string) => {
-      setProgress((p) => (p.completedConversations.includes(id) ? p : { ...p, completedConversations: [...p.completedConversations, id] }));
+      persist((p) => (p.completedConversations.includes(id) ? p : { ...p, completedConversations: [...p.completedConversations, id] }));
     },
-    [setProgress]
+    [persist]
   );
 
-  const addListenCorrect = useCallback((n = 1) => setProgress((p) => ({ ...p, listenCorrect: p.listenCorrect + n })), [setProgress]);
-  const addSpeakDone = useCallback((n = 1) => setProgress((p) => ({ ...p, speakDone: p.speakDone + n })), [setProgress]);
-  const addBuilderDone = useCallback((n = 1) => setProgress((p) => ({ ...p, builderDone: p.builderDone + n })), [setProgress]);
+  const addListenCorrect = useCallback((n = 1) => persist((p) => ({ ...p, listenCorrect: p.listenCorrect + n })), [persist]);
+  const addSpeakDone = useCallback((n = 1) => persist((p) => ({ ...p, speakDone: p.speakDone + n })), [persist]);
+  const addBuilderDone = useCallback((n = 1) => persist((p) => ({ ...p, builderDone: p.builderDone + n })), [persist]);
 
   const markGrammarTopicCompleted = useCallback(
     (id: string) => {
-      setProgress((p) =>
+      persist((p) =>
         p.completedGrammarTopics.includes(id) ? p : { ...p, completedGrammarTopics: [...p.completedGrammarTopics, id] }
       );
     },
-    [setProgress]
+    [persist]
+  );
+
+  const markDictionaryWordSeen = useCallback(
+    (entryId: string) => {
+      persist((p) =>
+        p.dictionaryWordsSeen.includes(entryId) ? p : { ...p, dictionaryWordsSeen: [...p.dictionaryWordsSeen, entryId] }
+      );
+    },
+    [persist]
   );
 
   const updateWeeklyTopicProgress = useCallback(
     (topicId: string, patch: Partial<WeeklyTopicProgress>) => {
-      setProgress((p) => {
+      persist((p) => {
         const current = p.weeklyTopics?.[topicId] ?? { ...EMPTY_WEEKLY_TOPIC_PROGRESS };
         return {
           ...p,
@@ -103,7 +137,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         };
       });
     },
-    [setProgress]
+    [persist]
   );
 
   const getWeeklyTopicProgress = useCallback(
@@ -128,6 +162,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         markGrammarTopicCompleted,
         updateWeeklyTopicProgress,
         getWeeklyTopicProgress,
+        markDictionaryWordSeen,
         resetProgress,
       }}
     >

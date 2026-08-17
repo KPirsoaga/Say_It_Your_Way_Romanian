@@ -165,6 +165,8 @@ export interface ProgressState {
   completedGrammarTopics: string[];
   /** Weekly topic progress keyed by topic id */
   weeklyTopics: Record<string, WeeklyTopicProgress>;
+  /** Dictionary entry ids the learner has opened or practised */
+  dictionaryWordsSeen: string[];
 }
 
 export interface GrammarExample {
@@ -284,6 +286,8 @@ export interface WeeklyVocabItem {
   /** Category for the sorting exercise (topic-specific labels) */
   sortCategory?: string;
   pron?: string;
+  /** Optional link to canonical Dictionary entry */
+  dictionaryId?: string;
   teacherNote?: string;
   review?: ContentReviewMeta;
 }

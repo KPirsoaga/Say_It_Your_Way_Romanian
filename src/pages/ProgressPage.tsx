@@ -3,8 +3,9 @@ import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { Button } from '../components/Button';
 import { useProgress, toLocalDateStr } from '../context/ProgressContext';
-import { scenarios, miniConversations } from '../content';
+import { miniConversations } from '../content';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
+import { dictionaryStats } from '../content/dictionary';
 import type { PageId } from '../App';
 
 interface Props {
@@ -16,7 +17,8 @@ export function ProgressPage({ go }: Props) {
 
   const daysCount = progress.practisedDays.length;
   const favCount = progress.favourites.length;
-  const completedCount = progress.completedScenarios.length;
+  const wordsExplored = progress.dictionaryWordsSeen.length;
+  const dictTotal = dictionaryStats().total;
   const convCount = progress.completedConversations.length;
   const grammarCount = progress.completedGrammarTopics.length;
 
@@ -36,7 +38,7 @@ export function ProgressPage({ go }: Props) {
         <div className="grid grid-cols-2 gap-3 tile-grid">
           <BigStat icon="Flame" value={daysCount} label="Days practised" color="text-coral-400" bg="bg-coral-50 dark:bg-coral-400/20" />
           <BigStat icon="HeartFilled" value={favCount} label="Saved phrases" color="text-rose-400" bg="bg-rose-50 dark:bg-rose-400/20" />
-          <BigStat icon="Trophy" value={completedCount} label="Scenarios done" color="text-sun-400" bg="bg-sun-50 dark:bg-sun-300/20" />
+          <BigStat icon="BookOpen" value={wordsExplored} label="Words explored" color="text-sea-600" bg="bg-sea-50 dark:bg-sea-600/20" />
           <BigStat icon="MessagesSquare" value={convCount} label="Conversations" color="text-sea-600" bg="bg-sea-50 dark:bg-sea-600/20" />
         </div>
 
@@ -116,29 +118,16 @@ export function ProgressPage({ go }: Props) {
           </Button>
         </Card>
 
-        {/* Scenarios completed */}
+        {/* Dictionary */}
         <Card>
-          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Scenarios</p>
-          <div className="space-y-2">
-            {scenarios.map((s) => {
-              const done = progress.completedScenarios.includes(s.id);
-              return (
-                <div key={s.id} className="flex items-center justify-between gap-2 min-w-0">
-                  <span className="tile-label text-ink-700 dark:text-ink-300 text-base flex-1 min-w-0">{s.title}</span>
-                  {done ? (
-                    <span className="inline-flex items-center gap-1 text-sea-600 dark:text-sea-200 font-bold text-sm">
-                      <Icon name="Check" className="h-4 w-4" /> Done
-                    </span>
-                  ) : (
-                    <Button variant="ghost" size="md" onClick={() => go('scenario', s.id)} className="text-sea-600 dark:text-sea-200">
-                      Practise
-                      <Icon name="ChevronRight" className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Dictionary</p>
+          <p className="text-sm text-ink-600 dark:text-ink-300 mb-3">
+            {wordsExplored} of {dictTotal} words explored. Open the Dictionary to see word families and forms.
+          </p>
+          <Button variant="ghost" size="md" onClick={() => go('dictionary')} className="text-sea-600 dark:text-sea-200 w-full">
+            Open Dictionary
+            <Icon name="ChevronRight" className="h-4 w-4" />
+          </Button>
         </Card>
 
         {/* Reset */}

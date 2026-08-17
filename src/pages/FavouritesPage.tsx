@@ -7,6 +7,7 @@ import { useSpeech } from '../hooks/useSpeech';
 import { useSettings } from '../context/SettingsContext';
 import { scenarios, getDailyContent, survivalPhrases, realLifeCategories, grammarTopics } from '../content';
 import { getWeeklyTopic } from '../content/weeklyTopics';
+import { getDictionaryEntry } from '../content/dictionary';
 import type { PhraseLine } from '../types';
 
 interface FavResolved {
@@ -61,7 +62,28 @@ function resolveFavourite(id: string): FavResolved | null {
     if (!phrase) return null;
     return { id, phrase, label: cat.title };
   }
+  if (id.startsWith('dict:')) {
+    const entry = getDictionaryEntry(id.slice(5));
+    if (!entry) return null;
+    return {
+      id,
+      phrase: { ro: entry.phraseRo ?? entry.headwordRo, en: entry.phraseEn ?? entry.headwordEn, pron: entry.pron },
+      label: 'Dictionary',
+    };
+  }
   const [sid, idxStr] = id.split(':');
+  const dictFromScenario = getDictionaryEntry(`dict-scenario-${sid}-${idxStr}`);
+  if (dictFromScenario) {
+    return {
+      id,
+      phrase: {
+        ro: dictFromScenario.phraseRo ?? dictFromScenario.headwordRo,
+        en: dictFromScenario.phraseEn ?? dictFromScenario.headwordEn,
+        pron: dictFromScenario.pron,
+      },
+      label: dictFromScenario.sources[0]?.label ?? 'Dictionary',
+    };
+  }
   const scenario = scenarios.find((s) => s.id === sid);
   if (!scenario) return null;
   const idx = Number(idxStr);

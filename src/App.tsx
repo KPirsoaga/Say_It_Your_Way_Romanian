@@ -7,8 +7,8 @@ import { BottomNav } from './components/BottomNav';
 import { Icon } from './components/Icon';
 import { HomePage } from './pages/HomePage';
 import { DailyPage } from './pages/DailyPage';
-import { ScenariosPage } from './pages/ScenariosPage';
-import { ScenarioDetailPage } from './pages/ScenarioDetailPage';
+import { DictionaryPage } from './pages/DictionaryPage';
+import { DictionaryEntryPage } from './pages/DictionaryEntryPage';
 import { FavouritesPage } from './pages/FavouritesPage';
 import { ProgressPage } from './pages/ProgressPage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -41,7 +41,8 @@ import { TeacherProgressPage } from './pages/share/TeacherProgressPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
 import { getWeeklyTopic } from './content/weeklyTopics';
-import type { ScenarioId, WeeklyExerciseType } from './types';
+import { getDictionaryEntry } from './content/dictionary';
+import type { WeeklyExerciseType } from './types';
 
 function parseWeeklyReadingArg(arg: string): { topicId: string; readingId: string } | null {
   const i = arg.indexOf(':');
@@ -61,8 +62,8 @@ function parseWeeklyExerciseArg(arg: string): { topicId: string; exerciseType: W
 export type PageId =
   | 'home'
   | 'daily'
-  | 'scenarios'
-  | 'scenario'
+  | 'dictionary'
+  | 'dictionary-entry'
   | 'favourites'
   | 'progress'
   | 'settings'
@@ -112,7 +113,7 @@ function Shell() {
   const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
   const showNav =
     navPages.includes(page) ||
-    page === 'scenarios' ||
+    page === 'dictionary' ||
     page === 'weekly-topic' ||
     page === 'weekly-vocab' ||
     page === 'weekly-reading' ||
@@ -135,16 +136,16 @@ function Shell() {
       <main className={showNav ? 'pb-24' : ''}>
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
-        {page === 'scenarios' && <ScenariosPage go={go} onBack={() => go('home')} />}
-        {page === 'scenario' && arg ? (
-          <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />
-        ) : page === 'scenario' ? (
+        {page === 'dictionary' && <DictionaryPage go={go} onBack={() => go('home')} />}
+        {page === 'dictionary-entry' && arg && getDictionaryEntry(arg) ? (
+          <DictionaryEntryPage entryId={arg} go={go} onBack={() => go('dictionary')} />
+        ) : page === 'dictionary-entry' ? (
           <NavigationFallback
-            title="Scenario not found"
-            message="We couldn’t open that scenario. Pick one from the list."
-            onBack={() => go('scenarios')}
-            backLabel="View scenarios"
-            backIcon="LayoutGrid"
+            title="Word not found"
+            message="We couldn’t open that dictionary entry."
+            onBack={() => go('dictionary')}
+            backLabel="Back to Dictionary"
+            backIcon="BookOpen"
           />
         ) : null}
         {page === 'favourites' && <FavouritesPage />}
