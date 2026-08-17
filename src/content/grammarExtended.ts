@@ -1,4 +1,5 @@
 import type { GrammarTopic } from '../types';
+import { getCanonicalVerb } from './verbs';
 
 /** Parts of speech, indicative mood, auxiliary & predicative verb guides */
 export const extendedGrammarTopics: GrammarTopic[] = [
@@ -134,7 +135,7 @@ export const extendedGrammarTopics: GrammarTopic[] = [
     tip: 'A useful model verb is a avea (to have). Learn these forms first, then notice the same pattern on other verbs.',
     simplerRo: 'aveam / aveai / avea',
     simplerEn: 'I used to have / you used to have / he-she used to have',
-    conjugation: [
+    conjugation: getCanonicalVerb('vb-avea')?.imperfect ?? [
       { label: 'eu', ro: 'aveam', en: 'I had / I used to have', pron: 'ah-VAY-ahm' },
       { label: 'tu', ro: 'aveai', en: 'you had / you used to have', pron: 'ah-VAY-ay' },
       { label: 'el/ea', ro: 'avea', en: 'he/she had / used to have', pron: 'ah-VAY-ah' },
