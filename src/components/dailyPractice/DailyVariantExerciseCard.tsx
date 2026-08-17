@@ -14,12 +14,39 @@ interface Props {
   onSeeVerb?: (grammarVerbId: string) => void;
 }
 
+function promptText(exercise: DailyVariantExercise): { title: string; showRo: boolean } {
+  switch (exercise.type) {
+    case 'en-ro':
+      return { title: 'Which Romanian word matches this meaning?', showRo: false };
+    case 'listen':
+      return { title: 'Listen and choose the meaning', showRo: false };
+    case 'verb-person':
+      return { title: 'Who is speaking? What does this form mean?', showRo: true };
+    case 'singular-plural':
+      return { title: 'Singular or plural — what does this mean?', showRo: true };
+    case 'definite-form':
+      return { title: 'Definite form — what does this mean?', showRo: true };
+    case 'adjective-form':
+      return { title: 'Adjective form — what does this mean?', showRo: true };
+    default:
+      return { title: 'What does this mean?', showRo: true };
+  }
+}
+
 export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSeeVerb }: Props) {
   const { speak, stop, currentId, supported } = useSpeech();
   const [picked, setPicked] = useState<string | null>(null);
   const answered = picked !== null;
   const correct = picked === exercise.correct;
   const audioId = `daily-ex-${exercise.id}`;
+  const { title, showRo } = promptText(exercise);
+  const isListen = exercise.type === 'listen';
+  const isEnRo = exercise.type === 'en-ro';
+
+  const playAudio = () => {
+    if (currentId === audioId) stop();
+    else speak(exercise.type === 'en-ro' ? exercise.feedback.baseWord : exercise.promptRo, audioId);
+  };
 
   return (
     <div className="space-y-4 animate-fade-in">
@@ -28,17 +55,23 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
       </p>
       <Card className="space-y-4">
         <div>
-          <p className="text-3xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
-            {exercise.promptRo}
-          </p>
-          {supported && (
-            <Button variant="soft" size="md" className="mt-3" onClick={() => (currentId === audioId ? stop() : speak(exercise.promptRo, audioId))}>
+          {isEnRo ? (
+            <p className="text-2xl font-bold text-ink-900 dark:text-sand-100">{exercise.promptEn}</p>
+          ) : showRo && !isListen ? (
+            <p className="text-3xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
+              {exercise.promptRo}
+            </p>
+          ) : isListen ? (
+            <p className="text-lg font-bold text-ink-700 dark:text-ink-300">Tap Listen, then choose.</p>
+          ) : null}
+          {supported && (isListen || showRo) && (
+            <Button variant="soft" size="md" className="mt-3" onClick={playAudio}>
               <Icon name={currentId === audioId ? 'Pause' : 'Volume2'} className="h-5 w-5" />
               Listen
             </Button>
           )}
         </div>
-        <p className="text-sm text-ink-600 dark:text-ink-300">What does this mean?</p>
+        <p className="text-sm text-ink-600 dark:text-ink-300">{title}</p>
         <div className="space-y-2">
           {exercise.options.map((opt) => {
             const isPicked = picked === opt;
@@ -57,6 +90,7 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
                       ? 'bg-coral-50 dark:bg-coral-400/20 ring-2 ring-coral-400'
                       : 'bg-sand-100 dark:bg-ink-900 hover:ring-2 hover:ring-sea-300'
                 }`}
+                lang={isEnRo ? 'ro' : undefined}
               >
                 {opt}
               </button>
@@ -71,18 +105,23 @@ export function DailyVariantExerciseCard({ exercise, index, total, onNext, onSee
             {correct ? '✓' : '→'} {exercise.feedback.meaning}
           </p>
           <p className="text-sm text-ink-600 dark:text-ink-300">
-            Base {exercise.feedback.grammarVerbId ? 'verb' : 'word'}: <span lang="ro">{exercise.feedback.baseWord}</span> — {exercise.feedback.baseEn}
+            Base {exercise.feedback.grammarVerbId ? 'verb' : exercise.type === 'adjective-form' ? 'adjective' : 'noun'}:{' '}
+            <span lang="ro">{exercise.feedback.baseWord}</span>
           </p>
-          {exercise.feedback.formLabel && (
-            <p className="text-sm text-ink-500 dark:text-ink-400">Form: {exercise.feedback.formLabel}</p>
+          {exercise.feedback.tenseLabel && exercise.feedback.formLabel && (
+            <p className="text-sm text-ink-500 dark:text-ink-400">
+              {exercise.feedback.tenseLabel}: {exercise.feedback.formLabel}
+            </p>
           )}
           {exercise.feedback.plainNote && (
             <p className="text-sm text-ink-500 dark:text-ink-400">{exercise.feedback.plainNote}</p>
           )}
-          <WordFamilyChain chain={exercise.feedback.wordFamily ?? []} />
+          {exercise.feedback.wordFamily && exercise.feedback.wordFamily.length >= 2 && (
+            <WordFamilyChain chain={exercise.feedback.wordFamily} />
+          )}
           {exercise.feedback.grammarVerbId && onSeeVerb && (
             <Button variant="soft" size="md" className="w-full" onClick={() => onSeeVerb(exercise.feedback.grammarVerbId!)}>
-              See full verb
+              See full verb →
               <Icon name="ChevronRight" className="h-5 w-5" />
             </Button>
           )}

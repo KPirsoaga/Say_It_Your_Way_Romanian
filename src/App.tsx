@@ -41,7 +41,7 @@ import { TeacherProgressPage } from './pages/share/TeacherProgressPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
 import { getWeeklyTopic } from './content/weeklyTopics';
-import { getDictionaryEntry } from './content/dictionary';
+import { getDictionaryEntry, getDictionaryPhrase } from './content/dictionary';
 import type { WeeklyExerciseType } from './types';
 
 function parseWeeklyReadingArg(arg: string): { topicId: string; readingId: string } | null {
@@ -137,7 +137,7 @@ function Shell() {
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
         {page === 'dictionary' && <DictionaryPage go={go} onBack={() => go('home')} />}
-        {page === 'dictionary-entry' && arg && getDictionaryEntry(arg) ? (
+        {page === 'dictionary-entry' && arg && (getDictionaryEntry(arg) || getDictionaryPhrase(arg)) ? (
           <DictionaryEntryPage entryId={arg} go={go} onBack={() => go('dictionary')} />
         ) : page === 'dictionary-entry' ? (
           <NavigationFallback
