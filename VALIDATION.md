@@ -589,3 +589,14 @@ Status: Fixed
 Notes: `camping.ts`, `dogWalkers.ts`, `drivingCarRoadSigns.ts`, `bbqSocialising.ts`; icons `TentTree`, `Dog`, `Car`, `CookingPot`; uncertain Romanian marked with `review` metadata for Mihaela.
 
 ---
+
+VAL-054
+Area: Dictionary / Daily Practice / Navigation
+Issue: Scenarios duplicated vocabulary practice; Daily Practice did not teach word-form recognition; no central vocabulary reference.
+Expected behaviour: Remove standalone Scenarios UI; migrate scenario phrases into Dictionary; alphabetical Dictionary with search, word families, Grammar Help verb links; Daily Practice uses weighted variant exercises from current/previous weekly topics and Dictionary; Home shows Words explored stat; `dictionaryWordsSeen` in localStorage with backwards-compatible migration.
+Current behaviour: Scenarios section on Home; Daily Practice used random scenario dialogue; vocabulary scattered across features.
+Priority: High
+Status: Fixed
+Notes: `src/content/dictionary/*`, `DictionaryPage`, `DictionaryEntryPage`, `WordFamily`, `generateDailyPracticeSession`; scenario content retained in `content.ts` for Dictionary build and saved favourites.
+
+---

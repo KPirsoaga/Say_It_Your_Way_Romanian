@@ -89,7 +89,7 @@ function recentActivities(progress: ProgressState, topicId: string): string[] {
   if (tp?.matchingDone) activities.push('Vocabulary matching');
   if (tp?.sortingDone) activities.push('Category sorting');
   if (progress.completedScenarios.length > 0) {
-    activities.push(`Completed ${progress.completedScenarios.length} scenario(s)`);
+    activities.push(`Explored ${progress.dictionaryWordsSeen.length} dictionary word(s)`);
   }
   if (progress.completedConversations.length > 0) {
     activities.push(`Completed ${progress.completedConversations.length} conversation(s)`);
