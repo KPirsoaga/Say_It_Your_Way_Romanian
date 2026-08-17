@@ -1,15 +1,22 @@
 import { Icon } from './Icon';
 import type { PageId } from '../App';
 
-interface Props {
-  current: PageId;
-  go: (page: PageId) => void;
+interface NavItem {
+  id: PageId;
+  icon: string;
+  label: string;
+  arg?: string;
 }
 
-const items: { id: PageId; icon: string; label: string }[] = [
+interface Props {
+  current: PageId;
+  go: (page: PageId, arg?: string) => void;
+}
+
+const items: NavItem[] = [
   { id: 'home', icon: 'Home', label: 'Home' },
+  { id: 'weekly-topic', icon: 'BookOpen', label: 'Lesson', arg: 'building-cabin' },
   { id: 'daily', icon: 'CalendarDays', label: 'Daily' },
-  { id: 'scenarios', icon: 'LayoutGrid', label: 'Scenarios' },
   { id: 'favourites', icon: 'Heart', label: 'Saved' },
   { id: 'progress', icon: 'BarChart3', label: 'Progress' },
 ];
@@ -22,12 +29,18 @@ export function BottomNav({ current, go }: Props) {
     >
       <div className="mx-auto max-w-md px-1 py-1.5 grid grid-cols-5 tile-grid">
         {items.map((it) => {
-          const active = current === it.id || (it.id === 'scenarios' && current === 'scenario');
+          const active =
+            current === it.id ||
+            (it.id === 'weekly-topic' &&
+              (current === 'weekly-topics' ||
+                current === 'weekly-vocab' ||
+                current === 'weekly-reading' ||
+                current === 'weekly-exercise'));
           return (
             <button
               key={it.id}
               type="button"
-              onClick={() => go(it.id)}
+              onClick={() => go(it.id, it.arg)}
               className="flex flex-col items-center gap-0.5 py-1.5 tap-target justify-center transition min-w-0 w-full px-0.5"
               aria-label={it.label}
               aria-current={active ? 'page' : undefined}

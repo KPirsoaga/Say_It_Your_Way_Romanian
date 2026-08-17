@@ -1,27 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './Button';
 import { Icon } from './Icon';
+import { ExerciseCompletion } from './ExerciseCompletion';
+import { shuffledMcOptions } from '../utils/shuffle';
 import type { WeeklyMcQuestion } from '../types';
 
 interface Props {
   questions: WeeklyMcQuestion[];
   title: string;
   onComplete: () => void;
+  onBackToTopic: () => void;
 }
 
-export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
+export function WeeklyMcExercise({ questions, title, onComplete, onBackToTopic }: Props) {
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [options, setOptions] = useState<string[]>([]);
+  const [attempt, setAttempt] = useState(0);
 
   const q = questions[index];
   const isLast = index >= questions.length - 1;
 
+  useEffect(() => {
+    setOptions(shuffledMcOptions(q.options, q.correct));
+    setPicked(null);
+  }, [index, q.id, q.options, q.correct, attempt]);
+
   const choose = (i: number) => {
     if (picked !== null || finished) return;
     setPicked(i);
-    const correct = q.options[i] === q.correct;
+    const correct = options[i] === q.correct;
     if (correct) setCorrectCount((c) => c + 1);
   };
 
@@ -31,19 +41,25 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
       onComplete();
     } else {
       setIndex((i) => i + 1);
-      setPicked(null);
     }
+  };
+
+  const tryAgain = () => {
+    setIndex(0);
+    setPicked(null);
+    setCorrectCount(0);
+    setFinished(false);
+    setAttempt((a) => a + 1);
   };
 
   if (finished) {
     return (
-      <div className="card p-5 text-center animate-fade-in">
-        <Icon name="Check" className="h-12 w-12 text-sea-500 mx-auto mb-3" />
-        <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">Well done!</h2>
-        <p className="mt-2 text-ink-700 dark:text-ink-300">
-          You got {correctCount} of {questions.length} right. No pressure — you can try again anytime.
-        </p>
-      </div>
+      <ExerciseCompletion
+        title="Well done!"
+        message={`You got ${correctCount} of ${questions.length} right. No pressure — you can try again anytime.`}
+        onBackToTopic={onBackToTopic}
+        onTryAgain={tryAgain}
+      />
     );
   }
 
@@ -62,7 +78,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
       </p>
 
       <div className="flex flex-col gap-2" role="radiogroup" aria-label="Choose an answer">
-        {q.options.map((opt, i) => {
+        {options.map((opt, i) => {
           const isCorrect = opt === q.correct;
           const isPicked = picked === i;
           let cls = 'btn-md bg-white ring-2 ring-sand-300 text-ink-700 dark:bg-ink-900 dark:ring-white/20 dark:text-ink-300';
@@ -73,7 +89,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
           }
           return (
             <button
-              key={i}
+              key={`${q.id}-${opt}-${attempt}`}
               type="button"
               disabled={picked !== null}
               onClick={() => choose(i)}
@@ -92,7 +108,7 @@ export function WeeklyMcExercise({ questions, title, onComplete }: Props) {
 
       {picked !== null && (
         <div className="mt-4 space-y-3" role="status" aria-live="polite">
-          {q.options[picked] === q.correct ? (
+          {options[picked] === q.correct ? (
             <p className="text-sea-600 dark:text-sea-200 font-bold text-lg">Yes! That’s right.</p>
           ) : (
             <p className="text-coral-500 font-bold text-lg">

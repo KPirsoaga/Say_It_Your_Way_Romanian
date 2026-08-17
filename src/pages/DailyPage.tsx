@@ -8,6 +8,8 @@ import { ListenChoose } from '../components/ListenChoose';
 import { SpeakPractice } from '../components/SpeakPractice';
 import { useProgress, todayStr } from '../context/ProgressContext';
 import { getDailyContent } from '../content';
+import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
+import { userFlagId } from '../content/review/reviewIds';
 import type { PageId } from '../App';
 
 interface Props {
@@ -17,6 +19,7 @@ interface Props {
 export function DailyPage({ go }: Props) {
   const today = todayStr();
   const daily = useMemo(() => getDailyContent(today), [today]);
+  const lessonPhrase = useMemo(() => getWeeklyLessonPhrase(today), [today]);
   const { markPractisedToday } = useProgress();
   const [step, setStep] = useState<'phrase' | 'dialogue' | 'listen' | 'speak' | 'done'>('phrase');
   const [listened, setListened] = useState(false);
@@ -55,7 +58,17 @@ export function DailyPage({ go }: Props) {
       <div className="mx-auto max-w-md px-4 pb-6 pt-4 space-y-4">
         {step === 'phrase' && (
           <StepShell title="1. Today’s phrase" onNext={() => setStep('dialogue')} nextLabel="Next">
-            <PhraseCard phrase={daily.phrase} favId={`daily:${today}:phrase`} hero />
+            <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">From this week&apos;s lesson — Building a Cabin</p>
+            <PhraseCard
+              phrase={lessonPhrase}
+              favId={`daily:${today}:phrase`}
+              hero
+              flag={{
+                id: userFlagId(`daily:${today}:phrase`),
+                contentArea: 'Daily Practice',
+                contextLabel: 'Daily phrase',
+              }}
+            />
           </StepShell>
         )}
 
@@ -100,7 +113,16 @@ export function DailyPage({ go }: Props) {
             nextLabel={canFinish ? 'Finish' : 'Finish anyway'}
             disabled={false}
           >
-            <SpeakPractice phrase={daily.speak} speechId={`daily:${today}:speak`} onDone={() => setSpoken(true)} />
+            <SpeakPractice
+              phrase={daily.speak}
+              speechId={`daily:${today}:speak`}
+              onDone={() => setSpoken(true)}
+              flag={{
+                id: userFlagId(`daily:${today}:speak`),
+                contentArea: 'Daily Practice',
+                contextLabel: 'Daily speak phrase',
+              }}
+            />
           </StepShell>
         )}
 

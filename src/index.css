@@ -92,3 +92,18 @@ html.dark body {
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* QR scanner video region */
+.qr-video-region {
+  position: relative;
+}
+.qr-video-region video {
+  width: 100% !important;
+  max-height: 70vh;
+  display: block !important;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+#qr-shaded-region {
+  pointer-events: none;
+}

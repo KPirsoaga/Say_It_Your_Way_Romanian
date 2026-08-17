@@ -21,12 +21,23 @@ import { MiniConversationDetailPage } from './pages/MiniConversationDetailPage';
 import { GrammarHelpPage } from './pages/GrammarHelpPage';
 import { GrammarTopicPage } from './pages/GrammarTopicPage';
 import { GrammarVerbPage } from './pages/GrammarVerbPage';
+import { GrammarCheatSheetPage } from './pages/GrammarCheatSheetPage';
+import { GrammarTenseGuidePage } from './pages/GrammarTenseGuidePage';
+import { GrammarPatternPage } from './pages/GrammarPatternPage';
 import { WeeklyTopicsPage } from './pages/WeeklyTopicsPage';
 import { WeeklyTopicDetailPage } from './pages/WeeklyTopicDetailPage';
 import { WeeklyVocabPage } from './pages/WeeklyVocabPage';
 import { WeeklyReadingPage } from './pages/WeeklyReadingPage';
 import { WeeklyExercisePage } from './pages/WeeklyExercisePage';
 import { MihaelaReviewPage } from './pages/MihaelaReviewPage';
+import { ShareWithTeacherPage } from './pages/share/ShareWithTeacherPage';
+import { ReviewSyncHubPage } from './pages/share/ReviewSyncHubPage';
+import { ReviewExportPage } from './pages/share/ReviewExportPage';
+import { ReviewImportPage } from './pages/share/ReviewImportPage';
+import { TeacherReviewPage } from './pages/share/TeacherReviewPage';
+import { ProgressSyncHubPage } from './pages/share/ProgressSyncHubPage';
+import { ProgressExportPage } from './pages/share/ProgressExportPage';
+import { TeacherProgressPage } from './pages/share/TeacherProgressPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
 import { getWeeklyTopic } from './content/weeklyTopics';
@@ -65,12 +76,23 @@ export type PageId =
   | 'grammar'
   | 'grammar-topic'
   | 'grammar-verb'
+  | 'grammar-cheat'
+  | 'grammar-tense'
+  | 'grammar-pattern'
   | 'weekly-topics'
   | 'weekly-topic'
   | 'weekly-vocab'
   | 'weekly-reading'
   | 'weekly-exercise'
-  | 'mihaela-review';
+  | 'mihaela-review'
+  | 'share-with-teacher'
+  | 'share-review'
+  | 'share-review-export'
+  | 'share-review-import'
+  | 'teacher-review'
+  | 'share-progress'
+  | 'share-progress-export'
+  | 'teacher-progress';
 
 function Shell() {
   const [page, setPage] = useState<PageId>('home');
@@ -87,8 +109,14 @@ function Shell() {
   }, [page]);
 
   // Pages that show the bottom nav (top-level destinations)
-  const navPages: PageId[] = ['home', 'daily', 'scenarios', 'favourites', 'progress'];
-  const showNav = navPages.includes(page);
+  const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
+  const showNav =
+    navPages.includes(page) ||
+    page === 'scenarios' ||
+    page === 'weekly-topic' ||
+    page === 'weekly-vocab' ||
+    page === 'weekly-reading' ||
+    page === 'weekly-exercise';
   const showSettingsGear = page === 'home';
 
   return (
@@ -107,7 +135,7 @@ function Shell() {
       <main className={showNav ? 'pb-24' : ''}>
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
-        {page === 'scenarios' && <ScenariosPage go={go} />}
+        {page === 'scenarios' && <ScenariosPage go={go} onBack={() => go('home')} />}
         {page === 'scenario' && arg ? (
           <ScenarioDetailPage scenarioId={arg as ScenarioId} go={go} />
         ) : page === 'scenario' ? (
@@ -122,7 +150,11 @@ function Shell() {
         {page === 'favourites' && <FavouritesPage />}
         {page === 'progress' && <ProgressPage go={go} />}
         {page === 'settings' && (
-          <SettingsPage onBack={() => go('home')} onOpenReview={() => go('mihaela-review')} />
+          <SettingsPage
+            onBack={() => go('home')}
+            onOpenReview={() => go('mihaela-review')}
+            onOpenShare={() => go('share-with-teacher')}
+          />
         )}
         {page === 'builder' && <PhraseBuilderPage go={go} />}
         {page === 'reallife' && <RealLifePage onBack={() => go('home')} initialCategoryId={arg} />}
@@ -154,11 +186,48 @@ function Shell() {
           />
         ) : null}
         {page === 'grammar-verb' && arg ? (
-          <GrammarVerbPage verbId={arg} onBack={() => go('grammar')} />
+          <GrammarVerbPage
+            verbId={arg}
+            onBack={() => go('grammar')}
+            onNavigate={(id) => go('grammar-verb', id)}
+          />
         ) : page === 'grammar-verb' ? (
           <NavigationFallback
             title="Verb not found"
             message="We couldn’t open that verb."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-cheat' && arg ? (
+          <GrammarCheatSheetPage sheetId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-cheat' ? (
+          <NavigationFallback
+            title="Cheat sheet not found"
+            message="We couldn’t open that reference page."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-tense' && arg ? (
+          <GrammarTenseGuidePage guideId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-tense' ? (
+          <NavigationFallback
+            title="Tense guide not found"
+            message="We couldn’t open that tense guide."
+            onBack={() => go('grammar')}
+            backLabel="Back to Grammar Help"
+            backIcon="BookOpen"
+          />
+        ) : null}
+        {page === 'grammar-pattern' && arg ? (
+          <GrammarPatternPage patternId={arg} onBack={() => go('grammar')} />
+        ) : page === 'grammar-pattern' ? (
+          <NavigationFallback
+            title="Pattern not found"
+            message="We couldn’t open that sentence pattern."
             onBack={() => go('grammar')}
             backLabel="Back to Grammar Help"
             backIcon="BookOpen"
@@ -194,6 +263,7 @@ function Shell() {
               topicId={parsed.topicId}
               readingId={parsed.readingId}
               onBack={() => go('weekly-topic', parsed.topicId)}
+              go={go}
             />
           ) : (
             <NavigationFallback
@@ -239,7 +309,41 @@ function Shell() {
             backIcon="BookOpen"
           />
         ) : null}
-        {page === 'mihaela-review' && <MihaelaReviewPage onBack={() => go('settings')} />}
+        {page === 'mihaela-review' && (
+          <MihaelaReviewPage
+            onBack={() => go('settings')}
+            onShareReview={() => go('share-review-export')}
+          />
+        )}
+        {page === 'share-with-teacher' && (
+          <ShareWithTeacherPage
+            onBack={() => go('settings')}
+            onReviewSync={() => go('share-review')}
+            onProgressSync={() => go('share-progress')}
+          />
+        )}
+        {page === 'share-review' && (
+          <ReviewSyncHubPage
+            onBack={() => go('share-with-teacher')}
+            onExport={() => go('share-review-export')}
+            onTeacher={() => go('teacher-review')}
+            onImport={() => go('share-review-import')}
+          />
+        )}
+        {page === 'share-review-export' && <ReviewExportPage onBack={() => go('share-review')} />}
+        {page === 'share-review-import' && (
+          <ReviewImportPage onBack={() => go('share-review')} onDone={() => go('mihaela-review')} />
+        )}
+        {page === 'teacher-review' && <TeacherReviewPage onBack={() => go('share-review')} />}
+        {page === 'share-progress' && (
+          <ProgressSyncHubPage
+            onBack={() => go('share-with-teacher')}
+            onExport={() => go('share-progress-export')}
+            onTeacher={() => go('teacher-progress')}
+          />
+        )}
+        {page === 'share-progress-export' && <ProgressExportPage onBack={() => go('share-progress')} />}
+        {page === 'teacher-progress' && <TeacherProgressPage onBack={() => go('share-progress')} />}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}

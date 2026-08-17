@@ -175,6 +175,51 @@ export interface GrammarExample {
   review?: ContentReviewMeta;
 }
 
+export type GrammarTense = 'present' | 'perfect-compus' | 'imperfect' | 'future';
+
+export const GRAMMAR_TENSE_LABELS: Record<GrammarTense, string> = {
+  present: 'Present',
+  'perfect-compus': 'Perfect Compus',
+  imperfect: 'Imperfect',
+  future: 'Future',
+};
+
+export interface GrammarCheatSheet {
+  id: string;
+  title: string;
+  summary: string;
+  icon: string;
+  color: ColorKey;
+  rows: { ro: string; en: string; note?: string }[];
+  review?: ContentReviewMeta;
+}
+
+export interface GrammarTenseGuide {
+  id: string;
+  title: string;
+  subtitle: string;
+  icon: string;
+  color: ColorKey;
+  /** Plain-English situation — no linguistic jargon */
+  story: string;
+  whenToUse: string;
+  compareWith?: string;
+  examples: GrammarExample[];
+  review?: ContentReviewMeta;
+}
+
+export interface GrammarSentencePattern {
+  id: string;
+  title: string;
+  summary: string;
+  icon: string;
+  color: ColorKey;
+  patternRo: string;
+  patternEn: string;
+  tip: string;
+  examples: GrammarExample[];
+}
+
 export interface GrammarTopic {
   id: string;
   title: string;
@@ -183,7 +228,7 @@ export interface GrammarTopic {
   icon: string;
   color: ColorKey;
   /** Optional section for Grammar Help grouping */
-  group?: 'patterns' | 'parts-of-speech' | 'indicative' | 'imperfect' | 'auxiliary' | 'predicative';
+  group?: 'patterns' | 'parts-of-speech' | 'indicative' | 'imperfect' | 'auxiliary' | 'predicative' | 'sentence-pattern';
   /** Romanian grammar label, e.g. "verbă" */
   roLabel?: string;
   /** When to use this tense or pattern */
@@ -217,9 +262,13 @@ export interface GrammarVerb {
   icon: string;
   color: ColorKey;
   present: VerbForm[];
+  perfectCompus?: VerbForm[];
   /** Optional imperfect tense forms */
   imperfect?: VerbForm[];
+  future?: VerbForm[];
   examples: GrammarExample[];
+  /** Optional examples grouped by tense */
+  examplesByTense?: Partial<Record<GrammarTense, GrammarExample[]>>;
   review?: ContentReviewMeta;
 }
 
@@ -301,6 +350,14 @@ export interface WeeklyTopic {
   vocabulary: WeeklyVocabItem[];
   readings: WeeklyReading[];
   exercises: WeeklyTopicExercises;
+  /** Optional grammar tie-in shown on Home and topic hub */
+  grammarFocus?: {
+    label: string;
+    hint: string;
+    grammarTopicId?: string;
+    grammarTenseId?: string;
+    grammarVerbId?: string;
+  };
 }
 
 export interface WeeklyTopicProgress {
@@ -366,14 +423,32 @@ export interface ReviewCatalogItem {
   suggestedBy?: string;
   teacherNotes?: string;
   contextLabel?: string;
+  /** Set when the learner flagged this item manually */
+  flaggedByUser?: boolean;
+}
+
+export interface ManualReviewFlag {
+  id: string;
+  contentArea: ReviewContentArea;
+  ro: string;
+  en: string;
+  reviewReason: string;
+  contextLabel?: string;
+  flaggedAt: string;
+  userNote?: string;
 }
 
 export interface ReviewDecision {
   status: ReviewStatus;
   teacherNotes?: string;
+  correctedRo?: string;
+  correctedEn?: string;
+  pronunciationNotes?: string;
+  generalComments?: string;
   updatedAt: string;
 }
 
 export interface ReviewState {
   decisions: Record<string, ReviewDecision>;
+  manualFlags: Record<string, ManualReviewFlag>;
 }

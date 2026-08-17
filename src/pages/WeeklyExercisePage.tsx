@@ -15,7 +15,7 @@ interface Props {
 const titles: Record<WeeklyExerciseType, string> = {
   'ro-en': 'Romanian → English',
   'en-ro': 'English → Romanian',
-  match: 'Vocabulary Matching',
+  match: 'Vocabulary Review',
   sort: 'Category Sorting',
 };
 
@@ -46,6 +46,7 @@ export function WeeklyExercisePage({ topicId, exerciseType, onBack }: Props) {
             questions={topic.exercises.roToEn}
             title="What does it mean?"
             onComplete={complete}
+            onBackToTopic={onBack}
           />
         )}
         {exerciseType === 'en-ro' && (
@@ -53,16 +54,18 @@ export function WeeklyExercisePage({ topicId, exerciseType, onBack }: Props) {
             questions={topic.exercises.enToRo}
             title="How do you say it in Romanian?"
             onComplete={complete}
+            onBackToTopic={onBack}
           />
         )}
         {exerciseType === 'match' && (
-          <WeeklyTapMatch pairs={topic.exercises.matching} onComplete={complete} />
+          <WeeklyTapMatch pairs={topic.exercises.matching} onComplete={complete} onBackToTopic={onBack} />
         )}
         {exerciseType === 'sort' && (
           <WeeklyCategorySort
             categories={topic.exercises.sortCategories}
             items={topic.exercises.sortItems}
             onComplete={complete}
+            onBackToTopic={onBack}
           />
         )}
       </div>

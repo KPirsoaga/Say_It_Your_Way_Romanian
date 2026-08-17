@@ -54,6 +54,9 @@ import {
   TentTree,
   Dog,
   CookingPot,
+  QrCode,
+  ScanLine,
+  Share2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -113,6 +116,9 @@ const map: Record<string, LucideIcon> = {
   TentTree,
   Dog,
   CookingPot,
+  QrCode,
+  ScanLine,
+  Share2,
   Tortoise: Turtle,
 };
 

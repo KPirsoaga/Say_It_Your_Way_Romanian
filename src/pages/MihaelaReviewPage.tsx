@@ -8,6 +8,7 @@ import type { ReviewCatalogItem, ReviewStatus } from '../types';
 
 interface Props {
   onBack: () => void;
+  onShareReview: () => void;
 }
 
 type FilterKey = 'active' | ReviewStatus | 'all';
@@ -32,7 +33,7 @@ const statusLabels: Record<ReviewStatus, string> = {
   'needs-changes': 'Needs changes',
 };
 
-export function MihaelaReviewPage({ onBack }: Props) {
+export function MihaelaReviewPage({ onBack, onShareReview }: Props) {
   const { counts, itemsByStatus, getEffectiveStatus, getDecisionNotes, markApproved, markNeedsChanges, resetItem } =
     useReview();
   const [filter, setFilter] = useState<FilterKey>('active');
@@ -58,6 +59,11 @@ export function MihaelaReviewPage({ onBack }: Props) {
           <CountCard label="Approved" value={counts.approved} color="text-sea-600 dark:text-sea-200" />
           <CountCard label="Needs changes" value={counts.needsChanges} color="text-coral-400" />
         </section>
+
+        <Button variant="soft" size="lg" className="w-full" onClick={onShareReview}>
+          <Icon name="QrCode" className="h-5 w-5" />
+          Share review items
+        </Button>
 
         <div className="flex flex-wrap gap-2">
           {filterOptions.map((opt) => {
@@ -143,7 +149,14 @@ function ReviewCard({
         <span className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300">
           {item.contentArea}
         </span>
-        <span className={`text-xs font-bold rounded-full px-3 py-1 ${statusStyles[status]}`}>{statusLabels[status]}</span>
+        <div className="flex flex-wrap items-center gap-2">
+          {item.flaggedByUser && (
+            <span className="text-xs font-bold rounded-full px-3 py-1 bg-rose-50 text-rose-400 dark:bg-rose-400/20 dark:text-rose-200">
+              Flagged by me
+            </span>
+          )}
+          <span className={`text-xs font-bold rounded-full px-3 py-1 ${statusStyles[status]}`}>{statusLabels[status]}</span>
+        </div>
       </div>
 
       {item.contextLabel && (

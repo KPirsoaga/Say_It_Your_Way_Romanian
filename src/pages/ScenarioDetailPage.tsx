@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import { Icon } from '../components/Icon';
 import { useProgress } from '../context/ProgressContext';
 import { colorMap, scenarios } from '../content';
+import { userFlagId } from '../content/review/reviewIds';
 import type { ScenarioId } from '../types';
 import type { PageId } from '../App';
 
@@ -36,7 +37,7 @@ export function ScenarioDetailPage({ scenarioId, go }: Props) {
 
   const finish = () => {
     markScenarioCompleted(scenarioId);
-    go('home');
+    go('scenarios');
   };
 
   return (
@@ -62,7 +63,16 @@ export function ScenarioDetailPage({ scenarioId, go }: Props) {
           Listen, repeat, and save the ones you want to keep. Take your time.
         </p>
         {scenario.lines.map((line, i) => (
-          <PhraseCard key={i} phrase={line} favId={`${scenario.id}:${i}`} />
+          <PhraseCard
+            key={i}
+            phrase={line}
+            favId={`${scenario.id}:${i}`}
+            flag={{
+              id: userFlagId(`scenario:${scenario.id}:${i}`),
+              contentArea: 'Scenarios',
+              contextLabel: scenario.title,
+            }}
+          />
         ))}
 
         <Button variant="primary" size="lg" className="w-full mt-2" onClick={finish}>

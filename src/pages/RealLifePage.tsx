@@ -3,6 +3,7 @@ import { PageHeader } from '../components/PageHeader';
 import { Card } from '../components/Card';
 import { Icon } from '../components/Icon';
 import { PhraseCard } from '../components/PhraseCard';
+import { userFlagId } from '../content/review/reviewIds';
 import { NoShameBanner } from '../components/NoShameBanner';
 import { colorMap, realLifeCategories } from '../content';
 
@@ -50,7 +51,16 @@ export function RealLifePage({ onBack, initialCategoryId }: Props) {
                     <p className={`text-sm font-bold ${c.text}`}>{cat.when}</p>
                   </div>
                   {cat.phrases.map((p, i) => (
-                    <PhraseCard key={i} phrase={p} favId={`reallife:${cat.id}:${i}`} />
+                    <PhraseCard
+                      key={i}
+                      phrase={p}
+                      favId={`reallife:${cat.id}:${i}`}
+                      flag={{
+                        id: userFlagId(`reallife:${cat.id}:${i}`),
+                        contentArea: 'Real Life Mode',
+                        contextLabel: cat.title,
+                      }}
+                    />
                   ))}
                 </div>
               )}

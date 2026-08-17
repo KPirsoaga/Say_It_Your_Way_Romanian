@@ -79,14 +79,14 @@ export function FavouritesPage() {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Favourites" subtitle={`${items.length} saved phrases`} />
+      <PageHeader title="Saved" subtitle={`${items.length} saved phrases`} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {items.length === 0 && (
           <div className="text-center py-12 animate-fade-in">
             <div className="mx-auto h-20 w-20 rounded-full bg-rose-50 dark:bg-rose-400/20 flex items-center justify-center mb-4">
               <Icon name="Heart" className="h-10 w-10 text-rose-300 dark:text-rose-200" />
             </div>
-            <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">No favourites yet</h2>
+            <h2 className="text-xl font-bold text-ink-900 dark:text-sand-100">No saved phrases yet</h2>
             <p className="mt-2 text-ink-500 dark:text-ink-300">
               Tap the heart on any phrase to save it here for quick practice.
             </p>

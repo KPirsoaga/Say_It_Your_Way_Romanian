@@ -4,16 +4,19 @@ import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
+import { FlagForMihaela } from './FlagForMihaela';
 import type { PhraseLine } from '../types';
+import type { FlagReviewTarget } from '../content/review/reviewIds';
 
 interface Props {
   phrase: PhraseLine;
   /** id used for speech tracking */
   speechId: string;
   onDone?: () => void;
+  flag?: Omit<FlagReviewTarget, 'ro' | 'en'>;
 }
 
-export function SpeakPractice({ phrase, speechId, onDone }: Props) {
+export function SpeakPractice({ phrase, speechId, onDone, flag }: Props) {
   const { settings } = useSettings();
   const { supported, speak, stop, currentId } = useSpeech();
   const { addSpeakDone } = useProgress();
@@ -86,6 +89,17 @@ export function SpeakPractice({ phrase, speechId, onDone }: Props) {
         <p className="mt-4 text-sea-600 dark:text-sea-200 font-bold text-lg animate-pop flex items-center gap-2">
           <Icon name="Sparkles" className="h-6 w-6" /> Nice work! Every time you say it, it gets easier.
         </p>
+      )}
+
+      {flag && (
+        <FlagForMihaela
+          className="mt-4"
+          id={flag.id}
+          ro={phrase.ro}
+          en={phrase.en}
+          contentArea={flag.contentArea}
+          contextLabel={flag.contextLabel}
+        />
       )}
     </div>
   );

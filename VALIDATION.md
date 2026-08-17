@@ -368,6 +368,217 @@ Notes: Access via **Settings → Maintenance / Review → Mihaela Review**. Coll
 
 ---
 
+---
+
+VAL-034
+Area: Home / Navigation
+Issue: Home page had repetitive sections and Weekly Topics felt secondary; hero duplicated Mini Conversations.
+Expected behaviour: Clear order: hero → this week’s lesson (Building a Cabin with progress) → need today → ways to practise → today’s phrase → scenarios.
+Current behaviour: Weekly Topics was a small card; conversations appeared in hero and in Ways to practise; No Shame banner repeated.
+Priority: Medium
+Status: Fixed
+Notes: Home links directly to `weekly-topic/building-cabin`; “View all weekly topics” secondary link. Removed duplicate hero conversation button and mid-page No Shame banner.
+
+---
+
+VAL-035
+Area: Exercises
+Issue: Multiple-choice correct answer often appeared as the top option (content order); match/sort exercises were predictable.
+Expected behaviour: Shuffled MC options in Weekly Topics and Listen & Choose; shuffled match columns and sort word pool; correctness unchanged.
+Current behaviour: Options rendered in source array order.
+Priority: High
+Status: Fixed
+Notes: `src/utils/shuffle.ts` with `shuffledMcOptions`; applied in `WeeklyMcExercise`, `ListenChoose`, `WeeklyTapMatch`, `WeeklyCategorySort`.
+
+---
+
+VAL-036
+Area: Content / Romanian — Building a Cabin
+Issue: Reading passages and phrases sounded unnatural (e.g. greblă + gard, “Peretele este mare”, insulation “pe perete”); long TTS passages sounded strange.
+Expected behaviour: More natural Romanian where confident; uncertain strings flagged for Mihaela Review; sentence-by-sentence audio on reading pages.
+Current behaviour: Passages updated; readings and changed phrase still flagged in Mihaela Review.
+Priority: High
+Status: Fixed
+Notes: Reading 1–3 Romanian/English revised. Phrase “Lucrez la acoperiș” replaces “Ridic acoperișul”. `v-lovi` / `v-gati` flagged off-topic. Weekly reading page adds sentence-by-sentence play.
+
+---
+
+VAL-037
+Area: Phrase Builder / Audio
+Issue: Phrase Builder chunk feedback could mis-highlight; pronunciation hints could be confused with TTS source.
+Expected behaviour: Chunk feedback compares Romanian text; TTS always uses `*.ro`; pron hints labelled as not read aloud.
+Current behaviour: Visual check used index comparison only; pron labels generic.
+Priority: Low
+Status: Fixed
+Notes: `PhraseBuilder` compares chunk `.ro` strings. `PhraseCard` and `ListenChoose` label pron as guide only.
+
+---
+
+VAL-038
+Area: Navigation
+Issue: Bottom nav prioritised Scenarios over the weekly lesson; weekly sub-pages hid the nav.
+Expected behaviour: Lesson tab opens Building a Cabin; bottom nav visible on lesson, vocab, reading, and exercise pages.
+Current behaviour: Scenarios in bottom nav; weekly pages full-screen without nav.
+Priority: High
+Status: Fixed
+Notes: `BottomNav` Lesson tab → `weekly-topic/building-cabin`. `App.tsx` shows nav on weekly sub-pages.
+
+---
+
+VAL-039
+Area: Exercises / Weekly Topics
+Issue: Finishing an exercise dropped users with no clear return path; MC options predictable; progress counted 9 steps including translation.
+Expected behaviour: Back to topic + Try again on completion; shuffled options; 8 tracked steps (translation optional, not in %).
+Current behaviour: Exercises ended without navigation; fixed option order; 9-step progress bar.
+Priority: High
+Status: Fixed
+Notes: `ExerciseCompletion` component; `shuffle.ts` in weekly exercises; `WEEKLY_TOPIC_STEP_COUNT = 8`.
+
+---
+
+VAL-040
+Area: Grammar Help
+Issue: No quick way to move between verb pages; duplicate auxiliary/predicative cards in overview.
+Expected behaviour: Prev/next verb navigation and chip strip; overview hides topics with dedicated verb pages.
+Current behaviour: Manual back-and-forth only; duplicate overview entries.
+Priority: Medium
+Status: Fixed
+Notes: `GrammarVerbNav` + `grammarVerbNav.ts`. `GrammarHelpPage` filters `gr-pos-auxiliary` and `gr-pos-predicative`.
+
+---
+
+VAL-041
+Area: Home / Daily / Phrase Builder
+Issue: Home buried the lesson; daily phrase unrelated to weekly content; Phrase Builder lacked cabin sentences.
+Expected behaviour: Lesson-first home; today’s phrase from Building a Cabin; cabin Phrase Builder items first.
+Current behaviour: Stats and scenarios dominated; generic daily phrase; generic builder only.
+Priority: High
+Status: Fixed
+Notes: `getWeeklyLessonPhrase`, `cabinPhraseBuilderItems`, home hero “Continue this week’s lesson”.
+
+---
+
+VAL-042
+Area: Reading / Terminology
+Issue: Readings had no speak step or next-reading flow; “Matching” and “Favourites” labels inconsistent.
+Expected behaviour: Speak-out-loud after reveal; Next reading button; “Vocabulary Review” and “Saved” labels.
+Current behaviour: Translation-only finish; inconsistent naming.
+Priority: Medium
+Status: Fixed
+Notes: `WeeklyReadingPage` speak + next reading. Progress, exercises, and Saved page relabelled.
+
+---
+
+VAL-043
+Area: Content — Building a Cabin
+Issue: MC distractor `a găti` was off-topic for cabin vocabulary exercise.
+Expected behaviour: Distractors stay on-theme for the lesson.
+Current behaviour: `a găti` appeared as wrong answer in exercise `er5`.
+Priority: Low
+Status: Fixed
+Notes: Replaced with `a săpa` in `buildingCabin.ts` exercise `er5`.
+
+---
+
+VAL-044
+Area: Home / UX
+Issue: Home page presented unrelated features side by side; duplicate shortcuts to Real Life Mode and the weekly lesson; No Shame Mode as a separate tile.
+Expected behaviour: Single guided path — Continue lesson → Today’s phrase → Ways to practise → Scenarios → Progress; lesson progress shows vocabulary, reading, exercises, grammar focus; scenarios grouped.
+Current behaviour: Hero competed with lesson card; “I actually need this today” duplicated Real Life Mode; flat scenario list; stats mid-page.
+Priority: High
+Status: Fixed
+Notes: `HomePage` reordered and simplified. Removed need-today grid and No Shame tile. `scenarioGroups.ts` for Home and Scenarios page. Optional `grammarFocus` on weekly topics.
+
+---
+
+VAL-045
+Area: Grammar Help
+Issue: Grammar Help was a collection of disconnected textbook-style topic pages; verbs had only present tense on separate flows; linguistic jargon (indicative mood, predicative, auxiliary).
+Expected behaviour: Cheat sheets, verb centre with tense toggle (Present / Perfect Compus / Imperfect / Future), plain-English tense guides, sentence patterns, simplified parts of speech; find answers in one or two taps.
+Current behaviour: Old mood/group sections; single tense per verb page; long topic cards with practise tracking.
+Priority: High
+Status: Fixed
+Notes: New `grammarCheatSheets`, `grammarTenseGuides`, `grammarSentencePatterns`, `grammarPartsOfSpeech`, `grammarVerbTenses`. `GrammarTenseToggle` on verb pages. Grammar exercises placeholder. Legacy `grammarTopics` retained for review collector only.
+
+---
+
+VAL-046
+Area: Navigation / Home / Mihaela Review
+Issue: Scenarios list had no back navigation and hid bottom nav; Home progress was at the bottom; learners could not manually flag content for Mihaela.
+Expected behaviour: Scenarios page has back + bottom nav; Home order is hero → progress → lesson → phrase → practise → scenarios; subtle “Flag for Mihaela” on Romanian content saved to localStorage without duplicates.
+Current behaviour: Scenarios felt like a dead end; progress at page bottom; only author-flagged content in review.
+Priority: High
+Status: Fixed
+Notes: `FlagForMihaela` component; `ReviewContext.manualFlags`; `user-flag:*` ids in `rcd-review` localStorage.
+
+---
+
+VAL-047
+Area: Share with Teacher / QR sync
+Issue: No offline way to share review items or progress with Mihaela using QR codes.
+Expected behaviour: Settings → Share with Teacher → Review Sync (two-way) and Progress Sync (one-way); multi-QR chunking when payloads are large; teacher review with corrections; learner imports response by id.
+Current behaviour: Review and progress stayed on one device only.
+Priority: High
+Status: Fixed
+Notes: `src/services/qr/*` package codec; `qrcode` + `html5-qrcode`; pages under `src/pages/share/`; teacher session in `rcd-teacher-review` localStorage.
+
+---
+
+VAL-048
+Area: Share with Teacher / QR scanner
+Issue: Camera failed to open when tapping Scan QR code.
+Expected behaviour: Scanner region visible before camera starts; back-camera fallback; clear error if HTTPS or permissions block access.
+Current behaviour: `html5-qrcode` started while the preview div was `display:none`, so video never attached.
+Priority: High
+Status: Fixed
+Notes: Defer `start()` until after region is shown; enumerate cameras with facingMode fallback; `qr-scanner-region` video CSS.
+
+---
+
+VAL-049
+Area: Share with Teacher / QR scanner (desktop)
+Issue: Desktop webcam showed black screen after granting camera permission.
+Expected behaviour: Live camera preview visible; QR codes scannable on desktop.
+Current behaviour: `aspectRatio: 1` and shaded qrbox broke desktop webcams; preview looked black.
+Priority: High
+Status: Fixed
+Notes: Removed forced square aspect ratio; full-frame scan without dark overlay; 4:3 preview container; upload QR image fallback for desktop.
+
+---
+
+VAL-050
+Area: Share with Teacher / QR scanner lifecycle
+Issue: Scanner did not decode reliably; pressing back without stopping broke the app.
+Expected behaviour: Reliable scan on mobile and desktop; back navigation always stops camera first.
+Current behaviour: Custom Html5Qrcode integration had hidden preview, no file UI; unmount left camera running.
+Priority: High
+Status: Fixed
+Notes: Switched to `Html5QrcodeScanner`; `useScannerSafeBack` stops camera before navigate; smaller QR payloads; larger display codes.
+
+---
+
+VAL-051
+Area: Share with Teacher / QR scanner reliability
+Issue: Scanner still failed on mobile and desktop after e86f1de; large review payloads could exceed QR capacity; React StrictMode broke camera lifecycle.
+Expected behaviour: Camera, photo upload, or paste all work; generated QRs are scannable; back navigation safe.
+Current behaviour: Html5QrcodeScanner unreliable; verbose payloads too large; StrictMode double-mount.
+Priority: High
+Status: Fixed
+Notes: Direct `Html5Qrcode` API; removed StrictMode; compact QR codec; paste fallback; 360px QR display; clearer scan errors.
+
+---
+
+VAL-052
+Area: Share with Teacher / Review Sync payload
+Issue: Review Sync generated too many QR codes (e.g. 8 for one sync) because each item carried timestamps, context labels, and verbose array rows.
+Expected behaviour: Compact review export (`id`, `area`, `ro`, `en`, `note`, `status`); compact teacher response (`id`, `status`, `cro`, `cen`, `note`, `pron`); omit empty fields; filters before generate (default pending only); item count and soft warning above 3 QRs; progress sync stays separate.
+Current behaviour: Verbose per-item arrays and metadata inflated payloads; all active items exported with no filters.
+Priority: High
+Status: Fixed
+Notes: `reviewPackage.ts` compact wire objects; `ReviewExportPage` status/area filters; legacy array/object parsing retained for older QRs.
+
+---
+
 VAL-053
 Area: Weekly Topics / Content
 Issue: Only one weekly topic (Building a Cabin) existed — learners needed more real-life topic packs.

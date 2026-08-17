@@ -8,7 +8,14 @@ import {
   extraMiniConversations,
 } from './content/additions';
 
-export { grammarTopics, grammarVerbs } from './content/grammar';
+export {
+  grammarTopics,
+  grammarVerbs,
+  grammarCheatSheets,
+  grammarTenseGuides,
+  grammarSentencePatterns,
+  grammarPartsOfSpeech,
+} from './content/grammar';
 
 export const scenarios: Scenario[] = [
   {

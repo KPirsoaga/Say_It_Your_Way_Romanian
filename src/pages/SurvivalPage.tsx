@@ -7,6 +7,8 @@ import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { NoShameBanner } from '../components/NoShameBanner';
 import { survivalPhrases } from '../content';
+import { FlagForMihaela } from '../components/FlagForMihaela';
+import { userFlagId } from '../content/review/reviewIds';
 
 interface Props {
   onBack: () => void;
@@ -99,6 +101,14 @@ export function SurvivalPage({ onBack }: Props) {
                     </Button>
                   )}
                 </div>
+                <FlagForMihaela
+                  className="mt-3"
+                  id={userFlagId(`survival:${i}`)}
+                  ro={p.ro}
+                  en={p.en}
+                  contentArea="Survival Romanian"
+                  contextLabel={`Survival phrase ${i + 1}`}
+                />
               </Card>
             );
           })}
