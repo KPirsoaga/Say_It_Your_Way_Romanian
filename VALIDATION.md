@@ -652,6 +652,6 @@ Expected behaviour: Never invent Romanian forms. Verify each lexical item indivi
 Current behaviour: `verifiedLexicalFamilies.ts` and `verifiedVerbForms.ts` gate all learner-facing morphology. `nounFamilyCandidateRegistry` quarantined. Weekly verbs marked `pattern-inferred`; generated tenses stripped from learner paths. `lexicalSafety.ts` defines learner-safe provenance. `runLexicalRepairAudit()` reports verified vs base-only counts.
 Priority: Critical
 Status: Fixed
-Notes: dexonline.ro verified: câine, mașină, pâine, bandă, pod, râu (nouns); bun, mare (adjectives); a fi, a găti, a asculta (present tense only — partial morphology, not full four-tense coverage). Remaining headwords show base form only until individually verified. Teacher Review reserved for naturalness/conflicts, not routine morphology. Pre-merge: `npx tsx scripts/pre-merge-lexical-check.mjs`.
+Notes: Stage B (quarantine) + Stage C (dexonline restoration via `scripts/import-dexonline-lexical.mjs`): 71/71 verbs with full four-tense coverage (present, imperfect, perfect compus, future); 88/90 nouns fully verified; bun, mare (adjectives). Base-only until verified: extensie (dexonline lemma extensiune), mici (plural-only, no clean dexonline paradigm). Teacher Review reserved for naturalness/conflicts, not routine morphology. Pre-merge: `npx tsx scripts/pre-merge-lexical-check.mjs`.
 
 ---

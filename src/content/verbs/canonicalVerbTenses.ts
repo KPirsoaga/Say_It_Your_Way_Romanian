@@ -464,11 +464,14 @@ export function getVerbExamplesForTense(verb: GrammarVerb, tense: GrammarTense):
 
 export function getAvailableTenses(verb: GrammarVerb): GrammarTense[] {
   const tenses: GrammarTense[] = [];
-  if (isVerbTenseLearnerSafe(verb.id, 'present') && verb.present.length) tenses.push('present');
-  if (isVerbTenseLearnerSafe(verb.id, 'perfect-compus') && verb.perfectCompus?.length) {
-    tenses.push('perfect-compus');
-  }
-  if (isVerbTenseLearnerSafe(verb.id, 'imperfect') && verb.imperfect?.length) tenses.push('imperfect');
-  if (isVerbTenseLearnerSafe(verb.id, 'future') && verb.future?.length) tenses.push('future');
+  const maybeAdd = (tense: GrammarTense) => {
+    if (isVerbTenseLearnerSafe(verb.id, tense) && getVerbFormsForTense(verb, tense)?.length) {
+      tenses.push(tense);
+    }
+  };
+  maybeAdd('present');
+  maybeAdd('perfect-compus');
+  maybeAdd('imperfect');
+  maybeAdd('future');
   return tenses;
 }

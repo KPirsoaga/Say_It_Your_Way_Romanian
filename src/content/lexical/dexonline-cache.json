@@ -1,0 +1,7070 @@
+{
+  "fetchedAt": "2026-08-17",
+  "verbs": {
+    "vb-fi": {
+      "url": "https://dexonline.ro/definitie/fi",
+      "lemma": "fi",
+      "paradigm": {
+        "infinitive": "fi",
+        "participiu": "fost",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "suntîs&#x2011s"
+          },
+          {
+            "label": "tu",
+            "ro": "ești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "esteeîi&#x2011i"
+          },
+          {
+            "label": "noi",
+            "ro": "suntemsuntem"
+          },
+          {
+            "label": "voi",
+            "ro": "suntețisunteți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "suntîs&#x2011s"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "fiu"
+          },
+          {
+            "label": "tu",
+            "ro": "fii"
+          },
+          {
+            "label": "el/ea",
+            "ro": "fie"
+          },
+          {
+            "label": "noi",
+            "ro": "fim"
+          },
+          {
+            "label": "voi",
+            "ro": "fiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "fie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "eram"
+          },
+          {
+            "label": "tu",
+            "ro": "erai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "era"
+          },
+          {
+            "label": "noi",
+            "ro": "eram"
+          },
+          {
+            "label": "voi",
+            "ro": "erați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "erau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-avea": {
+      "url": "https://dexonline.ro/definitie/avea",
+      "lemma": "avea",
+      "paradigm": {
+        "infinitive": "avea",
+        "participiu": "avut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "am"
+          },
+          {
+            "label": "tu",
+            "ro": "ai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "are"
+          },
+          {
+            "label": "noi",
+            "ro": "avem"
+          },
+          {
+            "label": "voi",
+            "ro": "aveți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "au"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "am"
+          },
+          {
+            "label": "tu",
+            "ro": "aiaibi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aibăaibeaivă"
+          },
+          {
+            "label": "noi",
+            "ro": "avem"
+          },
+          {
+            "label": "voi",
+            "ro": "aveți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aibăaibeaivă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "aveam"
+          },
+          {
+            "label": "tu",
+            "ro": "aveai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "avea"
+          },
+          {
+            "label": "noi",
+            "ro": "aveam"
+          },
+          {
+            "label": "voi",
+            "ro": "aveați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aveau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-vrea": {
+      "url": "https://dexonline.ro/definitie/vrea",
+      "lemma": "vrea",
+      "paradigm": {
+        "infinitive": "vreavra",
+        "participiu": "vrut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "vreauvrau"
+          },
+          {
+            "label": "tu",
+            "ro": "vreivrai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vreavra"
+          },
+          {
+            "label": "noi",
+            "ro": "vrem"
+          },
+          {
+            "label": "voi",
+            "ro": "vreți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vorvreauvrau"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "vreauvrau"
+          },
+          {
+            "label": "tu",
+            "ro": "vreivrai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vreavreie"
+          },
+          {
+            "label": "noi",
+            "ro": "vrem"
+          },
+          {
+            "label": "voi",
+            "ro": "vreți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vreavreie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "vreamvram"
+          },
+          {
+            "label": "tu",
+            "ro": "vreaivrai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vreavra"
+          },
+          {
+            "label": "noi",
+            "ro": "vreamvram"
+          },
+          {
+            "label": "voi",
+            "ro": "vreațivrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vreauvrau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-putea": {
+      "url": "https://dexonline.ro/definitie/putea",
+      "lemma": "putea",
+      "paradigm": {
+        "infinitive": "putea",
+        "participiu": "putut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "potpoci"
+          },
+          {
+            "label": "tu",
+            "ro": "poți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "poate"
+          },
+          {
+            "label": "noi",
+            "ro": "putem"
+          },
+          {
+            "label": "voi",
+            "ro": "puteți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "pot"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "potpoci"
+          },
+          {
+            "label": "tu",
+            "ro": "poți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "poată"
+          },
+          {
+            "label": "noi",
+            "ro": "putem"
+          },
+          {
+            "label": "voi",
+            "ro": "puteți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "poată"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "puteam"
+          },
+          {
+            "label": "tu",
+            "ro": "puteai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "putea"
+          },
+          {
+            "label": "noi",
+            "ro": "puteam"
+          },
+          {
+            "label": "voi",
+            "ro": "puteați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "puteau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-face": {
+      "url": "https://dexonline.ro/definitie/face",
+      "lemma": "face",
+      "paradigm": {
+        "infinitive": "face",
+        "participiu": "făcut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "fac"
+          },
+          {
+            "label": "tu",
+            "ro": "faci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "face"
+          },
+          {
+            "label": "noi",
+            "ro": "facem"
+          },
+          {
+            "label": "voi",
+            "ro": "faceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "fac"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "fac"
+          },
+          {
+            "label": "tu",
+            "ro": "faci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "facă"
+          },
+          {
+            "label": "noi",
+            "ro": "facem"
+          },
+          {
+            "label": "voi",
+            "ro": "faceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "facă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "făceam"
+          },
+          {
+            "label": "tu",
+            "ro": "făceai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "făcea"
+          },
+          {
+            "label": "noi",
+            "ro": "făceam"
+          },
+          {
+            "label": "voi",
+            "ro": "făceați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "făceau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-merge": {
+      "url": "https://dexonline.ro/definitie/merge",
+      "lemma": "merge",
+      "paradigm": {
+        "infinitive": "merge",
+        "participiu": "mers",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "merg"
+          },
+          {
+            "label": "tu",
+            "ro": "mergi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "merge"
+          },
+          {
+            "label": "noi",
+            "ro": "mergem"
+          },
+          {
+            "label": "voi",
+            "ro": "mergeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "merg"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "merg"
+          },
+          {
+            "label": "tu",
+            "ro": "mergi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "meargă"
+          },
+          {
+            "label": "noi",
+            "ro": "mergem"
+          },
+          {
+            "label": "voi",
+            "ro": "mergeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "meargă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "mergeam"
+          },
+          {
+            "label": "tu",
+            "ro": "mergeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mergea"
+          },
+          {
+            "label": "noi",
+            "ro": "mergeam"
+          },
+          {
+            "label": "voi",
+            "ro": "mergeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mergeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-spune": {
+      "url": "https://dexonline.ro/definitie/spune",
+      "lemma": "spune",
+      "paradigm": {
+        "infinitive": "spune",
+        "participiu": "spus",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "spunspui"
+          },
+          {
+            "label": "tu",
+            "ro": "spui"
+          },
+          {
+            "label": "el/ea",
+            "ro": "spune"
+          },
+          {
+            "label": "noi",
+            "ro": "spunem"
+          },
+          {
+            "label": "voi",
+            "ro": "spuneți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "spun"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "spunspui"
+          },
+          {
+            "label": "tu",
+            "ro": "spui"
+          },
+          {
+            "label": "el/ea",
+            "ro": "spunăspuie"
+          },
+          {
+            "label": "noi",
+            "ro": "spunem"
+          },
+          {
+            "label": "voi",
+            "ro": "spuneți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "spunăspuie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "spuneam"
+          },
+          {
+            "label": "tu",
+            "ro": "spuneai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "spunea"
+          },
+          {
+            "label": "noi",
+            "ro": "spuneam"
+          },
+          {
+            "label": "voi",
+            "ro": "spuneați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "spuneau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-intelege": {
+      "url": "https://dexonline.ro/definitie/%C3%AEn%C8%9Belege",
+      "lemma": "înțelege",
+      "paradigm": {
+        "infinitive": "înțelege&#x2011nțelege",
+        "participiu": "înțeles&#x2011nțelesînțelesu&#x2011&#x2011nțelesu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "înțeleg&#x2011nțeleg"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegi&#x2011nțelegi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțelege&#x2011nțelege"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegem&#x2011nțelegem"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeți&#x2011nțelegeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțeleg&#x2011nțeleg"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "înțeleg&#x2011nțeleg"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegi&#x2011nțelegi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțeleagă&#x2011nțeleagă"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegem&#x2011nțelegem"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeți&#x2011nțelegeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțeleagă&#x2011nțeleagă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "înțelegeam&#x2011nțelegeam"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegeai&#x2011nțelegeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțelegea&#x2011nțelegea"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegeam&#x2011nțelegeam"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeați&#x2011nțelegeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțelegeau&#x2011nțelegeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-vorbi": {
+      "url": "https://dexonline.ro/definitie/vorbi",
+      "lemma": "vorbi",
+      "paradigm": {
+        "infinitive": "vorbi",
+        "participiu": "vorbit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "vorbesc"
+          },
+          {
+            "label": "tu",
+            "ro": "vorbești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vorbește"
+          },
+          {
+            "label": "noi",
+            "ro": "vorbim"
+          },
+          {
+            "label": "voi",
+            "ro": "vorbiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vorbesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "vorbesc"
+          },
+          {
+            "label": "tu",
+            "ro": "vorbești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vorbească"
+          },
+          {
+            "label": "noi",
+            "ro": "vorbim"
+          },
+          {
+            "label": "voi",
+            "ro": "vorbiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vorbească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "vorbeam"
+          },
+          {
+            "label": "tu",
+            "ro": "vorbeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vorbea"
+          },
+          {
+            "label": "noi",
+            "ro": "vorbeam"
+          },
+          {
+            "label": "voi",
+            "ro": "vorbeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vorbeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-pleca": {
+      "url": "https://dexonline.ro/definitie/pleca",
+      "lemma": "pleca",
+      "paradigm": {
+        "infinitive": "pleca",
+        "participiu": "plecat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "plec"
+          },
+          {
+            "label": "tu",
+            "ro": "pleci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pleacă"
+          },
+          {
+            "label": "noi",
+            "ro": "plecăm"
+          },
+          {
+            "label": "voi",
+            "ro": "plecați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "pleacă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "plec"
+          },
+          {
+            "label": "tu",
+            "ro": "pleci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plece"
+          },
+          {
+            "label": "noi",
+            "ro": "plecăm"
+          },
+          {
+            "label": "voi",
+            "ro": "plecați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "plece"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "plecam"
+          },
+          {
+            "label": "tu",
+            "ro": "plecai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pleca"
+          },
+          {
+            "label": "noi",
+            "ro": "plecam"
+          },
+          {
+            "label": "voi",
+            "ro": "plecați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "plecau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-intreba": {
+      "url": "https://dexonline.ro/definitie/%C3%AEntreba",
+      "lemma": "întreba",
+      "paradigm": {
+        "infinitive": "întreba&#x2011ntreba",
+        "participiu": "întrebat&#x2011ntrebatîntrebatu&#x2011&#x2011ntrebatu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "întreb&#x2011ntreb"
+          },
+          {
+            "label": "tu",
+            "ro": "întrebi&#x2011ntrebi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "întreabă&#x2011ntreabă"
+          },
+          {
+            "label": "noi",
+            "ro": "întrebăm&#x2011ntrebăm"
+          },
+          {
+            "label": "voi",
+            "ro": "întrebați&#x2011ntrebați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "întreabă&#x2011ntreabă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "întreb&#x2011ntreb"
+          },
+          {
+            "label": "tu",
+            "ro": "întrebi&#x2011ntrebi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "întrebe&#x2011ntrebe"
+          },
+          {
+            "label": "noi",
+            "ro": "întrebăm&#x2011ntrebăm"
+          },
+          {
+            "label": "voi",
+            "ro": "întrebați&#x2011ntrebați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "întrebe&#x2011ntrebe"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "întrebam&#x2011ntrebam"
+          },
+          {
+            "label": "tu",
+            "ro": "întrebai&#x2011ntrebai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "întreba&#x2011ntreba"
+          },
+          {
+            "label": "noi",
+            "ro": "întrebam&#x2011ntrebam"
+          },
+          {
+            "label": "voi",
+            "ro": "întrebați&#x2011ntrebați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "întrebau&#x2011ntrebau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-manca": {
+      "url": "https://dexonline.ro/definitie/m%C3%A2nca",
+      "lemma": "mânca",
+      "paradigm": {
+        "infinitive": "mânca",
+        "participiu": "mâncat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "mănâncmânc"
+          },
+          {
+            "label": "tu",
+            "ro": "mănâncimânci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mănâncămâncă"
+          },
+          {
+            "label": "noi",
+            "ro": "mâncăm"
+          },
+          {
+            "label": "voi",
+            "ro": "mâncați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mănâncămâncă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "mănâncmânc"
+          },
+          {
+            "label": "tu",
+            "ro": "mănâncimânci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mănâncemânce"
+          },
+          {
+            "label": "noi",
+            "ro": "mâncăm"
+          },
+          {
+            "label": "voi",
+            "ro": "mâncați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mănâncemânce"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "mâncam"
+          },
+          {
+            "label": "tu",
+            "ro": "mâncai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mânca"
+          },
+          {
+            "label": "noi",
+            "ro": "mâncam"
+          },
+          {
+            "label": "voi",
+            "ro": "mâncați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mâncau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-bea": {
+      "url": "https://dexonline.ro/definitie/bea",
+      "lemma": "bea",
+      "paradigm": {
+        "infinitive": "bea",
+        "participiu": "băut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "beau"
+          },
+          {
+            "label": "tu",
+            "ro": "bei"
+          },
+          {
+            "label": "el/ea",
+            "ro": "bea"
+          },
+          {
+            "label": "noi",
+            "ro": "bem"
+          },
+          {
+            "label": "voi",
+            "ro": "beți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "beau"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "beau"
+          },
+          {
+            "label": "tu",
+            "ro": "bei"
+          },
+          {
+            "label": "el/ea",
+            "ro": "beabeie"
+          },
+          {
+            "label": "noi",
+            "ro": "bem"
+          },
+          {
+            "label": "voi",
+            "ro": "beți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "beabeie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "beam"
+          },
+          {
+            "label": "tu",
+            "ro": "beai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "bea"
+          },
+          {
+            "label": "noi",
+            "ro": "beam"
+          },
+          {
+            "label": "voi",
+            "ro": "beați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "beau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-construi": {
+      "url": "https://dexonline.ro/definitie/construi",
+      "lemma": "construi",
+      "paradigm": {
+        "infinitive": "construi",
+        "participiu": "construit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "construiesc"
+          },
+          {
+            "label": "tu",
+            "ro": "construiești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "construiește"
+          },
+          {
+            "label": "noi",
+            "ro": "construim"
+          },
+          {
+            "label": "voi",
+            "ro": "construiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "construiesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "construiesc"
+          },
+          {
+            "label": "tu",
+            "ro": "construiești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "construiască"
+          },
+          {
+            "label": "noi",
+            "ro": "construim"
+          },
+          {
+            "label": "voi",
+            "ro": "construiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "construiască"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "construiam"
+          },
+          {
+            "label": "tu",
+            "ro": "construiai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "construia"
+          },
+          {
+            "label": "noi",
+            "ro": "construiam"
+          },
+          {
+            "label": "voi",
+            "ro": "construiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "construiau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-munci": {
+      "url": "https://dexonline.ro/definitie/munci",
+      "lemma": "munci",
+      "paradigm": {
+        "infinitive": "munci",
+        "participiu": "muncit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "muncesc"
+          },
+          {
+            "label": "tu",
+            "ro": "muncești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "muncește"
+          },
+          {
+            "label": "noi",
+            "ro": "muncim"
+          },
+          {
+            "label": "voi",
+            "ro": "munciți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "muncesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "muncesc"
+          },
+          {
+            "label": "tu",
+            "ro": "muncești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "muncească"
+          },
+          {
+            "label": "noi",
+            "ro": "muncim"
+          },
+          {
+            "label": "voi",
+            "ro": "munciți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "muncească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "munceam"
+          },
+          {
+            "label": "tu",
+            "ro": "munceai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "muncea"
+          },
+          {
+            "label": "noi",
+            "ro": "munceam"
+          },
+          {
+            "label": "voi",
+            "ro": "munceați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "munceau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-gati": {
+      "url": "https://dexonline.ro/definitie/g%C4%83ti",
+      "lemma": "găti",
+      "paradigm": {
+        "infinitive": "găti",
+        "participiu": "gătit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "gătesc"
+          },
+          {
+            "label": "tu",
+            "ro": "gătești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "gătește"
+          },
+          {
+            "label": "noi",
+            "ro": "gătim"
+          },
+          {
+            "label": "voi",
+            "ro": "gătiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "gătesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "gătesc"
+          },
+          {
+            "label": "tu",
+            "ro": "gătești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "gătească"
+          },
+          {
+            "label": "noi",
+            "ro": "gătim"
+          },
+          {
+            "label": "voi",
+            "ro": "gătiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "gătească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "găteam"
+          },
+          {
+            "label": "tu",
+            "ro": "găteai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "gătea"
+          },
+          {
+            "label": "noi",
+            "ro": "găteam"
+          },
+          {
+            "label": "voi",
+            "ro": "găteați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "găteau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-pune": {
+      "url": "https://dexonline.ro/definitie/pune",
+      "lemma": "pune",
+      "paradigm": {
+        "infinitive": "pune",
+        "participiu": "pus",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "punpui"
+          },
+          {
+            "label": "tu",
+            "ro": "pui"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pune"
+          },
+          {
+            "label": "noi",
+            "ro": "punem"
+          },
+          {
+            "label": "voi",
+            "ro": "puneți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "pun"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "punpui"
+          },
+          {
+            "label": "tu",
+            "ro": "pui"
+          },
+          {
+            "label": "el/ea",
+            "ro": "punăpuie"
+          },
+          {
+            "label": "noi",
+            "ro": "punem"
+          },
+          {
+            "label": "voi",
+            "ro": "puneți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "punăpuie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "puneam"
+          },
+          {
+            "label": "tu",
+            "ro": "puneai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "punea"
+          },
+          {
+            "label": "noi",
+            "ro": "puneam"
+          },
+          {
+            "label": "voi",
+            "ro": "puneați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "puneau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-taia": {
+      "url": "https://dexonline.ro/definitie/t%C4%83ia",
+      "lemma": "tăia",
+      "paradigm": {
+        "infinitive": "tăia",
+        "participiu": "tăiat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "tai"
+          },
+          {
+            "label": "tu",
+            "ro": "tai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "taie"
+          },
+          {
+            "label": "noi",
+            "ro": "tăiem"
+          },
+          {
+            "label": "voi",
+            "ro": "tăiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "taie"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "tai"
+          },
+          {
+            "label": "tu",
+            "ro": "tai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "taie"
+          },
+          {
+            "label": "noi",
+            "ro": "tăiem"
+          },
+          {
+            "label": "voi",
+            "ro": "tăiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "taie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "tăiam"
+          },
+          {
+            "label": "tu",
+            "ro": "tăiai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "tăia"
+          },
+          {
+            "label": "noi",
+            "ro": "tăiam"
+          },
+          {
+            "label": "voi",
+            "ro": "tăiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "tăiau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-sapa": {
+      "url": "https://dexonline.ro/definitie/s%C4%83pa",
+      "lemma": "săpa",
+      "paradigm": {
+        "infinitive": "săpa",
+        "participiu": "săpat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "sapsăp"
+          },
+          {
+            "label": "tu",
+            "ro": "sapisăpi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "sapă"
+          },
+          {
+            "label": "noi",
+            "ro": "săpăm"
+          },
+          {
+            "label": "voi",
+            "ro": "săpați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "sapă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "sapsăp"
+          },
+          {
+            "label": "tu",
+            "ro": "sapisăpi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "sapesăpe"
+          },
+          {
+            "label": "noi",
+            "ro": "săpăm"
+          },
+          {
+            "label": "voi",
+            "ro": "săpați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "sapesăpe"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "săpam"
+          },
+          {
+            "label": "tu",
+            "ro": "săpai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "săpa"
+          },
+          {
+            "label": "noi",
+            "ro": "săpam"
+          },
+          {
+            "label": "voi",
+            "ro": "săpați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "săpau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-urca": {
+      "url": "https://dexonline.ro/definitie/urca",
+      "lemma": "urca",
+      "paradigm": {
+        "infinitive": "urca",
+        "participiu": "urcat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "urc"
+          },
+          {
+            "label": "tu",
+            "ro": "urci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "urcă"
+          },
+          {
+            "label": "noi",
+            "ro": "urcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "urcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "urcă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "urc"
+          },
+          {
+            "label": "tu",
+            "ro": "urci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "urce"
+          },
+          {
+            "label": "noi",
+            "ro": "urcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "urcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "urce"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "urcam"
+          },
+          {
+            "label": "tu",
+            "ro": "urcai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "urca"
+          },
+          {
+            "label": "noi",
+            "ro": "urcam"
+          },
+          {
+            "label": "voi",
+            "ro": "urcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "urcau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-cobori": {
+      "url": "https://dexonline.ro/definitie/cobor%C3%AE",
+      "lemma": "coborî",
+      "paradigm": {
+        "infinitive": "coborî",
+        "participiu": "coborât",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "cobor"
+          },
+          {
+            "label": "tu",
+            "ro": "cobori"
+          },
+          {
+            "label": "el/ea",
+            "ro": "coboară"
+          },
+          {
+            "label": "noi",
+            "ro": "coborâm"
+          },
+          {
+            "label": "voi",
+            "ro": "coborâți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "coboară"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "cobor"
+          },
+          {
+            "label": "tu",
+            "ro": "cobori"
+          },
+          {
+            "label": "el/ea",
+            "ro": "coboare"
+          },
+          {
+            "label": "noi",
+            "ro": "coborâm"
+          },
+          {
+            "label": "voi",
+            "ro": "coborâți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "coboare"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "coboram"
+          },
+          {
+            "label": "tu",
+            "ro": "coborai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "cobora"
+          },
+          {
+            "label": "noi",
+            "ro": "coboram"
+          },
+          {
+            "label": "voi",
+            "ro": "coborați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "coborau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-ridica": {
+      "url": "https://dexonline.ro/definitie/ridica",
+      "lemma": "ridica",
+      "paradigm": {
+        "infinitive": "ridica",
+        "participiu": "ridicat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "ridic"
+          },
+          {
+            "label": "tu",
+            "ro": "ridici"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ridică"
+          },
+          {
+            "label": "noi",
+            "ro": "ridicăm"
+          },
+          {
+            "label": "voi",
+            "ro": "ridicați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ridică"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "ridic"
+          },
+          {
+            "label": "tu",
+            "ro": "ridici"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ridice"
+          },
+          {
+            "label": "noi",
+            "ro": "ridicăm"
+          },
+          {
+            "label": "voi",
+            "ro": "ridicați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ridice"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "ridicam"
+          },
+          {
+            "label": "tu",
+            "ro": "ridicai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ridica"
+          },
+          {
+            "label": "noi",
+            "ro": "ridicam"
+          },
+          {
+            "label": "voi",
+            "ro": "ridicați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ridicau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-cara": {
+      "url": "https://dexonline.ro/definitie/c%C4%83ra",
+      "lemma": "căra",
+      "paradigm": {
+        "infinitive": "căra",
+        "participiu": "cărat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "car"
+          },
+          {
+            "label": "tu",
+            "ro": "cari"
+          },
+          {
+            "label": "el/ea",
+            "ro": "cară"
+          },
+          {
+            "label": "noi",
+            "ro": "cărăm"
+          },
+          {
+            "label": "voi",
+            "ro": "cărați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "cară"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "car"
+          },
+          {
+            "label": "tu",
+            "ro": "cari"
+          },
+          {
+            "label": "el/ea",
+            "ro": "care"
+          },
+          {
+            "label": "noi",
+            "ro": "cărăm"
+          },
+          {
+            "label": "voi",
+            "ro": "cărați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "care"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "căram"
+          },
+          {
+            "label": "tu",
+            "ro": "cărai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "căra"
+          },
+          {
+            "label": "noi",
+            "ro": "căram"
+          },
+          {
+            "label": "voi",
+            "ro": "cărați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "cărau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-uda": {
+      "url": "https://dexonline.ro/definitie/uda",
+      "lemma": "uda",
+      "paradigm": {
+        "infinitive": "uda",
+        "participiu": "udat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "ud"
+          },
+          {
+            "label": "tu",
+            "ro": "uzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "udă"
+          },
+          {
+            "label": "noi",
+            "ro": "udăm"
+          },
+          {
+            "label": "voi",
+            "ro": "udați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "udă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "ud"
+          },
+          {
+            "label": "tu",
+            "ro": "uzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ude"
+          },
+          {
+            "label": "noi",
+            "ro": "udăm"
+          },
+          {
+            "label": "voi",
+            "ro": "udați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ude"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "udam"
+          },
+          {
+            "label": "tu",
+            "ro": "udai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "uda"
+          },
+          {
+            "label": "noi",
+            "ro": "udam"
+          },
+          {
+            "label": "voi",
+            "ro": "udați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "udau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-hrani": {
+      "url": "https://dexonline.ro/definitie/hr%C4%83ni",
+      "lemma": "hrăni",
+      "paradigm": {
+        "infinitive": "hrăni",
+        "participiu": "hrănit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "hrănesc"
+          },
+          {
+            "label": "tu",
+            "ro": "hrănești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "hrănește"
+          },
+          {
+            "label": "noi",
+            "ro": "hrănim"
+          },
+          {
+            "label": "voi",
+            "ro": "hrăniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "hrănesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "hrănesc"
+          },
+          {
+            "label": "tu",
+            "ro": "hrănești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "hrănească"
+          },
+          {
+            "label": "noi",
+            "ro": "hrănim"
+          },
+          {
+            "label": "voi",
+            "ro": "hrăniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "hrănească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "hrăneam"
+          },
+          {
+            "label": "tu",
+            "ro": "hrăneai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "hrănea"
+          },
+          {
+            "label": "noi",
+            "ro": "hrăneam"
+          },
+          {
+            "label": "voi",
+            "ro": "hrăneați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "hrăneau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-aduna": {
+      "url": "https://dexonline.ro/definitie/aduna",
+      "lemma": "aduna",
+      "paradigm": {
+        "infinitive": "aduna",
+        "participiu": "adunat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "adun"
+          },
+          {
+            "label": "tu",
+            "ro": "aduni"
+          },
+          {
+            "label": "el/ea",
+            "ro": "adună"
+          },
+          {
+            "label": "noi",
+            "ro": "adunăm"
+          },
+          {
+            "label": "voi",
+            "ro": "adunați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "adună"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "adun"
+          },
+          {
+            "label": "tu",
+            "ro": "aduni"
+          },
+          {
+            "label": "el/ea",
+            "ro": "adune"
+          },
+          {
+            "label": "noi",
+            "ro": "adunăm"
+          },
+          {
+            "label": "voi",
+            "ro": "adunați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "adune"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "adunam"
+          },
+          {
+            "label": "tu",
+            "ro": "adunai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aduna"
+          },
+          {
+            "label": "noi",
+            "ro": "adunam"
+          },
+          {
+            "label": "voi",
+            "ro": "adunați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "adunau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-insuruba": {
+      "url": "https://dexonline.ro/definitie/%C3%AEn%C8%99uruba",
+      "lemma": "înșuruba",
+      "paradigm": {
+        "infinitive": "înșuruba&#x2011nșuruba",
+        "participiu": "înșurubat&#x2011nșurubatînșurubatu&#x2011&#x2011nșurubatu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "înșurubez&#x2011nșurubez"
+          },
+          {
+            "label": "tu",
+            "ro": "înșurubezi&#x2011nșurubezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înșurubează&#x2011nșurubează"
+          },
+          {
+            "label": "noi",
+            "ro": "înșurubăm&#x2011nșurubăm"
+          },
+          {
+            "label": "voi",
+            "ro": "înșurubați&#x2011nșurubați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înșurubează&#x2011nșurubează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "înșurubez&#x2011nșurubez"
+          },
+          {
+            "label": "tu",
+            "ro": "înșurubezi&#x2011nșurubezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înșurubeze&#x2011nșurubeze"
+          },
+          {
+            "label": "noi",
+            "ro": "înșurubăm&#x2011nșurubăm"
+          },
+          {
+            "label": "voi",
+            "ro": "înșurubați&#x2011nșurubați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înșurubeze&#x2011nșurubeze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "înșurubam&#x2011nșurubam"
+          },
+          {
+            "label": "tu",
+            "ro": "înșurubai&#x2011nșurubai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înșuruba&#x2011nșuruba"
+          },
+          {
+            "label": "noi",
+            "ro": "înșurubam&#x2011nșurubam"
+          },
+          {
+            "label": "voi",
+            "ro": "înșurubați&#x2011nșurubați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înșurubau&#x2011nșurubau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-tunde": {
+      "url": "https://dexonline.ro/definitie/tunde",
+      "lemma": "tunde",
+      "paradigm": {
+        "infinitive": "tunde",
+        "participiu": "tuns",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "tundtunz"
+          },
+          {
+            "label": "tu",
+            "ro": "tunzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "tunde"
+          },
+          {
+            "label": "noi",
+            "ro": "tundem"
+          },
+          {
+            "label": "voi",
+            "ro": "tundeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "tund"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "tundtunz"
+          },
+          {
+            "label": "tu",
+            "ro": "tunzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "tundătunză"
+          },
+          {
+            "label": "noi",
+            "ro": "tundem"
+          },
+          {
+            "label": "voi",
+            "ro": "tundeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "tundătunză"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "tundeam"
+          },
+          {
+            "label": "tu",
+            "ro": "tundeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "tundea"
+          },
+          {
+            "label": "noi",
+            "ro": "tundeam"
+          },
+          {
+            "label": "voi",
+            "ro": "tundeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "tundeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-campa": {
+      "url": "https://dexonline.ro/definitie/campa",
+      "lemma": "campa",
+      "paradigm": {
+        "infinitive": "campa",
+        "participiu": "campat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "campez"
+          },
+          {
+            "label": "tu",
+            "ro": "campezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "campează"
+          },
+          {
+            "label": "noi",
+            "ro": "campăm"
+          },
+          {
+            "label": "voi",
+            "ro": "campați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "campează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "campez"
+          },
+          {
+            "label": "tu",
+            "ro": "campezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "campeze"
+          },
+          {
+            "label": "noi",
+            "ro": "campăm"
+          },
+          {
+            "label": "voi",
+            "ro": "campați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "campeze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "campam"
+          },
+          {
+            "label": "tu",
+            "ro": "campai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "campa"
+          },
+          {
+            "label": "noi",
+            "ro": "campam"
+          },
+          {
+            "label": "voi",
+            "ro": "campați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "campau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-monta": {
+      "url": "https://dexonline.ro/definitie/monta",
+      "lemma": "monta",
+      "paradigm": {
+        "infinitive": "monta",
+        "participiu": "montat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "montez"
+          },
+          {
+            "label": "tu",
+            "ro": "montezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "montează"
+          },
+          {
+            "label": "noi",
+            "ro": "montăm"
+          },
+          {
+            "label": "voi",
+            "ro": "montați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "montează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "montez"
+          },
+          {
+            "label": "tu",
+            "ro": "montezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "monteze"
+          },
+          {
+            "label": "noi",
+            "ro": "montăm"
+          },
+          {
+            "label": "voi",
+            "ro": "montați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "monteze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "montam"
+          },
+          {
+            "label": "tu",
+            "ro": "montai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "monta"
+          },
+          {
+            "label": "noi",
+            "ro": "montam"
+          },
+          {
+            "label": "voi",
+            "ro": "montați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "montau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-strange": {
+      "url": "https://dexonline.ro/definitie/str%C3%A2nge",
+      "lemma": "strânge",
+      "paradigm": {
+        "infinitive": "strânge",
+        "participiu": "strâns",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "strâng"
+          },
+          {
+            "label": "tu",
+            "ro": "strângi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "strânge"
+          },
+          {
+            "label": "noi",
+            "ro": "strângem"
+          },
+          {
+            "label": "voi",
+            "ro": "strângeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "strâng"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "strâng"
+          },
+          {
+            "label": "tu",
+            "ro": "strângi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "strângă"
+          },
+          {
+            "label": "noi",
+            "ro": "strângem"
+          },
+          {
+            "label": "voi",
+            "ro": "strângeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "strângă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "strângeam"
+          },
+          {
+            "label": "tu",
+            "ro": "strângeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "strângea"
+          },
+          {
+            "label": "noi",
+            "ro": "strângeam"
+          },
+          {
+            "label": "voi",
+            "ro": "strângeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "strângeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-aprinde": {
+      "url": "https://dexonline.ro/definitie/aprinde",
+      "lemma": "aprinde",
+      "paradigm": {
+        "infinitive": "aprinde",
+        "participiu": "aprins",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "aprindaprinz"
+          },
+          {
+            "label": "tu",
+            "ro": "aprinzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aprinde"
+          },
+          {
+            "label": "noi",
+            "ro": "aprindem"
+          },
+          {
+            "label": "voi",
+            "ro": "aprindeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aprind"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "aprindaprinz"
+          },
+          {
+            "label": "tu",
+            "ro": "aprinzi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aprindăaprinză"
+          },
+          {
+            "label": "noi",
+            "ro": "aprindem"
+          },
+          {
+            "label": "voi",
+            "ro": "aprindeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aprindăaprinză"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "aprindeam"
+          },
+          {
+            "label": "tu",
+            "ro": "aprindeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aprindea"
+          },
+          {
+            "label": "noi",
+            "ro": "aprindeam"
+          },
+          {
+            "label": "voi",
+            "ro": "aprindeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aprindeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-stinge": {
+      "url": "https://dexonline.ro/definitie/stinge",
+      "lemma": "stinge",
+      "paradigm": {
+        "infinitive": "stinge",
+        "participiu": "stins",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "sting"
+          },
+          {
+            "label": "tu",
+            "ro": "stingi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "stinge"
+          },
+          {
+            "label": "noi",
+            "ro": "stingem"
+          },
+          {
+            "label": "voi",
+            "ro": "stingeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "sting"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "sting"
+          },
+          {
+            "label": "tu",
+            "ro": "stingi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "stingă"
+          },
+          {
+            "label": "noi",
+            "ro": "stingem"
+          },
+          {
+            "label": "voi",
+            "ro": "stingeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "stingă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "stingeam"
+          },
+          {
+            "label": "tu",
+            "ro": "stingeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "stingea"
+          },
+          {
+            "label": "noi",
+            "ro": "stingeam"
+          },
+          {
+            "label": "voi",
+            "ro": "stingeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "stingeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-dormi": {
+      "url": "https://dexonline.ro/definitie/dormi",
+      "lemma": "dormi",
+      "paradigm": {
+        "infinitive": "dormi",
+        "participiu": "dormit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "dorm"
+          },
+          {
+            "label": "tu",
+            "ro": "dormi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "doarme"
+          },
+          {
+            "label": "noi",
+            "ro": "dormim"
+          },
+          {
+            "label": "voi",
+            "ro": "dormiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "dorm"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "dorm"
+          },
+          {
+            "label": "tu",
+            "ro": "dormi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "doarmă"
+          },
+          {
+            "label": "noi",
+            "ro": "dormim"
+          },
+          {
+            "label": "voi",
+            "ro": "dormiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "doarmă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "dormeam"
+          },
+          {
+            "label": "tu",
+            "ro": "dormeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "dormea"
+          },
+          {
+            "label": "noi",
+            "ro": "dormeam"
+          },
+          {
+            "label": "voi",
+            "ro": "dormeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "dormeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-impacheta": {
+      "url": "https://dexonline.ro/definitie/%C3%AEmpacheta",
+      "lemma": "împacheta",
+      "paradigm": {
+        "infinitive": "împacheta&#x2011mpacheta",
+        "participiu": "împachetat&#x2011mpachetatîmpachetatu&#x2011&#x2011mpachetatu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "împachetez&#x2011mpachetez"
+          },
+          {
+            "label": "tu",
+            "ro": "împachetezi&#x2011mpachetezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "împachetează&#x2011mpachetează"
+          },
+          {
+            "label": "noi",
+            "ro": "împachetăm&#x2011mpachetăm"
+          },
+          {
+            "label": "voi",
+            "ro": "împachetați&#x2011mpachetați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "împachetează&#x2011mpachetează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "împachetez&#x2011mpachetez"
+          },
+          {
+            "label": "tu",
+            "ro": "împachetezi&#x2011mpachetezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "împacheteze&#x2011mpacheteze"
+          },
+          {
+            "label": "noi",
+            "ro": "împachetăm&#x2011mpachetăm"
+          },
+          {
+            "label": "voi",
+            "ro": "împachetați&#x2011mpachetați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "împacheteze&#x2011mpacheteze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "împachetam&#x2011mpachetam"
+          },
+          {
+            "label": "tu",
+            "ro": "împachetai&#x2011mpachetai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "împacheta&#x2011mpacheta"
+          },
+          {
+            "label": "noi",
+            "ro": "împachetam&#x2011mpachetam"
+          },
+          {
+            "label": "voi",
+            "ro": "împachetați&#x2011mpachetați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "împachetau&#x2011mpachetau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-ploua": {
+      "url": "https://dexonline.ro/definitie/ploua",
+      "lemma": "ploua",
+      "paradigm": {
+        "infinitive": "ploua",
+        "participiu": "plouat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "tu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plouă"
+          },
+          {
+            "label": "noi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "voi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "&mdash;"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "tu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plouăploaie"
+          },
+          {
+            "label": "noi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "voi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "&mdash;"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "tu",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ploua"
+          },
+          {
+            "label": "noi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "voi",
+            "ro": "&mdash;"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "&mdash;"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-inota": {
+      "url": "https://dexonline.ro/definitie/%C3%AEnota",
+      "lemma": "înota",
+      "paradigm": {
+        "infinitive": "înota&#x2011nota",
+        "participiu": "înotat&#x2011notatînotatu&#x2011&#x2011notatu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "înot&#x2011not"
+          },
+          {
+            "label": "tu",
+            "ro": "înoți&#x2011noți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înoată&#x2011noată"
+          },
+          {
+            "label": "noi",
+            "ro": "înotăm&#x2011notăm"
+          },
+          {
+            "label": "voi",
+            "ro": "înotați&#x2011notați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înoată&#x2011noată"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "înot&#x2011not"
+          },
+          {
+            "label": "tu",
+            "ro": "înoți&#x2011noți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înoate&#x2011noate"
+          },
+          {
+            "label": "noi",
+            "ro": "înotăm&#x2011notăm"
+          },
+          {
+            "label": "voi",
+            "ro": "înotați&#x2011notați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înoate&#x2011noate"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "înotam&#x2011notam"
+          },
+          {
+            "label": "tu",
+            "ro": "înotai&#x2011notai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înota&#x2011nota"
+          },
+          {
+            "label": "noi",
+            "ro": "înotam&#x2011notam"
+          },
+          {
+            "label": "voi",
+            "ro": "înotați&#x2011notați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înotau&#x2011notau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-plimba": {
+      "url": "https://dexonline.ro/definitie/plimba",
+      "lemma": "plimba",
+      "paradigm": {
+        "infinitive": "plimba",
+        "participiu": "plimbat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "plimb"
+          },
+          {
+            "label": "tu",
+            "ro": "plimbi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plimbă"
+          },
+          {
+            "label": "noi",
+            "ro": "plimbăm"
+          },
+          {
+            "label": "voi",
+            "ro": "plimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "plimbă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "plimb"
+          },
+          {
+            "label": "tu",
+            "ro": "plimbi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plimbe"
+          },
+          {
+            "label": "noi",
+            "ro": "plimbăm"
+          },
+          {
+            "label": "voi",
+            "ro": "plimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "plimbe"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "plimbam"
+          },
+          {
+            "label": "tu",
+            "ro": "plimbai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "plimba"
+          },
+          {
+            "label": "noi",
+            "ro": "plimbam"
+          },
+          {
+            "label": "voi",
+            "ro": "plimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "plimbau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-alerga": {
+      "url": "https://dexonline.ro/definitie/alerga",
+      "lemma": "alerga",
+      "paradigm": {
+        "infinitive": "alerga",
+        "participiu": "alergat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "alerg"
+          },
+          {
+            "label": "tu",
+            "ro": "alergi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aleargă"
+          },
+          {
+            "label": "noi",
+            "ro": "alergăm"
+          },
+          {
+            "label": "voi",
+            "ro": "alergați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aleargă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "alerg"
+          },
+          {
+            "label": "tu",
+            "ro": "alergi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "alerge"
+          },
+          {
+            "label": "noi",
+            "ro": "alergăm"
+          },
+          {
+            "label": "voi",
+            "ro": "alergați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "alerge"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "alergam"
+          },
+          {
+            "label": "tu",
+            "ro": "alergai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "alerga"
+          },
+          {
+            "label": "noi",
+            "ro": "alergam"
+          },
+          {
+            "label": "voi",
+            "ro": "alergați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "alergau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-se-juca": {
+      "url": "https://dexonline.ro/definitie/juca",
+      "lemma": "juca",
+      "paradigm": {
+        "infinitive": "juca",
+        "participiu": "jucat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "joc"
+          },
+          {
+            "label": "tu",
+            "ro": "joci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "joacă"
+          },
+          {
+            "label": "noi",
+            "ro": "jucăm"
+          },
+          {
+            "label": "voi",
+            "ro": "jucați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "joacă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "joc"
+          },
+          {
+            "label": "tu",
+            "ro": "joci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "joace"
+          },
+          {
+            "label": "noi",
+            "ro": "jucăm"
+          },
+          {
+            "label": "voi",
+            "ro": "jucați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "joace"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "jucam"
+          },
+          {
+            "label": "tu",
+            "ro": "jucai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "juca"
+          },
+          {
+            "label": "noi",
+            "ro": "jucam"
+          },
+          {
+            "label": "voi",
+            "ro": "jucați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "jucau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-latra": {
+      "url": "https://dexonline.ro/definitie/l%C4%83tra",
+      "lemma": "lătra",
+      "paradigm": {
+        "infinitive": "lătra",
+        "participiu": "lătrat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "latru"
+          },
+          {
+            "label": "tu",
+            "ro": "latri"
+          },
+          {
+            "label": "el/ea",
+            "ro": "latră"
+          },
+          {
+            "label": "noi",
+            "ro": "lătrăm"
+          },
+          {
+            "label": "voi",
+            "ro": "lătrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "latră"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "latru"
+          },
+          {
+            "label": "tu",
+            "ro": "latri"
+          },
+          {
+            "label": "el/ea",
+            "ro": "latre"
+          },
+          {
+            "label": "noi",
+            "ro": "lătrăm"
+          },
+          {
+            "label": "voi",
+            "ro": "lătrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "latre"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "lătram"
+          },
+          {
+            "label": "tu",
+            "ro": "lătrai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "lătra"
+          },
+          {
+            "label": "noi",
+            "ro": "lătram"
+          },
+          {
+            "label": "voi",
+            "ro": "lătrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "lătrau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-musca": {
+      "url": "https://dexonline.ro/definitie/mu%C8%99ca",
+      "lemma": "mușca",
+      "paradigm": {
+        "infinitive": "mușca",
+        "participiu": "mușcat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "mușc"
+          },
+          {
+            "label": "tu",
+            "ro": "muști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mușcă"
+          },
+          {
+            "label": "noi",
+            "ro": "mușcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "mușcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mușcă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "mușc"
+          },
+          {
+            "label": "tu",
+            "ro": "muști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "muște"
+          },
+          {
+            "label": "noi",
+            "ro": "mușcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "mușcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "muște"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "mușcam"
+          },
+          {
+            "label": "tu",
+            "ro": "mușcai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mușca"
+          },
+          {
+            "label": "noi",
+            "ro": "mușcam"
+          },
+          {
+            "label": "voi",
+            "ro": "mușcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mușcau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-mirosi": {
+      "url": "https://dexonline.ro/definitie/mirosi",
+      "lemma": "mirosi",
+      "paradigm": {
+        "infinitive": "mirosi",
+        "participiu": "mirosit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "miros"
+          },
+          {
+            "label": "tu",
+            "ro": "miroși"
+          },
+          {
+            "label": "el/ea",
+            "ro": "miroase"
+          },
+          {
+            "label": "noi",
+            "ro": "mirosim"
+          },
+          {
+            "label": "voi",
+            "ro": "mirosiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mirosmiroase"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "miros"
+          },
+          {
+            "label": "tu",
+            "ro": "miroși"
+          },
+          {
+            "label": "el/ea",
+            "ro": "miroasămiroase"
+          },
+          {
+            "label": "noi",
+            "ro": "mirosim"
+          },
+          {
+            "label": "voi",
+            "ro": "mirosiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "miroasămiroase"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "miroseam"
+          },
+          {
+            "label": "tu",
+            "ro": "miroseai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mirosea"
+          },
+          {
+            "label": "noi",
+            "ro": "miroseam"
+          },
+          {
+            "label": "voi",
+            "ro": "miroseați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "miroseau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-asculta": {
+      "url": "https://dexonline.ro/definitie/asculta",
+      "lemma": "asculta",
+      "paradigm": {
+        "infinitive": "asculta",
+        "participiu": "ascultat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "ascult"
+          },
+          {
+            "label": "tu",
+            "ro": "asculți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ascultă"
+          },
+          {
+            "label": "noi",
+            "ro": "ascultăm"
+          },
+          {
+            "label": "voi",
+            "ro": "ascultați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ascultă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "ascult"
+          },
+          {
+            "label": "tu",
+            "ro": "asculți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "asculte"
+          },
+          {
+            "label": "noi",
+            "ro": "ascultăm"
+          },
+          {
+            "label": "voi",
+            "ro": "ascultați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "asculte"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "ascultam"
+          },
+          {
+            "label": "tu",
+            "ro": "ascultai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "asculta"
+          },
+          {
+            "label": "noi",
+            "ro": "ascultam"
+          },
+          {
+            "label": "voi",
+            "ro": "ascultați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ascultau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-iubi": {
+      "url": "https://dexonline.ro/definitie/iubi",
+      "lemma": "iubi",
+      "paradigm": {
+        "infinitive": "iubi",
+        "participiu": "iubit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "iubesc"
+          },
+          {
+            "label": "tu",
+            "ro": "iubești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iubește"
+          },
+          {
+            "label": "noi",
+            "ro": "iubim"
+          },
+          {
+            "label": "voi",
+            "ro": "iubiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iubesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "iubesc"
+          },
+          {
+            "label": "tu",
+            "ro": "iubești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iubească"
+          },
+          {
+            "label": "noi",
+            "ro": "iubim"
+          },
+          {
+            "label": "voi",
+            "ro": "iubiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iubească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "iubeam"
+          },
+          {
+            "label": "tu",
+            "ro": "iubeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iubea"
+          },
+          {
+            "label": "noi",
+            "ro": "iubeam"
+          },
+          {
+            "label": "voi",
+            "ro": "iubeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iubeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-mangaia": {
+      "url": "https://dexonline.ro/definitie/m%C3%A2ng%C3%A2ia",
+      "lemma": "mângâia",
+      "paradigm": {
+        "infinitive": "mângâia",
+        "participiu": "mângâiat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "mângâi"
+          },
+          {
+            "label": "tu",
+            "ro": "mângâi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mângâie"
+          },
+          {
+            "label": "noi",
+            "ro": "mângâiem"
+          },
+          {
+            "label": "voi",
+            "ro": "mângâiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mângâie"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "mângâi"
+          },
+          {
+            "label": "tu",
+            "ro": "mângâi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mângâie"
+          },
+          {
+            "label": "noi",
+            "ro": "mângâiem"
+          },
+          {
+            "label": "voi",
+            "ro": "mângâiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mângâie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "mângâiam"
+          },
+          {
+            "label": "tu",
+            "ro": "mângâiai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "mângâia"
+          },
+          {
+            "label": "noi",
+            "ro": "mângâiam"
+          },
+          {
+            "label": "voi",
+            "ro": "mângâiați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "mângâiau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-se-teme": {
+      "url": "https://dexonline.ro/definitie/teme",
+      "lemma": "teme",
+      "paradigm": {
+        "infinitive": "teme",
+        "participiu": "temut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "tem"
+          },
+          {
+            "label": "tu",
+            "ro": "temi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "teme"
+          },
+          {
+            "label": "noi",
+            "ro": "temem"
+          },
+          {
+            "label": "voi",
+            "ro": "temeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "tem"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "tem"
+          },
+          {
+            "label": "tu",
+            "ro": "temi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "teamă"
+          },
+          {
+            "label": "noi",
+            "ro": "temem"
+          },
+          {
+            "label": "voi",
+            "ro": "temeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "teamă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "temeam"
+          },
+          {
+            "label": "tu",
+            "ro": "temeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "temea"
+          },
+          {
+            "label": "noi",
+            "ro": "temeam"
+          },
+          {
+            "label": "voi",
+            "ro": "temeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "temeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-se-intelege": {
+      "url": "https://dexonline.ro/definitie/%C3%AEn%C8%9Belege",
+      "lemma": "înțelege",
+      "paradigm": {
+        "infinitive": "înțelege&#x2011nțelege",
+        "participiu": "înțeles&#x2011nțelesînțelesu&#x2011&#x2011nțelesu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "înțeleg&#x2011nțeleg"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegi&#x2011nțelegi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțelege&#x2011nțelege"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegem&#x2011nțelegem"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeți&#x2011nțelegeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțeleg&#x2011nțeleg"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "înțeleg&#x2011nțeleg"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegi&#x2011nțelegi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțeleagă&#x2011nțeleagă"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegem&#x2011nțelegem"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeți&#x2011nțelegeți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțeleagă&#x2011nțeleagă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "înțelegeam&#x2011nțelegeam"
+          },
+          {
+            "label": "tu",
+            "ro": "înțelegeai&#x2011nțelegeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "înțelegea&#x2011nțelegea"
+          },
+          {
+            "label": "noi",
+            "ro": "înțelegeam&#x2011nțelegeam"
+          },
+          {
+            "label": "voi",
+            "ro": "înțelegeați&#x2011nțelegeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "înțelegeau&#x2011nțelegeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-conduce": {
+      "url": "https://dexonline.ro/definitie/conduce",
+      "lemma": "conduce",
+      "paradigm": {
+        "infinitive": "conduce",
+        "participiu": "condus",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "conduc"
+          },
+          {
+            "label": "tu",
+            "ro": "conduci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "conduce"
+          },
+          {
+            "label": "noi",
+            "ro": "conducem"
+          },
+          {
+            "label": "voi",
+            "ro": "conduceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "conduc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "conduc"
+          },
+          {
+            "label": "tu",
+            "ro": "conduci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "conducă"
+          },
+          {
+            "label": "noi",
+            "ro": "conducem"
+          },
+          {
+            "label": "voi",
+            "ro": "conduceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "conducă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "conduceam"
+          },
+          {
+            "label": "tu",
+            "ro": "conduceai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "conducea"
+          },
+          {
+            "label": "noi",
+            "ro": "conduceam"
+          },
+          {
+            "label": "voi",
+            "ro": "conduceați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "conduceau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-parca": {
+      "url": "https://dexonline.ro/definitie/parca",
+      "lemma": "parca",
+      "paradigm": {
+        "infinitive": "parca",
+        "participiu": "parcat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "parchez"
+          },
+          {
+            "label": "tu",
+            "ro": "parchezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "parchează"
+          },
+          {
+            "label": "noi",
+            "ro": "parcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "parcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "parchează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "parchez"
+          },
+          {
+            "label": "tu",
+            "ro": "parchezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "parcheze"
+          },
+          {
+            "label": "noi",
+            "ro": "parcăm"
+          },
+          {
+            "label": "voi",
+            "ro": "parcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "parcheze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "parcam"
+          },
+          {
+            "label": "tu",
+            "ro": "parcai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "parca"
+          },
+          {
+            "label": "noi",
+            "ro": "parcam"
+          },
+          {
+            "label": "voi",
+            "ro": "parcați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "parcau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-opri": {
+      "url": "https://dexonline.ro/definitie/opri",
+      "lemma": "opri",
+      "paradigm": {
+        "infinitive": "opri",
+        "participiu": "oprit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "opresc"
+          },
+          {
+            "label": "tu",
+            "ro": "oprești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "oprește"
+          },
+          {
+            "label": "noi",
+            "ro": "oprim"
+          },
+          {
+            "label": "voi",
+            "ro": "opriți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "opresc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "opresc"
+          },
+          {
+            "label": "tu",
+            "ro": "oprești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "oprească"
+          },
+          {
+            "label": "noi",
+            "ro": "oprim"
+          },
+          {
+            "label": "voi",
+            "ro": "opriți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "oprească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "opream"
+          },
+          {
+            "label": "tu",
+            "ro": "opreai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "oprea"
+          },
+          {
+            "label": "noi",
+            "ro": "opream"
+          },
+          {
+            "label": "voi",
+            "ro": "opreați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "opreau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-porni": {
+      "url": "https://dexonline.ro/definitie/porni",
+      "lemma": "porni",
+      "paradigm": {
+        "infinitive": "porni",
+        "participiu": "pornit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "pornesc"
+          },
+          {
+            "label": "tu",
+            "ro": "pornești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pornește"
+          },
+          {
+            "label": "noi",
+            "ro": "pornim"
+          },
+          {
+            "label": "voi",
+            "ro": "porniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "pornesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "pornesc"
+          },
+          {
+            "label": "tu",
+            "ro": "pornești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pornească"
+          },
+          {
+            "label": "noi",
+            "ro": "pornim"
+          },
+          {
+            "label": "voi",
+            "ro": "porniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "pornească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "porneam"
+          },
+          {
+            "label": "tu",
+            "ro": "porneai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "pornea"
+          },
+          {
+            "label": "noi",
+            "ro": "porneam"
+          },
+          {
+            "label": "voi",
+            "ro": "porneați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "porneau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-vira": {
+      "url": "https://dexonline.ro/definitie/vira",
+      "lemma": "vira",
+      "paradigm": {
+        "infinitive": "vira",
+        "participiu": "virat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "virez"
+          },
+          {
+            "label": "tu",
+            "ro": "virezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "virează"
+          },
+          {
+            "label": "noi",
+            "ro": "virăm"
+          },
+          {
+            "label": "voi",
+            "ro": "virați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "virează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "virez"
+          },
+          {
+            "label": "tu",
+            "ro": "virezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vireze"
+          },
+          {
+            "label": "noi",
+            "ro": "virăm"
+          },
+          {
+            "label": "voi",
+            "ro": "virați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vireze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "viram"
+          },
+          {
+            "label": "tu",
+            "ro": "virai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vira"
+          },
+          {
+            "label": "noi",
+            "ro": "viram"
+          },
+          {
+            "label": "voi",
+            "ro": "virați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "virau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-depasi": {
+      "url": "https://dexonline.ro/definitie/dep%C4%83%C8%99i",
+      "lemma": "depăși",
+      "paradigm": {
+        "infinitive": "depăși",
+        "participiu": "depășit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "depășesc"
+          },
+          {
+            "label": "tu",
+            "ro": "depășești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "depășește"
+          },
+          {
+            "label": "noi",
+            "ro": "depășim"
+          },
+          {
+            "label": "voi",
+            "ro": "depășiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "depășesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "depășesc"
+          },
+          {
+            "label": "tu",
+            "ro": "depășești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "depășească"
+          },
+          {
+            "label": "noi",
+            "ro": "depășim"
+          },
+          {
+            "label": "voi",
+            "ro": "depășiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "depășească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "depășeam"
+          },
+          {
+            "label": "tu",
+            "ro": "depășeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "depășea"
+          },
+          {
+            "label": "noi",
+            "ro": "depășeam"
+          },
+          {
+            "label": "voi",
+            "ro": "depășeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "depășeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-frana": {
+      "url": "https://dexonline.ro/definitie/fr%C3%A2na",
+      "lemma": "frâna",
+      "paradigm": {
+        "infinitive": "frâna",
+        "participiu": "frânat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "frânez"
+          },
+          {
+            "label": "tu",
+            "ro": "frânezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "frânează"
+          },
+          {
+            "label": "noi",
+            "ro": "frânăm"
+          },
+          {
+            "label": "voi",
+            "ro": "frânați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "frânează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "frânez"
+          },
+          {
+            "label": "tu",
+            "ro": "frânezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "frâneze"
+          },
+          {
+            "label": "noi",
+            "ro": "frânăm"
+          },
+          {
+            "label": "voi",
+            "ro": "frânați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "frâneze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "frânam"
+          },
+          {
+            "label": "tu",
+            "ro": "frânai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "frâna"
+          },
+          {
+            "label": "noi",
+            "ro": "frânam"
+          },
+          {
+            "label": "voi",
+            "ro": "frânați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "frânau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-accelera": {
+      "url": "https://dexonline.ro/definitie/accelera",
+      "lemma": "accelera",
+      "paradigm": {
+        "infinitive": "accelera",
+        "participiu": "accelerat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "accelerez"
+          },
+          {
+            "label": "tu",
+            "ro": "accelerezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "accelerează"
+          },
+          {
+            "label": "noi",
+            "ro": "accelerăm"
+          },
+          {
+            "label": "voi",
+            "ro": "accelerați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "accelerează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "accelerez"
+          },
+          {
+            "label": "tu",
+            "ro": "accelerezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "accelereze"
+          },
+          {
+            "label": "noi",
+            "ro": "accelerăm"
+          },
+          {
+            "label": "voi",
+            "ro": "accelerați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "accelereze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "acceleram"
+          },
+          {
+            "label": "tu",
+            "ro": "accelerai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "accelera"
+          },
+          {
+            "label": "noi",
+            "ro": "acceleram"
+          },
+          {
+            "label": "voi",
+            "ro": "accelerați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "accelerau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-alimenta": {
+      "url": "https://dexonline.ro/definitie/alimenta",
+      "lemma": "alimenta",
+      "paradigm": {
+        "infinitive": "alimenta",
+        "participiu": "alimentat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "alimentez"
+          },
+          {
+            "label": "tu",
+            "ro": "alimentezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "alimentează"
+          },
+          {
+            "label": "noi",
+            "ro": "alimentăm"
+          },
+          {
+            "label": "voi",
+            "ro": "alimentați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "alimentează"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "alimentez"
+          },
+          {
+            "label": "tu",
+            "ro": "alimentezi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "alimenteze"
+          },
+          {
+            "label": "noi",
+            "ro": "alimentăm"
+          },
+          {
+            "label": "voi",
+            "ro": "alimentați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "alimenteze"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "alimentam"
+          },
+          {
+            "label": "tu",
+            "ro": "alimentai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "alimenta"
+          },
+          {
+            "label": "noi",
+            "ro": "alimentam"
+          },
+          {
+            "label": "voi",
+            "ro": "alimentați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "alimentau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-repara": {
+      "url": "https://dexonline.ro/definitie/repara",
+      "lemma": "repara",
+      "paradigm": {
+        "infinitive": "repara",
+        "participiu": "reparat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "repar"
+          },
+          {
+            "label": "tu",
+            "ro": "repari"
+          },
+          {
+            "label": "el/ea",
+            "ro": "repară"
+          },
+          {
+            "label": "noi",
+            "ro": "reparăm"
+          },
+          {
+            "label": "voi",
+            "ro": "reparați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "repară"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "repar"
+          },
+          {
+            "label": "tu",
+            "ro": "repari"
+          },
+          {
+            "label": "el/ea",
+            "ro": "repare"
+          },
+          {
+            "label": "noi",
+            "ro": "reparăm"
+          },
+          {
+            "label": "voi",
+            "ro": "reparați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "repare"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "reparam"
+          },
+          {
+            "label": "tu",
+            "ro": "reparai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "repara"
+          },
+          {
+            "label": "noi",
+            "ro": "reparam"
+          },
+          {
+            "label": "voi",
+            "ro": "reparați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "reparau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-schimba": {
+      "url": "https://dexonline.ro/definitie/schimba",
+      "lemma": "schimba",
+      "paradigm": {
+        "infinitive": "schimba",
+        "participiu": "schimbat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "schimb"
+          },
+          {
+            "label": "tu",
+            "ro": "schimbi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "schimbă"
+          },
+          {
+            "label": "noi",
+            "ro": "schimbăm"
+          },
+          {
+            "label": "voi",
+            "ro": "schimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "schimbă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "schimb"
+          },
+          {
+            "label": "tu",
+            "ro": "schimbi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "schimbe"
+          },
+          {
+            "label": "noi",
+            "ro": "schimbăm"
+          },
+          {
+            "label": "voi",
+            "ro": "schimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "schimbe"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "schimbam"
+          },
+          {
+            "label": "tu",
+            "ro": "schimbai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "schimba"
+          },
+          {
+            "label": "noi",
+            "ro": "schimbam"
+          },
+          {
+            "label": "voi",
+            "ro": "schimbați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "schimbau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-intra": {
+      "url": "https://dexonline.ro/definitie/intra",
+      "lemma": "intra",
+      "paradigm": {
+        "infinitive": "intra",
+        "participiu": "intrat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "intru"
+          },
+          {
+            "label": "tu",
+            "ro": "intri"
+          },
+          {
+            "label": "el/ea",
+            "ro": "intră"
+          },
+          {
+            "label": "noi",
+            "ro": "intrăm"
+          },
+          {
+            "label": "voi",
+            "ro": "intrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "intră"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "intru"
+          },
+          {
+            "label": "tu",
+            "ro": "intri"
+          },
+          {
+            "label": "el/ea",
+            "ro": "intre"
+          },
+          {
+            "label": "noi",
+            "ro": "intrăm"
+          },
+          {
+            "label": "voi",
+            "ro": "intrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "intre"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "intram"
+          },
+          {
+            "label": "tu",
+            "ro": "intrai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "intra"
+          },
+          {
+            "label": "noi",
+            "ro": "intram"
+          },
+          {
+            "label": "voi",
+            "ro": "intrați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "intrau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-iesi": {
+      "url": "https://dexonline.ro/definitie/ie%C8%99i",
+      "lemma": "ieși",
+      "paradigm": {
+        "infinitive": "ieși",
+        "participiu": "ieșit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "ies"
+          },
+          {
+            "label": "tu",
+            "ro": "ieși"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iese"
+          },
+          {
+            "label": "noi",
+            "ro": "ieșim"
+          },
+          {
+            "label": "voi",
+            "ro": "ieșiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ies"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "ies"
+          },
+          {
+            "label": "tu",
+            "ro": "ieși"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iasă"
+          },
+          {
+            "label": "noi",
+            "ro": "ieșim"
+          },
+          {
+            "label": "voi",
+            "ro": "ieșiți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iasă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "ieșeam"
+          },
+          {
+            "label": "tu",
+            "ro": "ieșeai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ieșea"
+          },
+          {
+            "label": "noi",
+            "ro": "ieșeam"
+          },
+          {
+            "label": "voi",
+            "ro": "ieșeați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "ieșeau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-aduce": {
+      "url": "https://dexonline.ro/definitie/aduce",
+      "lemma": "aduce",
+      "paradigm": {
+        "infinitive": "aduce",
+        "participiu": "adus",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "aduc"
+          },
+          {
+            "label": "tu",
+            "ro": "aduci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aduce"
+          },
+          {
+            "label": "noi",
+            "ro": "aducem"
+          },
+          {
+            "label": "voi",
+            "ro": "aduceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aduc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "aduc"
+          },
+          {
+            "label": "tu",
+            "ro": "aduci"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aducă"
+          },
+          {
+            "label": "noi",
+            "ro": "aducem"
+          },
+          {
+            "label": "voi",
+            "ro": "aduceți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aducă"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "aduceam"
+          },
+          {
+            "label": "tu",
+            "ro": "aduceai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "aducea"
+          },
+          {
+            "label": "noi",
+            "ro": "aduceam"
+          },
+          {
+            "label": "voi",
+            "ro": "aduceați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "aduceau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-lua": {
+      "url": "https://dexonline.ro/definitie/lua",
+      "lemma": "lua",
+      "paradigm": {
+        "infinitive": "lua",
+        "participiu": "luat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "iau"
+          },
+          {
+            "label": "tu",
+            "ro": "iei"
+          },
+          {
+            "label": "el/ea",
+            "ro": "ia"
+          },
+          {
+            "label": "noi",
+            "ro": "luăm"
+          },
+          {
+            "label": "voi",
+            "ro": "luați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iau"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "iau"
+          },
+          {
+            "label": "tu",
+            "ro": "iei"
+          },
+          {
+            "label": "el/ea",
+            "ro": "iaieie"
+          },
+          {
+            "label": "noi",
+            "ro": "luăm"
+          },
+          {
+            "label": "voi",
+            "ro": "luați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "iaieie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "luam"
+          },
+          {
+            "label": "tu",
+            "ro": "luai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "lua"
+          },
+          {
+            "label": "noi",
+            "ro": "luam"
+          },
+          {
+            "label": "voi",
+            "ro": "luați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "luau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-prefera": {
+      "url": "https://dexonline.ro/definitie/prefera",
+      "lemma": "prefera",
+      "paradigm": {
+        "infinitive": "prefera",
+        "participiu": "preferat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "prefer"
+          },
+          {
+            "label": "tu",
+            "ro": "preferi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "preferă"
+          },
+          {
+            "label": "noi",
+            "ro": "preferăm"
+          },
+          {
+            "label": "voi",
+            "ro": "preferați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "preferă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "prefer"
+          },
+          {
+            "label": "tu",
+            "ro": "preferi"
+          },
+          {
+            "label": "el/ea",
+            "ro": "prefere"
+          },
+          {
+            "label": "noi",
+            "ro": "preferăm"
+          },
+          {
+            "label": "voi",
+            "ro": "preferați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "prefere"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "preferam"
+          },
+          {
+            "label": "tu",
+            "ro": "preferai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "prefera"
+          },
+          {
+            "label": "noi",
+            "ro": "preferam"
+          },
+          {
+            "label": "voi",
+            "ro": "preferați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "preferau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-gusta": {
+      "url": "https://dexonline.ro/definitie/gusta",
+      "lemma": "gusta",
+      "paradigm": {
+        "infinitive": "gusta",
+        "participiu": "gustat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "gust"
+          },
+          {
+            "label": "tu",
+            "ro": "guști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "gustă"
+          },
+          {
+            "label": "noi",
+            "ro": "gustăm"
+          },
+          {
+            "label": "voi",
+            "ro": "gustați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "gustă"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "gust"
+          },
+          {
+            "label": "tu",
+            "ro": "guști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "guste"
+          },
+          {
+            "label": "noi",
+            "ro": "gustăm"
+          },
+          {
+            "label": "voi",
+            "ro": "gustați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "guste"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "gustam"
+          },
+          {
+            "label": "tu",
+            "ro": "gustai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "gusta"
+          },
+          {
+            "label": "noi",
+            "ro": "gustam"
+          },
+          {
+            "label": "voi",
+            "ro": "gustați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "gustau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-veni": {
+      "url": "https://dexonline.ro/definitie/veni",
+      "lemma": "veni",
+      "paradigm": {
+        "infinitive": "veni",
+        "participiu": "venit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "vinviu"
+          },
+          {
+            "label": "tu",
+            "ro": "vii"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vine"
+          },
+          {
+            "label": "noi",
+            "ro": "venim"
+          },
+          {
+            "label": "voi",
+            "ro": "veniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vin"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "vinviu"
+          },
+          {
+            "label": "tu",
+            "ro": "vii"
+          },
+          {
+            "label": "el/ea",
+            "ro": "vinăvie"
+          },
+          {
+            "label": "noi",
+            "ro": "venim"
+          },
+          {
+            "label": "voi",
+            "ro": "veniți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "vinăvie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "veneam"
+          },
+          {
+            "label": "tu",
+            "ro": "veneai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "venea"
+          },
+          {
+            "label": "noi",
+            "ro": "veneam"
+          },
+          {
+            "label": "voi",
+            "ro": "veneați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "veneau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-sta": {
+      "url": "https://dexonline.ro/definitie/sta",
+      "lemma": "sta",
+      "paradigm": {
+        "infinitive": "sta",
+        "participiu": "statstătutstatu&#x2011stătutu&#x2011",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "stau"
+          },
+          {
+            "label": "tu",
+            "ro": "stai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "stă"
+          },
+          {
+            "label": "noi",
+            "ro": "stăm"
+          },
+          {
+            "label": "voi",
+            "ro": "stați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "stau"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "stau"
+          },
+          {
+            "label": "tu",
+            "ro": "stai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "steasteie"
+          },
+          {
+            "label": "noi",
+            "ro": "stăm"
+          },
+          {
+            "label": "voi",
+            "ro": "stați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "steasteie"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "stăteamstamsteteam"
+          },
+          {
+            "label": "tu",
+            "ro": "stăteaistaisteteai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "stăteastastetea"
+          },
+          {
+            "label": "noi",
+            "ro": "stăteamstamsteteam"
+          },
+          {
+            "label": "voi",
+            "ro": "stăteațistațisteteați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "stăteaustausteteau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-cunoaste": {
+      "url": "https://dexonline.ro/definitie/cunoa%C8%99te",
+      "lemma": "cunoaște",
+      "paradigm": {
+        "infinitive": "cunoaște",
+        "participiu": "cunoscut",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "cunosc"
+          },
+          {
+            "label": "tu",
+            "ro": "cunoști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "cunoaște"
+          },
+          {
+            "label": "noi",
+            "ro": "cunoaștem"
+          },
+          {
+            "label": "voi",
+            "ro": "cunoașteți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "cunosc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "cunosc"
+          },
+          {
+            "label": "tu",
+            "ro": "cunoști"
+          },
+          {
+            "label": "el/ea",
+            "ro": "cunoască"
+          },
+          {
+            "label": "noi",
+            "ro": "cunoaștem"
+          },
+          {
+            "label": "voi",
+            "ro": "cunoașteți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "cunoască"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "cunoșteam"
+          },
+          {
+            "label": "tu",
+            "ro": "cunoșteai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "cunoștea"
+          },
+          {
+            "label": "noi",
+            "ro": "cunoșteam"
+          },
+          {
+            "label": "voi",
+            "ro": "cunoșteați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "cunoșteau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-invita": {
+      "url": "https://dexonline.ro/definitie/invita",
+      "lemma": "invita",
+      "paradigm": {
+        "infinitive": "invita",
+        "participiu": "invitat",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "invit"
+          },
+          {
+            "label": "tu",
+            "ro": "inviți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "invită"
+          },
+          {
+            "label": "noi",
+            "ro": "invităm"
+          },
+          {
+            "label": "voi",
+            "ro": "invitați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "invită"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "invit"
+          },
+          {
+            "label": "tu",
+            "ro": "inviți"
+          },
+          {
+            "label": "el/ea",
+            "ro": "invite"
+          },
+          {
+            "label": "noi",
+            "ro": "invităm"
+          },
+          {
+            "label": "voi",
+            "ro": "invitați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "invite"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "invitam"
+          },
+          {
+            "label": "tu",
+            "ro": "invitai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "invita"
+          },
+          {
+            "label": "noi",
+            "ro": "invitam"
+          },
+          {
+            "label": "voi",
+            "ro": "invitați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "invitau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    },
+    "vb-lovi": {
+      "url": "https://dexonline.ro/definitie/lovi",
+      "lemma": "lovi",
+      "paradigm": {
+        "infinitive": "lovi",
+        "participiu": "lovit",
+        "present": [
+          {
+            "label": "eu",
+            "ro": "lovesc"
+          },
+          {
+            "label": "tu",
+            "ro": "lovești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "lovește"
+          },
+          {
+            "label": "noi",
+            "ro": "lovim"
+          },
+          {
+            "label": "voi",
+            "ro": "loviți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "lovesc"
+          }
+        ],
+        "subjunctive": [
+          {
+            "label": "eu",
+            "ro": "lovesc"
+          },
+          {
+            "label": "tu",
+            "ro": "lovești"
+          },
+          {
+            "label": "el/ea",
+            "ro": "lovească"
+          },
+          {
+            "label": "noi",
+            "ro": "lovim"
+          },
+          {
+            "label": "voi",
+            "ro": "loviți"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "lovească"
+          }
+        ],
+        "imperfect": [
+          {
+            "label": "eu",
+            "ro": "loveam"
+          },
+          {
+            "label": "tu",
+            "ro": "loveai"
+          },
+          {
+            "label": "el/ea",
+            "ro": "lovea"
+          },
+          {
+            "label": "noi",
+            "ro": "loveam"
+          },
+          {
+            "label": "voi",
+            "ro": "loveați"
+          },
+          {
+            "label": "ei/ele",
+            "ro": "loveau"
+          }
+        ],
+        "source": "dexonline.ro"
+      }
+    }
+  },
+  "errors": {
+    "noun:extensie": "no declension parsed or headword mismatch",
+    "noun:încuietoare": "no declension parsed or headword mismatch",
+    "noun:mici": "no declension parsed or headword mismatch"
+  },
+  "nouns": {
+    "câine": {
+      "url": "https://dexonline.ro/definitie/c%C3%A2ine",
+      "declension": {
+        "gender": "masculine",
+        "singular": "câine",
+        "plural": "câini",
+        "definiteSingular": "câinele",
+        "definitePlural": "câinii",
+        "source": "dexonline.ro"
+      }
+    },
+    "mașină": {
+      "url": "https://dexonline.ro/definitie/ma%C8%99in%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "mașină",
+        "plural": "mașini",
+        "definiteSingular": "mașina",
+        "definitePlural": "mașinile",
+        "source": "dexonline.ro"
+      }
+    },
+    "pâine": {
+      "url": "https://dexonline.ro/definitie/p%C3%A2ine",
+      "declension": {
+        "gender": "feminine",
+        "singular": "pâine",
+        "plural": "pâini",
+        "definiteSingular": "pâinea",
+        "definitePlural": "pâinile",
+        "source": "dexonline.ro"
+      }
+    },
+    "bandă": {
+      "url": "https://dexonline.ro/definitie/band%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "bandă",
+        "plural": "benzi",
+        "definiteSingular": "banda",
+        "definitePlural": "benzile",
+        "source": "dexonline.ro"
+      }
+    },
+    "pod": {
+      "url": "https://dexonline.ro/definitie/pod",
+      "declension": {
+        "gender": "neuter",
+        "singular": "pod",
+        "plural": "poduri",
+        "definiteSingular": "podul",
+        "definitePlural": "podurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "cort": {
+      "url": "https://dexonline.ro/definitie/cort",
+      "declension": {
+        "gender": "neuter",
+        "singular": "cort",
+        "plural": "corturi",
+        "definiteSingular": "cortul",
+        "definitePlural": "corturile",
+        "source": "dexonline.ro"
+      }
+    },
+    "acoperiș": {
+      "url": "https://dexonline.ro/definitie/acoperi%C8%99",
+      "declension": {
+        "gender": "neuter",
+        "singular": "acoperiș",
+        "plural": "acoperișuri",
+        "definiteSingular": "acoperișul",
+        "definitePlural": "acoperișurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "grătar": {
+      "url": "https://dexonline.ro/definitie/gr%C4%83tar",
+      "declension": {
+        "gender": "neuter",
+        "singular": "grătar",
+        "plural": "grătare",
+        "definiteSingular": "grătarul",
+        "definitePlural": "grătarele",
+        "source": "dexonline.ro"
+      }
+    },
+    "râu": {
+      "url": "https://dexonline.ro/definitie/r%C3%A2u",
+      "declension": {
+        "gender": "neuter",
+        "singular": "râu",
+        "plural": "râuri",
+        "definiteSingular": "râul",
+        "definitePlural": "râurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "pădure": {
+      "url": "https://dexonline.ro/definitie/p%C4%83dure",
+      "declension": {
+        "gender": "feminine",
+        "singular": "pădure",
+        "plural": "păduri",
+        "definiteSingular": "pădurea",
+        "definitePlural": "pădurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "perete": {
+      "url": "https://dexonline.ro/definitie/perete",
+      "declension": {
+        "gender": "masculine",
+        "singular": "perete",
+        "plural": "pereți",
+        "definiteSingular": "peretele",
+        "definitePlural": "pereții",
+        "source": "dexonline.ro"
+      }
+    },
+    "gard": {
+      "url": "https://dexonline.ro/definitie/gard",
+      "declension": {
+        "gender": "neuter",
+        "singular": "gard",
+        "plural": "garduri",
+        "definiteSingular": "gardul",
+        "definitePlural": "gardurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "topor": {
+      "url": "https://dexonline.ro/definitie/topor",
+      "declension": {
+        "gender": "neuter",
+        "singular": "topor",
+        "plural": "topoare",
+        "definiteSingular": "toporul",
+        "definitePlural": "topoarele",
+        "source": "dexonline.ro"
+      }
+    },
+    "tavan": {
+      "url": "https://dexonline.ro/definitie/tavan",
+      "declension": {
+        "gender": "neuter",
+        "singular": "tavan",
+        "plural": "tavane",
+        "definiteSingular": "tavanul",
+        "definitePlural": "tavanele",
+        "source": "dexonline.ro"
+      }
+    },
+    "șurub": {
+      "url": "https://dexonline.ro/definitie/%C8%99urub",
+      "declension": {
+        "gender": "neuter",
+        "singular": "șurub",
+        "plural": "șuruburi",
+        "definiteSingular": "șurubul",
+        "definitePlural": "șuruburile",
+        "source": "dexonline.ro"
+      }
+    },
+    "podea": {
+      "url": "https://dexonline.ro/definitie/podea",
+      "declension": {
+        "gender": "feminine",
+        "singular": "podea",
+        "plural": "podele",
+        "definiteSingular": "podeaua",
+        "definitePlural": "podelele",
+        "source": "dexonline.ro"
+      }
+    },
+    "fundație": {
+      "url": "https://dexonline.ro/definitie/funda%C8%9Bie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "fundație",
+        "plural": "fundații",
+        "definiteSingular": "fundația",
+        "definitePlural": "fundațiile",
+        "source": "dexonline.ro"
+      }
+    },
+    "izolație": {
+      "url": "https://dexonline.ro/definitie/izola%C8%9Bie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "izolație",
+        "plural": "izolații",
+        "definiteSingular": "izolația",
+        "definitePlural": "izolațiile",
+        "source": "dexonline.ro"
+      }
+    },
+    "șurubelniță": {
+      "url": "https://dexonline.ro/definitie/%C8%99urubelni%C8%9B%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "șurubelniță",
+        "plural": "șurubelnițe",
+        "definiteSingular": "șurubelnița",
+        "definitePlural": "șurubelnițele",
+        "source": "dexonline.ro"
+      }
+    },
+    "încuietoare": {
+      "url": "https://dexonline.ro/definitie/%C3%AEncuietoare",
+      "declension": {
+        "gender": "feminine",
+        "singular": "încuietoare",
+        "plural": "încuietori",
+        "definiteSingular": "încuietoarea",
+        "definitePlural": "încuietorile",
+        "source": "dexonline.ro"
+      }
+    },
+    "greblă": {
+      "url": "https://dexonline.ro/definitie/grebl%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "greblă",
+        "plural": "greble",
+        "definiteSingular": "grebla",
+        "definitePlural": "greblele",
+        "source": "dexonline.ro"
+      }
+    },
+    "saltea": {
+      "url": "https://dexonline.ro/definitie/saltea",
+      "declension": {
+        "gender": "feminine",
+        "singular": "saltea",
+        "plural": "saltele",
+        "definiteSingular": "salteaua",
+        "definitePlural": "saltelele",
+        "source": "dexonline.ro"
+      }
+    },
+    "pătură": {
+      "url": "https://dexonline.ro/definitie/p%C4%83tur%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "pătură",
+        "plural": "pături",
+        "definiteSingular": "pătura",
+        "definitePlural": "păturile",
+        "source": "dexonline.ro"
+      }
+    },
+    "pernă": {
+      "url": "https://dexonline.ro/definitie/pern%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "pernă",
+        "plural": "perne",
+        "definiteSingular": "perna",
+        "definitePlural": "pernele",
+        "source": "dexonline.ro"
+      }
+    },
+    "rucsac": {
+      "url": "https://dexonline.ro/definitie/rucsac",
+      "declension": {
+        "gender": "neuter",
+        "singular": "rucsac",
+        "plural": "rucsacuri",
+        "definiteSingular": "rucsacul",
+        "definitePlural": "rucsacurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "lanternă": {
+      "url": "https://dexonline.ro/definitie/lantern%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "lanternă",
+        "plural": "lanterne",
+        "definiteSingular": "lanterna",
+        "definitePlural": "lanternele",
+        "source": "dexonline.ro"
+      }
+    },
+    "foc": {
+      "url": "https://dexonline.ro/definitie/foc",
+      "declension": {
+        "gender": "neuter",
+        "singular": "foc",
+        "plural": "focuri",
+        "definiteSingular": "focul",
+        "definitePlural": "focurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "brichetă": {
+      "url": "https://dexonline.ro/definitie/brichet%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "brichetă",
+        "plural": "brichete",
+        "definiteSingular": "bricheta",
+        "definitePlural": "brichetele",
+        "source": "dexonline.ro"
+      }
+    },
+    "ceaun": {
+      "url": "https://dexonline.ro/definitie/ceaun",
+      "declension": {
+        "gender": "neuter",
+        "singular": "ceaun",
+        "plural": "ceaune",
+        "definiteSingular": "ceaunul",
+        "definitePlural": "ceaunele",
+        "source": "dexonline.ro"
+      }
+    },
+    "munte": {
+      "url": "https://dexonline.ro/definitie/munte",
+      "declension": {
+        "gender": "masculine",
+        "singular": "munte",
+        "plural": "munți",
+        "definiteSingular": "muntele",
+        "definitePlural": "munții",
+        "source": "dexonline.ro"
+      }
+    },
+    "apă": {
+      "url": "https://dexonline.ro/definitie/ap%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "apă",
+        "plural": "ape",
+        "definiteSingular": "apa",
+        "definitePlural": "apele",
+        "source": "dexonline.ro"
+      }
+    },
+    "gunoi": {
+      "url": "https://dexonline.ro/definitie/gunoi",
+      "declension": {
+        "gender": "neuter",
+        "singular": "gunoi",
+        "plural": "gunoaie",
+        "definiteSingular": "gunoiul",
+        "definitePlural": "gunoaiele",
+        "source": "dexonline.ro"
+      }
+    },
+    "insecte": {
+      "url": "https://dexonline.ro/definitie/insecte",
+      "declension": {
+        "gender": "feminine",
+        "singular": "insecte",
+        "plural": "insecte",
+        "definiteSingular": null,
+        "definitePlural": "insectele",
+        "source": "dexonline.ro"
+      }
+    },
+    "cățel": {
+      "url": "https://dexonline.ro/definitie/c%C4%83%C8%9Bel",
+      "declension": {
+        "gender": "masculine",
+        "singular": "cățel",
+        "plural": "căței",
+        "definiteSingular": "cățelul",
+        "definitePlural": "cățeii",
+        "source": "dexonline.ro"
+      }
+    },
+    "cățeluș": {
+      "url": "https://dexonline.ro/definitie/c%C4%83%C8%9Belu%C8%99",
+      "declension": {
+        "gender": "masculine",
+        "singular": "cățeluș",
+        "plural": "cățeluși",
+        "definiteSingular": "cățelușul",
+        "definitePlural": "cățelușii",
+        "source": "dexonline.ro"
+      }
+    },
+    "rasă": {
+      "url": "https://dexonline.ro/definitie/ras%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "rasă",
+        "plural": "rase",
+        "definiteSingular": "rasa",
+        "definitePlural": "rasele",
+        "source": "dexonline.ro"
+      }
+    },
+    "lesă": {
+      "url": "https://dexonline.ro/definitie/les%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "lesă",
+        "plural": "lese",
+        "definiteSingular": "lesa",
+        "definitePlural": "lesele",
+        "source": "dexonline.ro"
+      }
+    },
+    "zgardă": {
+      "url": "https://dexonline.ro/definitie/zgard%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "zgardă",
+        "plural": "zgărzi",
+        "definiteSingular": "zgarda",
+        "definitePlural": "zgărzile",
+        "source": "dexonline.ro"
+      }
+    },
+    "ham": {
+      "url": "https://dexonline.ro/definitie/ham",
+      "declension": {
+        "gender": "neuter",
+        "singular": "ham",
+        "plural": "hamuri",
+        "definiteSingular": "hamul",
+        "definitePlural": "hamurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "minge": {
+      "url": "https://dexonline.ro/definitie/minge",
+      "declension": {
+        "gender": "feminine",
+        "singular": "minge",
+        "plural": "mingi",
+        "definiteSingular": "mingea",
+        "definitePlural": "mingile",
+        "source": "dexonline.ro"
+      }
+    },
+    "băț": {
+      "url": "https://dexonline.ro/definitie/b%C4%83%C8%9B",
+      "declension": {
+        "gender": "neuter",
+        "singular": "băț",
+        "plural": "bețe",
+        "definiteSingular": "bățul",
+        "definitePlural": "bețele",
+        "source": "dexonline.ro"
+      }
+    },
+    "jucărie": {
+      "url": "https://dexonline.ro/definitie/juc%C4%83rie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "jucărie",
+        "plural": "jucării",
+        "definiteSingular": "jucăria",
+        "definitePlural": "jucăriile",
+        "source": "dexonline.ro"
+      }
+    },
+    "recompensă": {
+      "url": "https://dexonline.ro/definitie/recompens%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "recompensă",
+        "plural": "recompense",
+        "definiteSingular": "recompensa",
+        "definitePlural": "recompensele",
+        "source": "dexonline.ro"
+      }
+    },
+    "mascul": {
+      "url": "https://dexonline.ro/definitie/mascul",
+      "declension": {
+        "gender": "masculine",
+        "singular": "mascul",
+        "plural": "masculi",
+        "definiteSingular": "masculul",
+        "definitePlural": "masculii",
+        "source": "dexonline.ro"
+      }
+    },
+    "femelă": {
+      "url": "https://dexonline.ro/definitie/femel%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "femelă",
+        "plural": "femele",
+        "definiteSingular": "femela",
+        "definitePlural": "femelele",
+        "source": "dexonline.ro"
+      }
+    },
+    "blană": {
+      "url": "https://dexonline.ro/definitie/blan%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "blană",
+        "plural": "blăni",
+        "definiteSingular": "blana",
+        "definitePlural": "blănile",
+        "source": "dexonline.ro"
+      }
+    },
+    "coadă": {
+      "url": "https://dexonline.ro/definitie/coad%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "coadă",
+        "plural": "cozi",
+        "definiteSingular": "coada",
+        "definitePlural": "cozile",
+        "source": "dexonline.ro"
+      }
+    },
+    "labă": {
+      "url": "https://dexonline.ro/definitie/lab%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "labă",
+        "plural": "labe",
+        "definiteSingular": "laba",
+        "definitePlural": "labele",
+        "source": "dexonline.ro"
+      }
+    },
+    "parc": {
+      "url": "https://dexonline.ro/definitie/parc",
+      "declension": {
+        "gender": "neuter",
+        "singular": "parc",
+        "plural": "parcuri",
+        "definiteSingular": "parcul",
+        "definitePlural": "parcurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "plimbare": {
+      "url": "https://dexonline.ro/definitie/plimbare",
+      "declension": {
+        "gender": "feminine",
+        "singular": "plimbare",
+        "plural": "plimbări",
+        "definiteSingular": "plimbarea",
+        "definitePlural": "plimbările",
+        "source": "dexonline.ro"
+      }
+    },
+    "stăpân": {
+      "url": "https://dexonline.ro/definitie/st%C4%83p%C3%A2n",
+      "declension": {
+        "gender": "masculine",
+        "singular": "stăpân",
+        "plural": "stăpâni",
+        "definiteSingular": "stăpânul",
+        "definitePlural": "stăpânii",
+        "source": "dexonline.ro"
+      }
+    },
+    "veterinar": {
+      "url": "https://dexonline.ro/definitie/veterinar",
+      "declension": {
+        "gender": "masculine",
+        "singular": "veterinar",
+        "plural": "veterinari",
+        "definiteSingular": "veterinarul",
+        "definitePlural": "veterinarii",
+        "source": "dexonline.ro"
+      }
+    },
+    "volan": {
+      "url": "https://dexonline.ro/definitie/volan",
+      "declension": {
+        "gender": "neuter",
+        "singular": "volan",
+        "plural": "volane",
+        "definiteSingular": "volanul",
+        "definitePlural": "volanele",
+        "source": "dexonline.ro"
+      }
+    },
+    "motor": {
+      "url": "https://dexonline.ro/definitie/motor",
+      "declension": {
+        "gender": "masculine",
+        "singular": "motor",
+        "plural": "motori",
+        "definiteSingular": "motorul",
+        "definitePlural": "motorii",
+        "source": "dexonline.ro"
+      }
+    },
+    "frână": {
+      "url": "https://dexonline.ro/definitie/fr%C3%A2n%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "frână",
+        "plural": "frâne",
+        "definiteSingular": "frâna",
+        "definitePlural": "frânele",
+        "source": "dexonline.ro"
+      }
+    },
+    "ambreiaj": {
+      "url": "https://dexonline.ro/definitie/ambreiaj",
+      "declension": {
+        "gender": "neuter",
+        "singular": "ambreiaj",
+        "plural": "ambreiaje",
+        "definiteSingular": "ambreiajul",
+        "definitePlural": "ambreiajele",
+        "source": "dexonline.ro"
+      }
+    },
+    "viteză": {
+      "url": "https://dexonline.ro/definitie/vitez%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "viteză",
+        "plural": "viteze",
+        "definiteSingular": "viteza",
+        "definitePlural": "vitezele",
+        "source": "dexonline.ro"
+      }
+    },
+    "roată": {
+      "url": "https://dexonline.ro/definitie/roat%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "roată",
+        "plural": "roți",
+        "definiteSingular": "roata",
+        "definitePlural": "roțile",
+        "source": "dexonline.ro"
+      }
+    },
+    "anvelopă": {
+      "url": "https://dexonline.ro/definitie/anvelop%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "anvelopă",
+        "plural": "anvelope",
+        "definiteSingular": "anvelopa",
+        "definitePlural": "anvelopele",
+        "source": "dexonline.ro"
+      }
+    },
+    "portbagaj": {
+      "url": "https://dexonline.ro/definitie/portbagaj",
+      "declension": {
+        "gender": "neuter",
+        "singular": "portbagaj",
+        "plural": "portbagaje",
+        "definiteSingular": "portbagajul",
+        "definitePlural": "portbagajele",
+        "source": "dexonline.ro"
+      }
+    },
+    "capotă": {
+      "url": "https://dexonline.ro/definitie/capot%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "capotă",
+        "plural": "capote",
+        "definiteSingular": "capota",
+        "definitePlural": "capotele",
+        "source": "dexonline.ro"
+      }
+    },
+    "far": {
+      "url": "https://dexonline.ro/definitie/far",
+      "declension": {
+        "gender": "neuter",
+        "singular": "far",
+        "plural": "faruri",
+        "definiteSingular": "farul",
+        "definitePlural": "farurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "oglindă": {
+      "url": "https://dexonline.ro/definitie/oglind%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "oglindă",
+        "plural": "oglinzi",
+        "definiteSingular": "oglinda",
+        "definitePlural": "oglinzile",
+        "source": "dexonline.ro"
+      }
+    },
+    "parbriz": {
+      "url": "https://dexonline.ro/definitie/parbriz",
+      "declension": {
+        "gender": "neuter",
+        "singular": "parbriz",
+        "plural": "parbrize",
+        "definiteSingular": "parbrizul",
+        "definitePlural": "parbrizele",
+        "source": "dexonline.ro"
+      }
+    },
+    "benzină": {
+      "url": "https://dexonline.ro/definitie/benzin%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "benzină",
+        "plural": "benzine",
+        "definiteSingular": "benzina",
+        "definitePlural": "benzinele",
+        "source": "dexonline.ro"
+      }
+    },
+    "motorină": {
+      "url": "https://dexonline.ro/definitie/motorin%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "motorină",
+        "plural": "motorine",
+        "definiteSingular": "motorina",
+        "definitePlural": "motorinele",
+        "source": "dexonline.ro"
+      }
+    },
+    "benzinărie": {
+      "url": "https://dexonline.ro/definitie/benzin%C4%83rie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "benzinărie",
+        "plural": "benzinării",
+        "definiteSingular": "benzinăria",
+        "definitePlural": "benzinăriile",
+        "source": "dexonline.ro"
+      }
+    },
+    "drum": {
+      "url": "https://dexonline.ro/definitie/drum",
+      "declension": {
+        "gender": "neuter",
+        "singular": "drum",
+        "plural": "drumuri",
+        "definiteSingular": "drumul",
+        "definitePlural": "drumurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "stradă": {
+      "url": "https://dexonline.ro/definitie/strad%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "stradă",
+        "plural": "străzi",
+        "definiteSingular": "strada",
+        "definitePlural": "străzile",
+        "source": "dexonline.ro"
+      }
+    },
+    "intersecție": {
+      "url": "https://dexonline.ro/definitie/intersec%C8%9Bie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "intersecție",
+        "plural": "intersecții",
+        "definiteSingular": "intersecția",
+        "definitePlural": "intersecțiile",
+        "source": "dexonline.ro"
+      }
+    },
+    "parcare": {
+      "url": "https://dexonline.ro/definitie/parcare",
+      "declension": {
+        "gender": "feminine",
+        "singular": "parcare",
+        "plural": "parcări",
+        "definiteSingular": "parcarea",
+        "definitePlural": "parcările",
+        "source": "dexonline.ro"
+      }
+    },
+    "autostradă": {
+      "url": "https://dexonline.ro/definitie/autostrad%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "autostradă",
+        "plural": "autostrăzi",
+        "definiteSingular": "autostrada",
+        "definitePlural": "autostrăzile",
+        "source": "dexonline.ro"
+      }
+    },
+    "curbă": {
+      "url": "https://dexonline.ro/definitie/curb%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "curbă",
+        "plural": "curbe",
+        "definiteSingular": "curba",
+        "definitePlural": "curbele",
+        "source": "dexonline.ro"
+      }
+    },
+    "semafor": {
+      "url": "https://dexonline.ro/definitie/semafor",
+      "declension": {
+        "gender": "neuter",
+        "singular": "semafor",
+        "plural": "semafoare",
+        "definiteSingular": "semaforul",
+        "definitePlural": "semafoarele",
+        "source": "dexonline.ro"
+      }
+    },
+    "carne": {
+      "url": "https://dexonline.ro/definitie/carne",
+      "declension": {
+        "gender": "feminine",
+        "singular": "carne",
+        "plural": "cărnuri",
+        "definiteSingular": "carnea",
+        "definitePlural": "cărnurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "cârnați": {
+      "url": "https://dexonline.ro/definitie/c%C3%A2rna%C8%9Bi",
+      "declension": {
+        "gender": "masculine",
+        "singular": "cârnați",
+        "plural": "cârnați",
+        "definiteSingular": null,
+        "definitePlural": "cârnații",
+        "source": "dexonline.ro"
+      }
+    },
+    "pui": {
+      "url": "https://dexonline.ro/definitie/pui",
+      "declension": {
+        "gender": "masculine",
+        "singular": "pui",
+        "plural": "pui",
+        "definiteSingular": "puiul",
+        "definitePlural": "puii",
+        "source": "dexonline.ro"
+      }
+    },
+    "porc": {
+      "url": "https://dexonline.ro/definitie/porc",
+      "declension": {
+        "gender": "masculine",
+        "singular": "porc",
+        "plural": "porci",
+        "definiteSingular": "porcul",
+        "definitePlural": "porcii",
+        "source": "dexonline.ro"
+      }
+    },
+    "salată": {
+      "url": "https://dexonline.ro/definitie/salat%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "salată",
+        "plural": "salate",
+        "definiteSingular": "salata",
+        "definitePlural": "salatele",
+        "source": "dexonline.ro"
+      }
+    },
+    "sos": {
+      "url": "https://dexonline.ro/definitie/sos",
+      "declension": {
+        "gender": "neuter",
+        "singular": "SOS",
+        "plural": "SOS-uri",
+        "definiteSingular": "SOS-ul",
+        "definitePlural": "SOS-urile",
+        "source": "dexonline.ro"
+      }
+    },
+    "muștar": {
+      "url": "https://dexonline.ro/definitie/mu%C8%99tar",
+      "declension": {
+        "gender": "neuter",
+        "singular": "muștar",
+        "plural": "muștaruri",
+        "definiteSingular": "muștarul",
+        "definitePlural": "muștarurile",
+        "source": "dexonline.ro"
+      }
+    },
+    "farfurie": {
+      "url": "https://dexonline.ro/definitie/farfurie",
+      "declension": {
+        "gender": "feminine",
+        "singular": "farfurie",
+        "plural": "farfurii",
+        "definiteSingular": "farfuria",
+        "definitePlural": "farfuriile",
+        "source": "dexonline.ro"
+      }
+    },
+    "pahar": {
+      "url": "https://dexonline.ro/definitie/pahar",
+      "declension": {
+        "gender": "neuter",
+        "singular": "pahar",
+        "plural": "pahare",
+        "definiteSingular": "paharul",
+        "definitePlural": "paharele",
+        "source": "dexonline.ro"
+      }
+    },
+    "furculiță": {
+      "url": "https://dexonline.ro/definitie/furculi%C8%9B%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "furculiță",
+        "plural": "furculițe",
+        "definiteSingular": "furculița",
+        "definitePlural": "furculițele",
+        "source": "dexonline.ro"
+      }
+    },
+    "cuțit": {
+      "url": "https://dexonline.ro/definitie/cu%C8%9Bit",
+      "declension": {
+        "gender": "neuter",
+        "singular": "cuțit",
+        "plural": "cuțite",
+        "definiteSingular": "cuțitul",
+        "definitePlural": "cuțitele",
+        "source": "dexonline.ro"
+      }
+    },
+    "șervețel": {
+      "url": "https://dexonline.ro/definitie/%C8%99erve%C8%9Bel",
+      "declension": {
+        "gender": "neuter",
+        "singular": "șervețel",
+        "plural": "șervețele",
+        "definiteSingular": "șervețelul",
+        "definitePlural": "șervețelele",
+        "source": "dexonline.ro"
+      }
+    },
+    "masă": {
+      "url": "https://dexonline.ro/definitie/mas%C4%83",
+      "declension": {
+        "gender": "feminine",
+        "singular": "masă",
+        "plural": "mese",
+        "definiteSingular": "masa",
+        "definitePlural": "mesele",
+        "source": "dexonline.ro"
+      }
+    },
+    "scaun": {
+      "url": "https://dexonline.ro/definitie/scaun",
+      "declension": {
+        "gender": "neuter",
+        "singular": "scaun",
+        "plural": "scaune",
+        "definiteSingular": "scaunul",
+        "definitePlural": "scaunele",
+        "source": "dexonline.ro"
+      }
+    }
+  }
+}
