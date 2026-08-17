@@ -33,18 +33,16 @@ export function ProgressPage({ go }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Progress" subtitle="Your calm, steady practice" />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
-        {/* Big numbers */}
+      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
         <div className="grid grid-cols-2 gap-3 tile-grid">
-          <BigStat icon="Flame" value={daysCount} label="Days practised" color="text-coral-400" bg="bg-coral-50 dark:bg-coral-400/20" />
-          <BigStat icon="HeartFilled" value={favCount} label="Saved phrases" color="text-rose-400" bg="bg-rose-50 dark:bg-rose-400/20" />
-          <BigStat icon="BookOpen" value={wordsExplored} label="Words explored" color="text-sea-600" bg="bg-sea-50 dark:bg-sea-600/20" />
-          <BigStat icon="MessagesSquare" value={convCount} label="Conversations" color="text-sea-600" bg="bg-sea-50 dark:bg-sea-600/20" />
+          <BigStat icon="CalendarDays" value={daysCount} label="Days practised" color="text-olive-600" bg="bg-olive-50 dark:bg-olive-900/30" />
+          <BigStat icon="HeartFilled" value={favCount} label="Saved phrases" color="text-coral" bg="bg-coral-50 dark:bg-coral-900/20" />
+          <BigStat icon="BookMarked" value={wordsExplored} label="Words explored" color="text-olive-600" bg="bg-olive-50 dark:bg-olive-900/30" />
+          <BigStat icon="MessagesSquare" value={convCount} label="Conversations" color="text-forest/70" bg="bg-clay-100 dark:bg-forest-800" />
         </div>
 
-        {/* Activity strip */}
         <Card>
-          <p className="font-bold text-ink-900 dark:text-sand-100 mb-3">Last 4 weeks</p>
+          <p className="font-display font-bold text-forest dark:text-linen-100 mb-3">Last 4 weeks</p>
           <div className="grid grid-cols-7 gap-1.5">
             {last28.map((d, i) => {
               const did = practicedSet.has(d);
@@ -53,13 +51,13 @@ export function ProgressPage({ go }: Props) {
                   key={i}
                   title={d}
                   className={`aspect-square rounded-md ${
-                    did ? 'bg-sea-500 animate-bar-grow origin-bottom' : 'bg-sand-200 dark:bg-white/10'
+                    did ? 'bg-olive-500 dark:bg-olive-400 animate-bar-grow origin-bottom' : 'bg-clay-200/60 dark:bg-forest-700'
                   }`}
                 />
               );
             })}
           </div>
-          <p className="text-xs text-ink-500 dark:text-ink-300 mt-3">Each square is one day. Filled means you practised.</p>
+          <p className="text-xs text-forest/50 dark:text-linen/50 mt-3">Each square is one day. Filled means you practised.</p>
         </Card>
 
         {/* Activity counts */}

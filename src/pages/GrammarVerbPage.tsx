@@ -46,8 +46,8 @@ export function GrammarVerbPage({ verbId, onBack, onNavigate }: Props) {
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <GrammarVerbNav verbId={verbId} onSelect={onNavigate} />
 
-        <div className={`rounded-3xl ${c.bgSoft} p-5 text-center`}>
-          <p className="text-3xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
+        <div className={`rounded-3xl ${c.bgSoft} p-5 text-center border border-forest/5`}>
+          <p className="font-display text-3xl font-bold text-forest dark:text-linen-100" lang="ro">
             {verb.infinitive}
           </p>
           <p className="mt-1 text-lg text-ink-700 dark:text-ink-300">{verb.en}</p>

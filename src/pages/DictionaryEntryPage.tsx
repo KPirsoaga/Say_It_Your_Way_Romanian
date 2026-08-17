@@ -108,37 +108,48 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Dictionary" subtitle={entry!.type} onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
-        <Card className="space-y-3">
-          <p className="text-2xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
+      <PageHeader title={displayRo} subtitle={displayEn} onBack={onBack} />
+      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
+        <header className="space-y-2">
+          <p className="text-3xl font-semibold text-forest dark:text-linen-100" lang="ro">
             {displayRo}
           </p>
-          <p className="text-lg text-ink-700 dark:text-ink-300">{displayEn}</p>
-          {entry!.pron && <p className="text-sm text-sea-600 dark:text-sea-200 italic">{entry!.pron}</p>}
-          {entry!.teacherNote && <p className="text-sm text-ink-500 dark:text-ink-400">{entry!.teacherNote}</p>}
-          {entry!.senses && entry!.senses.length > 1 && (
-            <div className="space-y-1">
-              <p className="text-xs font-bold uppercase text-ink-500">Meanings</p>
-              {entry!.senses.map((sense, i) => (
-                <p key={i} className="text-sm text-ink-600 dark:text-ink-300">
-                  {sense.en}
-                  {sense.note ? ` — ${sense.note}` : ''}
-                </p>
-              ))}
-            </div>
-          )}
+          <p className="text-lg text-forest/80 dark:text-linen/80">{displayEn}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-clay-100 dark:bg-forest-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-forest/60 dark:text-linen/60 capitalize">
+              {entry!.type}
+            </span>
+            {entry!.nounFamily?.gender && (
+              <span className="rounded-full bg-olive-50 dark:bg-olive-900/30 px-3 py-1 text-xs font-semibold text-olive-700 dark:text-olive-300 capitalize">
+                {entry!.nounFamily.gender}
+              </span>
+            )}
+          </div>
+          {entry!.pron && <p className="text-sm text-olive-600 dark:text-olive-300 italic">{entry!.pron}</p>}
+          {entry!.teacherNote && <p className="text-sm text-forest/60 dark:text-linen/60">{entry!.teacherNote}</p>}
           {supported && (
             <Button variant="soft" size="md" onClick={() => (currentId === audioId ? stop() : speak(displayRo, audioId))}>
               <Icon name={currentId === audioId ? 'Pause' : 'Volume2'} className="h-5 w-5" />
               Play
             </Button>
           )}
-        </Card>
+        </header>
+
+        {entry!.senses && entry!.senses.length > 1 && (
+          <Card variant="quiet" className="space-y-1">
+            <p className="text-xs font-semibold uppercase text-forest/50">Meanings</p>
+            {entry!.senses.map((sense, i) => (
+              <p key={i} className="text-sm text-forest/70 dark:text-linen/70">
+                {sense.en}
+                {sense.note ? ` — ${sense.note}` : ''}
+              </p>
+            ))}
+          </Card>
+        )}
 
         {showWordFamily && (
-          <Card className="space-y-3">
-            <h2 className="font-bold text-ink-900 dark:text-sand-100">Word family</h2>
+          <section className="space-y-3">
+            <h2 className="font-display text-lg font-bold text-forest dark:text-linen-100">Word family</h2>
             <WordFamily
               nounFamily={entry!.nounFamily}
               verbFamily={entry!.verbFamily}
@@ -150,12 +161,12 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
               playingId={currentId}
             />
             {entry!.verbFamily?.grammarVerbId && (
-              <Button variant="soft" size="lg" className="w-full" onClick={() => go('grammar-verb', entry!.verbFamily!.grammarVerbId!)}>
+              <Button variant="outline" size="lg" className="w-full" onClick={() => go('grammar-verb', entry!.verbFamily!.grammarVerbId!)}>
                 Full conjugations →
                 <Icon name="ChevronRight" className="h-5 w-5" />
               </Button>
             )}
-          </Card>
+          </section>
         )}
 
         {entry!.usageExamples && entry!.usageExamples.length > 0 && (

@@ -46,8 +46,8 @@ export function SettingsPage({ onBack, onOpenReview, onOpenShare }: Props) {
                   aria-pressed={active}
                   className={`rounded-2xl p-3 flex flex-col items-center gap-1 transition border-2 ${
                     active
-                      ? 'border-sea-500 bg-sea-50 dark:bg-sea-600/20'
-                      : 'border-transparent bg-sand-100 dark:bg-ink-900 dark:border-white/10'
+                      ? 'border-olive-500 bg-olive-50 dark:bg-olive-900/30'
+                      : 'border-transparent bg-clay-100 dark:bg-forest-800 dark:border-linen/10'
                   }`}
                 >
                   <span

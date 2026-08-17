@@ -5,6 +5,7 @@ import { ReviewProvider } from './context/ReviewContext';
 import { SpeechProvider } from './context/SpeechContext';
 import { BottomNav } from './components/BottomNav';
 import { Icon } from './components/Icon';
+import { MorePage } from './pages/MorePage';
 import { HomePage } from './pages/HomePage';
 import { DailyPage } from './pages/DailyPage';
 import { DictionaryPage } from './pages/DictionaryPage';
@@ -60,6 +61,7 @@ function parseWeeklyExerciseArg(arg: string): { topicId: string; exerciseType: W
 
 export type PageId =
   | 'home'
+  | 'more'
   | 'daily'
   | 'dictionary'
   | 'dictionary-entry'
@@ -108,10 +110,9 @@ function Shell() {
   };
 
   // Pages that show the bottom nav (top-level destinations)
-  const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
+  const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'dictionary', 'more', 'progress', 'favourites'];
   const showNav =
     navPages.includes(page) ||
-    page === 'dictionary' ||
     page === 'weekly-topic' ||
     page === 'weekly-vocab' ||
     page === 'weekly-reading' ||
@@ -119,13 +120,13 @@ function Shell() {
   const showSettingsGear = page === 'home';
 
   return (
-    <div className="min-h-screen bg-sand-100 dark:bg-ink-900 text-ink-900 dark:text-sand-100">
+    <div className="surface-page">
       {showSettingsGear && (
         <button
           type="button"
           onClick={() => go('settings')}
           aria-label="Open settings"
-          className="fixed top-[max(0.75rem,env(safe-area-inset-top))] right-[max(0.75rem,env(safe-area-inset-right))] z-20 tap-target rounded-2xl bg-white/80 dark:bg-ink-900/80 backdrop-blur p-2 text-ink-700 dark:text-ink-300 shadow-soft hover:bg-white dark:hover:bg-ink-700 transition"
+          className="fixed top-[max(0.75rem,env(safe-area-inset-top))] right-[max(0.75rem,env(safe-area-inset-right))] z-20 tap-target rounded-2xl bg-white/90 dark:bg-forest-800/90 backdrop-blur p-2 text-forest/80 dark:text-linen/80 shadow-soft hover:bg-white dark:hover:bg-forest-700 transition border border-forest/8"
         >
           <Icon name="Settings" className="h-6 w-6" />
         </button>
@@ -133,6 +134,7 @@ function Shell() {
 
       <main className={showNav ? 'pb-24' : ''}>
         {page === 'home' && <HomePage go={go} />}
+        {page === 'more' && <MorePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
         {page === 'dictionary' && <DictionaryPage go={go} onBack={navBack} />}
         {page === 'dictionary-entry' && arg && (getDictionaryEntry(arg) || getDictionaryPhrase(arg)) ? (

@@ -34,6 +34,7 @@ import {
   Trophy,
   Flame,
   BookOpen,
+  BookMarked,
   Mic,
   Eye,
   HandHeart,
@@ -96,6 +97,7 @@ const map: Record<string, LucideIcon> = {
   Trophy,
   Flame,
   BookOpen,
+  BookMarked,
   Mic,
   Eye,
   HandHeart,
@@ -122,9 +124,9 @@ const map: Record<string, LucideIcon> = {
   Tortoise: Turtle,
 };
 
-export function Icon({ name, className }: { name: string; className?: string }) {
+export function Icon({ name, className, strokeWidth }: { name: string; className?: string; strokeWidth?: number }) {
   const Cmp = map[name] ?? Sparkles;
-  return <Cmp className={className} />;
+  return <Cmp className={className} strokeWidth={strokeWidth} />;
 }
 
 export type { LucideIcon };

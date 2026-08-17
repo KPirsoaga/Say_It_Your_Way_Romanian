@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'favicon-16x16.png', 'favicon-32x32.png', 'apple-touch-icon.png'],
       manifest: {
         name: 'Say It Your Way Romanian',
         short_name: 'Say Romanian',
@@ -18,8 +18,8 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#f7f3ea',
-        theme_color: '#f7f3ea',
+        background_color: '#F4F0E6',
+        theme_color: '#1C2A23',
         icons: [
           {
             src: '/pwa-192x192.png',
