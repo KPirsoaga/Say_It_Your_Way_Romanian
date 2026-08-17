@@ -1,6 +1,9 @@
 import type { ContentReviewMeta, GrammarTense, VerbForm } from '../../types';
 
-export type DictionaryWordType = 'noun' | 'verb' | 'adjective' | 'phrase';
+export type DictionaryLexicalType = 'noun' | 'verb' | 'adjective';
+
+/** Legacy alias — phrases are stored separately */
+export type DictionaryWordType = DictionaryLexicalType | 'phrase';
 
 export interface DictionarySourceRef {
   feature: 'weekly-topic' | 'scenario' | 'real-life' | 'survival' | 'grammar' | 'phrase-builder';
@@ -22,6 +25,8 @@ export interface DictionaryNounFamily {
   definiteSingular?: DictionaryForm;
   definitePlural?: DictionaryForm;
   articleNote?: string;
+  /** True when all four noun forms are verified */
+  complete?: boolean;
 }
 
 export interface DictionaryVerbFamily {
@@ -39,6 +44,7 @@ export interface DictionaryAdjectiveFamily {
   feminineSingular?: DictionaryForm;
   masculinePlural?: DictionaryForm;
   femininePlural?: DictionaryForm;
+  complete?: boolean;
 }
 
 export interface DictionarySense {
@@ -47,9 +53,17 @@ export interface DictionarySense {
   review?: ContentReviewMeta;
 }
 
+export interface DictionaryUsageExample {
+  ro: string;
+  en: string;
+  sourceLabel?: string;
+  phraseId?: string;
+}
+
+/** Canonical lexical headword — grammatical variants live inside families */
 export interface DictionaryEntry {
   id: string;
-  type: DictionaryWordType;
+  type: DictionaryLexicalType;
   headwordRo: string;
   headwordEn: string;
   /** Lowercase sort key without leading article/infinitive marker */
@@ -64,12 +78,40 @@ export interface DictionaryEntry {
   nounFamily?: DictionaryNounFamily;
   verbFamily?: DictionaryVerbFamily;
   adjectiveFamily?: DictionaryAdjectiveFamily;
-  /** Full phrase text when type === 'phrase' */
-  phraseRo?: string;
-  phraseEn?: string;
-  /** Weekly topic vocab id when linked */
+  /** Verified full family available for display and practice */
+  familyComplete: boolean;
+  /** Missing or unverified forms — needs Mihaela review */
+  familyNeedsReview: boolean;
+  usageExamples?: DictionaryUsageExample[];
   weeklyVocabId?: string;
   weeklyTopicId?: string;
+}
+
+export interface DictionaryPhrase {
+  id: string;
+  ro: string;
+  en: string;
+  sortKey: string;
+  letter: string;
+  pron?: string;
+  review?: ContentReviewMeta;
+  sources: DictionarySourceRef[];
+  linkedHeadwordIds: string[];
+}
+
+export interface DictionaryFormAlias {
+  ro: string;
+  entryId: string;
+  displayRo: string;
+  en: string;
+  explanation: string;
+  formLabel: string;
+  type: DictionaryLexicalType;
+}
+
+export interface DictionarySearchMatch {
+  entry: DictionaryEntry;
+  alias?: DictionaryFormAlias;
 }
 
 export interface DictionaryVariant {
@@ -80,8 +122,9 @@ export interface DictionaryVariant {
   formLabel: string;
   baseRo: string;
   baseEn: string;
-  type: DictionaryWordType;
+  type: DictionaryLexicalType;
   grammarVerbId?: string;
+  tense?: GrammarTense;
   wordFamilyChain: string[];
   sourceWeight: 'current' | 'previous' | 'wider';
 }
@@ -91,6 +134,7 @@ export type DailyVariantExerciseType =
   | 'singular-plural'
   | 'definite-form'
   | 'adjective-form'
+  | 'verb-person'
   | 'ro-en'
   | 'en-ro'
   | 'listen';
@@ -108,6 +152,7 @@ export interface DailyVariantExercise {
     baseWord: string;
     baseEn: string;
     formLabel?: string;
+    tenseLabel?: string;
     wordFamily?: string[];
     grammarVerbId?: string;
     plainNote?: string;
@@ -121,3 +166,10 @@ export interface DailyPracticeSession {
 }
 
 export const GRAMMAR_TENSE_ORDER: GrammarTense[] = ['present', 'perfect-compus', 'imperfect', 'future'];
+
+export const GRAMMAR_TENSE_LABELS: Record<GrammarTense, string> = {
+  present: 'Present',
+  'perfect-compus': 'Perfect compus',
+  imperfect: 'Imperfect',
+  future: 'Future',
+};

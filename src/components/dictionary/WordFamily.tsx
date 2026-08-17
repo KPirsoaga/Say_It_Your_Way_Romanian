@@ -2,18 +2,39 @@ import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { FlagForMihaela } from '../FlagForMihaela';
 import { userFlagId } from '../../content/review/reviewIds';
+import {
+  adjectiveFamilyChain,
+  learnerPersonLabel,
+  nounFamilyChain,
+  verbPresentChain,
+} from '../../content/dictionary/familyUtils';
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily, DictionaryVerbFamily } from '../../content/dictionary/types';
+import { GRAMMAR_TENSE_LABELS, GRAMMAR_TENSE_ORDER } from '../../content/dictionary/types';
 import type { GrammarTense } from '../../types';
-import { GRAMMAR_TENSE_ORDER } from '../../content/dictionary/types';
 
 interface Props {
   nounFamily?: DictionaryNounFamily;
   verbFamily?: DictionaryVerbFamily;
   adjectiveFamily?: DictionaryAdjectiveFamily;
+  familyComplete?: boolean;
   selectedTense?: GrammarTense;
   onTenseChange?: (tense: GrammarTense) => void;
   onPlay?: (ro: string, id: string) => void;
   playingId?: string | null;
+}
+
+function TransformationChain({ chain }: { chain: string[] }) {
+  if (chain.length < 2) return null;
+  return (
+    <div className="rounded-2xl bg-sea-50 dark:bg-sea-600/10 px-4 py-3 overflow-x-auto">
+      <p className="text-xs font-bold uppercase tracking-wide text-ink-500 dark:text-ink-300 mb-2">
+        Same word, different forms
+      </p>
+      <p className="text-base font-bold text-ink-900 dark:text-sand-100 whitespace-nowrap" lang="ro">
+        {chain.join(' → ')}
+      </p>
+    </div>
+  );
 }
 
 function FormRow({
@@ -50,14 +71,17 @@ export function WordFamily({
   nounFamily,
   verbFamily,
   adjectiveFamily,
+  familyComplete = false,
   selectedTense = 'present',
   onTenseChange,
   onPlay,
   playingId,
 }: Props) {
-  if (nounFamily) {
+  if (nounFamily && familyComplete) {
+    const chain = nounFamilyChain(nounFamily);
     return (
       <div className="space-y-3">
+        <TransformationChain chain={chain} />
         {nounFamily.gender && (
           <p className="text-sm text-ink-600 dark:text-ink-300">
             Gender: <span className="font-bold capitalize">{nounFamily.gender}</span>
@@ -68,13 +92,13 @@ export function WordFamily({
         )}
         <FormRow label="Singular" form={nounFamily.singular} audioId="nf-sg" onPlay={onPlay} playingId={playingId} />
         <FormRow label="Plural" form={nounFamily.plural} audioId="nf-pl" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Definite singular" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Definite plural" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
+        <FormRow label="The … (singular)" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
+        <FormRow label="The … (plural)" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
       </div>
     );
   }
 
-  if (verbFamily) {
+  if (verbFamily?.present && verbFamily.present.length > 0) {
     const tenseForms =
       selectedTense === 'present'
         ? verbFamily.present
@@ -83,6 +107,8 @@ export function WordFamily({
           : selectedTense === 'imperfect'
             ? verbFamily.imperfect
             : verbFamily.future;
+
+    const chain = selectedTense === 'present' ? verbPresentChain(verbFamily) : [verbFamily.infinitive, ...(tenseForms?.map((f) => f.ro) ?? [])];
 
     return (
       <div className="space-y-3">
@@ -99,32 +125,37 @@ export function WordFamily({
                     : 'bg-sand-100 text-ink-600 dark:bg-ink-800 dark:text-ink-300'
                 }`}
               >
-                {tense === 'perfect-compus' ? 'Perfect compus' : tense.charAt(0).toUpperCase() + tense.slice(1)}
+                {GRAMMAR_TENSE_LABELS[tense]}
               </button>
             ))}
           </div>
         )}
+        {chain.length >= 2 && <TransformationChain chain={chain} />}
         <div className="space-y-2">
           {tenseForms?.map((form, i) => (
             <FormRow
               key={`${form.label}-${i}`}
-              label={form.label}
+              label={learnerPersonLabel(form.label)}
               form={form}
               audioId={`vf-${selectedTense}-${i}`}
               onPlay={onPlay}
               playingId={playingId}
             />
           )) ?? (
-            <p className="text-sm text-ink-500 dark:text-ink-300">More tense forms coming in Grammar Help.</p>
+            <p className="text-sm text-ink-500 dark:text-ink-300">
+              More forms for this tense are in Grammar Help.
+            </p>
           )}
         </div>
       </div>
     );
   }
 
-  if (adjectiveFamily) {
+  if (adjectiveFamily && familyComplete) {
+    const chain = adjectiveFamilyChain(adjectiveFamily);
     return (
       <div className="space-y-3">
+        <TransformationChain chain={chain} />
         <FormRow label="Masculine singular" form={adjectiveFamily.masculineSingular} audioId="af-ms" onPlay={onPlay} playingId={playingId} />
         <FormRow label="Feminine singular" form={adjectiveFamily.feminineSingular} audioId="af-fs" onPlay={onPlay} playingId={playingId} />
         <FormRow label="Masculine plural" form={adjectiveFamily.masculinePlural} audioId="af-mp" onPlay={onPlay} playingId={playingId} />
@@ -158,11 +189,11 @@ export function DictionaryFlag({
   );
 }
 
-export function WordFamilyChain({ chain }: { chain: string[] }) {
+export function WordFamilyChain({ chain, prefix }: { chain: string[]; prefix?: string }) {
   if (chain.length < 2) return null;
   return (
-    <p className="text-sm text-ink-600 dark:text-ink-300">
-      Word family: {chain.join(' → ')}
+    <p className="text-sm text-ink-600 dark:text-ink-300" lang="ro">
+      {prefix ? `${prefix} ` : ''}{chain.join(' → ')}
     </p>
   );
 }

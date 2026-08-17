@@ -7,7 +7,7 @@ import { useSpeech } from '../hooks/useSpeech';
 import { useSettings } from '../context/SettingsContext';
 import { scenarios, getDailyContent, survivalPhrases, realLifeCategories, grammarTopics } from '../content';
 import { getWeeklyTopic } from '../content/weeklyTopics';
-import { getDictionaryEntry } from '../content/dictionary';
+import { getDictionaryEntry, getDictionaryPhrase } from '../content/dictionary';
 import type { PhraseLine } from '../types';
 
 interface FavResolved {
@@ -64,21 +64,27 @@ function resolveFavourite(id: string): FavResolved | null {
   }
   if (id.startsWith('dict:')) {
     const entry = getDictionaryEntry(id.slice(5));
-    if (!entry) return null;
-    return {
-      id,
-      phrase: { ro: entry.phraseRo ?? entry.headwordRo, en: entry.phraseEn ?? entry.headwordEn, pron: entry.pron },
-      label: 'Dictionary',
-    };
+    if (entry) {
+      return {
+        id,
+        phrase: { ro: entry.headwordRo, en: entry.headwordEn, pron: entry.pron },
+        label: 'Dictionary',
+      };
+    }
+    const phrase = getDictionaryPhrase(id.slice(5));
+    if (phrase) {
+      return { id, phrase: { ro: phrase.ro, en: phrase.en, pron: phrase.pron }, label: 'Dictionary' };
+    }
+    return null;
   }
   const [sid, idxStr] = id.split(':');
-  const dictFromScenario = getDictionaryEntry(`dict-scenario-${sid}-${idxStr}`);
+  const dictFromScenario = getDictionaryPhrase(`dict-scenario-${sid}-${idxStr}`);
   if (dictFromScenario) {
     return {
       id,
       phrase: {
-        ro: dictFromScenario.phraseRo ?? dictFromScenario.headwordRo,
-        en: dictFromScenario.phraseEn ?? dictFromScenario.headwordEn,
+        ro: dictFromScenario.ro,
+        en: dictFromScenario.en,
         pron: dictFromScenario.pron,
       },
       label: dictFromScenario.sources[0]?.label ?? 'Dictionary',

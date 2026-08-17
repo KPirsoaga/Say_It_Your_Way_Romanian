@@ -1,4 +1,5 @@
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily } from './types';
+import { ROMANIAN_ARTICLE_NOTE } from './familyUtils';
 
 /** Hand-authored noun/adjective families — uncertain forms flagged in build step */
 export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
@@ -8,7 +9,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'câini', en: 'dogs' },
     definiteSingular: { ro: 'câinele', en: 'the dog' },
     definitePlural: { ro: 'câinii', en: 'the dogs' },
-    articleNote: 'In Romanian, “the” is often attached to the end of the noun.',
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   cort: {
     gender: 'masculine',
@@ -16,7 +18,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'corturi', en: 'tents' },
     definiteSingular: { ro: 'cortul', en: 'the tent' },
     definitePlural: { ro: 'corturile', en: 'the tents' },
-    articleNote: 'In Romanian, “the” is often attached to the end of the noun.',
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   acoperiș: {
     gender: 'masculine',
@@ -24,6 +27,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'acoperișuri', en: 'roofs' },
     definiteSingular: { ro: 'acoperișul', en: 'the roof' },
     definitePlural: { ro: 'acoperișurile', en: 'the roofs' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   pod: {
     gender: 'neuter',
@@ -32,6 +37,16 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     definiteSingular: { ro: 'podul', en: 'the attic / the bridge' },
     definitePlural: { ro: 'podurile', en: 'the attics / the bridges' },
     articleNote: 'Context matters — in the cabin topic, pod means attic.',
+    complete: true,
+  },
+  bandă: {
+    gender: 'feminine',
+    singular: { ro: 'bandă', en: 'lane' },
+    plural: { ro: 'benzi', en: 'lanes' },
+    definiteSingular: { ro: 'banda', en: 'the lane' },
+    definitePlural: { ro: 'benzile', en: 'the lanes' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   pâine: {
     gender: 'feminine',
@@ -39,6 +54,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'pâini', en: 'loaves of bread' },
     definiteSingular: { ro: 'pâinea', en: 'the bread' },
     definitePlural: { ro: 'pâinile', en: 'the breads' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   mașină: {
     gender: 'feminine',
@@ -46,6 +63,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'mașini', en: 'cars' },
     definiteSingular: { ro: 'mașina', en: 'the car' },
     definitePlural: { ro: 'mașinile', en: 'the cars' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   grătar: {
     gender: 'masculine',
@@ -53,6 +72,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'grătare', en: 'barbecues / grills' },
     definiteSingular: { ro: 'grătarul', en: 'the barbecue' },
     definitePlural: { ro: 'grătarele', en: 'the barbecues' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   râu: {
     gender: 'masculine',
@@ -60,6 +81,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'râuri', en: 'rivers' },
     definiteSingular: { ro: 'râul', en: 'the river' },
     definitePlural: { ro: 'râurile', en: 'the rivers' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
   pădure: {
     gender: 'feminine',
@@ -67,6 +90,8 @@ export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
     plural: { ro: 'păduri', en: 'forests' },
     definiteSingular: { ro: 'pădurea', en: 'the forest' },
     definitePlural: { ro: 'pădurile', en: 'the forests' },
+    articleNote: ROMANIAN_ARTICLE_NOTE,
+    complete: true,
   },
 };
 
@@ -76,23 +101,27 @@ export const curatedAdjectiveFamilies: Record<string, DictionaryAdjectiveFamily>
     feminineSingular: { ro: 'bună', en: 'good' },
     masculinePlural: { ro: 'buni', en: 'good' },
     femininePlural: { ro: 'bune', en: 'good' },
+    complete: true,
   },
   mare: {
     masculineSingular: { ro: 'mare', en: 'big / large' },
     feminineSingular: { ro: 'mare', en: 'big / large' },
     masculinePlural: { ro: 'mari', en: 'big / large' },
     femininePlural: { ro: 'mari', en: 'big / large' },
+    complete: true,
   },
   mic: {
     masculineSingular: { ro: 'mic', en: 'small' },
     feminineSingular: { ro: 'mică', en: 'small' },
     masculinePlural: { ro: 'mici', en: 'small' },
     femininePlural: { ro: 'mici', en: 'small' },
+    complete: true,
   },
   greu: {
     masculineSingular: { ro: 'greu', en: 'heavy' },
     feminineSingular: { ro: 'grea', en: 'heavy' },
     masculinePlural: { ro: 'grei', en: 'heavy' },
     femininePlural: { ro: 'grele', en: 'heavy' },
+    complete: true,
   },
 };

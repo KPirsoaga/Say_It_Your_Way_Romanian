@@ -3,15 +3,28 @@ import { scenarios, realLifeCategories, survivalPhrases } from '../../content';
 import { weeklyTopics } from '../weeklyTopics';
 import { curatedAdjectiveFamilies, curatedNounFamilies } from './curatedFamilies';
 import { lookupGrammarVerbId } from './verbLinks';
+import {
+  adjectiveFamilyChain,
+  extractPerfectParticiples,
+  isAdjectiveFamilyComplete,
+  isNounFamilyComplete,
+  nounFamilyChain,
+  nounHeadword,
+  verbPresentChain,
+} from './familyUtils';
 import type {
   DictionaryEntry,
-  DictionaryNounFamily,
+  DictionaryFormAlias,
+  DictionaryLexicalType,
+  DictionaryPhrase,
+  DictionarySearchMatch,
   DictionarySense,
   DictionarySourceRef,
+  DictionaryUsageExample,
   DictionaryVariant,
   DictionaryWordType,
 } from './types';
-import type { ContentReviewMeta, WeeklyVocabItem } from '../../types';
+import type { ContentReviewMeta, GrammarTense, WeeklyVocabItem } from '../../types';
 
 function normalizeRo(ro: string): string {
   return ro
@@ -20,7 +33,7 @@ function normalizeRo(ro: string): string {
     .replace(/^a\s+/, '');
 }
 
-function sortKeyFor(ro: string, type: DictionaryWordType): string {
+function sortKeyFor(ro: string, type: DictionaryLexicalType): string {
   const base = type === 'verb' ? ro.replace(/^a\s+/i, '') : ro;
   return base.trim().toLowerCase();
 }
@@ -42,23 +55,49 @@ function mergeSources(existing: DictionarySourceRef[], next: DictionarySourceRef
   return [...existing, next];
 }
 
-function nounHeadword(ro: string): string {
-  return ro.split(' ')[0] ?? ro;
-}
+const missingFamilyReview: ContentReviewMeta = {
+  needsReview: true,
+  reviewReason: 'Word family forms not yet verified — needs Mihaela review.',
+  suggestedBy: 'app author',
+  contentArea: 'Vocabulary',
+  reviewStatus: 'pending',
+};
 
-function buildNounFamily(ro: string, en: string): DictionaryNounFamily | undefined {
+function buildNounFamily(ro: string, en: string) {
   const head = nounHeadword(ro);
-  if (curatedNounFamilies[head]) return curatedNounFamilies[head];
-  if (ro.includes(' ')) return undefined;
+  const curated = curatedNounFamilies[head];
+  if (curated) {
+    return {
+      family: curated,
+      complete: Boolean(curated.complete ?? isNounFamilyComplete(curated)),
+      needsReview: false,
+    };
+  }
+  if (ro.includes(' ')) {
+    return { family: undefined, complete: false, needsReview: true };
+  }
   return {
-    singular: { ro, en },
-    articleNote: 'More forms may be added after teacher review.',
+    family: { singular: { ro, en } },
+    complete: false,
+    needsReview: true,
   };
 }
 
 function buildAdjectiveFamily(ro: string, en: string) {
   const head = ro.trim();
-  return curatedAdjectiveFamilies[head] ?? { masculineSingular: { ro, en } };
+  const curated = curatedAdjectiveFamilies[head];
+  if (curated) {
+    return {
+      family: curated,
+      complete: Boolean(curated.complete ?? isAdjectiveFamilyComplete(curated)),
+      needsReview: false,
+    };
+  }
+  return {
+    family: { masculineSingular: { ro, en } },
+    complete: false,
+    needsReview: true,
+  };
 }
 
 function buildVerbFamily(ro: string, en: string) {
@@ -90,17 +129,19 @@ function upsertEntry(
 }
 
 function addWeeklyVocab(
-  map: Map<string, DictionaryEntry>,
+  headwordMap: Map<string, DictionaryEntry>,
   topicId: string,
   topicTitle: string,
   item: WeeklyVocabItem
 ): void {
-  const type = item.category as DictionaryWordType;
+  if (item.category === 'phrase') return;
+
+  const type = item.category as DictionaryLexicalType;
   const key = `${type}:${normalizeRo(item.ro)}`;
   const source: DictionarySourceRef = { feature: 'weekly-topic', featureId: topicId, label: topicTitle };
 
   upsertEntry(
-    map,
+    headwordMap,
     key,
     () => {
       const sortKey = sortKeyFor(item.ro, type);
@@ -117,59 +158,87 @@ function addWeeklyVocab(
         sources: [source],
         weeklyVocabId: item.id,
         weeklyTopicId: topicId,
+        familyComplete: false,
+        familyNeedsReview: false,
       };
-      if (type === 'noun') entry.nounFamily = buildNounFamily(item.ro, item.en);
-      if (type === 'verb') entry.verbFamily = buildVerbFamily(item.ro, item.en);
-      if (type === 'adjective') entry.adjectiveFamily = buildAdjectiveFamily(item.ro, item.en);
-      if (type === 'phrase') {
-        entry.phraseRo = item.ro;
-        entry.phraseEn = item.en;
+
+      if (type === 'noun') {
+        const { family, complete, needsReview } = buildNounFamily(item.ro, item.en);
+        entry.nounFamily = family;
+        entry.familyComplete = complete;
+        entry.familyNeedsReview = needsReview;
+        if (needsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
       }
+      if (type === 'verb') {
+        entry.verbFamily = buildVerbFamily(item.ro, item.en);
+        entry.familyComplete = Boolean(entry.verbFamily.present && entry.verbFamily.present.length >= 6);
+        entry.familyNeedsReview = !entry.verbFamily.grammarVerbId;
+        if (entry.familyNeedsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
+      }
+      if (type === 'adjective') {
+        const { family, complete, needsReview } = buildAdjectiveFamily(item.ro, item.en);
+        entry.adjectiveFamily = family;
+        entry.familyComplete = complete;
+        entry.familyNeedsReview = needsReview;
+        if (needsReview) entry.review = mergeReview(entry.review, missingFamilyReview);
+      }
+
       return entry;
     },
-    (existing) => ({
-      ...existing,
-      sources: mergeSources(existing.sources, source),
-      pron: existing.pron ?? item.pron,
-      teacherNote: existing.teacherNote ?? item.teacherNote,
-      review: mergeReview(existing.review, item.review),
-    })
+    (existing) => {
+      let next = {
+        ...existing,
+        sources: mergeSources(existing.sources, source),
+        pron: existing.pron ?? item.pron,
+        teacherNote: existing.teacherNote ?? item.teacherNote,
+        review: mergeReview(existing.review, item.review),
+      };
+      if (type === 'noun' && !existing.familyComplete) {
+        const { family, complete, needsReview } = buildNounFamily(item.ro, item.en);
+        next = {
+          ...next,
+          nounFamily: existing.nounFamily ?? family,
+          familyComplete: existing.familyComplete || complete,
+          familyNeedsReview: existing.familyNeedsReview && needsReview,
+        };
+      }
+      return next;
+    }
   );
 }
 
 function addPhrase(
-  map: Map<string, DictionaryEntry>,
+  phraseMap: Map<string, DictionaryPhrase>,
   ro: string,
   en: string,
   source: DictionarySourceRef,
   extra?: { pron?: string; review?: ContentReviewMeta; id?: string }
-): void {
+): DictionaryPhrase {
   const key = `phrase:${normalizeRo(ro)}`;
-  upsertEntry(
-    map,
-    key,
-    () => {
-      const sortKey = sortKeyFor(ro, 'phrase');
-      return {
-        id: extra?.id ?? `dict-phrase-${source.featureId}`,
-        type: 'phrase',
-        headwordRo: ro.length > 48 ? `${ro.slice(0, 45)}…` : ro,
-        headwordEn: en,
-        sortKey,
-        letter: letterBucket(sortKey),
-        pron: extra?.pron,
-        review: extra?.review,
-        sources: [source],
-        phraseRo: ro,
-        phraseEn: en,
-      };
-    },
-    (existing) => ({
+  const existing = phraseMap.get(key);
+  if (existing) {
+    const merged: DictionaryPhrase = {
       ...existing,
       sources: mergeSources(existing.sources, source),
       review: mergeReview(existing.review, extra?.review),
-    })
-  );
+    };
+    phraseMap.set(key, merged);
+    return merged;
+  }
+  const sortKey = sortKeyFor(ro, 'noun');
+  const phrase: DictionaryPhrase = {
+    id: extra?.id ?? `dict-phrase-${source.featureId}`,
+    ro,
+    en,
+    sortKey,
+    letter: letterBucket(sortKey),
+    pron: extra?.pron,
+    review: extra?.review,
+    sources: [source],
+    linkedHeadwordIds: [],
+  };
+  phraseMap.set(key, phrase);
+  return phrase;
 }
 
 function addGrammarVerbs(map: Map<string, DictionaryEntry>): void {
@@ -196,6 +265,8 @@ function addGrammarVerbs(map: Map<string, DictionaryEntry>): void {
           imperfect: verb.imperfect,
           future: verb.future,
         },
+        familyComplete: Boolean(verb.present && verb.present.length >= 6),
+        familyNeedsReview: false,
       }),
       (existing) => ({
         ...existing,
@@ -208,23 +279,192 @@ function addGrammarVerbs(map: Map<string, DictionaryEntry>): void {
           imperfect: verb.imperfect,
           future: verb.future,
         },
+        familyComplete: existing.familyComplete || Boolean(verb.present && verb.present.length >= 6),
         sources: mergeSources(existing.sources, { feature: 'grammar', featureId: verb.id, label: 'Grammar Help' }),
       })
     );
   });
 }
 
-/** Build deduplicated dictionary from all app vocabulary sources */
-export function buildDictionary(): DictionaryEntry[] {
-  const map = new Map<string, DictionaryEntry>();
+function tokenizeRo(text: string): string[] {
+  return text
+    .toLowerCase()
+    .replace(/[.,!?;:"'()]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function linkPhraseToHeadwords(
+  phrase: DictionaryPhrase,
+  headwords: DictionaryEntry[],
+  aliasByRo: Map<string, DictionaryFormAlias[]>
+): void {
+  const tokens = tokenizeRo(phrase.ro);
+  const linked = new Set<string>();
+
+  tokens.forEach((token) => {
+    headwords.forEach((entry) => {
+      if (normalizeRo(entry.headwordRo) === token) linked.add(entry.id);
+    });
+    const aliases = aliasByRo.get(token);
+    aliases?.forEach((a) => linked.add(a.entryId));
+  });
+
+  phrase.linkedHeadwordIds = [...linked];
+}
+
+function attachUsageExamples(phrases: DictionaryPhrase[], headwordMap: Map<string, DictionaryEntry>): void {
+  phrases.forEach((phrase) => {
+    phrase.linkedHeadwordIds.forEach((entryId) => {
+      const entry = [...headwordMap.values()].find((e) => e.id === entryId);
+      if (!entry) return;
+      const example: DictionaryUsageExample = {
+        ro: phrase.ro,
+        en: phrase.en,
+        sourceLabel: phrase.sources[0]?.label,
+        phraseId: phrase.id,
+      };
+      const existing = entry.usageExamples ?? [];
+      if (existing.some((e) => e.phraseId === phrase.id)) return;
+      entry.usageExamples = [...existing, example];
+    });
+  });
+}
+
+function buildFormAliases(headwords: DictionaryEntry[]): DictionaryFormAlias[] {
+  const aliases: DictionaryFormAlias[] = [];
+
+  const pushAlias = (alias: DictionaryFormAlias) => {
+    const key = normalizeRo(alias.ro);
+    if (key === normalizeRo(headwords.find((e) => e.id === alias.entryId)?.headwordRo ?? '')) return;
+    aliases.push({ ...alias, ro: key });
+  };
+
+  headwords.forEach((entry) => {
+    if (entry.nounFamily && entry.familyComplete) {
+      const chain = nounFamilyChain(entry.nounFamily);
+      const forms = [
+        { form: entry.nounFamily.plural, label: 'plural' },
+        { form: entry.nounFamily.definiteSingular, label: 'definite singular' },
+        { form: entry.nounFamily.definitePlural, label: 'definite plural' },
+      ];
+      forms.forEach(({ form, label }) => {
+        if (!form) return;
+        pushAlias({
+          ro: form.ro,
+          entryId: entry.id,
+          displayRo: form.ro,
+          en: form.en,
+          explanation: `${form.ro} = ${form.en}`,
+          formLabel: label,
+          type: 'noun',
+        });
+      });
+      chain.forEach((ro) => {
+        if (ro !== entry.nounFamily!.singular.ro) {
+          const match = forms.find((f) => f.form?.ro === ro);
+          if (match?.form) {
+            pushAlias({
+              ro,
+              entryId: entry.id,
+              displayRo: ro,
+              en: match.form.en,
+              explanation: `${ro} = ${match.form.en}`,
+              formLabel: match.label,
+              type: 'noun',
+            });
+          }
+        }
+      });
+    }
+
+    if (entry.verbFamily) {
+      const tenses: { tense: GrammarTense; forms?: { label: string; ro: string; en: string }[]; label: string }[] = [
+        { tense: 'present', forms: entry.verbFamily.present, label: 'Present' },
+        { tense: 'perfect-compus', forms: entry.verbFamily.perfectCompus, label: 'Perfect compus' },
+        { tense: 'imperfect', forms: entry.verbFamily.imperfect, label: 'Imperfect' },
+        { tense: 'future', forms: entry.verbFamily.future, label: 'Future' },
+      ];
+      tenses.forEach(({ forms, label }) => {
+        forms?.forEach((form) => {
+          pushAlias({
+            ro: form.ro,
+            entryId: entry.id,
+            displayRo: form.ro,
+            en: form.en,
+            explanation: `${form.ro} = ${form.en}`,
+            formLabel: `${label}: ${form.label}`,
+            type: 'verb',
+          });
+        });
+      });
+      if (entry.verbFamily.perfectCompus) {
+        extractPerfectParticiples(entry.verbFamily.perfectCompus).forEach((participle) => {
+          pushAlias({
+            ro: participle,
+            entryId: entry.id,
+            displayRo: participle,
+            en: `past participle of ${entry.verbFamily!.infinitive}`,
+            explanation: `${participle} → ${entry.verbFamily!.infinitive}`,
+            formLabel: 'past participle',
+            type: 'verb',
+          });
+        });
+      }
+    }
+
+    if (entry.adjectiveFamily && entry.familyComplete) {
+      const forms = [
+        { form: entry.adjectiveFamily.feminineSingular, label: 'feminine singular' },
+        { form: entry.adjectiveFamily.masculinePlural, label: 'masculine plural' },
+        { form: entry.adjectiveFamily.femininePlural, label: 'feminine plural' },
+      ];
+      forms.forEach(({ form, label }) => {
+        if (!form) return;
+        pushAlias({
+          ro: form.ro,
+          entryId: entry.id,
+          displayRo: form.ro,
+          en: form.en,
+          explanation: `${form.ro} = ${form.en}`,
+          formLabel: label,
+          type: 'adjective',
+        });
+      });
+    }
+  });
+
+  return aliases;
+}
+
+export interface BuiltDictionary {
+  headwords: DictionaryEntry[];
+  phrases: DictionaryPhrase[];
+  aliases: DictionaryFormAlias[];
+  aliasByRo: Map<string, DictionaryFormAlias[]>;
+}
+
+function buildAll(): BuiltDictionary {
+  const headwordMap = new Map<string, DictionaryEntry>();
+  const phraseMap = new Map<string, DictionaryPhrase>();
 
   weeklyTopics.forEach((topic) => {
-    topic.vocabulary.forEach((item) => addWeeklyVocab(map, topic.id, topic.title, item));
+    topic.vocabulary.forEach((item) => {
+      if (item.category === 'phrase') {
+        addPhrase(phraseMap, item.ro, item.en, {
+          feature: 'weekly-topic',
+          featureId: `${topic.id}:${item.id}`,
+          label: topic.title,
+        }, { pron: item.pron, review: item.review, id: `dict-${topic.id}-phrase-${item.id}` });
+      } else {
+        addWeeklyVocab(headwordMap, topic.id, topic.title, item);
+      }
+    });
   });
 
   scenarios.forEach((scenario) => {
     scenario.lines.forEach((line, i) => {
-      addPhrase(map, line.ro, line.en, {
+      addPhrase(phraseMap, line.ro, line.en, {
         feature: 'scenario',
         featureId: `${scenario.id}:${i}`,
         label: scenario.title,
@@ -238,7 +478,7 @@ export function buildDictionary(): DictionaryEntry[] {
 
   realLifeCategories.forEach((cat) => {
     cat.phrases.forEach((phrase, i) => {
-      addPhrase(map, phrase.ro, phrase.en, {
+      addPhrase(phraseMap, phrase.ro, phrase.en, {
         feature: 'real-life',
         featureId: `${cat.id}:${i}`,
         label: cat.title,
@@ -247,64 +487,197 @@ export function buildDictionary(): DictionaryEntry[] {
   });
 
   survivalPhrases.forEach((phrase, i) => {
-    addPhrase(map, phrase.ro, phrase.en, {
+    addPhrase(phraseMap, phrase.ro, phrase.en, {
       feature: 'survival',
       featureId: String(i),
       label: 'Survival Romanian',
     }, { pron: phrase.pron, review: phrase.review, id: `dict-survival-${i}` });
   });
 
-  addGrammarVerbs(map);
+  addGrammarVerbs(headwordMap);
 
-  // Second sense for pod (bridge vs attic) when merged from weekly topic
   const podKey = `noun:${normalizeRo('pod')}`;
-  const podEntry = map.get(podKey);
+  const podEntry = headwordMap.get(podKey);
   if (podEntry) {
     const senses: DictionarySense[] = [
       { en: 'attic', note: 'In the Building a Cabin topic.' },
       { en: 'bridge', note: 'In other contexts.' },
     ];
-    map.set(podKey, { ...podEntry, senses, review: mergeReview(podEntry.review, {
-      needsReview: true,
-      reviewReason: 'Multiple meanings — confirm with Mihaela.',
-      suggestedBy: 'app author',
-      contentArea: 'Vocabulary',
-      reviewStatus: 'pending',
-    }) });
+    headwordMap.set(podKey, {
+      ...podEntry,
+      senses,
+      review: mergeReview(podEntry.review, {
+        needsReview: true,
+        reviewReason: 'Multiple meanings — confirm with Mihaela.',
+        suggestedBy: 'app author',
+        contentArea: 'Vocabulary',
+        reviewStatus: 'pending',
+      }),
+    });
   }
 
-  return [...map.values()].sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
+  const headwords = [...headwordMap.values()].sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
+  const phrases = [...phraseMap.values()].sort((a, b) => a.sortKey.localeCompare(b.sortKey, 'ro'));
+
+  const aliases = buildFormAliases(headwords);
+  const aliasByRo = new Map<string, DictionaryFormAlias[]>();
+  aliases.forEach((alias) => {
+    const list = aliasByRo.get(alias.ro) ?? [];
+    list.push(alias);
+    aliasByRo.set(alias.ro, list);
+  });
+
+  phrases.forEach((phrase) => linkPhraseToHeadwords(phrase, headwords, aliasByRo));
+  attachUsageExamples(phrases, headwordMap);
+
+  return { headwords, phrases, aliases, aliasByRo };
 }
 
-export const dictionaryEntries = buildDictionary();
+const built = buildAll();
+
+/** Canonical lexical headwords only (nouns, verbs, adjectives) */
+export const dictionaryEntries = built.headwords;
+
+/** Phrases kept separately from the default alphabetical list */
+export const dictionaryPhrases = built.phrases;
+
+export const dictionaryFormAliases = built.aliases;
+
+const aliasByRo = built.aliasByRo;
+
+/** Build deduplicated dictionary from all app vocabulary sources */
+export function buildDictionary(): DictionaryEntry[] {
+  return dictionaryEntries;
+}
 
 export function getDictionaryEntry(id: string): DictionaryEntry | undefined {
   return dictionaryEntries.find((e) => e.id === id);
 }
 
-export function searchDictionary(query: string, typeFilter: DictionaryWordType | 'all'): DictionaryEntry[] {
+export function getDictionaryPhrase(id: string): DictionaryPhrase | undefined {
+  return dictionaryPhrases.find((p) => p.id === id);
+}
+
+export function resolveDictionarySearch(query: string): DictionarySearchMatch[] {
   const q = query.trim().toLowerCase();
-  return dictionaryEntries.filter((entry) => {
-    if (typeFilter !== 'all' && entry.type !== typeFilter) return false;
-    if (!q) return true;
+  if (!q) return dictionaryEntries.map((entry) => ({ entry }));
+
+  const exactAlias = aliasByRo.get(q);
+  if (exactAlias && exactAlias.length > 0) {
+    const seen = new Set<string>();
+    const results: DictionarySearchMatch[] = [];
+    exactAlias.forEach((alias) => {
+      const entry = getDictionaryEntry(alias.entryId);
+      if (!entry || seen.has(entry.id)) return;
+      seen.add(entry.id);
+      results.push({ entry, alias });
+    });
+    return results;
+  }
+
+  const matches: DictionarySearchMatch[] = [];
+  const seen = new Set<string>();
+
+  dictionaryEntries.forEach((entry) => {
     const hay = [
       entry.headwordRo,
       entry.headwordEn,
-      entry.phraseRo,
-      entry.phraseEn,
       entry.nounFamily?.plural?.ro,
       entry.nounFamily?.definiteSingular?.ro,
+      entry.nounFamily?.definitePlural?.ro,
       entry.verbFamily?.present?.map((f) => f.ro).join(' '),
+      entry.adjectiveFamily?.feminineSingular?.ro,
     ]
       .filter(Boolean)
       .join(' ')
       .toLowerCase();
-    return hay.includes(q) || entry.headwordRo.toLowerCase().includes(q) || entry.headwordEn.toLowerCase().includes(q);
+
+    if (hay.includes(q) || entry.headwordRo.toLowerCase().includes(q) || entry.headwordEn.toLowerCase().includes(q)) {
+      if (!seen.has(entry.id)) {
+        seen.add(entry.id);
+        matches.push({ entry });
+      }
+    }
+  });
+
+  aliasesPartialSearch(q).forEach((match) => {
+    if (!seen.has(match.entry.id)) {
+      seen.add(match.entry.id);
+      matches.push(match);
+    }
+  });
+
+  return matches;
+}
+
+function aliasesPartialSearch(q: string): DictionarySearchMatch[] {
+  const out: DictionarySearchMatch[] = [];
+  const seen = new Set<string>();
+  dictionaryFormAliases.forEach((alias) => {
+    if (alias.ro.includes(q) || alias.displayRo.toLowerCase().includes(q)) {
+      const entry = getDictionaryEntry(alias.entryId);
+      if (!entry) return;
+      const key = `${entry.id}:${alias.ro}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      out.push({ entry, alias });
+    }
+  });
+  return out;
+}
+
+export function searchDictionary(
+  query: string,
+  typeFilter: DictionaryWordType | 'all' | 'lexical'
+): (DictionaryEntry | DictionaryPhrase)[] {
+  const q = query.trim().toLowerCase();
+
+  if (typeFilter === 'phrase') {
+    return dictionaryPhrases.filter((phrase) => {
+      if (!q) return true;
+      return (
+        phrase.ro.toLowerCase().includes(q) ||
+        phrase.en.toLowerCase().includes(q)
+      );
+    });
+  }
+
+  const lexicalFilter = typeFilter === 'all' || typeFilter === 'lexical';
+  const results: (DictionaryEntry | DictionaryPhrase)[] = [];
+  const seen = new Set<string>();
+
+  const pushResult = (item: DictionaryEntry | DictionaryPhrase) => {
+    if (seen.has(item.id)) return;
+    seen.add(item.id);
+    results.push(item);
+  };
+
+  if (lexicalFilter || typeFilter === 'noun' || typeFilter === 'verb' || typeFilter === 'adjective') {
+    if (q) {
+      resolveDictionarySearch(query).forEach(({ entry }) => {
+        if (typeFilter === 'all' || typeFilter === 'lexical' || entry.type === typeFilter) {
+          pushResult(entry);
+        }
+      });
+    } else {
+      dictionaryEntries.forEach((entry) => {
+        if (typeFilter === 'all' || typeFilter === 'lexical' || entry.type === typeFilter) {
+          pushResult(entry);
+        }
+      });
+    }
+  }
+
+  return results.sort((a, b) => {
+    const aKey = 'sortKey' in a ? a.sortKey : '';
+    const bKey = 'sortKey' in b ? b.sortKey : '';
+    return aKey.localeCompare(bKey, 'ro');
   });
 }
 
-export function dictionaryLetterIndex(): string[] {
+export function dictionaryLetterIndex(includePhrases = false): string[] {
   const letters = new Set(dictionaryEntries.map((e) => e.letter));
+  if (includePhrases) dictionaryPhrases.forEach((p) => letters.add(p.letter));
   return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'.split('').filter((l) => letters.has(l));
 }
 
@@ -313,11 +686,10 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
   const baseRo = entry.type === 'verb' ? entry.verbFamily?.infinitive ?? entry.headwordRo : entry.headwordRo;
   const baseEn = entry.headwordEn;
 
-  if (entry.nounFamily) {
-    const chain = [entry.nounFamily.singular.ro];
+  if (entry.nounFamily && entry.familyComplete) {
+    const chain = nounFamilyChain(entry.nounFamily);
     const push = (ro: string | undefined, en: string | undefined, label: string) => {
       if (!ro || !en) return;
-      chain.push(ro);
       variants.push({
         entryId: entry.id,
         ro,
@@ -326,16 +698,18 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
         baseRo,
         baseEn,
         type: 'noun',
-        wordFamilyChain: [...new Set(chain)],
+        wordFamilyChain: chain,
         sourceWeight: weight,
       });
     };
     push(entry.nounFamily.plural?.ro, entry.nounFamily.plural?.en, 'plural');
     push(entry.nounFamily.definiteSingular?.ro, entry.nounFamily.definiteSingular?.en, 'definite singular');
     push(entry.nounFamily.definitePlural?.ro, entry.nounFamily.definitePlural?.en, 'definite plural');
+    push(entry.nounFamily.singular.ro, entry.nounFamily.singular.en, 'singular');
   }
 
   if (entry.verbFamily?.present) {
+    const chain = verbPresentChain(entry.verbFamily);
     entry.verbFamily.present.forEach((form) => {
       variants.push({
         entryId: entry.id,
@@ -347,18 +721,20 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
         baseEn,
         type: 'verb',
         grammarVerbId: entry.verbFamily?.grammarVerbId,
-        wordFamilyChain: [baseRo, form.ro],
+        tense: 'present',
+        wordFamilyChain: chain,
         sourceWeight: weight,
       });
     });
   }
 
-  if (entry.adjectiveFamily) {
+  if (entry.adjectiveFamily && entry.familyComplete) {
+    const chain = adjectiveFamilyChain(entry.adjectiveFamily);
     const forms = [
-      ['masculine singular', entry.adjectiveFamily.masculineSingular],
       ['feminine singular', entry.adjectiveFamily.feminineSingular],
       ['masculine plural', entry.adjectiveFamily.masculinePlural],
       ['feminine plural', entry.adjectiveFamily.femininePlural],
+      ['masculine singular', entry.adjectiveFamily.masculineSingular],
     ] as const;
     forms.forEach(([label, form]) => {
       if (!form) return;
@@ -370,7 +746,7 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
         baseRo,
         baseEn,
         type: 'adjective',
-        wordFamilyChain: [entry.adjectiveFamily!.masculineSingular.ro, form.ro],
+        wordFamilyChain: chain,
         sourceWeight: weight,
       });
     });
@@ -379,10 +755,63 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
   return variants;
 }
 
+export function getCurrentWeeklyTopicId(dateStr: string): string {
+  let seed = 0;
+  for (let i = 0; i < dateStr.length; i++) seed = (seed * 31 + dateStr.charCodeAt(i)) % 100000;
+  const idx = seed % weeklyTopics.length;
+  return weeklyTopics[idx]?.id ?? weeklyTopics[0]!.id;
+}
+
+export function dictionaryAuditReport() {
+  const nouns = dictionaryEntries.filter((e) => e.type === 'noun');
+  const verbs = dictionaryEntries.filter((e) => e.type === 'verb');
+  const adjectives = dictionaryEntries.filter((e) => e.type === 'adjective');
+  const nounsComplete = nouns.filter((e) => e.familyComplete);
+  const nounsAwaitingReview = nouns.filter((e) => e.familyNeedsReview);
+  const verbsGrammar = verbs.filter((e) => e.verbFamily?.grammarVerbId);
+  const verbsAllTenses = verbs.filter((e) => e.verbFamily && hasAllTenses(e.verbFamily));
+  const variantPool = dictionaryEntries.flatMap((e) => collectVariants(e, 'wider'));
+
+  const needsMihaela: string[] = [];
+  dictionaryEntries.forEach((e) => {
+    if (e.review?.needsReview) needsMihaela.push(`${e.headwordRo} (${e.review.reviewReason})`);
+    if (e.familyNeedsReview && !e.review?.needsReview) {
+      needsMihaela.push(`${e.headwordRo} (word family incomplete)`);
+    }
+  });
+
+  return {
+    canonicalHeadwords: dictionaryEntries.length,
+    nouns: nouns.length,
+    verbs: verbs.length,
+    adjectives: adjectives.length,
+    phrases: dictionaryPhrases.length,
+    nounsWithCompleteFamilies: nounsComplete.length,
+    nounsAwaitingReview: nounsAwaitingReview.length,
+    verbsConnectedToGrammarHelp: verbsGrammar.length,
+    verbsWithAllFourTenses: verbsAllTenses.length,
+    searchableGrammaticalVariants: dictionaryFormAliases.length,
+    dailyPracticeVariantPoolSize: variantPool.length,
+    needsMihaelaReview: needsMihaela,
+  };
+}
+
+function hasAllTenses(vf: NonNullable<DictionaryEntry['verbFamily']>): boolean {
+  return Boolean(
+    vf.present?.length &&
+      vf.perfectCompus?.length &&
+      vf.imperfect?.length &&
+      vf.future?.length
+  );
+}
+
 export function dictionaryStats() {
-  const nouns = dictionaryEntries.filter((e) => e.type === 'noun').length;
-  const verbs = dictionaryEntries.filter((e) => e.type === 'verb').length;
-  const adjectives = dictionaryEntries.filter((e) => e.type === 'adjective').length;
-  const phrases = dictionaryEntries.filter((e) => e.type === 'phrase').length;
-  return { total: dictionaryEntries.length, nouns, verbs, adjectives, phrases };
+  const audit = dictionaryAuditReport();
+  return {
+    total: audit.canonicalHeadwords,
+    nouns: audit.nouns,
+    verbs: audit.verbs,
+    adjectives: audit.adjectives,
+    phrases: audit.phrases,
+  };
 }
