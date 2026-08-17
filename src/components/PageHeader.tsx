@@ -12,7 +12,7 @@ interface Props {
 export function PageHeader({ title, subtitle, onBack, rightIcon, onRight, editorial = true }: Props) {
   return (
     <header className="sticky top-0 z-10 bg-linen-50/90 dark:bg-forest-900/90 backdrop-blur-md border-b border-forest/8 dark:border-linen/10 pt-[env(safe-area-inset-top)]">
-      <div className="mx-auto max-w-md px-4 py-3 flex items-center gap-3">
+      <div className="page-shell py-3 flex items-center gap-3">
         {onBack ? (
           <button
             type="button"

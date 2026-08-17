@@ -11,8 +11,8 @@ interface Props {
 export function DailyPracticeFeatureCard({ practisedToday, onStart }: Props) {
   return (
     <article className="rounded-3xl overflow-hidden border border-coral-200/60 dark:border-coral-800/30 bg-white dark:bg-forest-700 shadow-soft-lg">
-      <IllustrationPanel tone="coral" aspect="wide" ruled className="!rounded-none !aspect-[21/9]">
-        <ExploreScene destination="daily" className="h-full w-full max-h-[120px]" />
+      <IllustrationPanel tone="coral" aspect="wide" ruled className="!rounded-none !aspect-[21/9] lg:!aspect-[3/1]">
+        <ExploreScene destination="daily" className="h-full w-full max-h-[120px] lg:max-h-[180px]" />
       </IllustrationPanel>
 
       <div className="p-5 space-y-4">

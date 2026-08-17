@@ -40,8 +40,8 @@ export function ExploreDestinationCard({
         onClick={onClick}
         className="group w-full text-left rounded-3xl overflow-hidden border border-forest/8 dark:border-linen/10 bg-white dark:bg-forest-700 shadow-soft transition hover:shadow-soft-lg active:scale-[0.99] focus-visible:ring-4 focus-visible:ring-olive/30"
       >
-        <IllustrationPanel tone={meta.tone} aspect="wide" ruled={meta.ruled} className="!rounded-none !aspect-[16/9]">
-          <ExploreScene destination={destination} className="h-full w-full max-h-[140px] object-contain" />
+        <IllustrationPanel tone={meta.tone} aspect="wide" ruled={meta.ruled} className="!rounded-none !aspect-[16/9] lg:!aspect-[21/9]">
+          <ExploreScene destination={destination} className="h-full w-full max-h-[140px] lg:max-h-[220px] object-contain" />
         </IllustrationPanel>
         <div className="p-4 space-y-1">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-olive-600 dark:text-olive-300">
@@ -62,8 +62,8 @@ export function ExploreDestinationCard({
         onClick={onClick}
         className="group w-full text-left rounded-3xl overflow-hidden border border-forest/8 dark:border-linen/10 bg-white dark:bg-forest-700 shadow-soft transition hover:shadow-soft-lg active:scale-[0.99] focus-visible:ring-4 focus-visible:ring-olive/30 flex"
       >
-        <div className="w-[42%] shrink-0">
-          <IllustrationPanel tone={meta.tone} aspect="square" ruled={meta.ruled} className="!rounded-none h-full min-h-[100px]">
+        <div className="w-[42%] shrink-0 lg:w-[38%]">
+          <IllustrationPanel tone={meta.tone} aspect="square" ruled={meta.ruled} className="!rounded-none h-full min-h-[100px] lg:min-h-[140px]">
             <ExploreScene destination={destination} className="h-full w-full" />
           </IllustrationPanel>
         </div>
@@ -85,8 +85,8 @@ export function ExploreDestinationCard({
       onClick={onClick}
       className="group w-full text-left rounded-3xl overflow-hidden border border-forest/8 dark:border-linen/10 bg-white dark:bg-forest-700 shadow-soft transition hover:shadow-soft-lg active:scale-[0.99] focus-visible:ring-4 focus-visible:ring-olive/30"
     >
-      <IllustrationPanel tone={meta.tone} aspect="wide" ruled={meta.ruled} className="!rounded-none !aspect-[2/1]">
-        <ExploreScene destination={destination} className="h-full w-full max-h-[72px]" />
+      <IllustrationPanel tone={meta.tone} aspect="wide" ruled={meta.ruled} className="!rounded-none !aspect-[2/1] lg:!aspect-[5/2]">
+        <ExploreScene destination={destination} className="h-full w-full max-h-[72px] lg:max-h-[110px]" />
       </IllustrationPanel>
       <div className="px-3.5 py-3">
         <p className="font-display font-bold text-forest dark:text-linen-100 leading-tight">{title}</p>

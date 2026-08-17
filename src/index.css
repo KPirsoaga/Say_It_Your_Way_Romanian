@@ -149,6 +149,14 @@ html.dark {
   .input-field {
     @apply w-full rounded-2xl border border-clay-200 dark:border-linen/10 bg-white dark:bg-forest-800 px-4 py-3 text-base text-forest dark:text-linen-100 placeholder:text-forest/40 focus:outline-none focus:ring-4 focus:ring-olive/25;
   }
+
+  .page-shell {
+    @apply mx-auto w-full max-w-md px-4 lg:max-w-6xl lg:px-8 xl:max-w-7xl;
+  }
+
+  .page-shell-body {
+    @apply page-shell pb-32 pt-4;
+  }
 }
 
 ::-webkit-scrollbar {

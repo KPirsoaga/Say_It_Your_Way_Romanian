@@ -31,7 +31,7 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title={topic.title} subtitle={topic.description} onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+      <div className="page-shell-body space-y-4">
         <div className="rounded-3xl overflow-hidden border border-forest/8 dark:border-linen/10 shadow-soft">
           <TopicIllustrationPanel topicId={topic.id} aspect="wide" className="rounded-none" />
           <div className="p-4 bg-white/80 dark:bg-forest-700/80">

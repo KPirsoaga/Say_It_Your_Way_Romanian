@@ -34,8 +34,8 @@ export function HomePage({ go }: Props) {
   const practisedToday = progress.practisedDays.includes(today);
 
   return (
-    <div className="mx-auto max-w-md px-4 pb-8 pt-[max(0.5rem,env(safe-area-inset-top))] space-y-8">
-      <header className="animate-fade-in pt-10">
+    <div className="page-shell pb-8 pt-[max(0.5rem,env(safe-area-inset-top))] space-y-8">
+      <header className="animate-fade-in pt-10 lg:pt-6">
         <p className="font-script text-2xl text-coral leading-none">Bună!</p>
         <h1 className="font-display text-2xl font-bold text-forest dark:text-linen-100 mt-1 leading-tight">
           Your Romanian notebook
@@ -45,17 +45,17 @@ export function HomePage({ go }: Props) {
         </p>
       </header>
 
-      {/* Daily practice — primary feature */}
-      <section className="animate-fade-in">
-        <DailyPracticeFeatureCard practisedToday={practisedToday} onStart={() => go('daily')} />
-      </section>
+      {/* Daily practice + continue learning */}
+      <div className="animate-fade-in space-y-8 lg:space-y-0 lg:grid lg:grid-cols-12 lg:gap-6 lg:items-start">
+        <section className="lg:col-span-7">
+          <DailyPracticeFeatureCard practisedToday={practisedToday} onStart={() => go('daily')} />
+        </section>
 
-      {/* Continue learning */}
-      <section className="animate-fade-in">
-        <SectionHeading title="Continue learning" subtitle={activeTopic.title} />
-        <Card variant="accent" className="!p-0 overflow-hidden space-y-0">
-          <TopicIllustrationPanel topicId={activeTopic.id} aspect="wide" className="rounded-none" />
-          <div className="p-5 space-y-4">
+        <section className="lg:col-span-5">
+          <SectionHeading title="Continue learning" subtitle={activeTopic.title} />
+          <Card variant="accent" className="!p-0 overflow-hidden space-y-0 h-full">
+            <TopicIllustrationPanel topicId={activeTopic.id} aspect="wide" className="rounded-none lg:!aspect-[16/10]" />
+            <div className="p-5 space-y-4">
             <div>
               <p className="font-display text-lg font-bold text-forest dark:text-linen-100 leading-tight">
                 {activeTopic.title}
@@ -94,9 +94,8 @@ export function HomePage({ go }: Props) {
             </Button>
           </div>
         </Card>
-      </section>
-
-      {/* Explore — each destination visually distinct */}
+        </section>
+      </div>
       <section className="animate-fade-in space-y-3">
         <SectionHeading title="Explore" subtitle="Your core destinations" />
 
@@ -108,7 +107,7 @@ export function HomePage({ go }: Props) {
           onClick={() => go('weekly-topics')}
         />
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           <ExploreDestinationCard
             destination="dictionary"
             title="Dictionary"
@@ -123,15 +122,16 @@ export function HomePage({ go }: Props) {
             layout="compact"
             onClick={() => go('grammar')}
           />
+          <div className="col-span-2 lg:col-span-1">
+            <ExploreDestinationCard
+              destination="progress"
+              title="Progress"
+              subtitle="Your calm, steady journey"
+              layout="compact"
+              onClick={() => go('progress')}
+            />
+          </div>
         </div>
-
-        <ExploreDestinationCard
-          destination="progress"
-          title="Progress"
-          subtitle="Your calm, steady journey"
-          layout="wide"
-          onClick={() => go('progress')}
-        />
       </section>
 
       <footer className="pt-4 pb-2 flex justify-center opacity-60">

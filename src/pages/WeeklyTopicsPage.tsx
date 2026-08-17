@@ -22,10 +22,10 @@ export function WeeklyTopicsPage({ go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Weekly topics" subtitle="Vocabulary → reading → practice" onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
+      <div className="page-shell-body space-y-5">
         <div className="rounded-3xl overflow-hidden border border-forest/10 dark:border-linen/10 shadow-soft">
-          <IllustrationPanel tone="sky" aspect="wide" className="!rounded-none !aspect-[21/9]">
-            <ExploreScene destination="topics" className="h-full w-full max-h-[100px]" />
+          <IllustrationPanel tone="sky" aspect="wide" className="!rounded-none !aspect-[21/9] lg:!aspect-[3/1]">
+            <ExploreScene destination="topics" className="h-full w-full max-h-[100px] lg:max-h-[180px]" />
           </IllustrationPanel>
           <div className="bg-forest text-linen-100 p-5">
             <p className="text-sm uppercase tracking-wide font-semibold text-linen/80">Your lesson path</p>
@@ -41,7 +41,7 @@ export function WeeklyTopicsPage({ go, onBack }: Props) {
         <NoShameBanner compact />
 
         <SectionHeading title="All topics" />
-        <div className="space-y-4">
+        <div className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-5 lg:space-y-0">
           {weeklyTopics.map((topic) => {
             const tp = getWeeklyTopicProgress(topic.id);
             const pct = weeklyTopicPercent(tp);
@@ -49,7 +49,7 @@ export function WeeklyTopicsPage({ go, onBack }: Props) {
             return (
               <Card key={topic.id} onClick={() => go('weekly-topic', topic.id)} className="!p-0 overflow-hidden space-y-0">
                 <div className="flex gap-0">
-                  <div className="w-[38%] shrink-0 border-r border-forest/5 dark:border-linen/5">
+                  <div className="w-[38%] shrink-0 lg:w-[42%]">
                     <TopicIllustrationPanel topicId={topic.id} aspect="square" className="h-full" />
                   </div>
                   <div className="flex-1 p-4 min-w-0 space-y-2">

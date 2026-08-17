@@ -69,7 +69,7 @@ export function DictionaryPage({ go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Dictionary" subtitle="Your personal Romanian reference" onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+      <div className="page-shell-body space-y-4">
         <PageSceneBanner
           destination="dictionary"
           title="My Romanian words"

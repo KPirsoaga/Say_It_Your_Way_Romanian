@@ -32,7 +32,7 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
     return (
       <div className="min-h-screen">
         <PageHeader title="Dictionary" onBack={onBack} />
-        <div className="mx-auto max-w-md px-4 py-8">
+        <div className="page-shell py-8">
           <Card className="text-center py-8">Entry not found.</Card>
         </div>
       </div>
@@ -44,7 +44,7 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
     return (
       <div className="min-h-screen">
         <PageHeader title="Dictionary" subtitle="phrase" onBack={onBack} />
-        <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
+        <div className="page-shell-body space-y-4">
           <Card className="space-y-3">
             <p className="text-2xl font-bold text-ink-900 dark:text-sand-100" lang="ro">
               {phrase.ro}
@@ -111,7 +111,7 @@ export function DictionaryEntryPage({ entryId, go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title={displayRo} subtitle={displayEn} onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-5">
+      <div className="page-shell-body space-y-5">
         <header className="space-y-2">
           <p className="text-3xl font-semibold text-forest dark:text-linen-100" lang="ro">
             {displayRo}

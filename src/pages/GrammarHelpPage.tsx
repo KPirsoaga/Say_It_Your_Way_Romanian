@@ -64,7 +64,7 @@ export function GrammarHelpPage({ go, onBack }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader title="Grammar Help" subtitle="Practical cheat sheets — find answers in one or two taps" onBack={onBack} />
-      <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-6">
+      <div className="page-shell-body space-y-6">
         <PageSceneBanner
           destination="grammar"
           title="How Romanian fits together"

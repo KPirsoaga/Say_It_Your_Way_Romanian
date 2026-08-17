@@ -47,7 +47,7 @@ export function DailyPage({ go }: Props) {
         subtitle={new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
       />
 
-      <div className="mx-auto max-w-md px-4 pt-4">
+      <div className="page-shell pt-4">
         <div className="flex items-center gap-1.5 mb-4">
           {(['phrase', 'variants'] as const).map((s) => {
             const done = step === 'done' || (step === 'variants' && s === 'phrase');
@@ -64,7 +64,7 @@ export function DailyPage({ go }: Props) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-md px-4 pb-6 pt-0 space-y-4">
+      <div className="page-shell-body space-y-4">
         {step === 'phrase' && (
           <div className="animate-fade-in space-y-4">
             <h2 className="text-lg font-bold text-ink-900 dark:text-sand-100">1. Today&apos;s phrase</h2>
