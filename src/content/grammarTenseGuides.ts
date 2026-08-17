@@ -39,7 +39,7 @@ export const grammarTenseGuides: GrammarTenseGuide[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: '“Am lucrat la cabană” — confirm natural past form with Mihaela.',
+      reviewReason: '“Am lucrat la cabană” — confirm natural past form with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',
@@ -64,7 +64,7 @@ export const grammarTenseGuides: GrammarTenseGuide[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'Imperfect examples — confirm natural Romanian with Mihaela.',
+      reviewReason: 'Imperfect examples — confirm natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',

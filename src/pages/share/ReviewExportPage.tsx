@@ -86,7 +86,7 @@ export function ReviewExportPage({ onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Share review items" subtitle="Show this QR to Mihaela" onBack={onBack} />
+      <PageHeader title="Share review items" subtitle="Show this QR to your teacher" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!generated ? (
           <>
@@ -165,7 +165,7 @@ export function ReviewExportPage({ onBack }: Props) {
           <>
             <Card>
               <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-                {exportItems.length} item{exportItems.length === 1 ? '' : 's'} selected for sharing. Ask Mihaela to
+                {exportItems.length} item{exportItems.length === 1 ? '' : 's'} selected for sharing. Ask your teacher to
                 open <span className="font-bold">Teacher review</span> and scan{' '}
                 {codes.length > 1 ? `all ${codes.length} codes` : 'this code'}.
               </p>

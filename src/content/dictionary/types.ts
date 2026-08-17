@@ -80,7 +80,7 @@ export interface DictionaryEntry {
   adjectiveFamily?: DictionaryAdjectiveFamily;
   /** Verified full family available for display and practice */
   familyComplete: boolean;
-  /** Missing or unverified forms — needs Mihaela review */
+  /** Missing or unverified forms — needs teacher review */
   familyNeedsReview: boolean;
   usageExamples?: DictionaryUsageExample[];
   weeklyVocabId?: string;

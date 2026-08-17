@@ -121,7 +121,7 @@ export const extendedGrammarTopics: GrammarTopic[] = [
     ],
   },
 
-  // ─── Imperfect — dedicated (Mihaela) ─────────────────────────────────────
+  // ─── Imperfect — dedicated ─────────────────────────────────────────────────
   {
     id: 'gr-imperfect',
     title: 'Imperfect tense',
@@ -193,7 +193,7 @@ export const extendedGrammarTopics: GrammarTopic[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'Predicative / linking verb examples — confirm structure and natural Romanian with Mihaela.',
+      reviewReason: 'Predicative / linking verb examples — confirm structure and natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',

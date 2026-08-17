@@ -500,7 +500,7 @@ function buildAll(): BuiltDictionary {
       senses,
       review: mergeReview(podEntry.review, {
         needsReview: true,
-        reviewReason: 'Multiple meanings — confirm with Mihaela.',
+        reviewReason: 'Multiple meanings — confirm with teacher.',
         suggestedBy: 'app author',
         contentArea: 'Vocabulary',
         reviewStatus: 'pending',
@@ -767,9 +767,9 @@ export function dictionaryAuditReport() {
   const adjectivesComplete = adjectives.filter((e) => e.familyComplete);
   const variantPool = dictionaryEntries.flatMap((e) => collectVariants(e, 'wider'));
 
-  const needsMihaela: string[] = [];
+  const needsTeacherReview: string[] = [];
   dictionaryEntries.forEach((e) => {
-    if (e.review?.needsReview) needsMihaela.push(`${e.headwordRo} (${e.review.reviewReason})`);
+    if (e.review?.needsReview) needsTeacherReview.push(`${e.headwordRo} (${e.review.reviewReason})`);
   });
 
   return {
@@ -789,7 +789,7 @@ export function dictionaryAuditReport() {
     adjectivesWithCompleteFamilies: adjectivesComplete.length,
     searchableGrammaticalVariants: dictionaryFormAliases.length,
     dailyPracticeVariantPoolSize: variantPool.length,
-    needsMihaelaReview: needsMihaela,
+    needsTeacherReview,
     nounFamilyCoveragePercent: nouns.length ? Math.round((nounsComplete.length / nouns.length) * 100) : 0,
     verbFamilyCoveragePercent: verbs.length ? Math.round((verbsCanonical.length / verbs.length) * 100) : 0,
   };

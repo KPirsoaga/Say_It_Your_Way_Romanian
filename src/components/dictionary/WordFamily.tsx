@@ -1,6 +1,6 @@
 import { Button } from '../Button';
 import { Icon } from '../Icon';
-import { FlagForMihaela } from '../FlagForMihaela';
+import { FlagForTeacher } from '../FlagForTeacher';
 import { userFlagId } from '../../content/review/reviewIds';
 import {
   adjectiveFamilyChain,
@@ -182,7 +182,7 @@ export function DictionaryFlag({
   contextLabel: string;
 }) {
   return (
-    <FlagForMihaela
+    <FlagForTeacher
       id={userFlagId(`dictionary:${entryId}`)}
       ro={ro}
       en={en}

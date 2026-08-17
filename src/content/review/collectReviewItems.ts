@@ -52,7 +52,7 @@ function pushPhraseLines(
   });
 }
 
-/** Collect every content item flagged for Mihaela Review. */
+/** Collect every content item flagged for Teacher Review. */
 export function collectReviewItems(): ReviewCatalogItem[] {
   const items: ReviewCatalogItem[] = [];
 

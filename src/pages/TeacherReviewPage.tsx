@@ -33,7 +33,7 @@ const statusLabels: Record<ReviewStatus, string> = {
   'needs-changes': 'Needs changes',
 };
 
-export function MihaelaReviewPage({ onBack, onShareReview }: Props) {
+export function TeacherReviewPage({ onBack, onShareReview }: Props) {
   const { counts, itemsByStatus, getEffectiveStatus, getDecisionNotes, markApproved, markNeedsChanges, resetItem } =
     useReview();
   const [filter, setFilter] = useState<FilterKey>('active');
@@ -43,7 +43,7 @@ export function MihaelaReviewPage({ onBack, onShareReview }: Props) {
   return (
     <div className="min-h-screen">
       <PageHeader
-        title="Mihaela Review"
+        title="Teacher Review"
         subtitle="Romanian content to check together in lessons"
         onBack={onBack}
       />

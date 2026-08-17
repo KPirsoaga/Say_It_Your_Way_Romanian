@@ -8,7 +8,7 @@ import { useSettings } from '../context/SettingsContext';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { colorMap, miniConversations } from '../content';
-import { FlagForMihaela } from '../components/FlagForMihaela';
+import { FlagForTeacher } from '../components/FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 import type { ConversationTurn } from '../types';
 
@@ -262,7 +262,7 @@ export function MiniConversationDetailPage({ conversationId, onBack, onHome }: P
                         </Button>
                       </div>
                     )}
-                    <FlagForMihaela
+                    <FlagForTeacher
                       className="mt-3"
                       id={userFlagId(`conversation:${conv.id}:turn:${i}`)}
                       ro={turn.ro}

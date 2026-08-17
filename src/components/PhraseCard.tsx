@@ -4,7 +4,7 @@ import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
-import { FlagForMihaela } from './FlagForMihaela';
+import { FlagForTeacher } from './FlagForTeacher';
 import type { PhraseLine } from '../types';
 import type { FlagReviewTarget } from '../content/review/reviewIds';
 
@@ -14,7 +14,7 @@ interface Props {
   favId: string;
   /** larger display for "hero" phrases */
   hero?: boolean;
-  /** When set, shows “Flag for Mihaela” */
+  /** When set, shows “Flag for Teacher” */
   flag?: Omit<FlagReviewTarget, 'ro' | 'en'>;
 }
 
@@ -160,7 +160,7 @@ export function PhraseCard({ phrase, favId, hero = false, flag }: Props) {
       )}
 
       {flag && (
-        <FlagForMihaela
+        <FlagForTeacher
           className="mt-3"
           id={flag.id}
           ro={phrase.ro}

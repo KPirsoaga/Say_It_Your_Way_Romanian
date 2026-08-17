@@ -73,7 +73,7 @@ export interface VerbAuditReport {
   futureValidated: number;
   futurePartial: number;
   correctionsApplied: string[];
-  flaggedForMihaela: string[];
+  flaggedForTeacherReview: string[];
   handbookUnresolved: string[];
   notValidatedByHandbook: string[];
 }
@@ -103,7 +103,7 @@ export function auditCanonicalVerbs(): VerbAuditReport {
     'Fixed Pot repeta → Puteți repeta; Țeva apă → Curge apă (VAL-027)',
   ];
 
-  const flaggedForMihaela = canonicalGrammarVerbs
+  const flaggedForTeacherReview = canonicalGrammarVerbs
     .filter((v) => v.review?.needsReview)
     .map((v) => `${v.infinitive}: ${v.review?.reviewReason}`);
 
@@ -128,10 +128,10 @@ export function auditCanonicalVerbs(): VerbAuditReport {
     futureValidated,
     futurePartial: canonicalGrammarVerbs.filter((v) => v.future?.length).length - futureValidated,
     correctionsApplied,
-    flaggedForMihaela,
+    flaggedForTeacherReview,
     handbookUnresolved: [
       'a fi / a avea — auxiliary paradigms; perfect compus validated via Essential Grammar auxiliary model',
-      'Reflexive verbs (a se juca, a se teme) — learner forms include pronoun clitics; naturalness for Mihaela',
+      'Reflexive verbs (a se juca, a se teme) — learner forms include pronoun clitics; naturalness for teacher review',
       'a ploua — impersonal present pattern',
     ],
     notValidatedByHandbook: [

@@ -4,7 +4,7 @@ import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
-import { FlagForMihaela } from './FlagForMihaela';
+import { FlagForTeacher } from './FlagForTeacher';
 import type { PhraseLine } from '../types';
 import type { FlagReviewTarget } from '../content/review/reviewIds';
 
@@ -92,7 +92,7 @@ export function SpeakPractice({ phrase, speechId, onDone, flag }: Props) {
       )}
 
       {flag && (
-        <FlagForMihaela
+        <FlagForTeacher
           className="mt-4"
           id={flag.id}
           ro={phrase.ro}

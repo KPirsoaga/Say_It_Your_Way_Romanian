@@ -107,7 +107,7 @@ export function SettingsPage({ onBack, onOpenReview, onOpenShare }: Props) {
         <Card>
           <p className="font-bold text-ink-900 dark:text-sand-100 mb-1">Share with Teacher</p>
           <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
-            Offline QR codes to share review items or progress with Mihaela during lessons.
+            Offline QR codes to share review items or progress with your teacher during lessons.
           </p>
           <Button variant="soft" size="lg" className="w-full" onClick={onOpenShare}>
             <Icon name="Share2" className="h-5 w-5" />
@@ -118,11 +118,11 @@ export function SettingsPage({ onBack, onOpenReview, onOpenShare }: Props) {
         <Card>
           <p className="font-bold text-ink-900 dark:text-sand-100 mb-1">Maintenance / Review</p>
           <p className="text-sm text-ink-500 dark:text-ink-300 mb-3">
-            Check Romanian content with Mihaela during lessons. Decisions save on this device.
+            Check Romanian content with your teacher during lessons. Decisions save on this device.
           </p>
           <Button variant="soft" size="lg" className="w-full" onClick={onOpenReview}>
             <Icon name="BookOpen" className="h-5 w-5" />
-            Mihaela Review
+            Teacher Review
             {toReview > 0 && (
               <span className="ml-auto rounded-full bg-coral-400 text-white text-xs font-bold px-2.5 py-0.5">
                 {toReview}

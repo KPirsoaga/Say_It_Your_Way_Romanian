@@ -23,7 +23,7 @@ export function ProgressExportPage({ onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Share progress" subtitle="Show this to Mihaela before the lesson" onBack={onBack} />
+      <PageHeader title="Share progress" subtitle="Show this to your teacher before the lesson" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <Card>
           <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
