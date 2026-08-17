@@ -77,25 +77,28 @@ export function WordFamily({
   onPlay,
   playingId,
 }: Props) {
-  if (nounFamily && familyComplete) {
+  if (nounFamily) {
     const chain = nounFamilyChain(nounFamily);
-    return (
-      <div className="space-y-3">
-        <TransformationChain chain={chain} />
-        {nounFamily.gender && (
-          <p className="text-sm text-ink-600 dark:text-ink-300">
-            Gender: <span className="font-bold capitalize">{nounFamily.gender}</span>
-          </p>
-        )}
-        {nounFamily.articleNote && (
-          <p className="text-sm text-ink-500 dark:text-ink-400 leading-relaxed">{nounFamily.articleNote}</p>
-        )}
-        <FormRow label="Singular" form={nounFamily.singular} audioId="nf-sg" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="Plural" form={nounFamily.plural} audioId="nf-pl" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="The … (singular)" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
-        <FormRow label="The … (plural)" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
-      </div>
-    );
+    const hasForms = Boolean(nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural);
+    if (familyComplete || hasForms) {
+      return (
+        <div className="space-y-3">
+          {chain.length >= 2 && <TransformationChain chain={chain} />}
+          {nounFamily.gender && (
+            <p className="text-sm text-ink-600 dark:text-ink-300">
+              Gender: <span className="font-bold capitalize">{nounFamily.gender}</span>
+            </p>
+          )}
+          {nounFamily.articleNote && (
+            <p className="text-sm text-ink-500 dark:text-ink-400 leading-relaxed">{nounFamily.articleNote}</p>
+          )}
+          <FormRow label="Singular" form={nounFamily.singular} audioId="nf-sg" onPlay={onPlay} playingId={playingId} />
+          <FormRow label="Plural" form={nounFamily.plural} audioId="nf-pl" onPlay={onPlay} playingId={playingId} />
+          <FormRow label="The … (singular)" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
+          <FormRow label="The … (plural)" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
+        </div>
+      );
+    }
   }
 
   if (verbFamily?.present && verbFamily.present.length > 0) {
@@ -143,7 +146,7 @@ export function WordFamily({
             />
           )) ?? (
             <p className="text-sm text-ink-500 dark:text-ink-300">
-              More forms for this tense are in Grammar Help.
+              This tense is not available for this verb yet.
             </p>
           )}
         </div>

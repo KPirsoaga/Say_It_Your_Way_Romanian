@@ -28,7 +28,7 @@ export function GrammarCheatSheetPage({ sheetId, onBack }: Props) {
         </Card>
         <GrammarCheatSheetView sheet={sheet} />
         {sheet.review?.needsReview && (
-          <p className="text-xs text-sun-500 dark:text-sun-300 text-center">TODO: Review with Mihaela</p>
+          <p className="text-xs text-sun-500 dark:text-sun-300 text-center">{sheet.review.reviewReason}</p>
         )}
       </div>
     </div>

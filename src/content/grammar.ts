@@ -103,18 +103,10 @@ const patternGrammarTopics: GrammarTopic[] = [
       { ro: 'Vreau o cafea, vă rog.', en: 'I want a coffee, please.', pron: 'VROW oh kah-FEH, vuh ROHG.', slow: 'Vreau o cafea... vă rog.' },
       { ro: 'Am nevoie de ajutor.', en: 'I need help.', pron: 'Ahm neh-YO-eh deh ah-ZHOO-tor.', slow: 'Am nevoie... de ajutor.' },
       {
-        ro: 'Pot repeta, vă rog?',
+        ro: 'Puteți repeta, vă rog?',
         en: 'Can you repeat, please?',
-        pron: 'POHT reh-peh-TAH, vuh ROHG?',
-        slow: 'Pot repeta... vă rog?',
-        review: {
-          needsReview: true,
-          reviewReason:
-            'Romanian "Pot repeta" means "I can repeat" — likely should be "Puteți repeta, vă rog?" for "Can you repeat?"',
-          suggestedBy: 'app author',
-          contentArea: 'Grammar Help',
-          reviewStatus: 'pending',
-        },
+        pron: 'poo-TSETS reh-peh-TAH, vuh ROHG?',
+        slow: 'Puteți repeta... vă rog?',
       },
     ],
   },

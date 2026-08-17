@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { NavigationProvider, useNavigation } from './context/NavigationContext';
 import { SettingsProvider } from './context/SettingsContext';
 import { ProgressProvider } from './context/ProgressContext';
 import { ReviewProvider } from './context/ReviewContext';
@@ -40,9 +40,8 @@ import { ProgressExportPage } from './pages/share/ProgressExportPage';
 import { TeacherProgressPage } from './pages/share/TeacherProgressPage';
 import { NoShamePage } from './components/NoShameBanner';
 import { NavigationFallback } from './components/NavigationFallback';
-import { getWeeklyTopic } from './content/weeklyTopics';
 import { getDictionaryEntry, getDictionaryPhrase } from './content/dictionary';
-import type { WeeklyExerciseType } from './types';
+import { getWeeklyTopic } from './content/weeklyTopics';
 
 function parseWeeklyReadingArg(arg: string): { topicId: string; readingId: string } | null {
   const i = arg.indexOf(':');
@@ -95,19 +94,17 @@ export type PageId =
   | 'share-progress-export'
   | 'teacher-progress';
 
+import type { WeeklyExerciseType } from './types';
+
 function Shell() {
-  const [page, setPage] = useState<PageId>('home');
-  const [arg, setArg] = useState<string | undefined>();
+  const { current, go, back, canGoBack } = useNavigation();
+  const page = current.page;
+  const arg = current.arg;
 
-  const go = (p: PageId, a?: string) => {
-    setArg(a);
-    setPage(p);
-    window.scrollTo({ top: 0 });
+  const navBack = () => {
+    if (canGoBack) back();
+    else go('home');
   };
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [page]);
 
   // Pages that show the bottom nav (top-level destinations)
   const navPages: PageId[] = ['home', 'weekly-topics', 'daily', 'favourites', 'progress'];
@@ -136,9 +133,9 @@ function Shell() {
       <main className={showNav ? 'pb-24' : ''}>
         {page === 'home' && <HomePage go={go} />}
         {page === 'daily' && <DailyPage go={go} />}
-        {page === 'dictionary' && <DictionaryPage go={go} onBack={() => go('home')} />}
+        {page === 'dictionary' && <DictionaryPage go={go} onBack={navBack} />}
         {page === 'dictionary-entry' && arg && (getDictionaryEntry(arg) || getDictionaryPhrase(arg)) ? (
-          <DictionaryEntryPage entryId={arg} go={go} onBack={() => go('dictionary')} />
+          <DictionaryEntryPage entryId={arg} go={go} onBack={navBack} />
         ) : page === 'dictionary-entry' ? (
           <NavigationFallback
             title="Word not found"
@@ -152,19 +149,19 @@ function Shell() {
         {page === 'progress' && <ProgressPage go={go} />}
         {page === 'settings' && (
           <SettingsPage
-            onBack={() => go('home')}
+            onBack={navBack}
             onOpenReview={() => go('mihaela-review')}
             onOpenShare={() => go('share-with-teacher')}
           />
         )}
         {page === 'builder' && <PhraseBuilderPage go={go} />}
-        {page === 'reallife' && <RealLifePage onBack={() => go('home')} initialCategoryId={arg} />}
-        {page === 'survival' && <SurvivalPage onBack={() => go('home')} />}
-        {page === 'tiny' && <TinyPracticePage onBack={() => go('home')} onHome={() => go('home')} />}
-        {page === 'noshame' && <NoShamePage onBack={() => go('home')} />}
-        {page === 'conversations' && <MiniConversationsPage go={go} onBack={() => go('home')} />}
+        {page === 'reallife' && <RealLifePage onBack={navBack} initialCategoryId={arg} />}
+        {page === 'survival' && <SurvivalPage onBack={navBack} />}
+        {page === 'tiny' && <TinyPracticePage onBack={navBack} onHome={() => go('home')} />}
+        {page === 'noshame' && <NoShamePage onBack={navBack} />}
+        {page === 'conversations' && <MiniConversationsPage go={go} onBack={navBack} />}
         {page === 'conversation' && arg ? (
-          <MiniConversationDetailPage conversationId={arg} onBack={() => go('conversations')} onHome={() => go('home')} />
+          <MiniConversationDetailPage conversationId={arg} onBack={navBack} onHome={() => go('home')} />
         ) : page === 'conversation' ? (
           <NavigationFallback
             title="Conversation not found"
@@ -174,9 +171,9 @@ function Shell() {
             backIcon="MessagesSquare"
           />
         ) : null}
-        {page === 'grammar' && <GrammarHelpPage go={go} onBack={() => go('home')} />}
+        {page === 'grammar' && <GrammarHelpPage go={go} onBack={navBack} />}
         {page === 'grammar-topic' && arg ? (
-          <GrammarTopicPage topicId={arg} onBack={() => go('grammar')} />
+          <GrammarTopicPage topicId={arg} onBack={navBack} />
         ) : page === 'grammar-topic' ? (
           <NavigationFallback
             title="Topic not found"
@@ -189,8 +186,8 @@ function Shell() {
         {page === 'grammar-verb' && arg ? (
           <GrammarVerbPage
             verbId={arg}
-            onBack={() => go('grammar')}
-            onNavigate={(id) => go('grammar-verb', id)}
+            onBack={navBack}
+            onNavigate={(id) => go('grammar-verb', id, { replace: true })}
           />
         ) : page === 'grammar-verb' ? (
           <NavigationFallback
@@ -202,7 +199,7 @@ function Shell() {
           />
         ) : null}
         {page === 'grammar-cheat' && arg ? (
-          <GrammarCheatSheetPage sheetId={arg} onBack={() => go('grammar')} />
+          <GrammarCheatSheetPage sheetId={arg} onBack={navBack} />
         ) : page === 'grammar-cheat' ? (
           <NavigationFallback
             title="Cheat sheet not found"
@@ -213,7 +210,7 @@ function Shell() {
           />
         ) : null}
         {page === 'grammar-tense' && arg ? (
-          <GrammarTenseGuidePage guideId={arg} onBack={() => go('grammar')} />
+          <GrammarTenseGuidePage guideId={arg} onBack={navBack} />
         ) : page === 'grammar-tense' ? (
           <NavigationFallback
             title="Tense guide not found"
@@ -224,7 +221,7 @@ function Shell() {
           />
         ) : null}
         {page === 'grammar-pattern' && arg ? (
-          <GrammarPatternPage patternId={arg} onBack={() => go('grammar')} />
+          <GrammarPatternPage patternId={arg} onBack={navBack} />
         ) : page === 'grammar-pattern' ? (
           <NavigationFallback
             title="Pattern not found"
@@ -234,9 +231,9 @@ function Shell() {
             backIcon="BookOpen"
           />
         ) : null}
-        {page === 'weekly-topics' && <WeeklyTopicsPage go={go} onBack={() => go('home')} />}
+        {page === 'weekly-topics' && <WeeklyTopicsPage go={go} onBack={navBack} />}
         {page === 'weekly-topic' && arg && getWeeklyTopic(arg) ? (
-          <WeeklyTopicDetailPage topicId={arg} go={go} onBack={() => go('weekly-topics')} />
+          <WeeklyTopicDetailPage topicId={arg} go={go} onBack={navBack} />
         ) : page === 'weekly-topic' ? (
           <NavigationFallback
             title="Topic not found"
@@ -247,7 +244,7 @@ function Shell() {
           />
         ) : null}
         {page === 'weekly-vocab' && arg ? (
-          <WeeklyVocabPage topicId={arg} onBack={() => go('weekly-topic', arg)} />
+          <WeeklyVocabPage topicId={arg} onBack={navBack} />
         ) : page === 'weekly-vocab' ? (
           <NavigationFallback
             title="Topic not found"
@@ -263,7 +260,7 @@ function Shell() {
             <WeeklyReadingPage
               topicId={parsed.topicId}
               readingId={parsed.readingId}
-              onBack={() => go('weekly-topic', parsed.topicId)}
+              onBack={navBack}
               go={go}
             />
           ) : (
@@ -290,7 +287,7 @@ function Shell() {
             <WeeklyExercisePage
               topicId={parsed.topicId}
               exerciseType={parsed.exerciseType}
-              onBack={() => go('weekly-topic', parsed.topicId)}
+              onBack={navBack}
             />
           ) : (
             <NavigationFallback
@@ -312,39 +309,39 @@ function Shell() {
         ) : null}
         {page === 'mihaela-review' && (
           <MihaelaReviewPage
-            onBack={() => go('settings')}
+            onBack={navBack}
             onShareReview={() => go('share-review-export')}
           />
         )}
         {page === 'share-with-teacher' && (
           <ShareWithTeacherPage
-            onBack={() => go('settings')}
+            onBack={navBack}
             onReviewSync={() => go('share-review')}
             onProgressSync={() => go('share-progress')}
           />
         )}
         {page === 'share-review' && (
           <ReviewSyncHubPage
-            onBack={() => go('share-with-teacher')}
+            onBack={navBack}
             onExport={() => go('share-review-export')}
             onTeacher={() => go('teacher-review')}
             onImport={() => go('share-review-import')}
           />
         )}
-        {page === 'share-review-export' && <ReviewExportPage onBack={() => go('share-review')} />}
+        {page === 'share-review-export' && <ReviewExportPage onBack={navBack} />}
         {page === 'share-review-import' && (
-          <ReviewImportPage onBack={() => go('share-review')} onDone={() => go('mihaela-review')} />
+          <ReviewImportPage onBack={navBack} onDone={() => go('mihaela-review')} />
         )}
-        {page === 'teacher-review' && <TeacherReviewPage onBack={() => go('share-review')} />}
+        {page === 'teacher-review' && <TeacherReviewPage onBack={navBack} />}
         {page === 'share-progress' && (
           <ProgressSyncHubPage
-            onBack={() => go('share-with-teacher')}
+            onBack={navBack}
             onExport={() => go('share-progress-export')}
             onTeacher={() => go('teacher-progress')}
           />
         )}
-        {page === 'share-progress-export' && <ProgressExportPage onBack={() => go('share-progress')} />}
-        {page === 'teacher-progress' && <TeacherProgressPage onBack={() => go('share-progress')} />}
+        {page === 'share-progress-export' && <ProgressExportPage onBack={navBack} />}
+        {page === 'teacher-progress' && <TeacherProgressPage onBack={navBack} />}
       </main>
 
       {showNav && <BottomNav current={page} go={go} />}
@@ -358,7 +355,9 @@ export default function App() {
       <ProgressProvider>
         <ReviewProvider>
           <SpeechProvider>
-            <Shell />
+            <NavigationProvider>
+              <Shell />
+            </NavigationProvider>
           </SpeechProvider>
         </ReviewProvider>
       </ProgressProvider>

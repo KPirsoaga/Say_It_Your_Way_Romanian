@@ -297,8 +297,8 @@ Issue: Several Romanian strings need native-speaker review before demo.
 Expected behaviour: Natural, correct Romanian with proper diacritics.
 Current behaviour: `Țeva apă pe podea.` likely typo; `Pot repeta, vă rog?` mismatches English intent; slow field missing diacritic on `când`.
 Priority: Medium
-Status: Open
-Notes: Fixed diacritic in slow field (`De când`). Added `TODO: Review with native Romanian teacher` comments for uncertain strings. English for grammar example aligned to intended meaning pending teacher review of Romanian.
+Status: Fixed
+Notes: Fixed `Curge apă pe podea.` and `Puteți repeta, vă rog?` per reference; diacritic in slow field fixed earlier. Remaining naturalness items stay in Mihaela Review for readings.
 
 ---
 
@@ -631,5 +631,16 @@ Current behaviour: Dictionary V2 curated families existed but were not systemati
 Priority: High
 Status: Fixed
 Notes: `essentialGrammarValidation.ts` + `platformGrammarAuditReport()`; 2 nouns explicitly validated (câine, mașină), 8 pattern-validated; 3 adjectives explicit (bun, mic, mare), 1 pattern (greu); no gender/plural/definite corrections required; article note confirmed original; 103 nouns remain incomplete pending reference; textbook content not copied.
+
+---
+
+VAL-058
+Area: Platform-wide / Final QA remediation pass
+Issue: Incomplete noun/verb families, vague Mihaela placeholders, fixed back navigation, over-repeated Daily Practice variants, unresolved VAL-027 strings, and missing coverage reporting.
+Expected behaviour: Expand validated noun/verb families from references; real navigation history with state preservation; remove bulk Mihaela uncertainty messages; fix known bad Romanian strings; report family coverage not raw entry counts.
+Current behaviour: Only 10 noun families complete; 57 verbs unlinked; back buttons used fixed destinations; dictionary showed "being checked by Mihaela" for 100+ entries.
+Priority: High
+Status: Fixed
+Notes: `nounFamilyBuilder.ts` (~85 noun families), `weeklyVerbPatterns.ts` (54 weekly verbs), `NavigationContext.tsx`, VAL-027 fixes (`Curge apă`, `Puteți repeta`), coverage metrics in `dictionaryAuditReport()`.
 
 ---

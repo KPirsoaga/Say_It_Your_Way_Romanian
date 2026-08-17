@@ -1,99 +1,13 @@
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily } from './types';
-import { ROMANIAN_ARTICLE_NOTE } from './familyUtils';
+import { nounFamilyRegistry } from './nounFamilyBuilder';
 
-/** Hand-authored noun/adjective families — uncertain forms flagged in build step */
-export const curatedNounFamilies: Record<string, DictionaryNounFamily> = {
-  câine: {
-    gender: 'masculine',
-    singular: { ro: 'câine', en: 'dog' },
-    plural: { ro: 'câini', en: 'dogs' },
-    definiteSingular: { ro: 'câinele', en: 'the dog' },
-    definitePlural: { ro: 'câinii', en: 'the dogs' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  cort: {
-    gender: 'masculine',
-    singular: { ro: 'cort', en: 'tent' },
-    plural: { ro: 'corturi', en: 'tents' },
-    definiteSingular: { ro: 'cortul', en: 'the tent' },
-    definitePlural: { ro: 'corturile', en: 'the tents' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  acoperiș: {
-    gender: 'masculine',
-    singular: { ro: 'acoperiș', en: 'roof' },
-    plural: { ro: 'acoperișuri', en: 'roofs' },
-    definiteSingular: { ro: 'acoperișul', en: 'the roof' },
-    definitePlural: { ro: 'acoperișurile', en: 'the roofs' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  pod: {
-    gender: 'neuter',
-    singular: { ro: 'pod', en: 'attic / bridge' },
-    plural: { ro: 'poduri', en: 'attics / bridges' },
-    definiteSingular: { ro: 'podul', en: 'the attic / the bridge' },
-    definitePlural: { ro: 'podurile', en: 'the attics / the bridges' },
-    articleNote: 'Context matters — in the cabin topic, pod means attic.',
-    complete: true,
-  },
-  bandă: {
-    gender: 'feminine',
-    singular: { ro: 'bandă', en: 'lane' },
-    plural: { ro: 'benzi', en: 'lanes' },
-    definiteSingular: { ro: 'banda', en: 'the lane' },
-    definitePlural: { ro: 'benzile', en: 'the lanes' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  pâine: {
-    gender: 'feminine',
-    singular: { ro: 'pâine', en: 'bread' },
-    plural: { ro: 'pâini', en: 'loaves of bread' },
-    definiteSingular: { ro: 'pâinea', en: 'the bread' },
-    definitePlural: { ro: 'pâinile', en: 'the breads' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  mașină: {
-    gender: 'feminine',
-    singular: { ro: 'mașină', en: 'car' },
-    plural: { ro: 'mașini', en: 'cars' },
-    definiteSingular: { ro: 'mașina', en: 'the car' },
-    definitePlural: { ro: 'mașinile', en: 'the cars' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  grătar: {
-    gender: 'masculine',
-    singular: { ro: 'grătar', en: 'barbecue / grill' },
-    plural: { ro: 'grătare', en: 'barbecues / grills' },
-    definiteSingular: { ro: 'grătarul', en: 'the barbecue' },
-    definitePlural: { ro: 'grătarele', en: 'the barbecues' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  râu: {
-    gender: 'masculine',
-    singular: { ro: 'râu', en: 'river' },
-    plural: { ro: 'râuri', en: 'rivers' },
-    definiteSingular: { ro: 'râul', en: 'the river' },
-    definitePlural: { ro: 'râurile', en: 'the rivers' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-  pădure: {
-    gender: 'feminine',
-    singular: { ro: 'pădure', en: 'forest' },
-    plural: { ro: 'păduri', en: 'forests' },
-    definiteSingular: { ro: 'pădurea', en: 'the forest' },
-    definitePlural: { ro: 'pădurile', en: 'the forests' },
-    articleNote: ROMANIAN_ARTICLE_NOTE,
-    complete: true,
-  },
-};
+/** Noun families validated via Essential Grammar reference and pattern models */
+export const curatedNounFamilies: Record<string, DictionaryNounFamily> = Object.fromEntries(
+  Object.entries(nounFamilyRegistry).map(([key, family]) => {
+    const { provenance: _p, ...rest } = family as DictionaryNounFamily & { provenance?: string };
+    return [key, rest];
+  })
+);
 
 export const curatedAdjectiveFamilies: Record<string, DictionaryAdjectiveFamily> = {
   bun: {
