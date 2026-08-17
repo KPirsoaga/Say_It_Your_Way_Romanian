@@ -1,3 +1,7 @@
+/**
+ * INTERNAL CANDIDATE GENERATOR — pattern-built conjugations are NOT learner-facing.
+ * Verified forms live in `verifiedVerbForms.ts`.
+ */
 import type { GrammarVerb, VerbForm, ColorKey } from '../../types';
 import type { ValidationProvenance } from '../validation/provenance';
 
@@ -196,6 +200,14 @@ const EN_LABEL: Record<string, string> = {
   'ei/ele': 'they',
 };
 
+/** @internal Candidate tense builders — not learner-facing */
+export const weeklyVerbCandidateBuilders = {
+  imperfectFor,
+  perfectCompusFor,
+  futureFor,
+  participleFor,
+};
+
 export function weeklyVerbToGrammarVerb(id: string, spec: WeeklyVerbSpec): GrammarVerb & { provenance: ValidationProvenance } {
   const presentRows = buildPresent(spec);
   const enBase = spec.en.replace(/^to\s+/, '');
@@ -212,11 +224,8 @@ export function weeklyVerbToGrammarVerb(id: string, spec: WeeklyVerbSpec): Gramm
     icon: spec.icon ?? 'Zap',
     color: spec.color ?? 'sea',
     present,
-    perfectCompus: perfectCompusFor(spec),
-    imperfect: imperfectFor(spec, presentRows),
-    future: futureFor(presentRows),
     examples: [],
-    provenance: spec.provenance,
+    provenance: 'pattern-inferred',
   };
 }
 

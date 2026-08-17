@@ -6,11 +6,13 @@ import { userFlagId } from '../../content/review/reviewIds';
 import {
   adjectiveFamilyChain,
   learnerPersonLabel,
+  learnerVisibleTensesForVerb,
   nounFamilyChain,
   verbPresentChain,
+  verifiedTenseCoverageLabel,
 } from '../../content/dictionary/familyUtils';
 import type { DictionaryAdjectiveFamily, DictionaryNounFamily, DictionaryVerbFamily } from '../../content/dictionary/types';
-import { GRAMMAR_TENSE_LABELS, GRAMMAR_TENSE_ORDER } from '../../content/dictionary/types';
+import { GRAMMAR_TENSE_LABELS } from '../../content/dictionary/types';
 import type { GrammarTense } from '../../types';
 
 interface Props {
@@ -66,8 +68,11 @@ export function WordFamily({
 }: Props) {
   if (nounFamily) {
     const chain = nounFamilyChain(nounFamily);
-    const hasForms = Boolean(nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural);
-    if (familyComplete || hasForms) {
+    const hasVerifiedForms = Boolean(
+      familyComplete &&
+        (nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural)
+    );
+    if (familyComplete && hasVerifiedForms) {
       return (
         <div className="space-y-3">
           {chain.length >= 2 && <BrandWordFamilyChain chain={chain} />}
@@ -86,38 +91,55 @@ export function WordFamily({
         </div>
       );
     }
+    if (!familyComplete) {
+      return null;
+    }
   }
 
-  if (verbFamily?.present && verbFamily.present.length > 0) {
+  if (verbFamily?.present && verbFamily.present.length > 0 && verbFamily.grammarVerbId) {
+    const visibleTenses = learnerVisibleTensesForVerb(verbFamily.grammarVerbId);
+    if (visibleTenses.length === 0) return null;
+
+    const activeTense = visibleTenses.includes(selectedTense) ? selectedTense : visibleTenses[0]!;
     const tenseForms =
-      selectedTense === 'present'
+      activeTense === 'present'
         ? verbFamily.present
-        : selectedTense === 'perfect-compus'
+        : activeTense === 'perfect-compus'
           ? verbFamily.perfectCompus
-          : selectedTense === 'imperfect'
+          : activeTense === 'imperfect'
             ? verbFamily.imperfect
             : verbFamily.future;
 
     const chain =
-      selectedTense === 'present'
+      activeTense === 'present'
         ? verbPresentChain(verbFamily)
         : [verbFamily.infinitive, ...(tenseForms?.map((f) => f.ro) ?? [])];
 
+    const coverageNote = verifiedTenseCoverageLabel(verbFamily.grammarVerbId);
+
     return (
       <div className="space-y-3">
-        {onTenseChange && (
+        {coverageNote && (
+          <p className="text-sm text-forest/60 dark:text-linen/60 leading-relaxed">{coverageNote}</p>
+        )}
+        {onTenseChange && visibleTenses.length > 1 && (
           <div className="flex flex-wrap gap-2">
-            {GRAMMAR_TENSE_ORDER.map((tense) => (
+            {visibleTenses.map((tense) => (
               <button
                 key={tense}
                 type="button"
                 onClick={() => onTenseChange(tense)}
-                className={`filter-chip ${selectedTense === tense ? 'filter-chip-active' : 'filter-chip-inactive'}`}
+                className={`filter-chip ${activeTense === tense ? 'filter-chip-active' : 'filter-chip-inactive'}`}
               >
                 {GRAMMAR_TENSE_LABELS[tense]}
               </button>
             ))}
           </div>
+        )}
+        {visibleTenses.length === 1 && (
+          <p className="text-xs font-semibold uppercase tracking-wide text-forest/50 dark:text-linen/50">
+            {GRAMMAR_TENSE_LABELS[visibleTenses[0]!]}
+          </p>
         )}
         {chain.length >= 2 && <BrandWordFamilyChain chain={chain} label="Same verb, different forms" />}
         <div className="space-y-2">
@@ -126,15 +148,11 @@ export function WordFamily({
               key={`${form.label}-${i}`}
               label={learnerPersonLabel(form.label)}
               form={form}
-              audioId={`vf-${selectedTense}-${i}`}
+              audioId={`vf-${activeTense}-${i}`}
               onPlay={onPlay}
               playingId={playingId}
             />
-          )) ?? (
-            <p className="text-sm text-forest/60 dark:text-linen/60">
-              This tense is not available for this verb yet.
-            </p>
-          )}
+          ))}
         </div>
       </div>
     );

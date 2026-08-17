@@ -1,4 +1,5 @@
 import type { GrammarExample, GrammarTense, GrammarVerb, VerbForm } from '../../types';
+import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe } from './verifiedVerbForms';
 
 type TenseSupplement = {
   perfectCompus?: VerbForm[];
@@ -438,6 +439,9 @@ export function mergeVerbTenses(verbs: GrammarVerb[]): GrammarVerb[] {
 }
 
 export function getVerbFormsForTense(verb: GrammarVerb, tense: GrammarTense): VerbForm[] | undefined {
+  if (!isVerbTenseLearnerSafe(verb.id, tense)) return undefined;
+  const verified = getLearnerSafeVerbForms(verb.id, tense);
+  if (verified?.length) return verified;
   switch (tense) {
     case 'present':
       return verb.present;
@@ -451,6 +455,7 @@ export function getVerbFormsForTense(verb: GrammarVerb, tense: GrammarTense): Ve
 }
 
 export function getVerbExamplesForTense(verb: GrammarVerb, tense: GrammarTense): GrammarExample[] {
+  if (!isVerbTenseLearnerSafe(verb.id, tense)) return [];
   const fromTense = verb.examplesByTense?.[tense];
   if (fromTense && fromTense.length > 0) return fromTense;
   if (tense === 'present') return verb.examples;
@@ -458,9 +463,12 @@ export function getVerbExamplesForTense(verb: GrammarVerb, tense: GrammarTense):
 }
 
 export function getAvailableTenses(verb: GrammarVerb): GrammarTense[] {
-  const tenses: GrammarTense[] = ['present'];
-  if (verb.perfectCompus?.length) tenses.push('perfect-compus');
-  if (verb.imperfect?.length) tenses.push('imperfect');
-  if (verb.future?.length) tenses.push('future');
+  const tenses: GrammarTense[] = [];
+  if (isVerbTenseLearnerSafe(verb.id, 'present') && verb.present.length) tenses.push('present');
+  if (isVerbTenseLearnerSafe(verb.id, 'perfect-compus') && verb.perfectCompus?.length) {
+    tenses.push('perfect-compus');
+  }
+  if (isVerbTenseLearnerSafe(verb.id, 'imperfect') && verb.imperfect?.length) tenses.push('imperfect');
+  if (isVerbTenseLearnerSafe(verb.id, 'future') && verb.future?.length) tenses.push('future');
   return tenses;
 }
