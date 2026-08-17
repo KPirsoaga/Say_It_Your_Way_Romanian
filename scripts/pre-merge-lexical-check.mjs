@@ -9,6 +9,8 @@ import { generateDailyPracticeSession } from '../src/content/dailyPractice/gener
 import { runLexicalRepairAudit } from '../src/content/dictionary/lexicalAudit.ts';
 import { getAvailableTenses } from '../src/content/verbs/canonicalVerbTenses.ts';
 import { grammarVerbs } from '../src/content/verbs/canonicalVerbs.ts';
+import { verifiedVerbTenses } from '../src/content/verbs/verifiedVerbForms.ts';
+import { verifiedNounFamilies } from '../src/content/dictionary/verifiedLexicalFamilies.ts';
 
 const failures = [];
 
@@ -21,10 +23,15 @@ function fail(label, detail) {
   console.log(`✗ ${label}: ${detail}`);
 }
 
-// 1. Fake noun families quarantined
+// 1. Fake noun families quarantined — pattern candidates must not appear as verified
 const cort = dictionaryEntries.find((e) => e.headwordRo === 'cort');
-if (cort?.familyComplete) fail('cort noun family', 'still marked complete');
-else ok('cort is base-only (no fake family)');
+if (cort?.familyComplete && !verifiedNounFamilies.cort) {
+  fail('cort noun family', 'marked complete without dexonline verification');
+} else if (verifiedNounFamilies.cort?.family.plural?.ro === 'corturi') {
+  ok('cort verified family restored from dexonline');
+} else {
+  fail('cort', 'verified family missing or incomplete');
+}
 
 const caine = dictionaryEntries.find((e) => e.headwordRo === 'câine');
 if (!caine?.familyComplete || caine.nounFamily?.plural?.ro !== 'câini') {
@@ -32,45 +39,48 @@ if (!caine?.familyComplete || caine.nounFamily?.plural?.ro !== 'câini') {
 } else ok('câine verified family intact');
 
 // 2. Verified aliases
-for (const q of ['câinii', 'mașina', 'gătesc']) {
+for (const q of ['câinii', 'mașina', 'gătesc', 'dorm', 'merg']) {
   const hits = resolveDictionarySearch(q);
   if (hits.length === 0) fail(`search ${q}`, 'no match');
   else ok(`search "${q}" -> ${hits[0].entry.headwordRo}`);
 }
 
-// 3. Unsafe generated aliases removed
-for (const q of ['corturi', 'cortul', 'construiesc']) {
+// 3. Unsafe pattern-only aliases must not resolve incorrectly
+for (const q of ['construiesc']) {
   const hits = resolveDictionarySearch(q);
-  const cortHit = hits.find((h) => h.entry.headwordRo === 'cort');
-  if (cortHit?.alias) fail(`search ${q}`, 'pattern alias still resolves to cort');
-  else ok(`unsafe alias "${q}" not linked to cort`);
+  const construi = hits.find((h) => h.entry.headwordRo === 'a construi');
+  if (construi?.alias) ok(`verified alias "${q}" -> a construi`);
+  else fail(`search ${q}`, 'expected verified conjugation alias for a construi');
 }
 
-// 4. Unresolved verbs — no invented conjugations in dictionary
+// 4. Restored verbs show dexonline-verified conjugations
 const merge = dictionaryEntries.find((e) => e.verbFamily?.grammarVerbId === 'vb-merge');
-if (merge?.verbFamily?.present?.length) {
-  fail('a merge dictionary', 'shows unverified present forms');
-} else ok('a merge has no learner conjugation in dictionary');
-
-// 5. Verified verbs
-for (const id of ['vb-asculta', 'vb-gati', 'vb-fi']) {
-  const verb = grammarVerbs.find((v) => v.id === id);
-  const tenses = verb ? getAvailableTenses(verb) : [];
-  if (tenses.length === 0) fail(id, 'no verified tenses');
-  else if (tenses.length > 1 && id !== 'vb-fi') fail(id, `unexpected extra tenses: ${tenses.join(',')}`);
-  else ok(`${id} shows only verified tenses: ${tenses.join(', ')}`);
-}
+if (!merge?.verbFamily?.present?.length) {
+  fail('a merge dictionary', 'missing verified present forms');
+} else ok('a merge shows verified present in dictionary');
 
 const dormi = grammarVerbs.find((v) => v.id === 'vb-dormi');
-if (dormi && getAvailableTenses(dormi).length > 0) {
-  fail('vb-dormi', 'shows conjugation without lexical verification');
-} else ok('vb-dormi unresolved — no tense tabs');
+const dormiTenses = dormi ? getAvailableTenses(dormi) : [];
+if (dormiTenses.length < 3) {
+  fail('vb-dormi', `expected multiple verified tenses, got: ${dormiTenses.join(', ') || 'none'}`);
+} else ok(`vb-dormi restored: ${dormiTenses.join(', ')}`);
+
+// 5. All grammar verbs should have at least present verified
+const unresolvedVerbs = grammarVerbs.filter((v) => getAvailableTenses(v).length === 0);
+if (unresolvedVerbs.length > 0) {
+  fail('verb coverage', `${unresolvedVerbs.length} verbs still base-only: ${unresolvedVerbs.map((v) => v.id).join(', ')}`);
+} else ok(`all ${grammarVerbs.length} verbs have verified morphology`);
 
 // 6. Base-only entries — no word family section trigger
 const perete = dictionaryEntries.find((e) => e.headwordRo === 'perete');
-if (perete && entryHasLearnerWordFamily(perete)) {
-  fail('perete', 'incorrectly has learner word family');
-} else ok('perete is clean base-only (no word family UI)');
+if (perete && !entryHasLearnerWordFamily(perete)) {
+  fail('perete', 'should have verified word family after restoration');
+} else ok('perete has verified word family');
+
+const extensie = dictionaryEntries.find((e) => e.headwordRo === 'extensie');
+if (extensie && entryHasLearnerWordFamily(extensie)) {
+  fail('extensie', 'should remain base-only (dexonline lemma mismatch)');
+} else ok('extensie correctly base-only (unresolved lemma on dexonline)');
 
 // 7. Daily Practice — multiple days, no duplicate entryIds in session
 const entryIdsByDay = new Map();
@@ -86,16 +96,19 @@ for (const day of ['2026-08-17', '2026-08-18', '2026-08-19', '2026-08-20', '2026
 }
 ok('Daily Practice sessions spread across entry IDs (5 days checked)');
 
-// 8. Audit terminology
+// 8. Audit — restoration coverage
 const audit = runLexicalRepairAudit();
-if (audit.verbs.withFullTenseCoverage > 0) {
-  fail('audit', 'claims full tense coverage exists (should be 0 for now)');
-} else ok('audit: no verbs falsely marked with full four-tense coverage');
-if (audit.verbs.withPartialMorphology !== 3) {
-  fail('audit', `expected 3 partial morphology verbs, got ${audit.verbs.withPartialMorphology}`);
-} else ok('audit: 3 verbs with partial verified morphology');
+if (audit.verbs.morphologyUnresolved > 0) {
+  fail('audit', `${audit.verbs.morphologyUnresolved} verbs still morphology-unresolved`);
+} else ok(`audit: ${audit.verbs.withFullTenseCoverage} verbs with full tense coverage, ${audit.verbs.withPartialMorphology} partial`);
+
+if (audit.nouns.fullyVerified < 50) {
+  fail('audit', `expected substantial noun restoration, only ${audit.nouns.fullyVerified} fully verified`);
+} else ok(`audit: ${audit.nouns.fullyVerified} nouns fully verified`);
 
 console.log('\n--- Summary ---');
+console.log(`Verified verbs: ${Object.keys(verifiedVerbTenses).length}`);
+console.log(`Verified nouns: ${Object.keys(verifiedNounFamilies).length}`);
 console.log(`Aliases: ${dictionaryFormAliases.length}`);
 console.log(`Candidate registry (internal): ${Object.keys(nounFamilyCandidateRegistry).length}`);
 console.log(JSON.stringify(audit.verbs, null, 2));
