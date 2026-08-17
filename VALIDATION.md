@@ -367,3 +367,14 @@ Status: Fixed
 Notes: Access via **Settings → Maintenance / Review → Mihaela Review**. Collector at `src/content/review/collectReviewItems.ts`. Converted TODO items in `grammar.ts`, `content.ts`, `buildingCabin.ts`. Grammar Help new verbs and predicative topic flagged. Supplemental registry entries for parts-of-speech and imperfect overview bundles.
 
 ---
+
+VAL-053
+Area: Weekly Topics / Content
+Issue: Only one weekly topic (Building a Cabin) existed — learners needed more real-life topic packs.
+Expected behaviour: Four new `WeeklyTopic` modules (Camping, Meeting Other Dog Walkers, Driving/Car/Road Signs, Socialising at a BBQ) with vocabulary, 3 readings each, all exercise types, and registration in `weeklyTopics` index.
+Current behaviour: Single topic available in Weekly Topics list.
+Priority: High
+Status: Fixed
+Notes: `camping.ts`, `dogWalkers.ts`, `drivingCarRoadSigns.ts`, `bbqSocialising.ts`; icons `TentTree`, `Dog`, `Car`, `CookingPot`; uncertain Romanian marked with `review` metadata for Mihaela.
+
+---
