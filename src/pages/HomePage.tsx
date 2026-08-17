@@ -6,7 +6,7 @@ import { todayStr } from '../context/ProgressContext';
 import { weeklyTopics, weeklyTopicPercent } from '../content/weeklyTopics';
 import { getWeeklyLessonPhrase } from '../content/weeklyTopics/dailyPhrase';
 import { dictionaryStats } from '../content/dictionary';
-import { FlagForMihaela } from '../components/FlagForMihaela';
+import { FlagForTeacher } from '../components/FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 import type { PageId } from '../App';
 import type { WeeklyTopicProgress } from '../types';
@@ -114,7 +114,7 @@ export function HomePage({ go }: Props) {
             {lessonPhrase.ro}
           </p>
           <p className="mt-2 text-ink-700 dark:text-ink-300">{lessonPhrase.en}</p>
-          <FlagForMihaela
+          <FlagForTeacher
             className="mt-3"
             id={userFlagId(`home-phrase:${today}`)}
             ro={lessonPhrase.ro}

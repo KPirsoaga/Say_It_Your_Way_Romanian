@@ -36,7 +36,7 @@ interface Props {
   onBack: () => void;
 }
 
-export function TeacherReviewPage({ onBack }: Props) {
+export function TeacherQrReviewPage({ onBack }: Props) {
   const [session, setSession] = useLocalStorage<TeacherSession>('rcd-teacher-review', EMPTY_SESSION);
   const [step, setStep] = useState<Step>(session.items.length > 0 ? 'review' : 'scan');
   const { handleBack, registerScannerStop } = useScannerSafeBack(onBack);
@@ -90,7 +90,7 @@ export function TeacherReviewPage({ onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Teacher review" subtitle="Mihaela — scan and review" onBack={handleBack} />
+      <PageHeader title="Teacher review" subtitle="Scan and review learner items" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {step === 'scan' && (
           <>

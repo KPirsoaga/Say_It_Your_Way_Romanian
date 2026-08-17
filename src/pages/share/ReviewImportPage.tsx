@@ -27,13 +27,13 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Return review" subtitle="Scan Mihaela's response QR" onBack={handleBack} />
+      <PageHeader title="Return review" subtitle="Scan teacher response QR" onBack={handleBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         {!success ? (
           <>
             <Card>
               <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-                After Mihaela reviews, scan her response QR here. Your review list updates automatically — no duplicates.
+                After your teacher reviews, scan the response QR here. Your review list updates automatically — no duplicates.
               </p>
             </Card>
             <QrScanner onScan={handleScan} onRegisterStop={registerScannerStop} />
@@ -59,7 +59,7 @@ export function ReviewImportPage({ onBack, onDone }: Props) {
               {applied} item{applied === 1 ? '' : 's'} matched and updated on this device.
             </p>
             <Button variant="primary" size="lg" className="w-full" onClick={onDone}>
-              Open Mihaela Review
+              Open Teacher Review
             </Button>
             <Button variant="ghost" size="md" className="w-full" onClick={reset}>
               Scan another code

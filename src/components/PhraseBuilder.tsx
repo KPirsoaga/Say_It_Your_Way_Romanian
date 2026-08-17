@@ -4,7 +4,7 @@ import { Icon } from './Icon';
 import { useSpeech } from '../hooks/useSpeech';
 import { useProgress } from '../context/ProgressContext';
 import { shuffleArray } from '../utils/shuffle';
-import { FlagForMihaela } from './FlagForMihaela';
+import { FlagForTeacher } from './FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 import type { PhraseBuilderItem } from '../types';
 
@@ -148,7 +148,7 @@ export function PhraseBuilder({ item, onDone }: Props) {
         </div>
       )}
 
-      <FlagForMihaela
+      <FlagForTeacher
         className="mt-4"
         id={userFlagId(`builder:${item.id}`)}
         ro={item.fullRo}

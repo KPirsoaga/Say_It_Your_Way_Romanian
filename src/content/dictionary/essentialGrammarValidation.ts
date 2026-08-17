@@ -215,7 +215,7 @@ export interface EssentialGrammarAuditReport {
   pronounGrammarCorrections: string[];
   platformErrorsDiscovered: string[];
   crossPlatformInconsistenciesCorrected: string[];
-  flaggedForMihaelaReview: string[];
+  flaggedForTeacherReview: string[];
   referenceCouldNotEstablish: string[];
   textbookContentCopied: false;
   curatedNounMismatches: { headword: string; issues: string[] }[];
@@ -295,7 +295,7 @@ export function auditEssentialGrammar(): EssentialGrammarAuditReport {
       .concat(curatedAdjectiveMismatches)
       .flatMap((m) => m.issues.map((issue) => `${m.headword}: ${issue}`)),
     crossPlatformInconsistenciesCorrected: [],
-    flaggedForMihaelaReview: [
+    flaggedForTeacherReview: [
       'pod — Essential Grammar documents bridge (neuter); attic meaning in Building a Cabin topic needs native confirmation',
       '103 dictionary nouns without complete validated families — do not auto-generate from rules',
       'Weekly topic readings and conversational phrases — naturalness beyond formal grammar scope',

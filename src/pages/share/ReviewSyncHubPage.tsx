@@ -13,17 +13,17 @@ interface Props {
 export function ReviewSyncHubPage({ onBack, onExport, onTeacher, onImport }: Props) {
   return (
     <div className="min-h-screen">
-      <PageHeader title="Review Sync" subtitle="Share Romanian for Mihaela to check" onBack={onBack} />
+      <PageHeader title="Review Sync" subtitle="Share Romanian for teacher review" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <Card>
           <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-            1. Katie generates a QR code with review items.
+            1. Learner generates a QR code with review items.
             <br />
-            2. Mihaela scans and reviews on her device.
+            2. Teacher scans and reviews on their device.
             <br />
-            3. Mihaela generates a response QR.
+            3. Teacher generates a response QR.
             <br />
-            4. Katie scans it — her review list updates.
+            4. Learner scans it — the review list updates.
           </p>
         </Card>
 

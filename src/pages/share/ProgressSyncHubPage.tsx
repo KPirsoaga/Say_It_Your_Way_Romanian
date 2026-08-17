@@ -16,7 +16,7 @@ export function ProgressSyncHubPage({ onBack, onExport, onTeacher }: Props) {
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <Card>
           <p className="text-sm text-ink-600 dark:text-ink-300 leading-relaxed">
-            Before your lesson, generate a progress QR. Mihaela scans it and sees what you have practised — vocabulary, reading, exercises, and more. Read-only for the teacher.
+            Before your lesson, generate a progress QR. Your teacher scans it and sees what you have practised — vocabulary, reading, exercises, and more. Read-only for the teacher.
           </p>
         </Card>
 

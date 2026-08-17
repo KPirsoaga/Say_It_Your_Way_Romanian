@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Icon } from './Icon';
 import { useSettings } from '../context/SettingsContext';
 import { useSpeech } from '../hooks/useSpeech';
-import { FlagForMihaela } from './FlagForMihaela';
+import { FlagForTeacher } from './FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 import type { GrammarExample, ReviewContentArea } from '../types';
 
@@ -59,7 +59,7 @@ export function GrammarExamples({ examples, idPrefix, contentArea = 'Grammar Hel
                 <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
                 {playing ? 'Playing…' : 'Play'}
               </Button>
-              <FlagForMihaela
+              <FlagForTeacher
                 className="mt-2"
                 id={userFlagId(`${idPrefix}-ex-${i}`)}
                 ro={ex.ro}

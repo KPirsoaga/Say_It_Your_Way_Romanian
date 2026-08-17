@@ -62,9 +62,9 @@ export function WeeklyTopicDetailPage({ topicId, go, onBack }: Props) {
 
         <NoShameBanner compact />
 
-        <Button variant="ghost" size="md" className="w-full text-ink-500 dark:text-ink-400" onClick={() => go('mihaela-review')}>
+        <Button variant="ghost" size="md" className="w-full text-ink-500 dark:text-ink-400" onClick={() => go('teacher-review')}>
           <Icon name="Lightbulb" className="h-4 w-4" />
-          Content flagged for Mihaela Review
+          Content flagged for Teacher Review
         </Button>
 
         <section className="space-y-3">

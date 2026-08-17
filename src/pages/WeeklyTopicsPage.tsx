@@ -18,7 +18,7 @@ export function WeeklyTopicsPage({ go, onBack }: Props) {
 
   return (
     <div className="min-h-screen">
-      <PageHeader title="Weekly lessons" subtitle="Lesson support with Mihaela — vocabulary, reading, practice" onBack={onBack} />
+      <PageHeader title="Weekly lessons" subtitle="Lesson support — vocabulary, reading, practice" onBack={onBack} />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
         <div className="rounded-3xl bg-gradient-to-br from-sun-300 to-sun-400 text-ink-900 p-5 shadow-soft">
           <div className="flex items-center gap-2 mb-1">

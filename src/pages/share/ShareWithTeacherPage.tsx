@@ -13,7 +13,7 @@ export function ShareWithTeacherPage({ onBack, onReviewSync, onProgressSync }: P
     <div className="min-h-screen">
       <PageHeader
         title="Share with Teacher"
-        subtitle="Offline QR codes for lessons with Mihaela"
+        subtitle="Offline QR codes for lessons with your teacher"
         onBack={onBack}
       />
       <div className="mx-auto max-w-md px-4 pb-32 pt-4 space-y-4">
@@ -32,7 +32,7 @@ export function ShareWithTeacherPage({ onBack, onReviewSync, onProgressSync }: P
               <div className="min-w-0 flex-1">
                 <p className="font-bold text-ink-900 dark:text-sand-100 text-xl">Review Sync</p>
                 <p className="text-sm text-ink-500 dark:text-ink-300 mt-1 leading-relaxed">
-                  Two-way — share Romanian you want checked, Mihaela reviews, you scan her response back.
+                  Two-way — share Romanian you want checked, your teacher reviews, you scan the response back.
                 </p>
               </div>
               <Icon name="ChevronRight" className="h-6 w-6 text-ink-300 shrink-0 mt-1" />
@@ -49,7 +49,7 @@ export function ShareWithTeacherPage({ onBack, onReviewSync, onProgressSync }: P
               <div className="min-w-0 flex-1">
                 <p className="font-bold text-ink-900 dark:text-sand-100 text-xl">Progress Sync</p>
                 <p className="text-sm text-ink-500 dark:text-ink-300 mt-1 leading-relaxed">
-                  One-way — before each lesson, show Mihaela what you have practised.
+                  One-way — before each lesson, show your teacher what you have practised.
                 </p>
               </div>
               <Icon name="ChevronRight" className="h-6 w-6 text-ink-300 shrink-0 mt-1" />

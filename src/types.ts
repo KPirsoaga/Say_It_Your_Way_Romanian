@@ -36,7 +36,7 @@ export interface PhraseLine {
   pron?: string;
   /** A slower, simplified Romanian version for the "show slower version" button */
   slow?: string;
-  /** Optional flag for Mihaela Review */
+  /** Optional flag for Teacher Review */
   review?: ContentReviewMeta;
 }
 
@@ -401,7 +401,7 @@ export const EMPTY_WEEKLY_TOPIC_PROGRESS: WeeklyTopicProgress = {
 
 export type WeeklyExerciseType = 'ro-en' | 'en-ro' | 'match' | 'sort';
 
-// ─── Mihaela Review ──────────────────────────────────────────────────────────
+// ─── Teacher Review ──────────────────────────────────────────────────────────
 
 export type ReviewContentArea =
   | 'Grammar Help'
@@ -428,7 +428,7 @@ export interface ContentReviewMeta {
   teacherNotes?: string;
 }
 
-/** Flattened item shown on the Mihaela Review page */
+/** Flattened item shown on the Teacher Review page */
 export interface ReviewCatalogItem {
   id: string;
   contentArea: ReviewContentArea;

@@ -231,7 +231,7 @@ export const canonicalVerbBase: GrammarVerb[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      reviewReason: 'New verb examples — confirm natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',
@@ -258,7 +258,7 @@ export const canonicalVerbBase: GrammarVerb[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      reviewReason: 'New verb examples — confirm natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',
@@ -285,7 +285,7 @@ export const canonicalVerbBase: GrammarVerb[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      reviewReason: 'New verb examples — confirm natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',
@@ -312,7 +312,7 @@ export const canonicalVerbBase: GrammarVerb[] = [
     ],
     review: {
       needsReview: true,
-      reviewReason: 'New verb examples — confirm natural Romanian with Mihaela.',
+      reviewReason: 'New verb examples — confirm natural Romanian with teacher.',
       suggestedBy: 'app author',
       contentArea: 'Grammar Help',
       reviewStatus: 'pending',

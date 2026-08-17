@@ -15,9 +15,9 @@ export const buildingCabinTopic: WeeklyTopic = {
   vocabulary: [
     // Verbs
     { id: 'v-construi', ro: 'a construi', en: 'to build', category: 'verb', sortCategory: 'actions', pron: 'ah kohn-STROO-ee' },
-    { id: 'v-lovi', ro: 'a lovi', en: 'to hit', category: 'verb', sortCategory: 'actions', pron: 'ah loh-VEE', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with Mihaela or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
+    { id: 'v-lovi', ro: 'a lovi', en: 'to hit', category: 'verb', sortCategory: 'actions', pron: 'ah loh-VEE', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with teacher or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
     { id: 'v-munci', ro: 'a munci', en: 'to work', category: 'verb', sortCategory: 'actions', pron: 'ah MOON-chee' },
-    { id: 'v-gati', ro: 'a găti', en: 'to cook', category: 'verb', sortCategory: 'actions', pron: 'ah GUH-tee', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with Mihaela or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
+    { id: 'v-gati', ro: 'a găti', en: 'to cook', category: 'verb', sortCategory: 'actions', pron: 'ah GUH-tee', review: { needsReview: true, reviewReason: 'Off-topic for cabin building — confirm with teacher or remove.', contentArea: 'Vocabulary', reviewStatus: 'pending', suggestedBy: 'app author' } },
     { id: 'v-pune', ro: 'a pune', en: 'to put', category: 'verb', sortCategory: 'actions', pron: 'ah POO-neh' },
     { id: 'v-taia', ro: 'a tăia', en: 'to cut', category: 'verb', sortCategory: 'actions', pron: 'ah TUH-yah' },
     { id: 'v-sapa', ro: 'a săpa', en: 'to dig', category: 'verb', sortCategory: 'actions', pron: 'ah SUH-puh' },
@@ -69,7 +69,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       pron: 'LOO-krehz lah ah-koh-peh-REESH',
       review: {
         needsReview: true,
-        reviewReason: 'Changed from “Ridic acoperișul” — confirm natural phrasing with Mihaela.',
+        reviewReason: 'Changed from “Ridic acoperișul” — confirm natural phrasing with teacher.',
         suggestedBy: 'app author',
         contentArea: 'Vocabulary',
         reviewStatus: 'pending',
@@ -91,7 +91,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       teacherNotes: 'Short sentences. Heavy repetition of nouns and verbs from your vocabulary list.',
       review: {
         needsReview: true,
-        reviewReason: 'Passage updated for naturalness — please confirm with Mihaela (especially “Lucrez la perete”).',
+        reviewReason: 'Passage updated for naturalness — please confirm with teacher (especially “Lucrez la perete”).',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',
@@ -109,7 +109,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       teacherNotes: 'More natural flow. Reuses vocabulary from Reading 1.',
       review: {
         needsReview: true,
-        reviewReason: 'Passage updated (“în perete”, “Muncesc mult”) — confirm natural Romanian with Mihaela.',
+        reviewReason: 'Passage updated (“în perete”, “Muncesc mult”) — confirm natural Romanian with teacher.',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',
@@ -134,7 +134,7 @@ export const buildingCabinTopic: WeeklyTopic = {
       teacherNotes: 'Feels like a real day of cabin work. Good for speaking practice with Mihaela.',
       review: {
         needsReview: true,
-        reviewReason: 'Story updated (greblă/gard fix, După-amiază) — confirm natural Romanian with Mihaela.',
+        reviewReason: 'Story updated (greblă/gard fix, După-amiază) — confirm natural Romanian with teacher.',
         suggestedBy: 'app author',
         contentArea: 'Reading passages',
         reviewStatus: 'pending',

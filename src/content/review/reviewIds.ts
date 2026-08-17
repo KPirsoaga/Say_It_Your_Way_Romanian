@@ -4,7 +4,7 @@ export const FLAG_REASON_PRESETS = [
   'Pronunciation sounds strange',
   'Translation may be wrong',
   'Romanian sounds unnatural',
-  'Ask Mihaela',
+  'Ask your teacher',
 ] as const;
 
 /** Stable id for a user-flagged review item in localStorage */

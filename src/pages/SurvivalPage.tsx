@@ -7,7 +7,7 @@ import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { NoShameBanner } from '../components/NoShameBanner';
 import { survivalPhrases } from '../content';
-import { FlagForMihaela } from '../components/FlagForMihaela';
+import { FlagForTeacher } from '../components/FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 
 interface Props {
@@ -101,7 +101,7 @@ export function SurvivalPage({ onBack }: Props) {
                     </Button>
                   )}
                 </div>
-                <FlagForMihaela
+                <FlagForTeacher
                   className="mt-3"
                   id={userFlagId(`survival:${i}`)}
                   ro={p.ro}

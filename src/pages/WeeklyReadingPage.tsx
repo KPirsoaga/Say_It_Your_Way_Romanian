@@ -8,7 +8,7 @@ import { useProgress } from '../context/ProgressContext';
 import { useSpeech } from '../hooks/useSpeech';
 import { useWeeklyTranslationNotes } from '../hooks/useWeeklyTranslationNotes';
 import { getWeeklyTopic } from '../content/weeklyTopics';
-import { FlagForMihaela } from '../components/FlagForMihaela';
+import { FlagForTeacher } from '../components/FlagForTeacher';
 import { userFlagId } from '../content/review/reviewIds';
 import type { PageId } from '../App';
 
@@ -91,7 +91,7 @@ export function WeeklyReadingPage({ topicId, readingId, onBack, go }: Props) {
             <Icon name={playing ? 'Pause' : 'Volume2'} className="h-5 w-5" />
             {playing ? 'Playing…' : 'Play full passage'}
           </Button>
-          <FlagForMihaela
+          <FlagForTeacher
             className="mt-3"
             id={userFlagId(`weekly-reading:${topicId}:${readingId}:ro`)}
             ro={reading.ro}
@@ -156,7 +156,7 @@ export function WeeklyReadingPage({ topicId, readingId, onBack, go }: Props) {
                 Model translation
               </p>
               <p className="text-lg text-ink-900 dark:text-sand-100 leading-relaxed">{reading.modelEn}</p>
-              <FlagForMihaela
+              <FlagForTeacher
                 className="mt-3"
                 id={userFlagId(`weekly-reading:${topicId}:${readingId}:en`)}
                 ro={reading.ro}
