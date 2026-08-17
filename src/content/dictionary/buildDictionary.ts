@@ -1,14 +1,15 @@
 import { grammarVerbs, auditCanonicalVerbs } from '../verbs';
 import { scenarios, realLifeCategories, survivalPhrases } from '../../content';
 import { weeklyTopics } from '../weeklyTopics';
-import { curatedAdjectiveFamilies, curatedNounFamilies } from './curatedFamilies';
+import { getVerifiedAdjectiveFamily, getVerifiedNounFamily } from './verifiedLexicalFamilies';
+import { getLearnerSafeVerbForms, isVerbTenseLearnerSafe } from '../verbs/verifiedVerbForms';
+import { runLexicalRepairAudit } from './lexicalAudit';
 import { auditEssentialGrammar } from './essentialGrammarValidation';
+import { verifiedVerbTenses } from '../verbs/verifiedVerbForms';
 import { lookupGrammarVerbId } from './verbLinks';
 import {
   adjectiveFamilyChain,
   extractPerfectParticiples,
-  isAdjectiveFamilyComplete,
-  isNounFamilyComplete,
   nounFamilyChain,
   nounHeadword,
   verbPresentChain,
@@ -58,11 +59,11 @@ function mergeSources(existing: DictionarySourceRef[], next: DictionarySourceRef
 
 function buildNounFamily(ro: string, en: string) {
   const head = nounHeadword(ro);
-  const curated = curatedNounFamilies[head];
-  if (curated) {
+  const verified = getVerifiedNounFamily(head);
+  if (verified) {
     return {
-      family: curated,
-      complete: Boolean(curated.complete ?? isNounFamilyComplete(curated)),
+      family: verified.family,
+      complete: verified.complete,
       needsReview: false,
     };
   }
@@ -78,32 +79,71 @@ function buildNounFamily(ro: string, en: string) {
 
 function buildAdjectiveFamily(ro: string, en: string) {
   const head = ro.trim();
-  const curated = curatedAdjectiveFamilies[head];
-  if (curated) {
+  const verified = getVerifiedAdjectiveFamily(head);
+  if (verified) {
     return {
-      family: curated,
-      complete: Boolean(curated.complete ?? isAdjectiveFamilyComplete(curated)),
+      family: verified.family,
+      complete: verified.complete,
       needsReview: false,
     };
   }
   return {
     family: { masculineSingular: { ro, en } },
     complete: false,
-    needsReview: true,
+    needsReview: false,
   };
 }
 
 function buildVerbFamily(ro: string, en: string) {
   const grammarVerbId = lookupGrammarVerbId(ro);
-  const grammarVerb = grammarVerbId ? grammarVerbs.find((v) => v.id === grammarVerbId) : undefined;
+  const present =
+    grammarVerbId && isVerbTenseLearnerSafe(grammarVerbId, 'present')
+      ? getLearnerSafeVerbForms(grammarVerbId, 'present')
+      : undefined;
+  const perfectCompus =
+    grammarVerbId && isVerbTenseLearnerSafe(grammarVerbId, 'perfect-compus')
+      ? getLearnerSafeVerbForms(grammarVerbId, 'perfect-compus')
+      : undefined;
+  const imperfect =
+    grammarVerbId && isVerbTenseLearnerSafe(grammarVerbId, 'imperfect')
+      ? getLearnerSafeVerbForms(grammarVerbId, 'imperfect')
+      : undefined;
+  const future =
+    grammarVerbId && isVerbTenseLearnerSafe(grammarVerbId, 'future')
+      ? getLearnerSafeVerbForms(grammarVerbId, 'future')
+      : undefined;
   return {
     infinitive: ro,
     en,
     grammarVerbId,
-    present: grammarVerb?.present,
-    perfectCompus: grammarVerb?.perfectCompus,
-    imperfect: grammarVerb?.imperfect,
-    future: grammarVerb?.future,
+    present,
+    perfectCompus,
+    imperfect,
+    future,
+  };
+}
+
+function learnerSafeVerbFamilyFromGrammar(verb: (typeof grammarVerbs)[0]) {
+  const present = isVerbTenseLearnerSafe(verb.id, 'present')
+    ? getLearnerSafeVerbForms(verb.id, 'present')
+    : undefined;
+  const perfectCompus = isVerbTenseLearnerSafe(verb.id, 'perfect-compus')
+    ? getLearnerSafeVerbForms(verb.id, 'perfect-compus')
+    : undefined;
+  const imperfect = isVerbTenseLearnerSafe(verb.id, 'imperfect')
+    ? getLearnerSafeVerbForms(verb.id, 'imperfect')
+    : undefined;
+  const future = isVerbTenseLearnerSafe(verb.id, 'future')
+    ? getLearnerSafeVerbForms(verb.id, 'future')
+    : undefined;
+  return {
+    infinitive: verb.infinitive,
+    en: verb.en,
+    grammarVerbId: verb.id,
+    present,
+    perfectCompus,
+    imperfect,
+    future,
   };
 }
 
@@ -165,7 +205,7 @@ function addWeeklyVocab(
       if (type === 'verb') {
         entry.verbFamily = buildVerbFamily(item.ro, item.en);
         entry.familyComplete = Boolean(entry.verbFamily.present && entry.verbFamily.present.length >= 6);
-        entry.familyNeedsReview = false;
+        entry.familyNeedsReview = !entry.familyComplete;
       }
       if (type === 'adjective') {
         const { family, complete, needsReview } = buildAdjectiveFamily(item.ro, item.en);
@@ -236,6 +276,13 @@ function addPhrase(
 function addGrammarVerbs(map: Map<string, DictionaryEntry>): void {
   grammarVerbs.forEach((verb) => {
     const key = `verb:${normalizeRo(verb.infinitive)}`;
+    const safeFamily = learnerSafeVerbFamilyFromGrammar(verb);
+    const hasLearnerTenses = Boolean(
+      safeFamily.present?.length ||
+        safeFamily.perfectCompus?.length ||
+        safeFamily.imperfect?.length ||
+        safeFamily.future?.length
+    );
     upsertEntry(
       map,
       key,
@@ -248,30 +295,16 @@ function addGrammarVerbs(map: Map<string, DictionaryEntry>): void {
         letter: letterBucket(sortKeyFor(verb.infinitive, 'verb')),
         review: verb.review,
         sources: [{ feature: 'grammar', featureId: verb.id, label: 'Grammar Help' }],
-        verbFamily: {
-          infinitive: verb.infinitive,
-          en: verb.en,
-          grammarVerbId: verb.id,
-          present: verb.present,
-          perfectCompus: verb.perfectCompus,
-          imperfect: verb.imperfect,
-          future: verb.future,
-        },
-        familyComplete: Boolean(verb.present && verb.present.length >= 6),
-        familyNeedsReview: false,
+        verbFamily: safeFamily,
+        familyComplete: Boolean(safeFamily.present && safeFamily.present.length >= 6),
+        familyNeedsReview: !hasLearnerTenses,
       }),
       (existing) => ({
         ...existing,
-        verbFamily: existing.verbFamily ?? {
-          infinitive: verb.infinitive,
-          en: verb.en,
-          grammarVerbId: verb.id,
-          present: verb.present,
-          perfectCompus: verb.perfectCompus,
-          imperfect: verb.imperfect,
-          future: verb.future,
-        },
-        familyComplete: existing.familyComplete || Boolean(verb.present && verb.present.length >= 6),
+        verbFamily: existing.verbFamily ?? safeFamily,
+        familyComplete:
+          existing.familyComplete || Boolean(safeFamily.present && safeFamily.present.length >= 6),
+        familyNeedsReview: existing.familyNeedsReview && !hasLearnerTenses,
         sources: mergeSources(existing.sources, { feature: 'grammar', featureId: verb.id, label: 'Grammar Help' }),
       })
     );
@@ -377,7 +410,9 @@ function buildFormAliases(headwords: DictionaryEntry[]): DictionaryFormAlias[] {
         { tense: 'imperfect', forms: entry.verbFamily.imperfect, label: 'Imperfect' },
         { tense: 'future', forms: entry.verbFamily.future, label: 'Future' },
       ];
-      tenses.forEach(({ forms, label }) => {
+      const grammarVerbId = entry.verbFamily.grammarVerbId;
+      tenses.forEach(({ tense, forms, label }) => {
+        if (!grammarVerbId || !isVerbTenseLearnerSafe(grammarVerbId, tense)) return;
         forms?.forEach((form) => {
           pushAlias({
             ro: form.ro,
@@ -390,7 +425,8 @@ function buildFormAliases(headwords: DictionaryEntry[]): DictionaryFormAlias[] {
           });
         });
       });
-      if (entry.verbFamily.perfectCompus) {
+      if (entry.verbFamily.perfectCompus && entry.verbFamily.grammarVerbId &&
+          isVerbTenseLearnerSafe(entry.verbFamily.grammarVerbId, 'perfect-compus')) {
         extractPerfectParticiples(entry.verbFamily.perfectCompus).forEach((participle) => {
           pushAlias({
             ro: participle,
@@ -700,7 +736,8 @@ export function collectVariants(entry: DictionaryEntry, weight: DictionaryVarian
     push(entry.nounFamily.singular.ro, entry.nounFamily.singular.en, 'singular');
   }
 
-  if (entry.verbFamily?.present) {
+  if (entry.verbFamily?.present && entry.verbFamily.grammarVerbId &&
+      isVerbTenseLearnerSafe(entry.verbFamily.grammarVerbId, 'present')) {
     const chain = verbPresentChain(entry.verbFamily);
     entry.verbFamily.present.forEach((form) => {
       variants.push({
@@ -755,22 +792,13 @@ export function getCurrentWeeklyTopicId(dateStr: string): string {
 }
 
 export function dictionaryAuditReport() {
+  const lexical = runLexicalRepairAudit('post-repair');
   const nouns = dictionaryEntries.filter((e) => e.type === 'noun');
   const verbs = dictionaryEntries.filter((e) => e.type === 'verb');
   const adjectives = dictionaryEntries.filter((e) => e.type === 'adjective');
-  const nounsComplete = nouns.filter((e) => e.familyComplete);
-  const nounsPartial = nouns.filter((e) => e.nounFamily && !e.familyComplete);
-  const nounsBaseOnly = nouns.filter((e) => !e.familyComplete && e.nounFamily?.singular && !e.nounFamily.plural);
-  const verbsCanonical = verbs.filter((e) => e.verbFamily?.grammarVerbId && e.verbFamily.present?.length);
-  const verbsPartial = verbs.filter((e) => e.verbFamily?.present?.length && !hasAllTenses(e.verbFamily!));
-  const verbsUnresolved = verbs.filter((e) => !e.verbFamily?.present?.length);
-  const adjectivesComplete = adjectives.filter((e) => e.familyComplete);
   const variantPool = dictionaryEntries.flatMap((e) => collectVariants(e, 'wider'));
 
-  const needsTeacherReview: string[] = [];
-  dictionaryEntries.forEach((e) => {
-    if (e.review?.needsReview) needsTeacherReview.push(`${e.headwordRo} (${e.review.reviewReason})`);
-  });
+  const needsTeacherReview: string[] = lexical.teacherReviewRemaining;
 
   return {
     canonicalHeadwords: dictionaryEntries.length,
@@ -778,20 +806,25 @@ export function dictionaryAuditReport() {
     verbs: verbs.length,
     adjectives: adjectives.length,
     phrases: dictionaryPhrases.length,
-    nounsWithCompleteFamilies: nounsComplete.length,
-    nounsWithPartialFamilies: nounsPartial.length,
-    nounsBaseOnly: nounsBaseOnly.length,
+    nounsWithCompleteFamilies: lexical.nouns.fullyVerified,
+    nounsWithPartialFamilies: lexical.nouns.partiallyVerified,
+    nounsBaseOnly: lexical.nouns.baseOnly,
     nounsAwaitingReview: nouns.filter((e) => e.familyNeedsReview).length,
-    verbsConnectedToGrammarHelp: verbsCanonical.length,
-    verbsWithPartialFamilies: verbsPartial.length,
-    verbsUnresolved: verbsUnresolved.length,
-    verbsWithAllFourTenses: verbs.filter((e) => e.verbFamily && hasAllTenses(e.verbFamily)).length,
-    adjectivesWithCompleteFamilies: adjectivesComplete.length,
+    verbsConnectedToGrammarHelp: Object.keys(verifiedVerbTenses).length,
+    verbsWithPartialFamilies: lexical.verbs.partiallyVerified,
+    verbsUnresolved: lexical.verbs.unresolved,
+    verbsWithAllFourTenses: lexical.verbs.fullyVerified,
+    adjectivesWithCompleteFamilies: lexical.adjectives.fullyVerified,
     searchableGrammaticalVariants: dictionaryFormAliases.length,
     dailyPracticeVariantPoolSize: variantPool.length,
     needsTeacherReview,
-    nounFamilyCoveragePercent: nouns.length ? Math.round((nounsComplete.length / nouns.length) * 100) : 0,
-    verbFamilyCoveragePercent: verbs.length ? Math.round((verbsCanonical.length / verbs.length) * 100) : 0,
+    nounFamilyCoveragePercent: nouns.length
+      ? Math.round((lexical.nouns.fullyVerified / nouns.length) * 100)
+      : 0,
+    verbFamilyCoveragePercent: verbs.length
+      ? Math.round((Object.keys(verifiedVerbTenses).length / verbs.length) * 100)
+      : 0,
+    lexicalRepair: lexical,
   };
 }
 
@@ -801,15 +834,6 @@ export function platformGrammarAuditReport() {
     essentialGrammar: auditEssentialGrammar(),
     verbs: auditCanonicalVerbs(),
   };
-}
-
-function hasAllTenses(vf: NonNullable<DictionaryEntry['verbFamily']>): boolean {
-  return Boolean(
-    vf.present?.length &&
-      vf.perfectCompus?.length &&
-      vf.imperfect?.length &&
-      vf.future?.length
-  );
 }
 
 export function dictionaryStats() {

@@ -96,10 +96,10 @@ function tenseProvenance(verb: GrammarVerb, tense: 'perfectCompus' | 'future'): 
 /** Platform verb audit */
 export function auditCanonicalVerbs(): VerbAuditReport {
   const correctionsApplied = [
+    'Lexical repair: weekly verbs no longer expose pattern-generated perfect/imperfect/future to learners',
+    'Only dexonline-verified verb tenses appear in Dictionary, Daily Practice, and Grammar Help',
     'a vrea imperfect ei/ele: vor → vreau (was present-tense form in imperfect slot)',
     'a mânca present ei/ele: mâncă → mănâncă (-a theme 3pl syncretism, Feldstein Ch.5)',
-    'Added imperfect for a întreba, a mânca, a bea, a avea nevoie de (handbook -a/-e patterns)',
-    'Expanded 54 weekly-topic verbs with pattern-validated conjugations (present + perfect compus + imperfect + future)',
     'Fixed Pot repeta → Puteți repeta; Țeva apă → Curge apă (VAL-027)',
   ];
 

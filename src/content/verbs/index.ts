@@ -14,3 +14,9 @@ export {
   getVerbExamplesForTense,
   getAvailableTenses,
 } from './canonicalVerbs';
+export {
+  getVerifiedTensesForVerb,
+  isVerbTenseLearnerSafe,
+  getLearnerSafeVerbForms,
+  verifiedVerbTenses,
+} from './verifiedVerbForms';

@@ -1,13 +1,17 @@
 // Core domain types for the Romanian practice app
 
 export type ValidationProvenance =
+  | 'lexical-explicit'
+  | 'lexical-cross-checked'
   | 'reference-explicit'
   | 'reference-pattern-validated'
+  | 'pattern-inferred'
   | 'verb-handbook'
   | 'essential-grammar'
   | 'teacher-validated'
   | 'unverified'
-  | 'partial';
+  | 'partial'
+  | 'conflicting';
 
 export type ScenarioId =
   | 'shop'

@@ -1,3 +1,9 @@
+/**
+ * INTERNAL CANDIDATE GENERATOR — NOT LEARNER-FACING.
+ * Pattern-built noun families may be used for author review only.
+ * Learner views, Daily Practice, search aliases, and Grammar Help must use
+ * `verifiedLexicalFamilies.ts` instead.
+ */
 import type { DictionaryNounFamily } from './types';
 import { ROMANIAN_ARTICLE_NOTE } from './familyUtils';
 import type { ValidationProvenance } from '../validation/provenance';
@@ -331,4 +337,8 @@ export function buildNounFamilyRegistry(): Record<string, DictionaryNounFamily &
   return out;
 }
 
-export const nounFamilyRegistry = buildNounFamilyRegistry();
+/** Pattern-built candidates — quarantined from learner paths */
+export const nounFamilyCandidateRegistry = buildNounFamilyRegistry();
+
+/** @deprecated Use nounFamilyCandidateRegistry — kept for audit imports */
+export const nounFamilyRegistry = nounFamilyCandidateRegistry;

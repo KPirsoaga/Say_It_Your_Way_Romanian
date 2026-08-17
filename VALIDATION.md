@@ -644,3 +644,14 @@ Status: Fixed
 Notes: `nounFamilyBuilder.ts` (~85 noun families), `weeklyVerbPatterns.ts` (54 weekly verbs), `NavigationContext.tsx`, VAL-027 fixes (`Curge apă`, `Puteți repeta`), coverage metrics in `dictionaryAuditReport()`.
 
 ---
+
+VAL-059
+Area: Platform-wide / Critical Romanian language data repair
+Issue: Dictionary noun families, weekly verb conjugations, search aliases, and Daily Practice variants were generated from morphology patterns (`nounFamilyBuilder.ts`, `weeklyVerbPatterns.ts`). Pattern rules produced plausible but incorrect forms (e.g. guessed plurals/definite articles). Learners saw unverified forms as established facts.
+Expected behaviour: Never invent Romanian forms. Verify each lexical item individually via dexonline.ro (DEX/DOOM paradigms). Only `lexical-explicit`, `lexical-cross-checked`, or `teacher-validated` forms appear in Dictionary word families, search aliases, Daily Practice, and Grammar Help conjugation tables. Pattern generators remain internal candidates only. Honest coverage reporting — accuracy over completeness.
+Current behaviour: `verifiedLexicalFamilies.ts` and `verifiedVerbForms.ts` gate all learner-facing morphology. `nounFamilyCandidateRegistry` quarantined. Weekly verbs marked `pattern-inferred`; generated tenses stripped from learner paths. `lexicalSafety.ts` defines learner-safe provenance. `runLexicalRepairAudit()` reports verified vs base-only counts.
+Priority: Critical
+Status: Fixed
+Notes: dexonline.ro verified: câine, mașină, pâine, bandă, pod, râu (nouns); bun, mare (adjectives); a fi, a găti, a asculta present (verbs). Remaining headwords show base form only until individually verified. Teacher Review reserved for naturalness/conflicts, not routine morphology.
+
+---

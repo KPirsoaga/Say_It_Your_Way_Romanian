@@ -66,8 +66,11 @@ export function WordFamily({
 }: Props) {
   if (nounFamily) {
     const chain = nounFamilyChain(nounFamily);
-    const hasForms = Boolean(nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural);
-    if (familyComplete || hasForms) {
+    const hasVerifiedForms = Boolean(
+      familyComplete &&
+        (nounFamily.plural || nounFamily.definiteSingular || nounFamily.definitePlural)
+    );
+    if (familyComplete && hasVerifiedForms) {
       return (
         <div className="space-y-3">
           {chain.length >= 2 && <BrandWordFamilyChain chain={chain} />}
@@ -83,6 +86,16 @@ export function WordFamily({
           <FormRow label="Plural" form={nounFamily.plural} audioId="nf-pl" onPlay={onPlay} playingId={playingId} />
           <FormRow label="The … (singular)" form={nounFamily.definiteSingular} audioId="nf-def-sg" onPlay={onPlay} playingId={playingId} />
           <FormRow label="The … (plural)" form={nounFamily.definitePlural} audioId="nf-def-pl" onPlay={onPlay} playingId={playingId} />
+        </div>
+      );
+    }
+    if (!familyComplete) {
+      return (
+        <div className="space-y-3">
+          <FormRow label="Singular" form={nounFamily.singular} audioId="nf-sg" onPlay={onPlay} playingId={playingId} />
+          <p className="text-sm text-forest/60 dark:text-linen/60 leading-relaxed">
+            Other forms for this noun have not been individually verified yet.
+          </p>
         </div>
       );
     }
